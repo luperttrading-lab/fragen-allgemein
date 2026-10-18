@@ -52,3 +52,8 @@
 - Vergleich (gleicher Tag): nano_banana_pro 2K kostet dasselbe wie 1K (13 877,8 vs. 13 889,8 Punkte) und liefert echte
   2048×2048 px; gpt_image25 (size 1024x1024, Referenz als image_url akzeptiert) nur 687,5 Punkte je Bild.
   Ohne Referenzbild bleibt nano_banana_pro beim Knete-Motiv, trifft aber den warmen Rosa-Beige-Ton der Vorlage schlechter.
+
+## Clay fertig (18.10.2026): stile/clay/b.html → stile/out3/clay/Clay_B.png (+ Clay_B_vergleich.jpg, KOSTEN.md)
+- 17 Aufrufe nano_banana_pro 2K (238 133 Punkte ≈ 238 Credits), 7 Bilder verwendet, alle Varianten in out3/clay/gen (verworfen/).
+- Freistellen: rembg (u2net) + Schattenbereinigung (stile/clay/freistellen.py); Schwellwert nur beim flachen Wecker.
+- Stand: 2K kostet wie 1K; Referenzbilder stabilisieren Farbwelt und Material; „kein Text“ hielt bei 17/17.
