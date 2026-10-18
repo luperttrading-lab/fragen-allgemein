@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>ADHS im Gehirn – Clay</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+:root{
+  --ink:#2b1f26; --ink2:#4a3a40;
+  --red:#cf3a2f; --blue:#2c74bf; --yellow:#f3bf2c; --green:#3e9c53; --orange:#ec862b; --purple:#6a46a5;
+  --cream:#f6eee2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:768px;height:1376px;overflow:hidden;background:#c6b7a6}
+body{
+  position:relative;font-family:'Nunito',sans-serif;color:var(--ink);
+  background:
+    radial-gradient(ellipse 560px 420px at 18% 6%, rgba(236,226,213,.85) 0%, rgba(236,226,213,0) 100%),
+    radial-gradient(ellipse 600px 380px at 60% 78%, rgba(222,210,195,.55) 0%, rgba(222,210,195,0) 100%),
+    linear-gradient(180deg,#b9aa9a 0%,#c4b5a4 38%,#cdbead 72%,#c3b29e 100%);
+}
+.grain{position:absolute;inset:0;z-index:50;pointer-events:none;mix-blend-mode:multiply;opacity:.13}
+.vignette{position:absolute;inset:0;z-index:49;pointer-events:none;
+  background:radial-gradient(ellipse 78% 70% at 42% 40%, rgba(40,25,15,0) 55%, rgba(40,25,15,.30) 100%)}
+
+/* ---------- Knet-Platten (Karten) ---------- */
+.card{position:absolute;border-radius:40px;isolation:isolate;
+  box-shadow:0 3px 4px rgba(45,25,12,.38), 12px 22px 30px -12px rgba(45,25,12,.48)}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--c);filter:url(#clayCard);z-index:-1}
+h2{font-family:'Fredoka',sans-serif;font-weight:600;font-size:25px;line-height:1.08;color:#fff;letter-spacing:.1px;
+  text-shadow:0 1px 0 rgba(0,0,0,.12)}
+h2.dark{color:var(--ink);text-shadow:0 1px 0 rgba(255,255,255,.25)}
+h2 small{display:block;font-size:19px;font-weight:500;margin-top:2px;opacity:.92}
+p,.t{font-size:16px;line-height:1.3;font-weight:600}
+.lbl{font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;letter-spacing:.3px}
+
+/* ---------- Knet-Plaketten (tragen Text) ---------- */
+.plq{position:relative;isolation:isolate;
+  box-shadow:0 2px 3px rgba(45,25,12,.32), 4px 9px 12px -5px rgba(45,25,12,.42)}
+.plq::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--pc,var(--cream));filter:url(#clayPlq);z-index:-1}
+.pill{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;
+  font-weight:800;font-size:16px;line-height:1.15;color:var(--ink);padding:7px 15px}
+svg.obj{position:absolute;overflow:visible}
+</style>
+</head>
+<body>
+
+<!-- ============ Filter ============ -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="clayCard" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="3" seed="11" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.26 0 0 0 0" result="na"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="3" result="f"/>
+      <feColorMatrix in="f" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.035 0 0 0 0" result="fa"/>
+      <feComposite in="b" in2="na" operator="arithmetic" k2="1" k3="1" result="h0"/>
+      <feComposite in="h0" in2="fa" operator="arithmetic" k2="1" k3="1" result="h"/>
+      <feDiffuseLighting in="h" surfaceScale="10" diffuseConstant="1" lighting-color="#fff" result="d">
+        <feDistantLight azimuth="225" elevation="55"/>
+      </feDiffuseLighting>
+      <feSpecularLighting in="h" surfaceScale="10" specularConstant=".38" specularExponent="11" lighting-color="#fff" result="s">
+        <feDistantLight azimuth="225" elevation="38"/>
+      </feSpecularLighting>
+      <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/>
+      <feComposite in="SourceGraphic" in2="d" operator="arithmetic" k1="1.0" k2="0.2" result="lit"/>
+      <feComposite in="lit" in2="s2" operator="arithmetic" k2="1" k3="0.28" result="lit2"/>
+      <feComposite in="lit2" in2="SourceAlpha" operator="in"/>
+    </filter>
+    <filter id="clayPlq" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4.5" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="5" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.12 0 0 0 0" result="na"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="8" result="f"/>
+      <feColorMatrix in="f" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.04 0 0 0 0" result="fa"/>
+      <feComposite in="b" in2="na" operator="arithmetic" k2="1" k3="1" result="h0"/>
+      <feComposite in="h0" in2="fa" operator="arithmetic" k2="1" k3="1" result="h"/>
+      <feDiffuseLighting in="h" surfaceScale="5" diffuseConstant="1" lighting-color="#fff" result="d">
+        <feDistantLight azimuth="225" elevation="55"/>
+      </feDiffuseLighting>
+      <feSpecularLighting in="h" surfaceScale="5" specularConstant=".35" specularExponent="12" lighting-color="#fff" result="s">
+        <feDistantLight azimuth="225" elevation="38"/>
+      </feSpecularLighting>
+      <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/>
+      <feComposite in="SourceGraphic" in2="d" operator="arithmetic" k1="1.0" k2="0.21" result="lit"/>
+      <feComposite in="lit" in2="s2" operator="arithmetic" k2="1" k3="0.25" result="lit2"/>
+      <feComposite in="lit2" in2="SourceAlpha" operator="in"/>
+    </filter>
+  </defs>
+</svg>
+<svg width="0" height="0" style="position:absolute"><defs id="objdefs"></defs></svg>
+
+<!-- ============ KOPF ============ -->
+<svg class="obj" id="title" style="left:22px;top:16px;width:500px;height:100px;z-index:3" viewBox="0 0 500 100">
+  <text x="4" y="76" font-family="Fredoka" font-weight="700" font-size="70">
+    <tspan fill="#cd372d">ADHS</tspan> <tspan fill="#2264b0" dx="-2">im Gehirn</tspan>
+  </text>
+</svg>
+<div class="pill plq" style="position:absolute;left:28px;top:116px;z-index:3;font-family:'Fredoka';font-weight:500;font-size:19px;padding:9px 20px">
+  Kein Willensproblem, sondern ein Steuerungsproblem</div>
+<svg class="obj" id="brain" style="left:520px;top:6px;width:236px;height:197px;z-index:6" viewBox="0 0 240 200"></svg>
+
+<!-- ============ 1 DAS PARADOX ============ -->
+<div class="card" style="--c:var(--blue);left:26px;top:182px;width:716px;height:200px;padding:17px 24px">
+  <h2>Das Paradox</h2>
+  <div style="display:flex;gap:16px;margin-top:9px;align-items:center">
+    <div style="display:flex;align-items:center;gap:10px;width:326px">
+      <svg id="envelope" width="104" height="84" viewBox="0 0 130 104" style="flex:none;overflow:visible"></svg>
+      <p class="plq" style="border-radius:20px;padding:9px 13px">Die wichtige E-Mail <span style="white-space:nowrap">(5 Minuten Arbeit)</span> bleibt <b style="font-weight:800">eine Stunde</b> liegen.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;width:326px">
+      <svg id="target" width="92" height="86" viewBox="0 0 110 104" style="flex:none;overflow:visible"></svg>
+      <p class="plq" style="border-radius:20px;padding:9px 13px">Beim Lieblingsthema: stundenlanger <b style="font-weight:800">Hyperfokus</b>.</p>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:15px;text-align:center">
+    <span class="pill plq" style="--pc:#ffd34d;font-family:'Fredoka';font-weight:500;font-size:18px;padding:8px 22px">
+      <span class="lbl" style="margin-right:8px;color:#a3281f">Merksatz:</span>Dasselbe Gehirn, andere Aktivierung.</span>
+  </div>
+</div>
+
+<!-- ============ 3 DER BEWERTER ============ -->
+<div class="card" style="--c:var(--yellow);left:26px;top:394px;width:352px;height:250px;padding:17px 22px">
+  <h2 class="dark">Der Bewerter:<small>Dopamin &amp; Noradrenalin</small></h2>
+  <svg class="obj" id="scale" style="right:8px;top:4px;width:96px;height:72px" viewBox="0 0 120 90"></svg>
+  <div style="display:flex;align-items:center;gap:10px;margin-top:11px">
+    <span class="t" style="font-weight:800;white-space:nowrap">Fragt ständig:</span>
+    <div class="bubble plq">„Lohnt sich das jetzt?“</div>
+  </div>
+  <p style="margin-top:12px;font-weight:700">Nicht einfach „zu wenig Dopamin“, sondern veränderte Signalwege.</p>
+  <div style="display:flex;align-items:center;gap:10px;margin-top:11px">
+    <span class="pill plq" style="font-size:15px;border-radius:20px;padding:7px 14px;text-align:center">Wichtig<br>finden</span>
+    <svg class="obj" id="neq" style="position:relative;flex:none;width:36px;height:36px" viewBox="0 0 36 36"></svg>
+    <span class="pill plq" style="font-size:15px;border-radius:20px;padding:7px 14px;text-align:center">jetzt Motivation<br>aufbringen</span>
+  </div>
+</div>
+
+<!-- ============ 5 DIE LÜCKE ============ -->
+<div class="card" style="--c:var(--green);left:390px;top:394px;width:352px;height:250px;padding:17px 22px">
+  <h2>Die Lücke zwischen<br>Wissen und Tun</h2>
+  <div style="position:relative;height:88px;margin-top:8px">
+    <div class="block plq" style="left:0">„Ich sollte …“</div>
+    <div class="hole"></div>
+    <svg class="obj" id="gaparrow" style="left:104px;top:-12px;width:104px;height:50px" viewBox="0 0 104 50"></svg>
+    <div class="block plq" style="right:0;width:132px">„Ich mache es jetzt.“</div>
+  </div>
+  <p class="plq" style="margin-top:10px;border-radius:18px;padding:8px 13px"><span class="lbl" style="color:#2a7a3e">Merksatz:</span> Ich weiß es und schaffe es trotzdem nicht anzufangen.</p>
+</div>
+
+<!-- ============ 4 STEUERZENTRALE ============ -->
+<div class="card" style="--c:var(--red);left:26px;top:656px;width:716px;height:206px;padding:17px 26px">
+  <h2>Die Steuerzentrale: <span style="font-weight:500;color:#ffe3d6">präfrontaler Cortex</span></h2>
+  <div class="lbl" style="margin-top:8px;color:#fff">Fünf Aufgaben:</div>
+  <div class="tasks">
+    <span class="pill plq" style="--pc:#ffd34d">Planen</span>
+    <span class="pill plq" style="--pc:#f6eee2">Arbeitsgedächtnis</span>
+    <span class="pill plq" style="--pc:#6cc27a">Ablenkung ausblenden</span>
+    <span class="pill plq" style="--pc:#6aa8e6">Impulse bremsen</span>
+    <span class="pill plq" style="--pc:#f9a54e">Langfristige Ziele</span>
+  </div>
+  <p style="margin-top:12px;font-style:italic;font-weight:700;color:#fff">Bei reizarmen Aufgaben weniger stabil.</p>
+  <svg class="obj" id="gears" style="right:8px;top:-6px;width:196px;height:200px" viewBox="0 0 196 200"></svg>
+</div>
+
+<!-- ============ 7 DEADLINE-FALLE ============ -->
+<div class="card" id="cyc" style="--c:var(--blue);left:26px;top:874px;width:428px;height:318px;padding:16px 22px">
+  <h2>Die Deadline-Falle</h2>
+  <svg class="obj" id="ring" style="left:0;top:0;width:428px;height:318px" viewBox="0 0 428 318"></svg>
+  <svg class="obj" id="clock" style="left:164px;top:134px;width:100px;height:100px" viewBox="0 0 120 120"></svg>
+</div>
+
+<!-- ============ 6 AKTIVIERUNG ============ -->
+<div class="card" style="--c:var(--orange);left:466px;top:874px;width:276px;height:318px;padding:16px 20px">
+  <h2 class="dark">Was die Aktivierung einschaltet</h2>
+  <div class="acts">
+    <div class="act plq"><svg class="ic" id="ic1" viewBox="0 0 40 40"></svg>Neuheit</div>
+    <div class="act plq"><svg class="ic" id="ic2" viewBox="0 0 40 40"></svg>Unmittelbare Konsequenzen</div>
+    <div class="act plq"><svg class="ic" id="ic3" viewBox="0 0 40 40"></svg>Persönliches Interesse</div>
+    <div class="act plq"><svg class="ic" id="ic4" viewBox="0 0 40 40"></svg>Zeitdruck</div>
+  </div>
+</div>
+
+<!-- ============ FAZIT ============ -->
+<div class="card" style="--c:var(--purple);left:26px;top:1204px;width:716px;height:112px;padding:14px 28px 16px;display:flex;flex-direction:column;justify-content:center">
+  <div style="font-family:'Fredoka';font-weight:600;font-size:21px;color:#ffd34d">Fazit</div>
+  <p style="font-size:17px;font-weight:700;color:#fff;margin-top:2px;line-height:1.32">ADHS heißt nicht <span style="color:#ffd34d">„keine Aufmerksamkeit“</span>. Es heißt: Aufmerksamkeit, Motivation und Verhalten zuverlässig an das anzupassen, was gerade nötig ist, fällt schwer.</p>
+</div>
+
+<!-- ============ FUSS ============ -->
+<div style="position:absolute;left:30px;right:30px;top:1326px;z-index:3;font-size:12.5px;line-height:1.35;color:#33261f;font-weight:600">
+  <div>Kein Hirnscan kann ADHS diagnostizieren, es gibt nur Gruppenunterschiede. · Die Diagnose gehört zu Fachleuten.</div>
+  <div style="margin-top:2px;font-weight:500">Quelle: NeuroWissen TV, „NEUROLOGE ERKLÄRT: Das macht ADHS wirklich in deinem Gehirn“ (2026)</div>
+</div>
+
+<svg class="fp" style="left:36px;top:318px;width:62px;height:62px;transform:rotate(-24deg)" viewBox="0 0 60 60"></svg>
+<svg class="fp" style="left:430px;top:788px;width:58px;height:58px;transform:rotate(38deg)" viewBox="0 0 60 60"></svg>
+<svg class="fp" style="left:40px;top:1130px;width:58px;height:58px;transform:rotate(12deg)" viewBox="0 0 60 60"></svg>
+<svg class="fp" style="left:676px;top:404px;width:56px;height:56px;transform:rotate(-60deg)" viewBox="0 0 60 60"></svg>
+<svg class="grain" viewBox="0 0 768 1376" preserveAspectRatio="none">
+  <filter id="gr" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncR type="linear" slope="1.4" intercept="-.2"/><feFuncG type="linear" slope="1.4" intercept="-.2"/><feFuncB type="linear" slope="1.4" intercept="-.2"/></feComponentTransfer></filter>
+  <rect width="768" height="1376" filter="url(#gr)"/>
+</svg>
+<div class="vignette"></div>
+
+<style>
+.bubble{white-space:nowrap;font-family:'Fredoka';font-weight:600;font-size:17px;border-radius:20px;padding:8px 13px;color:var(--ink);--pc:#fffaf3}
+.bubble::after{content:"";position:absolute;left:-10px;top:50%;margin-top:-4px;width:14px;height:13px;background:#f3ebe0;clip-path:polygon(0 70%,100% 0,100% 100%);}
+.block{position:absolute;top:22px;width:116px;height:62px;border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:'Fredoka';font-weight:500;font-size:17px;line-height:1.1;padding:0 8px;color:var(--ink)}
+.hole{position:absolute;left:121px;width:52px;top:56px;height:28px;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 72%, #0f2414 0%, #1d4325 45%, #2f7a40 100%);
+  box-shadow:inset 0 9px 10px rgba(0,10,0,.65), 0 2px 1px rgba(255,255,255,.35)}
+.tasks{display:flex;flex-wrap:wrap;gap:10px 10px;margin-top:8px;width:480px}
+.acts{display:flex;flex-direction:column;gap:10px;margin-top:11px}
+.act{display:flex;align-items:center;gap:10px;min-height:48px;border-radius:26px;padding:4px 14px 4px 5px;
+  font-weight:800;font-size:16px;line-height:1.15;color:var(--ink)}
+.ic{width:40px;height:40px;flex:none;overflow:visible}
+.fp{position:absolute;z-index:2;pointer-events:none;overflow:visible;opacity:.9}
+.cpill{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font-size:15px;padding:7px 13px;z-index:4}
+</style>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+const el=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;};
+
+/* ---- Knet-Filter für Objekte: matte Oberfläche, Körnung, Kontakt- und Schlagschatten ---- */
+const KINDS={clayL:[7,14,6],clayM:[4.5,11,4.5],clayS:[3,8,3.2],clayXS:[1.8,5,2.2],clayText:[2.6,7,3.4]};
+function fid(node,kind){
+  const svg=node.tagName==='svg'?node:node.ownerSVGElement, id=kind+'_'+svg.id;
+  if(!document.getElementById(id)){const vb=svg.viewBox.baseVal;clayFilter(id,...KINDS[kind],[vb.x-24,vb.y-24,vb.width+52,vb.height+56]);}
+  return `url(#${id})`;
+}
+function clayFilter(id,std,scale,sh,R){
+  document.getElementById('objdefs').insertAdjacentHTML('beforeend',`
+  <filter id="${id}" filterUnits="userSpaceOnUse" x="${R[0]}" y="${R[1]}" width="${R[2]}" height="${R[3]}" color-interpolation-filters="sRGB">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="${std}" result="b"/>
+    <feTurbulence type="fractalNoise" baseFrequency="${0.5/std}" numOctaves="2" seed="${Math.round(std*7)}" result="n"/>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.08 0 0 0 0" result="na"/>
+    <feTurbulence type="fractalNoise" baseFrequency="${Math.min(1.2,2.2/std)}" numOctaves="1" seed="9" result="f"/>
+    <feColorMatrix in="f" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.03 0 0 0 0" result="fa"/>
+    <feComposite in="b" in2="na" operator="arithmetic" k2="1" k3="1" result="h0"/>
+    <feComposite in="h0" in2="fa" operator="arithmetic" k2="1" k3="1" result="h"/>
+    <feDiffuseLighting in="h" surfaceScale="${scale}" diffuseConstant="1" lighting-color="#fff" result="d">
+      <feDistantLight azimuth="225" elevation="50"/></feDiffuseLighting>
+    <feSpecularLighting in="h" surfaceScale="${scale}" specularConstant=".5" specularExponent="13" lighting-color="#fff" result="s">
+      <feDistantLight azimuth="225" elevation="34"/></feSpecularLighting>
+    <feComposite in="s" in2="SourceAlpha" operator="in" result="s2"/>
+    <feComposite in="SourceGraphic" in2="d" operator="arithmetic" k1="1.12" k2="0.14" result="lit"/>
+    <feComposite in="lit" in2="s2" operator="arithmetic" k2="1" k3="0.3" result="lit2"/>
+    <feComposite in="lit2" in2="SourceAlpha" operator="in" result="obj"/>
+    <feGaussianBlur in="SourceAlpha" stdDeviation="${sh*0.9}" result="sb"/>
+    <feOffset in="sb" dx="${sh*0.6}" dy="${sh*1.2}" result="so"/>
+    <feFlood flood-color="#2a160c" flood-opacity=".38"/>
+    <feComposite in2="so" operator="in" result="shadow"/>
+    <feGaussianBlur in="SourceAlpha" stdDeviation="${Math.max(0.8,sh*0.25)}" result="cb"/>
+    <feOffset in="cb" dx="${sh*0.15}" dy="${sh*0.35}" result="co"/>
+    <feFlood flood-color="#1e0e06" flood-opacity=".42"/>
+    <feComposite in2="co" operator="in" result="contact"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="contact"/><feMergeNode in="obj"/></feMerge>
+  </filter>`);
+}
+document.querySelector('#title text').setAttribute('filter',fid(document.getElementById('title'),'clayText'));
+
+function smooth(pts){
+  let d=`M${pts[0][0]},${pts[0][1]}`;
+  for(let i=0;i<pts.length-1;i++){
+    const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    d+=` C${p1[0]+(p2[0]-p0[0])/6},${p1[1]+(p2[1]-p0[1])/6} ${p2[0]-(p3[0]-p1[0])/6},${p2[1]-(p3[1]-p1[1])/6} ${p2[0]},${p2[1]}`;
+  }
+  return d;
+}
+function sausage(parent,d,color,w,filt){return el('path',{d,fill:'none',stroke:color,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round',filter:fid(parent,filt)},parent);}
+
+/* ---- Gehirn aus Knetwülsten ---- */
+function serp(cx,cy,angDeg,n,amp,sp,seed){
+  const a=angDeg*Math.PI/180,ca=Math.cos(a),sa=Math.sin(a);
+  let r=seed||1;const rnd=()=>{r=(r*16807)%2147483647;return r/2147483647-0.5;};
+  const P=(u,v)=>[cx+u*ca-v*sa,cy+u*sa+v*ca];
+  const pts=[];
+  for(let k=0;k<n;k++){
+    const u=(k-(n-1)/2)*sp, s=k%2?1:-1, A=amp*(1+rnd()*0.35);
+    pts.push(P(u+rnd()*3,s*A*0.92));
+    pts.push(P(u+rnd()*4,0));
+    pts.push(P(u+rnd()*3,-s*A*0.92));
+    if(k<n-1) pts.push(P(u+sp/2,-s*(A+sp*0.42)));
+  }
+  return smooth(pts);
+}
+(function(){
+  const s=document.getElementById('brain');
+  sausage(s,'M150,150 C154,168 150,182 142,194','#d4615f',22,'clayM');
+  el('ellipse',{cx:180,cy:150,rx:34,ry:22,fill:'#dc6a67',filter:fid(s,'clayM')},s);
+  sausage(s,'M154,144 C167,138 192,138 206,145','#ee8a85',7,'clayXS');
+  sausage(s,'M154,155 C168,150 190,150 205,156','#ee8a85',7,'clayXS');
+  sausage(s,'M160,165 C171,161 186,161 198,165','#ee8a85',7,'clayXS');
+  el('path',{d:'M28,108 C12,78 26,34 70,24 C96,6 140,6 166,20 C206,24 234,60 224,100 C230,128 206,146 180,140 C160,156 128,158 100,152 C72,156 44,146 36,132 C26,126 24,118 28,108 Z',fill:'#d4585a',filter:fid(s,'clayL')},s);
+  const C=['#f0827f','#f48f88','#ec7a78'];
+  [[56,84,92,5,20,14.5,3],[112,40,8,5,12,14.5,5],[168,58,48,4,17,14.5,7],[116,90,18,5,15,14.5,9],
+   [200,100,96,3,13,14.5,11],[104,130,90,2,30,14.5,13],[158,116,0,3,10,14.5,15]]
+   .forEach((p,i)=>sausage(s,serp(...p),C[i%3],12.5,'clayS'));
+})();
+
+/* ---- Briefumschlag ---- */
+(function(){
+  const s=document.getElementById('envelope');
+  el('rect',{x:8,y:26,width:106,height:72,rx:14,fill:'#f4ece0',filter:fid(s,'clayM')},s);
+  el('path',{d:'M16,34 L61,66 L106,34 Z',fill:'#e6dccd',stroke:'#e6dccd','stroke-width':6,'stroke-linejoin':'round',filter:fid(s,'clayS')},s);
+  sausage(s,'M18,90 L50,64','#d8ccbb',5,'clayXS');sausage(s,'M104,90 L72,64','#d8ccbb',5,'clayXS');
+  el('circle',{cx:61,cy:66,r:10,fill:'#d23a30',filter:fid(s,'clayS')},s);
+  el('circle',{cx:108,cy:26,r:20,fill:'#f3bf2c',filter:fid(s,'clayM')},s);
+  el('circle',{cx:108,cy:26,r:13,fill:'#fbf5ea',filter:fid(s,'clayXS')},s);
+  sausage(s,'M108,26 L108,17','#2b1f26',4,'clayXS');
+  sausage(s,'M108,26 L115,29','#2b1f26',4,'clayXS');
+})();
+
+/* ---- Zielscheibe (Hyperfokus) ---- */
+(function(){
+  const s=document.getElementById('target');
+  [[44,'#d23a30'],[33,'#f6eee2'],[22,'#d23a30'],[11,'#f6eee2']].forEach(([r,f],i)=>
+    el('circle',{cx:50,cy:56,r,fill:f,filter:fid(s,i<1?'clayM':i<3?'clayS':'clayXS')},s));
+  sausage(s,'M52,54 L96,12','#3b2a22',6,'clayXS');
+  el('path',{d:'M90,6 L104,2 L100,16 L94,22 L86,14 Z',fill:'#f3bf2c',stroke:'#f3bf2c','stroke-width':4,'stroke-linejoin':'round',filter:fid(s,'clayXS')},s);
+})();
+
+/* ---- Pfeil über der Lücke ---- */
+(function(){
+  const s=document.getElementById('gaparrow');
+  const g=el('g',{filter:fid(s,'clayS')},s);
+  el('path',{d:'M8,40 C24,6 74,4 88,30',fill:'none',stroke:'#f3bf2c','stroke-width':10,'stroke-linecap':'round'},g);
+  el('path',{d:'M78,30 L96,44 L98,22 Z',fill:'#f3bf2c',stroke:'#f3bf2c','stroke-width':5,'stroke-linejoin':'round'},g);
+})();
+
+/* ---- Ungleich-Kugel ---- */
+(function(){
+  const s=document.getElementById('neq');
+  el('circle',{cx:18,cy:18,r:16,fill:'#d23a30',filter:fid(s,'clayS')},s);
+  sausage(s,'M10,14.5 L26,14.5','#fff4e8',3.6,'clayXS');
+  sausage(s,'M10,21.5 L26,21.5','#fff4e8',3.6,'clayXS');
+  sausage(s,'M21.5,8 L14.5,28','#fff4e8',3.6,'clayXS');
+})();
+
+/* ---- Waage (Bewerter) ---- */
+(function(){
+  const s=document.getElementById('scale');
+  el('ellipse',{cx:60,cy:82,rx:26,ry:7,fill:'#2c74bf',filter:fid(s,'clayS')},s);
+  sausage(s,'M60,80 L60,22','#2c74bf',9,'clayS');
+  sausage(s,'M18,26 L102,16','#3b2a22',7,'clayXS');
+  sausage(s,'M20,27 L12,52 M20,27 L30,52','#3b2a22',2.6,'clayXS');
+  sausage(s,'M100,17 L92,42 M100,17 L110,42','#3b2a22',2.6,'clayXS');
+  el('path',{d:'M4,52 L38,52 C36,64 6,64 4,52 Z',fill:'#d23a30',stroke:'#d23a30','stroke-width':3,'stroke-linejoin':'round',filter:fid(s,'clayS')},s);
+  el('path',{d:'M84,42 L118,42 C116,54 86,54 84,42 Z',fill:'#3e9c53',stroke:'#3e9c53','stroke-width':3,'stroke-linejoin':'round',filter:fid(s,'clayS')},s);
+  el('circle',{cx:60,cy:18,r:7,fill:'#f6eee2',filter:fid(s,'clayS')},s);
+})();
+
+/* ---- Zahnräder ---- */
+function gear(cx,cy,R,r,n,rot){
+  const pts=[];const tw=Math.PI/n;
+  for(let i=0;i<n;i++){
+    const a=rot+i*2*Math.PI/n;
+    const a0=a-tw*0.62,a1=a-tw*0.36,a2=a+tw*0.36,a3=a+tw*0.62;
+    pts.push([cx+r*Math.cos(a0),cy+r*Math.sin(a0)],[cx+R*Math.cos(a1),cy+R*Math.sin(a1)],[cx+R*Math.cos(a2),cy+R*Math.sin(a2)],[cx+r*Math.cos(a3),cy+r*Math.sin(a3)]);
+  }
+  return 'M'+pts.map(p=>p.map(v=>v.toFixed(1)).join(',')).join(' L')+' Z';
+}
+(function(){
+  const s=document.getElementById('gears');
+  el('path',{d:gear(84,112,66,52,10,0.1),fill:'#f3bf2c',stroke:'#f3bf2c','stroke-width':6,'stroke-linejoin':'round',filter:fid(s,'clayL')},s);
+  el('circle',{cx:84,cy:112,r:24,fill:'#f6eee2',filter:fid(s,'clayM')},s);
+  el('circle',{cx:84,cy:112,r:9,fill:'#2c74bf',filter:fid(s,'clayXS')},s);
+  el('path',{d:gear(158,42,38,28,8,0.42),fill:'#2c74bf',stroke:'#2c74bf','stroke-width':5,'stroke-linejoin':'round',filter:fid(s,'clayM')},s);
+  el('circle',{cx:158,cy:42,r:11,fill:'#f6eee2',filter:fid(s,'clayS')},s);
+})();
+
+/* ---- Wecker ---- */
+(function(){
+  const s=document.getElementById('clock');
+  sausage(s,'M36,96 L24,112','#3b2a22',9,'clayXS');
+  sausage(s,'M84,96 L96,112','#3b2a22',9,'clayXS');
+  el('circle',{cx:28,cy:26,r:17,fill:'#f3bf2c',filter:fid(s,'clayS')},s);
+  el('circle',{cx:92,cy:26,r:17,fill:'#f3bf2c',filter:fid(s,'clayS')},s);
+  sausage(s,'M60,10 L60,20','#3b2a22',7,'clayXS');
+  el('circle',{cx:60,cy:64,r:44,fill:'#d23a30',filter:fid(s,'clayL')},s);
+  el('circle',{cx:60,cy:64,r:32,fill:'#f6eee2',filter:fid(s,'clayM')},s);
+  [[60,38],[86,64],[60,90],[34,64]].forEach(([x,y])=>el('circle',{cx:x,cy:y,r:3.2,fill:'#2c74bf',filter:fid(s,'clayXS')},s));
+  sausage(s,'M60,64 L60,44','#2b1f26',6,'clayXS');
+  sausage(s,'M60,64 L75,72','#2b1f26',6,'clayXS');
+  el('circle',{cx:60,cy:64,r:5,fill:'#d23a30',filter:fid(s,'clayXS')},s);
+})();
+
+/* ---- Kreislauf der Deadline-Falle ---- */
+(function(){
+  const card=document.getElementById('cyc'), s=document.getElementById('ring');
+  const cx=214,cy=184,rx=146,ry=106;
+  const steps=[['Aufschieben','#f3bf2c'],['Deadline naht','#ec862b'],['Stress','#d8392e'],
+               ['Arbeitsphase','#45b05e'],['Erleichterung','#f6eee2'],['wieder von vorn','#f2908a']];
+  const ang=steps.map((_,i)=>(-90+i*60)*Math.PI/180);
+  steps.forEach(([t],i)=>{
+    const x=cx+rx*Math.cos(ang[i]),y=cy+ry*Math.sin(ang[i]);
+    const p=document.createElement('span');p.className='pill plq cpill';p.style.left=x+'px';p.style.top=y+'px';
+    if(i===5){p.innerHTML='↻ '+t;p.style.fontFamily='Fredoka';p.style.fontWeight='500';p.style.setProperty('--pc','#ffe08a');}
+    card.appendChild(p);
+    if(i!==5)p.textContent=t;
+  });
+  document.fonts.ready.then(()=>{
+    const cr=card.getBoundingClientRect(),rects=[];
+    card.querySelectorAll('.cpill').forEach(p=>{const r=p.getBoundingClientRect();rects.push([r.left-cr.left-5,r.top-cr.top-5,r.right-cr.left+5,r.bottom-cr.top+5]);});
+    const inside=(x,y)=>rects.some(r=>x>r[0]&&x<r[2]&&y>r[1]&&y<r[3]);
+    for(let i=0;i<6;i++){
+      const a0=ang[i],a1=ang[i]+Math.PI/3;const pts=[];
+      for(let k=0;k<=80;k++){const a=a0+(a1-a0)*k/80;const x=cx+rx*Math.cos(a),y=cy+ry*Math.sin(a);if(!inside(x,y))pts.push([x,y]);}
+      if(pts.length<8)continue;
+      const end=pts[pts.length-1],pre=pts[pts.length-6];
+      const body=pts.slice(0,pts.length-5).filter((_,k)=>k%4===0);body.push(pts[pts.length-6]);
+      const g=el('g',{filter:fid(s,'clayS')},s);
+      el('path',{d:smooth(body),fill:'none',stroke:steps[i][1],'stroke-width':13,'stroke-linecap':'round'},g);
+      const dx=end[0]-pre[0],dy=end[1]-pre[1],L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+      const tip=[end[0]+ux*3,end[1]+uy*3],bx=pre[0]-ux*2,by=pre[1]-uy*2;
+      el('path',{d:`M${tip[0]},${tip[1]} L${bx-uy*12},${by+ux*12} L${bx+uy*12},${by-ux*12} Z`,fill:steps[i][1],stroke:steps[i][1],'stroke-width':5,'stroke-linejoin':'round'},g);
+    }
+  });
+})();
+
+/* ---- Fingerabdrücke im Knet ---- */
+document.querySelectorAll('.fp').forEach((s,j)=>{
+  let r=17+j*31;const rnd=()=>{r=(r*16807)%2147483647;return r/2147483647;};
+  for(let k=0;k<10;k++){
+    const R=3.5+k*2.7, gap=0.5+rnd()*1.2, a0=rnd()*6.28, a1=a0+6.28-gap;
+    let d='';for(let t=0;t<=40;t++){const a=a0+(a1-a0)*t/40;const w=1+0.04*Math.sin(a*3+k);
+      const x=30+R*1.12*w*Math.cos(a), y=30+R*0.86*w*Math.sin(a);d+=(t?'L':'M')+x.toFixed(2)+','+y.toFixed(2);}
+    el('path',{d,fill:'none',stroke:'rgba(20,10,5,.20)','stroke-width':1.1,transform:'translate(.6,.7)','stroke-linecap':'round'},s);
+    el('path',{d,fill:'none',stroke:'rgba(255,255,255,.22)','stroke-width':1.0,transform:'translate(-.5,-.5)','stroke-linecap':'round'},s);
+  }
+});
+
+/* ---- Icons Aktivierung ---- */
+(function(){
+  const star=(cx,cy,R,r)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r:R;d+=(i?'L':'M')+(cx+rr*Math.cos(a)).toFixed(1)+','+(cy+rr*Math.sin(a)).toFixed(1);}return d+'Z';};
+  const f=(id,fn)=>fn(document.getElementById(id));
+  const base=(s,c)=>el('circle',{cx:20,cy:20,r:19,fill:c,filter:fid(s,'clayS')},s);
+  f('ic1',s=>{base(s,'#2c74bf');el('path',{d:star(20,21,12.5,5.8),fill:'#f3bf2c',stroke:'#f3bf2c','stroke-width':3,'stroke-linejoin':'round',filter:fid(s,'clayXS')},s);});
+  f('ic2',s=>{base(s,'#3b2a22');el('path',{d:'M23,5 L11,22 L19,22 L16,35 L29,17 L21,17 Z',fill:'#f3bf2c',stroke:'#f3bf2c','stroke-width':3,'stroke-linejoin':'round',filter:fid(s,'clayXS')},s);});
+  f('ic3',s=>{base(s,'#f6eee2');el('path',{d:'M20,32 C8,24 6,17 9,12 C12,7 18,8 20,13 C22,8 28,7 31,12 C34,17 32,24 20,32 Z',fill:'#d8392e',stroke:'#d8392e','stroke-width':3,'stroke-linejoin':'round',filter:fid(s,'clayXS')},s);});
+  f('ic4',s=>{base(s,'#3e9c53');
+    el('path',{d:'M13,10 L27,10 C27,17 22,18 20,20 C22,22 27,23 27,30 L13,30 C13,23 18,22 20,20 C18,18 13,17 13,10 Z',fill:'#f6eee2',stroke:'#f6eee2','stroke-width':2.5,'stroke-linejoin':'round',filter:fid(s,'clayXS')},s);
+    el('path',{d:'M15.5,28 C16,25 19,23.5 20,23 C21,23.5 24,25 24.5,28 Z',fill:'#f3bf2c',filter:fid(s,'clayXS')},s);
+    sausage(s,'M11,9 L29,9','#3b2a22',4.5,'clayXS');sausage(s,'M11,31 L29,31','#3b2a22',4.5,'clayXS');});
+})();
+</script>
+</body>
+</html>

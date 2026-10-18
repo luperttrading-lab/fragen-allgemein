@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>ADHS im Gehirn</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+:root{
+  --paper:#f7f2e7;
+  --ink:#1f1b18;
+  --ink2:#47413a;
+  --red:#b3261e;
+  --gap:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:768px;height:1376px;overflow:hidden;background:#ffffff}
+body{position:relative;color:var(--ink);font-family:'Source Serif 4',serif;-webkit-font-smoothing:antialiased;font-kerning:normal}
+.sheet{position:absolute;inset:12px;background:var(--paper);overflow:hidden;padding:22px 36px 0}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.11;mix-blend-mode:multiply;z-index:0}
+.sheet>*:not(.grain){position:relative;z-index:1}
+.sheet>.foot{position:absolute}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);column-gap:var(--gap)}
+svg{display:block}
+
+/* Masthead */
+.mast{display:flex;justify-content:space-between;align-items:baseline;font:600 12px/1 'Inter',sans-serif;letter-spacing:.22em;text-transform:uppercase;padding-bottom:9px}
+.mast .rub{color:var(--red)}
+.mast .mid{font:italic 400 14px/1 'Fraunces',serif;letter-spacing:.02em;text-transform:none;color:var(--ink2)}
+.mast .r{color:var(--ink2)}
+.dbl{border-top:3px solid var(--ink);height:6px;border-bottom:1px solid var(--ink)}
+
+/* Hero */
+.hero{position:relative;margin-top:10px;height:320px}
+.hero svg{position:absolute;left:0;top:0}
+.hl{position:absolute;left:46px;top:40px;font-family:'Fraunces',serif;font-variation-settings:'opsz' 144;color:var(--ink)}
+.hl .a{display:block;font-weight:900;font-size:118px;line-height:.80;letter-spacing:-.035em;margin-left:-4px}
+.hl .b{display:block;font-style:italic;font-weight:400;font-size:68px;line-height:.95;letter-spacing:-.02em;margin-top:4px}
+.deck{position:absolute;left:46px;top:219px;width:330px;font:italic 400 21px/1.25 'Source Serif 4',serif;color:var(--ink2)}
+
+/* Ueberschriften & Text */
+h2{font-family:'Fraunces',serif;font-variation-settings:'opsz' 48;font-weight:800;font-size:20px;line-height:1.1;letter-spacing:-.01em;margin-bottom:6px}
+h2 .no{font:600 12px/1 'Inter',sans-serif;letter-spacing:.14em;color:var(--red);margin-right:8px;vertical-align:3px}
+h2 .sub{display:block;font-style:italic;font-weight:500;font-size:18px;line-height:1.2;margin-top:1px}
+p{font-size:15px;line-height:1.4;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
+.merk{font-weight:700}
+.row{margin-top:10px;padding-top:10px;border-top:1px solid var(--ink)}
+.vr{position:relative}
+.vr::before{content:"";position:absolute;left:-10px;top:0;bottom:0;border-left:1px solid rgba(31,27,24,.35)}
+
+/* Reihe A */
+.para{grid-column:1/4;display:grid;grid-template-columns:112px 1fr;column-gap:12px}
+.para .txt{min-width:0}
+.bew{grid-column:4/7}
+.bew .top{display:grid;grid-template-columns:1fr 142px;column-gap:8px;align-items:start}
+.bew .cap{display:block;margin:8px 0 0;font:italic 400 15px/1.2 'Source Serif 4',serif;color:var(--ink2)}
+.neq{font-family:'Fraunces',serif;font-weight:700;color:var(--red)}
+
+/* Reihe B */
+.luecke h2{grid-column:1/7}
+.pq{grid-column:1/4;position:relative;padding-left:58px}
+.pq .qm{position:absolute;left:-2px;top:-52px;font:900 104px/1 'Fraunces',serif;font-variation-settings:'opsz' 144;color:var(--red)}
+.pq blockquote{text-wrap:balance;font:italic 500 28px/1.1 'Fraunces',serif;font-variation-settings:'opsz' 96;letter-spacing:-.015em}
+.gapfig{grid-column:4/7}
+
+/* Reihe C */
+.loop{grid-column:1/5;position:relative}
+.loop h2{position:absolute;left:0;top:0;z-index:2}
+.box{grid-column:5/7;position:relative;padding:11px 8px 10px 11px;align-self:start}
+.box>svg.bg{position:absolute;left:0;top:0;width:100%;height:100%;z-index:0}
+.box>*:not(.bg){position:relative;z-index:1}
+.box h2{font-size:18.5px;letter-spacing:-.02em}
+.box h2 .sub{font-size:17px}
+.box .wheel{position:absolute;right:8px;bottom:8px}
+.box ol{list-style:none;margin-top:4px}
+.box li{display:grid;grid-template-columns:28px 1fr;align-items:center;padding:2px 0;border-bottom:1px solid rgba(31,27,24,.22);font-size:15px;line-height:1.2;min-height:30px}
+.box li:last-child{border-bottom:0}
+.box li .n{position:relative;width:22px;height:22px}
+.box li .n svg{position:absolute;left:-2px;top:-2px}
+.box li .n b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:800 14px/1 'Fraunces',serif;color:var(--ink)}
+.box .note{margin-top:5px;font-style:italic;color:var(--ink2);line-height:1.3}
+
+/* Reihe D */
+.akt h2{grid-column:1/3;align-self:center}
+.icons{grid-column:3/7;display:grid;grid-template-columns:repeat(4,1fr);column-gap:10px}
+.icons div{text-align:center;font-size:15px;line-height:1.2}
+.icons svg{margin:0 auto 2px}
+
+/* Fazit */
+.fz{grid-column:1/5}
+.fz .t{font:400 20px/1.3 'Fraunces',serif;font-variation-settings:'opsz' 36;hyphens:manual;letter-spacing:-.005em;text-wrap:pretty}
+.fz .end{display:inline-block;width:10px;height:10px;background:var(--red);margin-left:6px;vertical-align:1px}
+.runin{font:600 12px/1 'Inter',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-right:9px;vertical-align:2px}
+.hin{grid-column:5/7;border-left:1px solid var(--ink);padding-left:14px}
+.hin p{font:400 12.5px/1.4 'Inter',sans-serif;color:var(--ink2);hyphens:manual}
+.hin p+p{margin-top:5px}
+.hin .runin{display:inline-block;margin:0 0 3px;vertical-align:0}
+.fazit{border-top:3px solid var(--ink)}
+
+.foot{left:36px;right:36px;bottom:13px}
+.foot .dbl{height:4px;border-top-width:1px}
+.foot .q{padding-top:7px;font:400 12px/1.35 'Inter',sans-serif;color:var(--ink2)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="fx"></defs></svg>
+<div class="sheet">
+  <svg class="grain" width="744" height="1352" aria-hidden="true">
+    <filter id="g"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <rect width="100%" height="100%" filter="url(#g)"/>
+  </svg>
+
+  <header class="mast">
+    <span class="rub">Wissen · Neurologie</span>
+    <span class="mid">Das Feature</span>
+    <span class="r">Aufmerksamkeit &amp; Motivation</span>
+  </header>
+  <div class="dbl"></div>
+
+  <!-- HERO -->
+  <section class="hero" data-m="hero">
+    <svg id="heroSvg" width="672" height="320" viewBox="0 0 672 320"></svg>
+    <h1 class="hl" data-m="h1"><span class="a">ADHS</span><span class="b">im Gehirn</span></h1>
+    <p class="deck" data-m="deck">Kein Willensproblem, sondern ein Steuerungs&shy;problem</p>
+  </section>
+
+  <!-- REIHE A -->
+  <section class="row grid" data-m="rowA">
+    <div class="para" data-m="para">
+      <svg id="envSvg" width="112" height="150" viewBox="0 0 112 150"></svg>
+      <div class="txt">
+        <h2><span class="no">01</span>Das Paradox</h2>
+        <p>Die wichtige E-Mail (5&nbsp;Minuten Arbeit) bleibt eine Stunde liegen. Beim Lieblings&shy;thema: stunden&shy;langer Hyper&shy;fokus.</p>
+        <p class="merk" style="margin-top:5px">Dasselbe Gehirn, andere Aktivierung.</p>
+      </div>
+    </div>
+    <div class="bew vr" data-m="bew">
+      <div class="top">
+        <h2><span class="no">03</span>Der Bewerter:<span class="sub">Dopamin &amp; Noradrenalin</span><span class="cap">Fragt ständig:</span></h2>
+        <svg id="bubSvg" width="142" height="84" viewBox="0 0 142 84"></svg>
+      </div>
+      <p>Nicht einfach „zu&nbsp;wenig Dopamin“, sondern veränderte Signal&shy;wege.</p>
+      <p class="merk" style="margin-top:5px">Wichtig finden <span class="neq">≠</span> jetzt Motivation aufbringen.</p>
+    </div>
+  </section>
+
+  <!-- REIHE B -->
+  <section class="row grid luecke" data-m="rowB">
+    <h2><span class="no">05</span>Die Lücke zwischen Wissen und Tun</h2>
+    <div class="pq">
+      <span class="qm">„</span>
+      <blockquote>Ich weiß es und schaffe es trotzdem nicht anzufangen.“</blockquote>
+    </div>
+    <div class="gapfig"><svg id="gapSvg" width="326" height="124" viewBox="0 0 326 124"></svg></div>
+  </section>
+
+  <!-- REIHE C -->
+  <section class="row grid" data-m="rowC">
+    <div class="loop" data-m="loop">
+      <h2><span class="no">07</span>Die Deadline-<br>Falle</h2>
+      <svg id="loopSvg" width="441" height="280" viewBox="0 0 441 280"></svg>
+    </div>
+    <aside class="box" data-m="box">
+      <svg class="bg" id="boxBg" preserveAspectRatio="none"></svg>
+      <svg class="wheel" id="wheelSvg" width="34" height="34" viewBox="0 0 34 34"></svg>
+      <h2><span class="no" style="display:block;margin-bottom:5px">04</span>Die Steuerzentrale:<span class="sub">präfrontaler Cortex</span></h2>
+      <ol id="tasks">
+        <li><span class="n"></span>Planen</li>
+        <li><span class="n"></span>Arbeits&shy;gedächtnis</li>
+        <li><span class="n"></span>Ablenkung ausblenden</li>
+        <li><span class="n"></span>Impulse bremsen</li>
+        <li><span class="n"></span>Langfristige Ziele</li>
+      </ol>
+      <p class="note">Bei reizarmen Aufgaben weniger stabil.</p>
+    </aside>
+  </section>
+
+  <!-- REIHE D -->
+  <section class="row grid akt" data-m="rowD">
+    <h2><span class="no">06</span>Was die Aktivierung einschaltet</h2>
+    <div class="icons">
+      <div><svg id="icNeu" width="42" height="40" viewBox="0 0 40 38"></svg>Neuheit</div>
+      <div><svg id="icKon" width="42" height="40" viewBox="0 0 40 38"></svg>Unmittelbare Konsequenzen</div>
+      <div><svg id="icInt" width="42" height="40" viewBox="0 0 40 38"></svg>Persönliches Interesse</div>
+      <div><svg id="icZeit" width="42" height="40" viewBox="0 0 40 38"></svg>Zeitdruck</div>
+    </div>
+  </section>
+
+  <!-- FAZIT -->
+  <section class="row grid fazit" data-m="fazit">
+    <div class="fz" data-m="fz">
+      <p class="t"><span class="runin">Fazit</span>ADHS heißt nicht „keine Aufmerksamkeit“. Es heißt: Aufmerksamkeit, Motivation und Verhalten zuverlässig an das anzupassen, was gerade nötig ist, fällt schwer.<span class="end"></span></p>
+    </div>
+    <aside class="hin" data-m="hin">
+      <p><span class="runin">Hinweise</span><br>Kein Hirnscan kann ADHS diagnostizieren, es gibt nur Gruppen&shy;unterschiede.</p>
+      <p>Die Diagnose gehört zu Fachleuten.</p>
+    </aside>
+  </section>
+
+  <footer class="foot" data-m="foot">
+    <div class="dbl"></div>
+    <div class="q">Quelle: NeuroWissen TV, „NEUROLOGE ERKLÄRT: Das macht ADHS wirklich in deinem Gehirn“ (2026)</div>
+  </footer>
+</div>
+
+<script>
+const INK='#221d19';
+const COL={sky:'#9fcbe6',sky2:'#5f9fcd',red:'#dc4b3c',red2:'#b8332a',yel:'#f3c74c',och:'#cf9447',pink:'#eba49b',rose:'#d98680',green:'#9cc49a',cream:'#fffaf0',blue:'#8fbfdd',grey:'#7f9ab5'};
+
+/* ---------- Filter: Tusche + Aquarell ---------- */
+(function(){
+  const fx=document.getElementById('fx');
+  const U='filterUnits="userSpaceOnUse" x="-60" y="-60" width="820" height="520" color-interpolation-filters="sRGB"';
+  function wc(id,seed,freq,scale,blur,er){
+    return `<filter id="${id}" ${U}>
+      <feTurbulence type="fractalNoise" baseFrequency="${freq}" numOctaves="4" seed="${seed}" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="${scale}" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="${blur}" result="b"/>
+      <feColorMatrix in="b" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 5 0" result="bo"/>
+      <feMorphology in="bo" operator="erode" radius="${er}" result="e"/>
+      <feGaussianBlur in="e" stdDeviation="${er}" result="eb"/>
+      <feComposite in="b" in2="eb" operator="out" result="edge"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.16" numOctaves="3" seed="${seed+31}" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.3" result="gm"/>
+      <feComposite in="b" in2="gm" operator="in" result="tex"/>
+      <feMerge><feMergeNode in="tex"/><feMergeNode in="edge"/></feMerge>
+    </filter>`;
+  }
+  let s='';
+  s+=wc('wc1',3,.028,10,1.1,2.2);
+  s+=wc('wc2',9,.034,12,1.3,2.4);
+  s+=wc('wc3',17,.022,9,1.0,2.0);
+  s+=wc('wcS',5,.010,26,2.4,4);   // Himmel
+  s+=wc('wcC',12,.018,10,1.6,3);  // Wolken
+  s+=wc('wcF',23,.06,4,.6,1.2);   // kleine Flecken
+  s+=`<filter id="wcO" ${U}><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="12" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G" result="d"/><feGaussianBlur in="d" stdDeviation="1"/></filter>`;
+  s+=`<filter id="ink" ${U}><feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G"/></filter>`;
+  s+=`<filter id="ink2" ${U}><feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" seed="8" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G"/></filter>`;
+  fx.innerHTML=s;
+})();
+
+const W=(d,c,o,f='wc1',t='')=>`<path d="${d}" fill="${c}" fill-opacity="${o}" filter="url(#${f})" style="mix-blend-mode:multiply"${t?` transform="${t}"`:''}/>`;
+const Wc=(cx,cy,r,c,o,f='wcF')=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}" fill-opacity="${o}" filter="url(#${f})" style="mix-blend-mode:multiply"/>`;
+const L=(d,w=2)=>`<path d="${d}" fill="none" stroke="${INK}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const G=(inner,f='ink',t='')=>`<g filter="url(#${f})"${t?` transform="${t}"`:''}>${inner}</g>`;
+const T=(x,y,txt,o={})=>`<text x="${x}" y="${y}" text-anchor="${o.a||'middle'}" font-family="${o.f||'Source Serif 4'}" font-size="${o.s||16}" font-style="${o.i?'italic':'normal'}" font-weight="${o.w||400}" fill="${o.c||INK}"${o.ls?` letter-spacing="${o.ls}"`:''}>${txt}</text>`;
+const f1=n=>(+n).toFixed(1);
+
+function cloud(x0,x1,yb,h,n,jit,p=2){
+  const cx=(x0+x1)/2, rx=(x1-x0)/2, pts=[], e=2/p;
+  for(let i=0;i<=n;i++){const t=Math.PI+Math.PI*i/n; const k=1+0.06*Math.sin(i*2.3+jit); const c=Math.cos(t), sn=Math.sin(t); pts.push([cx+rx*Math.sign(c)*Math.pow(Math.abs(c),e), yb-h*Math.pow(Math.abs(sn),e)*k]);}
+  let top=`M${f1(pts[0][0])} ${f1(pts[0][1])}`;
+  for(let i=1;i<pts.length;i++){const [a,b]=pts[i-1],[c,d]=pts[i]; const r=Math.hypot(c-a,d-b)/2*(1.05+0.12*((i*7+Math.round(jit*10))%3)/2); top+=` A${f1(r)} ${f1(r)} 0 0 1 ${f1(c)} ${f1(d)}`;}
+  let bot=''; const m=3;
+  for(let i=1;i<=m;i++){const xa=x1-(x1-x0)*(i-1)/m, xb=x1-(x1-x0)*i/m; const r=(xa-xb)/2*1.7; bot+=` A${f1(r)} ${f1(r)} 0 0 1 ${f1(xb)} ${yb}`;}
+  return {fill:top+bot+' Z', top};
+}
+function drawCloud(x0,x1,yb,h,n,jit,p=2){
+  const c=cloud(x0,x1,yb,h,n,jit,p), cx=(x0+x1)/2, w=x1-x0;
+  let s='';
+  s+=`<path d="${c.fill}" fill="${COL.cream}" fill-opacity=".97" filter="url(#wcO)"/>`;
+  s+=`<ellipse cx="${cx+w*.05}" cy="${yb-h*.36}" rx="${w*.36}" ry="${h*.16}" fill="${COL.yel}" fill-opacity=".26" filter="url(#wc3)" style="mix-blend-mode:multiply"/>`;
+  s+=`<ellipse cx="${cx}" cy="${yb-h*.06}" rx="${w*.42}" ry="${Math.max(8,h*.09)}" fill="${COL.grey}" fill-opacity=".26" filter="url(#wc2)" style="mix-blend-mode:multiply"/>`;
+  s+=G(`<path d="${c.top}" fill="none" stroke="${INK}" stroke-width="1.5" stroke-linecap="round"/>`,'ink2');
+  return s;
+}
+
+/* ---------- HERO ---------- */
+(function(){
+  const svg=document.getElementById('heroSvg');
+  let s='';
+  s+=W('M10 12 Q336 4 662 10 L664 310 Q336 318 8 308 Z',COL.sky,.62,'wcS');
+  s+=W('M10 12 Q336 4 662 10 L662 150 Q520 190 380 150 Q230 110 10 170 Z',COL.sky2,.30,'wcS');
+  s+=W('M440 60 Q560 40 650 70 Q600 90 470 85 Z',COL.sky2,.18,'wc2');
+  s+=W('M30 300 Q200 286 360 296',COL.sky2,.0,'wc2');
+  s+=drawCloud(496,664,308,58,6,1.3);
+  s+=drawCloud(26,430,290,262,14,0.4,3.2);
+  const CER='M40 150 C20 130 18 90 40 65 C60 35 110 18 160 20 C215 22 262 45 275 90 C285 120 280 150 262 165 C250 175 235 178 222 176 C205 185 185 190 165 186 C140 200 110 198 95 185 C85 178 80 168 84 160 C70 165 55 162 40 150 Z';
+  const CBL='M196 182 C205 208 240 216 262 200 C276 189 272 172 262 166 C250 175 235 178 222 176 C212 181 204 183 196 182 Z';
+  const STEM='M168 186 C172 206 176 226 178 246 L198 246 C196 228 197 206 204 184 C192 189 180 189 168 186 Z';
+  const PFC='M30 60 C50 34 90 22 118 22 C110 50 104 80 100 110 C97 132 92 150 86 166 C70 164 54 160 40 150 C20 130 18 90 30 60 Z';
+  let b='';
+  b+=`<defs><clipPath id="cerClip"><path d="${CER}"/></clipPath></defs>`;
+  b+=`<g filter="url(#wcO)"><path d="${CER}" fill="${COL.cream}"/><path d="${CBL}" fill="${COL.cream}"/><path d="${STEM}" fill="${COL.cream}"/></g>`;
+  b+=W(STEM,COL.och,.55,'wc1','translate(2,1)');
+  b+=W(CBL,COL.rose,.70,'wc2','translate(2,2)');
+  b+=W(CER,COL.pink,.55,'wc1','translate(3,2)');
+  b+=W('M70 168 C110 150 170 150 230 160 C250 165 262 170 262 165 C250 176 230 180 205 185 C180 192 140 200 100 190 Z',COL.och,.35,'wc3');
+  b+=`<g clip-path="url(#cerClip)">`+`<ellipse cx="62" cy="84" rx="80" ry="70" fill="${COL.yel}" fill-opacity=".55" filter="url(#wc3)" style="mix-blend-mode:multiply"/><ellipse cx="44" cy="90" rx="50" ry="52" fill="${COL.red}" fill-opacity=".55" filter="url(#wc2)" style="mix-blend-mode:multiply"/>`+`</g>`;
+  const sulci=[
+    'M86 160 C118 150 150 140 188 128 C204 122 214 117 226 106',
+    'M168 22 C164 44 157 60 160 80 C162 98 150 112 146 134',
+    'M60 58 C76 70 70 90 90 96 C106 101 100 118 118 126',
+    'M96 32 C102 52 122 54 119 74 C116 90 136 96 132 114',
+    'M38 108 C54 102 66 120 82 116',
+    'M132 24 C128 40 142 50 136 66 C132 78 142 86 140 100',
+    'M190 28 C196 50 184 64 200 74 C216 84 210 100 232 104',
+    'M232 44 C226 60 242 70 258 72',
+    'M200 98 C228 112 250 98 272 118',
+    'M248 128 C254 144 244 154 262 160',
+    'M108 176 C130 168 150 172 174 162 C190 156 206 160 222 148',
+    'M128 188 C150 181 170 186 192 177',
+    'M50 84 C62 92 58 104 70 110',
+    'M176 104 C186 112 196 104 206 116 C214 126 228 124 236 134',
+    'M60 134 C70 126 84 138 96 130',
+    'M216 60 C224 54 230 62 240 56'
+  ];
+  b+=G(sulci.map(d=>L(d,1.5)).join('')+L('M204 190 C222 198 244 199 262 188',1.2)+L('M210 199 C228 206 246 205 260 196',1.2)+L('M186 192 C187 210 188 228 189 244',1),'ink2');
+  b+=G(L(CER,2.4)+L(CBL,2.1)+L('M168 186 C172 206 176 226 178 246',2.1)+L('M204 184 C197 206 196 228 198 246',2.1),'ink');
+  b+=G(L('M30 46 L20 36',1.8)+L('M48 32 L44 18',1.8)+L('M18 70 L4 66',1.8),'ink2');
+  s+=`<g transform="translate(372,54)">${b}</g>`;
+  s+=G(L('M480 46 C450 46 430 58 422 84',1.5)+L('M416 76 L422 86 L429 77',1.5),'ink2');
+  s+=T(488,40,'präfrontaler Cortex',{a:'start',f:'Fraunces',i:1,s:17,w:500});
+  s+=T(489,58,'STEUERZENTRALE',{a:'start',f:'Inter',s:12,w:600,c:'#b3261e',ls:2});
+  svg.innerHTML=s;
+})();
+
+/* ---------- Briefumschlag ---------- */
+(function(){
+  const svg=document.getElementById('envSvg');
+  let s='';
+  const Q='M6 46 L98 30 L106 100 L14 114 Z';
+  s+=W('M14 122 Q60 112 108 108 Q112 118 60 126 Q20 130 14 122Z',COL.och,.25,'wcF');
+  s+=W(Q,COL.yel,.55,'wc1');
+  s+=W('M6 46 L98 30 L56 80 Z',COL.och,.45,'wc2');
+  s+=G(L(Q,2.2)+L('M6 46 L56 80 L98 30',1.8)+L('M14 114 L48 74',1.4)+L('M106 100 L66 70',1.4),'ink');
+  s+=`<circle cx="94" cy="26" r="14" fill="${COL.cream}" filter="url(#wcO)"/>`;
+  s+=Wc(94,26,15,COL.red,.85,'wcF');
+  s+=G(`<circle cx="94" cy="26" r="14" fill="none" stroke="${INK}" stroke-width="1.8"/>`+L('M94 17.5 L94 28.5',3)+`<circle cx="94" cy="34" r="1.9" fill="${INK}"/>`,'ink2');
+  svg.innerHTML=s;
+})();
+
+/* ---------- Sprechblase Bewerter ---------- */
+(function(){
+  const svg=document.getElementById('bubSvg');
+  const P='M14 6 Q72 0 128 6 Q140 9 139 30 Q139 52 126 55 L58 58 L30 78 L38 57 L16 55 Q3 52 3 30 Q3 9 14 6 Z';
+  let s=W(P,COL.blue,.55,'wc2')+G(L(P,2),'ink');
+  s+=T(71,26,'„Lohnt sich',{f:'Fraunces',i:1,s:17,w:600});
+  s+=T(71,46,'das jetzt?“',{f:'Fraunces',i:1,s:17,w:600});
+  svg.innerHTML=s;
+})();
+
+/* ---------- Luecke: zwei Blasen + Blitz ---------- */
+(function(){
+  const svg=document.getElementById('gapSvg');
+  const B1='M14 6 Q80 0 140 7 Q152 10 151 28 Q150 46 138 49 L62 52 L46 66 L48 51 L16 49 Q4 46 4 28 Q4 9 14 6 Z';
+  const B2='M134 64 Q226 58 312 65 Q323 68 322 87 Q321 106 309 108 L290 110 L300 123 L274 110 L136 110 Q124 107 124 87 Q124 67 134 64 Z';
+  const BOLT='M206 0 L178 30 L194 32 L168 60 L232 22 L212 21 L236 0 Z';
+  let s='';
+  s+=W(B1,COL.blue,.50,'wc2')+W(B2,COL.yel,.50,'wc1');
+  s+=W(BOLT,COL.yel,.90,'wc3')+W('M206 0 L178 30 L194 32 L176 52 L214 12 Z',COL.red,.45,'wcF');
+  s+=G(L(B1,2)+L(B2,2)+L(BOLT,2),'ink');
+  s+=G(L('M248 4 L258 -2',1.5)+L('M246 14 L262 12',1.5)+L('M160 6 L150 0',1.5),'ink2');
+  s+=`<g filter="url(#ink2)"><path d="M70 58 C84 76 96 84 116 86" fill="none" stroke="#b3261e" stroke-width="1.6" stroke-dasharray="4 4" stroke-linecap="round"/><path d="M108 80 L118 86 L108 92" fill="none" stroke="#b3261e" stroke-width="1.6" stroke-linecap="round"/></g>`;
+  s+=T(78,34,'„Ich sollte …“',{i:1,s:17});
+  s+=T(223,93,'„Ich mache es jetzt.“',{i:1,s:17});
+  svg.innerHTML=s;
+})();
+
+/* ---------- Deadline-Kreislauf mit Wecker ---------- */
+(function(){
+  const svg=document.getElementById('loopSvg');
+  const cx=228, cy=144, R=97;
+  const steps=[['Aufschieben',-90,COL.blue],['Deadline naht',-30,COL.yel],['Stress',30,COL.red],['Arbeitsphase',90,COL.och],['Erleichterung',150,COL.green]];
+  const P=(a,r=R)=>[cx+r*Math.cos(a*Math.PI/180), cy+r*Math.sin(a*Math.PI/180)];
+  let s='', ink='', red='';
+  const all=[...steps.map(x=>x[1]),210];
+  for(let k=0;k<6;k++){
+    const a0=all[k]+11, a1=(k<5?all[k+1]:270)-11;
+    const [x0,y0]=P(a0),[x1,y1]=P(a1);
+    const t=a1*Math.PI/180, tx=-Math.sin(t), ty=Math.cos(t), nx=Math.cos(t), ny=Math.sin(t), h=7;
+    const arc=`M${f1(x0)} ${f1(y0)} A${R} ${R} 0 0 1 ${f1(x1)} ${f1(y1)}`;
+    const head=`M${f1(x1-tx*h+nx*h*.6)} ${f1(y1-ty*h+ny*h*.6)} L${f1(x1)} ${f1(y1)} L${f1(x1-tx*h-nx*h*.6)} ${f1(y1-ty*h-ny*h*.6)}`;
+    if(k===5) red+=`<path d="${arc}" fill="none" stroke="#b3261e" stroke-width="1.8" stroke-dasharray="5 5" stroke-linecap="round"/><path d="${head}" fill="none" stroke="#b3261e" stroke-width="1.8" stroke-linecap="round"/>`;
+    else ink+=L(arc,1.8)+L(head,1.8);
+  }
+  s+=G(ink,'ink')+G(red,'ink2');
+  let w='';
+  w+=W('M-18 0 A18 18 0 0 1 18 0 Z',COL.yel,.85,'wcF','translate(-31,-41) rotate(-35)');
+  w+=W('M-18 0 A18 18 0 0 1 18 0 Z',COL.yel,.85,'wcF','translate(31,-41) rotate(35)');
+  w+=`<circle cx="0" cy="0" r="43" fill="${COL.red}" fill-opacity=".72" filter="url(#wc1)" style="mix-blend-mode:multiply"/>`;
+  w+=W('M20 -30 A43 43 0 0 1 -30 31 A36 36 0 0 0 20 -30Z',COL.red2,.35,'wcF');
+  w+=`<circle cx="0" cy="0" r="32" fill="${COL.cream}" filter="url(#wcO)"/>`;
+  let wi='';
+  wi+=`<g transform="translate(-31,-41) rotate(-35)">${L('M-18 0 A18 18 0 0 1 18 0 Z',2)}</g><g transform="translate(31,-41) rotate(35)">${L('M-18 0 A18 18 0 0 1 18 0 Z',2)}</g>`;
+  wi+=L('M0 -43 L0 -58',2)+`<circle cx="0" cy="-61" r="4" fill="${INK}"/>`;
+  wi+=`<circle cx="0" cy="0" r="43" fill="none" stroke="${INK}" stroke-width="2.4"/><circle cx="0" cy="0" r="32" fill="none" stroke="${INK}" stroke-width="1.5"/>`;
+  for(let i=0;i<12;i++){const a=i*30*Math.PI/180, r0=i%3?27:24; wi+=L(`M${f1(r0*Math.cos(a))} ${f1(r0*Math.sin(a))} L${f1(30*Math.cos(a))} ${f1(30*Math.sin(a))}`,i%3?1.2:1.8);}
+  wi+=L('M0 0 L0 -24',2.2)+L('M0 0 L-12 -8',2.6)+`<circle cx="0" cy="0" r="2.6" fill="${INK}"/>`;
+  wi+=L('M-26 35 L-36 51',2.6)+L('M26 35 L36 51',2.6);
+  wi+=L('M-58 -50 q-6 9 0 18',1.6)+L('M-66 -56 q-9 13 0 30',1.6)+L('M58 -50 q6 9 0 18',1.6)+L('M66 -56 q9 13 0 30',1.6);
+  w+=G(wi,'ink');
+  s+=`<g transform="translate(${cx},${cy+6})">${w}</g>`;
+  steps.forEach(([name,a,c],i)=>{
+    const [x,y]=P(a);
+    s+=Wc(f1(x+1),f1(y+1),16,c,.80,'wcF');
+    s+=G(`<circle cx="${f1(x)}" cy="${f1(y)}" r="15" fill="none" stroke="${INK}" stroke-width="1.6"/>`,'ink2');
+    s+=T(f1(x),f1(y+5.5),i+1,{f:'Fraunces',w:800,s:16});
+    let lx=x, ly=y+5.5, an='middle';
+    if(a===-90){ly=y-23;}
+    else if(a===90){ly=y+36;}
+    else if(Math.cos(a*Math.PI/180)>0){lx=x+23;an='start';}
+    else {lx=x-23;an='end';}
+    s+=T(f1(lx),f1(ly),name,{a:an,s:16});
+  });
+  const [wx,wy]=P(222);
+  s+=T(f1(wx-12),f1(wy+2),'wieder von vorn',{a:'end',i:1,s:16,c:'#b3261e'});
+  svg.innerHTML=s;
+})();
+
+/* ---------- Steuerzentrale-Kasten ---------- */
+(function(){
+  const box=document.querySelector('.box'), bg=document.getElementById('boxBg');
+  const w=box.offsetWidth, h=box.offsetHeight;
+  bg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+  const R=`M4 5 L${w-4} 3 L${w-3} ${h-4} L3 ${h-3} Z`;
+  bg.innerHTML=W(`M8 9 L${w-8} 7 L${w-7} ${h-8} L7 ${h-7} Z`,COL.yel,.20,'wc3')+W(`M8 9 L${w-8} 7 L${w-8} 70 L7 74 Z`,COL.och,.20,'wc2')+G(L(R,1.8),'ink');
+  const wh=document.getElementById('wheelSvg');
+  let s=`<circle cx="17" cy="17" r="11" fill="${COL.och}" fill-opacity=".55" filter="url(#wcF)" style="mix-blend-mode:multiply"/>`;
+  let k=`<circle cx="17" cy="17" r="11" fill="none" stroke="${INK}" stroke-width="1.8"/><circle cx="17" cy="17" r="3" fill="none" stroke="${INK}" stroke-width="1.5"/>`;
+  for(let i=0;i<8;i++){const a=i*45*Math.PI/180; k+=L(`M${f1(17+3*Math.cos(a))} ${f1(17+3*Math.sin(a))} L${f1(17+16*Math.cos(a))} ${f1(17+16*Math.sin(a))}`,1.6);}
+  wh.innerHTML=s+G(k,'ink2');
+  const cols=[COL.red,COL.yel,COL.blue,COL.och,COL.green];
+  document.querySelectorAll('#tasks .n').forEach((n,i)=>{
+    n.innerHTML=`<svg width="26" height="26" viewBox="0 0 26 26">${Wc(13,13,10.5,cols[i],.75,'wcF')}${G(`<circle cx="13" cy="13" r="10" fill="none" stroke="${INK}" stroke-width="1.3"/>`,'ink2')}</svg><b>${i+1}</b>`;
+  });
+})();
+
+/* ---------- Icons Aktivierung ---------- */
+(function(){
+  const star='M20 2 L24 14 L37 15 L27 23 L31 36 L20 28 L9 36 L13 23 L3 15 L16 14 Z';
+  document.getElementById('icNeu').innerHTML=W(star,COL.yel,.85,'wcF')+G(L(star,1.8),'ink2');
+  document.getElementById('icKon').innerHTML=Wc(19,20,15,COL.blue,.55)+Wc(19,20,9,COL.red,.65)+G(`<circle cx="19" cy="20" r="15" fill="none" stroke="${INK}" stroke-width="1.7"/><circle cx="19" cy="20" r="9" fill="none" stroke="${INK}" stroke-width="1.5"/><circle cx="19" cy="20" r="3" fill="${INK}"/>`+L('M19 20 L37 4',1.8)+L('M31 3 L37 4 L36 10',1.6),'ink2');
+  const heart='M20 35 C6 25 2 17 4 11 C6 4 15 3 20 11 C25 3 34 4 36 11 C38 17 34 25 20 35 Z';
+  document.getElementById('icInt').innerHTML=W(heart,COL.red,.75,'wcF')+G(L(heart,1.8),'ink2');
+  const hg='M10 3 L30 3 M10 35 L30 35 M12 3 C12 14 20 16 20 19 C20 22 12 24 12 35 M28 3 C28 14 20 16 20 19 C20 22 28 24 28 35';
+  document.getElementById('icZeit').innerHTML=W('M14 9 L26 9 C25 14 21 16 20 18 C19 16 15 14 14 9Z',COL.och,.8,'wcF')+W('M13 34 C14 28 18 26 20 25 C22 26 26 28 27 34Z',COL.och,.85,'wcF')+G(L(hg,1.8),'ink2');
+})();
+</script>
+</body>
+</html>

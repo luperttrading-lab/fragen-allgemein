@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>ADHS Sketch Note v3</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+  :root{ --ink:#161616; --blue:#5b8fc4; --blue2:#b9d2ea; --red:#e05a5a; --gray:#8d8d8d; }
+  html,body{margin:0;padding:0;width:768px;height:1376px;overflow:hidden;background:#fff;}
+  body{position:relative;color:var(--ink);font-family:'Roboto Condensed',sans-serif;}
+  #ink{position:absolute;left:0;top:0;width:768px;height:1376px;z-index:1;overflow:visible}
+  #top{position:absolute;left:0;top:0;width:768px;height:1376px;z-index:3;overflow:visible;pointer-events:none}
+  .t{position:absolute;z-index:2;margin:0;filter:url(#wob)}
+  .title{font-weight:900;font-size:62px;line-height:1;letter-spacing:-0.8px;text-align:center;filter:url(#wob2)}
+  .banner{font-weight:800;font-size:24px;line-height:1.1;text-align:center}
+  .hl{font-weight:800;font-size:42px;line-height:1;letter-spacing:-0.4px;white-space:nowrap}
+  .cap{font-weight:800;font-size:23px;line-height:1.05;letter-spacing:.2px;white-space:nowrap}
+  .sub{font-weight:700;font-size:20px;line-height:1.1;white-space:nowrap}
+  .body{font-weight:500;font-size:18.5px;line-height:1.14}
+  .cloud{font-weight:700;font-size:18px;line-height:1.15;text-align:center}
+  .mark{font-weight:900;line-height:1;white-space:nowrap;filter:url(#wob2)}
+  #ink path,#ink line,#ink polyline,#ink ellipse,#ink circle,#top path{stroke-linecap:round;stroke-linejoin:round}
+  .blue{color:var(--blue)} .red{color:var(--red)}
+  .node{font-weight:700;font-size:15.5px;line-height:1;white-space:nowrap;text-align:center;transform:translate(-50%,-50%)}
+  .lab{font-weight:800;font-size:24px;line-height:1;white-space:nowrap;text-align:center;transform:translateX(-50%)}
+  ul.list{list-style:none;margin:0;padding:0}
+  ul.list li{height:19px;line-height:19px;padding-left:22px;font-weight:600;font-size:17px;white-space:nowrap}
+  .fazit{font-weight:800;font-size:15.5px;line-height:1.16;text-align:center}
+  .src{font-weight:400;font-size:10.5px;line-height:1;color:#555;text-align:right;filter:none}
+</style>
+</head>
+<body>
+<svg id="ink" xmlns="http://www.w3.org/2000/svg" width="768" height="1376" viewBox="0 0 768 1376">
+  <defs>
+    <filter id="wob" x="-5%" y="-10%" width="110%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="wob2" x="-5%" y="-10%" width="110%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <g id="gBack"></g><g id="gFill"></g><g id="gInk"></g>
+</svg>
+<svg id="top" xmlns="http://www.w3.org/2000/svg" width="768" height="1376" viewBox="0 0 768 1376"><g id="gTop"></g></svg>
+
+<!-- Kopf -->
+<p class="t banner" id="banner" style="left:170px;top:41px;width:428px">Kein Willensproblem,<br>sondern ein Steuerungsproblem</p>
+<p class="t title" id="title" style="left:84px;top:128px;width:600px">ADHS im Gehirn:<br>Warum es kein<br>Disziplinproblem ist</p>
+
+<!-- Dekor Kopf -->
+<span class="t mark cut blue" style="left:48px;top:44px;font-size:96px;transform:rotate(-9deg)">?</span>
+<span class="t mark cut" style="left:100px;top:34px;font-size:34px;transform:rotate(6deg)">?</span>
+<span class="t mark cut red" style="left:58px;top:152px;font-size:90px;transform:rotate(-7deg)">!</span>
+<span class="t mark cut red" style="left:662px;top:46px;font-size:90px;transform:rotate(8deg)">?</span>
+<span class="t mark cut blue" style="left:716px;top:112px;font-size:66px;transform:rotate(9deg)">!</span>
+
+<!-- Spaltenüberschriften -->
+<span class="t hl" id="hl1a" style="left:122px;top:352px">Das</span>
+<span class="t hl" id="hl1b" style="left:38px;top:394px">Aufmerksamkeits-</span>
+<span class="t hl" id="hl1c" style="left:102px;top:436px">Paradox</span>
+<span class="t hl" id="hl2a" style="left:598px;top:372px">Die</span>
+<span class="t hl" id="hl2b" style="left:528px;top:414px">Steuerung</span>
+<span class="t hl" id="hl2c" style="left:532px;top:456px">im Gehirn</span>
+
+<!-- Links A: Strichmännchen mit Handy + Denkwolke -->
+<span class="t mark cut red" style="left:34px;top:498px;font-size:40px;transform:rotate(-12deg)">!!</span>
+<p class="t cloud" id="cloud1" style="left:112px;top:524px;width:164px">Aufmerksamkeit<br>haben: ja.<br>Aufmerksamkeit<br>steuern: schwierig.</p>
+<p class="t body" id="t1" style="left:52px;top:672px;width:200px">Wann beginnen?<br>Worauf richten?<br>Was ausblenden?<br>Wann wieder lösen?</p>
+
+<!-- Links B: Schreibtisch -->
+<span class="t cap" id="h2" style="left:48px;top:916px">DAS PARADOX</span>
+<p class="t body" id="t2" style="left:48px;top:942px;width:224px">Die wichtige E-Mail (5&nbsp;Minuten Arbeit) bleibt eine Stunde liegen. Beim Lieblingsthema: stundenlanger Hyperfokus.</p>
+
+<!-- Mitte: Gehirn + Kreislauf -->
+<p class="t sub" id="cap0" style="left:234px;top:786px;width:300px;text-align:center;font-size:18px">Dasselbe Gehirn, andere Aktivierung.</p>
+<span class="t cap" id="h7" style="left:258px;top:816px;width:250px;text-align:center">DIE DEADLINE-FALLE</span>
+<span class="t node" style="left:314px;top:862px">Aufschieben</span>
+<span class="t node" style="left:446px;top:862px">Deadline naht</span>
+<span class="t node red" style="left:446px;top:929px">Stress</span>
+<span class="t node" style="left:446px;top:996px">Arbeitsphase</span>
+<span class="t node" style="left:314px;top:996px">Erleichterung</span>
+<span class="t node" style="left:314px;top:929px">wieder von vorn</span>
+<span class="t mark red" style="left:466px;top:872px;font-size:26px;transform:rotate(10deg)">!!</span>
+
+<!-- Links C: Wissen | Handeln -->
+<span class="t lab" id="lab1" style="left:118px;top:1212px">WISSEN</span>
+<span class="t lab" id="lab2" style="left:296px;top:1212px">HANDELN</span>
+<span class="t mark blue" style="left:252px;top:1082px;font-size:64px">?</span>
+<p class="t body" id="t3" style="left:48px;top:1240px;width:330px">„Ich sollte …“ → „Ich mache es jetzt.“<br>Ich weiß es und schaffe es trotzdem nicht anzufangen.</p>
+
+<!-- Mitte unten: Dekor -->
+<span class="t mark blue" style="left:404px;top:1104px;font-size:72px;transform:rotate(-6deg)">?</span>
+<span class="t mark red" style="left:448px;top:1136px;font-size:60px;transform:rotate(8deg)">!</span>
+
+<!-- Rechts A: Synapse -->
+<span class="t cap" id="h4" style="left:500px;top:604px">DER BEWERTER:</span>
+<span class="t sub" id="h4b" style="left:500px;top:628px">Dopamin &amp; Noradrenalin</span>
+<p class="t body" id="t4" style="left:500px;top:652px;width:222px">Fragt ständig: „Lohnt sich das jetzt?“ Nicht „zu wenig Dopamin“, sondern veränderte Signalwege. Wichtig finden ≠ Motivation aufbringen.</p>
+
+<!-- Rechts B: Steuerzentrale -->
+<span class="t mark red" style="left:694px;top:756px;font-size:30px;transform:rotate(12deg)">!</span>
+<span class="t mark blue" style="left:712px;top:764px;font-size:30px;transform:rotate(16deg)">!</span>
+<span class="t cap" id="h5" style="left:496px;top:878px">DIE STEUERZENTRALE:</span>
+<span class="t sub" id="h5b" style="left:496px;top:902px">präfrontaler Cortex</span>
+<ul class="t list" id="tasks" style="left:498px;top:927px;width:200px">
+  <li>Planen</li><li>Arbeitsgedächtnis</li><li>Ablenkung ausblenden</li><li>Impulse bremsen</li><li>Langfristige Ziele</li>
+</ul>
+<p class="t body" id="t5" style="left:496px;top:1024px;width:226px">Bei reizarmen Aufgaben weniger stabil.</p>
+
+<!-- Rechts C: Zeitdruck -->
+<span class="t cap" id="h6" style="left:496px;top:1166px">AKTIVIERUNG DURCH<br>ZEITDRUCK</span>
+<p class="t body" id="t6" style="left:496px;top:1216px;width:226px">Was sie einschaltet: Neuheit · unmittelbare Konsequenzen · persönliches Interesse · Zeitdruck.</p>
+
+<!-- Fazit-Spruchband unten -->
+<p class="t fazit" id="fazit" style="left:124px;top:1311px;width:520px">ADHS heißt nicht „keine Aufmerksamkeit“. Es heißt: Aufmerksamkeit, Motivation und Verhalten zuverlässig an das anzupassen, was gerade nötig ist, fällt schwer.</p>
+<p class="t src" id="src" style="left:240px;top:1361px;width:496px">Quelle: NeuroWissen TV, „NEUROLOGE ERKLÄRT: Das macht ADHS wirklich in deinem Gehirn“ (2026)</p>
+
+<script src="../assets/rough.js"></script>
+<script src="draw3.js"></script>
+</body>
+</html>

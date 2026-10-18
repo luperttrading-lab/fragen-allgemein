@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>ADHS Sketch Note</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+  :root{
+    --ink:#1c1c1c; --pet:#0f6f7b; --yel:#ffe14d; --paper:#fdfcf8;
+  }
+  html,body{margin:0;padding:0;width:768px;height:1376px;overflow:hidden;background:var(--paper);}
+  body{
+    position:relative;color:var(--ink);
+    font:18px/1.24 'Patrick Hand',sans-serif;
+    background-color:var(--paper);
+    background-image:radial-gradient(circle, #e4e0d4 0.9px, transparent 1.2px);
+    background-size:22px 22px; background-position:6px 6px;
+  }
+  #ink{position:absolute;left:0;top:0;width:768px;height:1376px;z-index:1;overflow:visible}
+  .layer{position:absolute;left:0;top:0;width:768px;height:1376px;z-index:2}
+  p{margin:0}
+
+  /* ---------- Kopf ---------- */
+  #title{position:absolute;left:0;top:14px;width:768px;text-align:center;z-index:2}
+  #title span{font:700 78px/1 'Caveat',cursive;letter-spacing:.5px;display:inline-block;padding:0 4px}
+  #subtitle{position:absolute;left:0;top:111px;width:768px;text-align:center;z-index:2;font-size:24px;line-height:1.1}
+
+  /* ---------- Abschnitte ---------- */
+  .sec{position:absolute;box-sizing:border-box;padding:11px 16px 6px 16px;overflow:hidden;z-index:2}
+  h2{font:700 28px/1.05 'Caveat',cursive;margin:0 0 6px;text-indent:26px;}
+  h2 .sub{display:block;text-indent:0;font-size:23px;margin-top:1px}
+  .num{position:absolute;z-index:3;width:40px;height:40px;text-align:center;font:700 27px/40px 'Caveat',cursive}
+  .ico{flex:none}
+  .row{display:flex;align-items:center;gap:10px}
+  .kal{font-family:'Kalam',cursive;font-weight:700}
+  .cav{font-family:'Caveat',cursive;font-weight:700}
+  .pet{color:var(--pet)}
+  .tag{font:700 21px/1 'Caveat',cursive;color:var(--pet)}
+  .merk{position:relative;padding:9px 10px 6px 12px;font-size:18px}
+  .merk .tag{position:absolute;left:10px;top:-11px;background:#fff;padding:0 5px}
+  ul{list-style:none;margin:0;padding:0}
+  li{position:relative;padding-left:18px}
+  .neq{font:700 24px/1 'Caveat',cursive;color:var(--pet);padding:0 2px}
+
+  /* Positionen */
+  #s1{left:22px;top:160px;width:370px;height:210px}
+  #s2{left:416px;top:160px;width:330px;height:210px}
+  #s3{left:22px;top:388px;width:346px;height:244px}
+  #s4{left:392px;top:388px;width:354px;height:244px}
+  #s5{left:22px;top:650px;width:430px;height:222px}
+  #s6{left:476px;top:650px;width:270px;height:222px}
+  #s7{left:22px;top:890px;width:458px;height:278px}
+  #s8{left:504px;top:890px;width:242px;height:278px}
+  #fazit{left:40px;top:1188px;width:688px;height:100px;padding:16px 26px 4px;text-align:center}
+  #foot{position:absolute;left:22px;top:1312px;width:724px;z-index:2;font-size:15px;line-height:1.3;text-align:center}
+
+  /* 1 */
+  #s1 .row{margin-top:4px}
+  #s1 .merk{margin-top:14px}
+  /* 2 */
+  .card{position:relative;display:flex;align-items:center;gap:10px;padding:8px 10px;margin-top:8px}
+  .lab{font:700 22px/1 'Caveat',cursive}
+  /* 3 */
+  .bubble{position:relative;padding:4px 12px 5px;font-size:18px;margin-left:10px;white-space:nowrap}
+  .lead{display:block;font-size:16px;color:#444}
+  #s3 ul{margin-top:10px}
+  #s3 li+li{margin-top:5px}
+  /* 4 */
+  #s4 .wrap{display:flex;gap:8px;align-items:flex-start}
+  #s4 .bcol{width:118px;text-align:center}
+  #s4 .bcol .tag{display:block;margin-top:2px}
+  .tasks li{padding-left:24px;line-height:1.2}
+  .tasks li+li{margin-top:2px}
+  #s4 .note{margin-top:8px;display:flex;align-items:center;gap:8px}
+  /* 5 */
+  .gapbox{position:relative;height:104px;margin-top:0}
+  .gapbox .lbl{position:absolute;top:2px;font-size:18px;line-height:1.2}
+  .gapbox .l{left:4px}
+  .gapbox .r{right:0}
+  #s5 .merk{margin-top:12px}
+  /* 6 */
+  #s6 .wrap{display:flex;gap:6px;align-items:center;margin-top:4px}
+  #s6 li{padding-left:22px;margin:3px 0}
+  /* 7 */
+  .cycle{position:relative;width:426px;height:216px;margin-top:2px}
+  .node{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;padding:3px 8px;font-size:18px}
+  /* 8 */
+  #s8 .ln{display:flex;gap:6px;align-items:flex-start;margin-top:4px}
+  #s8 h2+.ln{margin-top:8px}
+  #s8 .qs{margin-top:10px}
+  #s8 .qs li{padding-left:34px;margin:6px 0 0;line-height:1.25}
+  /* Fazit */
+  #fazit .f1{font-size:20px;margin-bottom:3px}
+  #fazit .f2{font-size:20px;line-height:1.25}
+  #fazit .tag{position:absolute}
+</style>
+</head>
+<body>
+<svg id="ink" xmlns="http://www.w3.org/2000/svg" width="768" height="1376" viewBox="0 0 768 1376">
+  <g id="gShadow"></g><g id="gBox"></g><g id="gHl"></g><g id="gInk"></g>
+</svg>
+
+<!-- Kopf -->
+<div id="title"><span id="titleText">ADHS im Gehirn</span></div>
+<div id="subtitle">Kein Willensproblem, sondern ein <span class="hl">Steuerungsproblem</span></div>
+<div class="ico layer-ico" id="icoBrainTop" data-i="brain" style="position:absolute;left:12px;top:22px;width:80px;height:66px"></div>
+<div class="ico layer-ico" id="icoBoltTop" data-i="bolt" style="position:absolute;left:694px;top:20px;width:44px;height:72px"></div>
+
+<!-- 1 -->
+<section class="sec" id="s1" data-n="1">
+  <h2>Das Paradox</h2>
+  <div class="row"><div class="ico" data-i="mail" style="width:78px;height:50px"></div>
+    <p>Die wichtige E-Mail (5 Minuten Arbeit) bleibt <span class="hl">eine Stunde</span> liegen.</p></div>
+  <div class="row"><div class="ico" data-i="heart" style="width:78px;height:46px"></div>
+    <p>Beim Lieblingsthema: stundenlanger <span class="hl">Hyperfokus</span>.</p></div>
+  <div class="merk" data-box="merk"><span class="tag">Merksatz:</span> Dasselbe Gehirn, <b class="kal" style="font-size:18px">andere Aktivierung.</b></div>
+</section>
+
+<!-- 2 -->
+<section class="sec" id="s2" data-n="2" data-shadow="ink">
+  <h2>Mythos vs. Realität</h2>
+  <div class="card" data-box="dashed"><div class="ico" data-i="cross" style="width:26px;height:26px"></div>
+    <p><span class="lab">Mythos:</span> faul, undiszipliniert, <span style="white-space:nowrap">„ist mir egal“.</span></p></div>
+  <div class="card" data-box="solid"><div class="ico" data-i="check" style="width:28px;height:28px"></div>
+    <p><span class="lab pet">Realität:</span> neuroentwicklungsbedingte <span class="hl">Störung der Selbststeuerung</span>.</p></div>
+</section>
+
+<!-- 3 -->
+<section class="sec" id="s3" data-n="3">
+  <h2>Der Bewerter:<span class="sub">Dopamin &amp; Noradrenalin</span></h2>
+  <div class="row"><div class="ico" data-i="gauge" style="width:64px;height:48px"></div>
+    <div><span class="lead">Fragt ständig:</span><div class="bubble kal" data-box="bubble">„Lohnt sich das jetzt?“</div></div></div>
+  <ul>
+    <li>Nicht einfach „zu wenig Dopamin“, sondern <span class="hl">veränderte Signalwege</span>.</li>
+    <li>Wichtig finden <span class="neq">≠</span> jetzt Motivation aufbringen.</li>
+  </ul>
+</section>
+
+<!-- 4 -->
+<section class="sec" id="s4" data-n="4" data-shadow="ink">
+  <h2>Die Steuerzentrale:<span class="sub">präfrontaler Cortex</span></h2>
+  <div class="wrap">
+    <div class="bcol"><div class="ico" data-i="brainpfc" style="width:112px;height:86px;margin:0 auto"></div><span class="tag">Fünf Aufgaben:</span></div>
+    <div class="ico" data-i="brace" style="width:12px;height:118px"></div>
+    <ul class="tasks">
+      <li>Planen</li><li>Arbeitsgedächtnis</li><li>Ablenkung ausblenden</li><li>Impulse bremsen</li><li>Langfristige Ziele</li>
+    </ul>
+  </div>
+  <p class="note"><span class="ico" data-i="wave" style="width:34px;height:16px;display:inline-block"></span><span>Bei reizarmen Aufgaben <span class="hl">weniger stabil</span>.</span></p>
+</section>
+
+<!-- 5 -->
+<section class="sec" id="s5" data-n="5">
+  <h2>Die Lücke zwischen Wissen und Tun</h2>
+  <div class="gapbox" id="gapbox">
+    <span class="lbl l kal">„Ich sollte …“</span>
+    <span class="lbl r kal">„Ich mache es jetzt.“</span>
+  </div>
+  <div class="merk" data-box="merk"><span class="tag">Merksatz:</span> Ich weiß es und schaffe es <span class="hl">trotzdem nicht anzufangen</span>.</div>
+</section>
+
+<!-- 6 -->
+<section class="sec" id="s6" data-n="6" data-shadow="ink">
+  <h2>Was die Aktivierung einschaltet</h2>
+  <div class="wrap">
+    <div class="ico" data-i="bulb" style="width:56px;height:84px"></div>
+    <ul class="act">
+      <li>Neuheit</li><li>Unmittelbare Konsequenzen</li><li>Persönliches Interesse</li><li>Zeitdruck</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="sec" id="s7" data-n="7">
+  <h2>Die Deadline-Falle</h2>
+  <div class="cycle" id="cycle">
+    <div class="ico" data-i="clock" style="position:absolute;left:178px;top:73px;width:70px;height:70px"></div>
+    <div class="node" data-a="-90">Aufschieben</div>
+    <div class="node" data-a="-28">Deadline naht</div>
+    <div class="node kal" data-a="28" data-style="burst">Stress</div>
+    <div class="node" data-a="90">Arbeitsphase</div>
+    <div class="node" data-a="152">Erleichterung</div>
+    <div class="node" data-a="208">wieder von vorn</div>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="sec" id="s8" data-n="8" data-shadow="ink">
+  <h2>Hyperfokus ist kein Widerspruch</h2>
+  <div class="ln"><span class="ico" data-i="check" style="width:18px;height:18px;margin-top:3px"></span><p>Aufmerksamkeit haben: ja.</p></div>
+  <div class="ln"><span class="ico" data-i="wave" style="width:18px;height:12px;margin-top:7px"></span><p>Aufmerksamkeit steuern: <span class="hl">schwierig.</span></p></div>
+  <ul class="qs">
+    <li data-q="1">Wann beginnen?</li><li data-q="1">Worauf richten?</li><li data-q="1">Was ausblenden?</li><li data-q="1">Wann wieder lösen?</li>
+  </ul>
+  <div class="ico" data-i="magnifier" style="position:absolute;right:14px;top:42px;width:34px;height:34px"></div>
+</section>
+
+<!-- Fazit -->
+<section class="sec" id="fazit" data-shadow="pet">
+  <p class="f1 kal">ADHS heißt nicht „keine Aufmerksamkeit“.</p>
+  <p class="f2">Es heißt: Aufmerksamkeit, Motivation und Verhalten zuverlässig an das anzupassen, was gerade nötig ist, <span class="hl">fällt schwer</span>.</p>
+</section>
+<div class="tag" id="fazitTag" style="position:absolute;z-index:3;left:62px;top:1170px;font-size:30px;color:var(--ink)">Fazit</div>
+
+<!-- Fuß -->
+<div id="foot">
+  <div><span class="cav pet" style="font-size:19px">Hinweise:</span> Kein Hirnscan kann ADHS diagnostizieren, es gibt nur Gruppenunterschiede. · Die Diagnose gehört zu Fachleuten.</div>
+  <div style="font-size:14px;color:#444;margin-top:3px">Quelle: NeuroWissen TV, „NEUROLOGE ERKLÄRT: Das macht ADHS wirklich in deinem Gehirn“ (2026)</div>
+</div>
+
+<script src="../assets/rough.js"></script>
+<script src="draw.js"></script>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>ADHS im Gehirn</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+:root{
+  --paper:#f1ebdd; --paper-l:#f8f4eb; --sand:#d8ccb2; --sand-m:#bcae90; --sand-d:#8f8268;
+  --navy:#1a3356; --navy-l:#2d4d79; --navy-d:#12243f;
+  --orange:#e8762f; --orange-d:#c75d1e;
+  --ink:#262d3b; --grey:#5f5a50;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:768px;height:1376px;overflow:hidden;background:var(--paper)}
+body{
+  position:relative;font-family:'Source Sans 3',sans-serif;color:var(--ink);
+  background-color:var(--paper);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42  0 0 0 0 .33  0 0 0 0 .2  .32 0 0 0 -.09'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='768' height='1376'><filter id='m'><feTurbulence type='fractalNoise' baseFrequency='.012 .02' numOctaves='2' seed='7'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .45  0 0 0 0 .3  .22 0 0 0 -.06'/></filter><rect width='100%' height='100%' filter='url(%23m)'/></svg>");
+}
+
+/* ---------- Kopfband ---------- */
+.head{position:absolute;left:0;top:0;width:768px;height:152px;background:var(--navy);overflow:hidden}
+.head::before{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  .18 0 0 0 -.06'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--orange)}
+.head-text{position:absolute;left:32px;top:30px;width:520px}
+.accent{width:44px;height:4px;background:var(--orange);margin-bottom:14px}
+h1{font:700 52px/1 'Montserrat';color:#f8f4eb;letter-spacing:-.01em}
+.sub{margin-top:12px;font:500 20px/1.25 'Source Sans 3';color:#d9cfbb;letter-spacing:.005em}
+
+.badge{position:absolute;left:578px;top:14px;width:150px;height:150px;border-radius:50%;
+  background:var(--paper-l);border:3px solid var(--navy);
+  box-shadow:inset 0 0 0 5px var(--paper-l), inset 0 0 0 6px var(--sand)}
+.badge svg{position:absolute;left:8px;top:16px;width:128px;height:109px}
+
+/* ---------- Kernaussage ---------- */
+.kern{position:absolute;left:32px;top:174px;width:704px;
+  background:rgba(250,247,240,.8);border:1px solid var(--sand);border-left:5px solid var(--orange);border-radius:4px;
+  padding:11px 18px 12px 16px}
+.lbl{font:700 12px/1 'Montserrat';letter-spacing:.14em;text-transform:uppercase;color:var(--orange-d)}
+.kern p{margin-top:7px;font:400 16.5px/1.4 'Source Sans 3';color:var(--navy)}
+.kern p b{font-weight:700}
+
+/* ---------- Raster ---------- */
+.grid{position:absolute;left:32px;top:277px;width:704px;height:1001px;
+  display:grid;grid-template-columns:repeat(12,1fr);column-gap:16px;row-gap:10px;
+  grid-template-rows:238px 244px 232px 1fr}
+.panel{position:relative;background:rgba(250,247,240,.72);border:1px solid var(--sand);border-radius:6px;
+  padding:11px 14px 11px;overflow:hidden;display:flex;flex-direction:column}
+.s5{grid-column:span 5}.s6{grid-column:span 6}.s7{grid-column:span 7}
+.ph{display:flex;align-items:flex-start;gap:10px;padding-bottom:7px;border-bottom:1px solid var(--sand);margin-bottom:8px;min-height:36px}
+.num{flex:none;width:26px;height:26px;border-radius:4px;background:var(--navy);color:var(--paper-l);
+  font:700 12px/26px 'Montserrat';text-align:center}
+.pt{flex:1;font:700 16px/1.2 'Montserrat';color:var(--navy);padding-top:3px;text-wrap:balance}
+.pt small{display:block;font:600 14px/1.25 'Source Sans 3';color:var(--orange-d);margin-top:3px}
+.ic{flex:none;width:36px;height:36px;margin-top:-3px}
+.tx{font:400 15px/1.38 'Source Sans 3';color:var(--ink)}
+.tx b{font-weight:700;color:var(--navy)}
+
+/* 01 */
+.scene{display:flex;gap:12px;align-items:center}
+.scene+.scene{margin-top:7px;padding-top:7px;border-top:1px dashed var(--sand)}
+.scene svg{flex:none;width:34px;height:34px}
+.merk{margin-top:auto;background:var(--navy);border-radius:4px;padding:8px 12px 9px;color:var(--paper-l)}
+.merk .lbl{color:#f0a066;font-size:12px}
+.merk .mt{display:block;margin-top:5px;font:600 15.5px/1.3 'Source Sans 3'}
+
+/* 02 */
+.mvr{display:grid;grid-template-columns:minmax(0,5fr) 26px minmax(0,7fr);flex:1;min-height:0}
+.col{display:flex;flex-direction:column;border-radius:5px;padding:10px 10px 12px}
+.myth{background:#e7decb}
+.real{background:var(--navy)}
+.col .tag{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font:700 13px/1 'Montserrat';letter-spacing:.06em;text-transform:uppercase;
+  padding:6px 10px 6px 6px;border-radius:13px}
+.col .tag svg{width:16px;height:16px}
+.myth .tag{background:#f6f1e6;color:var(--grey)}
+.real .tag{background:#2d4d79;color:var(--paper-l)}
+.col p{margin:auto 0;padding-top:8px;font-size:16.5px;line-height:1.36;hyphens:manual}
+.myth p{color:#4f4a42;font-size:15.5px}
+.real p{color:var(--paper-l);font-weight:600}
+.vs{position:relative;display:flex;justify-content:center}
+.vs::before{content:"";position:absolute;top:10px;bottom:10px;left:50%;border-left:1px dashed var(--sand-m)}
+.vs span{position:relative;z-index:1;align-self:center;width:28px;height:28px;border-radius:50%;background:var(--orange);color:#fff;
+  font:700 12px/28px 'Montserrat';text-align:center}
+
+/* 03 */
+.ask{font:600 13px/1 'Source Sans 3';color:var(--grey);text-transform:none;letter-spacing:.01em}
+.bubble{position:relative;margin-top:7px;align-self:flex-start;background:var(--navy);color:var(--paper-l);
+  font:700 16px/1 'Montserrat';padding:10px 14px;border-radius:6px}
+.bubble::after{content:"";position:absolute;left:18px;bottom:-8px;border:8px solid transparent;border-top-color:var(--navy);border-bottom:0}
+.bl{list-style:none;margin-top:13px}
+.bl li{position:relative;padding-left:16px}
+.bl li+li{margin-top:7px}
+.bl li::before{content:"";position:absolute;left:1px;top:8px;width:7px;height:7px;background:var(--orange);border-radius:1px}
+.ne{color:var(--orange-d);font-weight:700;font-size:18px;line-height:1;padding:0 2px}
+
+/* 04 */
+.pfc{display:flex;gap:14px;flex:1;min-height:0}
+.kpi{flex:none;width:118px;border-right:1px solid var(--sand);padding-right:12px}
+.big{font:700 58px/1 'Montserrat';color:var(--orange)}
+.kl{margin-top:6px;font:600 14px/1.25 'Source Sans 3';color:var(--navy)}
+.tasks{list-style:none;flex:1}
+.tasks li{display:flex;align-items:center;gap:10px;height:23px;font:600 15px/1 'Source Sans 3';color:var(--navy)}
+.tasks li+li{border-top:1px dotted var(--sand-m)}
+.tasks svg{width:20px;height:20px;flex:none}
+.note{margin-top:7px;display:flex;align-items:center;gap:9px;background:#e9dfcb;border-radius:4px;padding:6px 10px}
+.note svg{width:18px;height:18px;flex:none}
+
+/* 05 */
+.flow{display:flex;align-items:flex-end;gap:0;margin-top:2px}
+.fcol .lbl{display:block;margin-bottom:6px;color:var(--grey);letter-spacing:.12em}
+.fbox{font:600 16px/1 'Source Sans 3';padding:11px 14px;border-radius:5px;white-space:nowrap}
+.fbox.k{background:var(--paper-l);border:1.5px solid var(--navy);color:var(--navy)}
+.fbox.t{background:var(--navy);color:var(--paper-l);border:1.5px solid var(--navy)}
+.farrow{flex:1;height:40px}
+.merk2{margin-top:auto;border-left:4px solid var(--orange);padding:5px 0 3px 12px;background:linear-gradient(90deg,rgba(232,118,47,.10),rgba(232,118,47,0) 85%)}
+.merk2 .mt{display:block;margin-top:5px;font:600 15.5px/1.3 'Source Sans 3';color:var(--navy)}
+
+/* 06 */
+.kpirow{display:flex;align-items:center;gap:12px;padding-bottom:6px;border-bottom:1px dotted var(--sand-m)}
+.kpirow .big{font-size:42px}
+.kpirow .kl{font-size:15px}
+.kpirow .kl{margin-top:0}
+.trig{flex:none;margin-top:6px}
+
+/* 07 */
+.cyc{display:block;width:372px;height:166px;margin:auto 0}
+
+/* 08 */
+.state{display:flex;align-items:center;gap:10px}
+.state+.state{margin-top:6px}
+.state svg{width:22px;height:22px;flex:none}
+.qhead{margin-top:9px}
+.qs{list-style:none;margin-top:7px}
+.qs li{display:flex;align-items:center;gap:9px;height:24px;font:600 15px/1 'Source Sans 3';color:var(--navy)}
+.qs li span{flex:none;width:18px;height:18px;border-radius:50%;background:var(--orange);color:#fff;font:700 12px/18px 'Montserrat';text-align:center}
+.qs li+li{border-top:1px dotted var(--sand-m)}
+
+/* ---------- Fußband ---------- */
+.foot{position:absolute;left:0;bottom:0;width:768px;height:84px;background:var(--navy);color:#d9cfbb;padding:12px 32px 0}
+.foot::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--orange)}
+.frow{display:flex;align-items:flex-start;gap:10px;font:400 13.5px/1.3 'Source Sans 3';color:#ece4d3}
+.frow .lbl{color:#f0a066;flex:none;width:92px;padding-top:2px}
+.frow svg{width:16px;height:16px;flex:none}
+.frow ul{list-style:none;flex:1}
+.frow li{position:relative;padding-left:12px}
+.frow li::before{content:"";position:absolute;left:0;top:7px;width:5px;height:5px;background:#e8762f}
+.src{margin-top:7px;padding-top:7px;border-top:1px solid #34486a;font:400 12px/1.2 'Source Sans 3';color:#b6bfcd}
+</style>
+</head>
+<body>
+
+<!-- ===== Symbole ===== -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- E-Mail mit Uhr -->
+    <symbol id="i-mail" viewBox="0 0 48 48">
+      <rect x="3" y="10" width="36" height="27" rx="3" fill="#2d4d79"/>
+      <path d="M3 14 L21 28 L39 14 V34 a3 3 0 0 1 -3 3 H6 a3 3 0 0 1 -3 -3 Z" fill="#1a3356"/>
+      <path d="M5 12.5 L21 25.5 L37 12.5" fill="none" stroke="#f8f4eb" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="37" cy="35" r="9.5" fill="#e8762f" stroke="#f8f4eb" stroke-width="2.6"/>
+      <path d="M37 30 V35 H41" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Zielscheibe (Hyperfokus) -->
+    <symbol id="i-target" viewBox="0 0 48 48">
+      <circle cx="21" cy="27" r="18" fill="#2d4d79"/>
+      <path d="M21 9 A18 18 0 0 1 21 45 Z" fill="#1a3356"/>
+      <circle cx="21" cy="27" r="12" fill="#f8f4eb"/>
+      <circle cx="21" cy="27" r="7.5" fill="#1a3356"/>
+      <circle cx="21" cy="27" r="3.2" fill="#e8762f"/>
+      <path d="M22.5 25.5 L40 8" stroke="#c75d1e" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M37 4 L44 4 L44 11 L40.5 11.5 L36.5 7.5 Z" fill="#e8762f"/>
+    </symbol>
+    <!-- Gegenläufige Pfeile (Paradox) -->
+    <symbol id="i-swap" viewBox="0 0 48 48">
+      <path d="M6 16 H32" stroke="#1a3356" stroke-width="5" stroke-linecap="round"/>
+      <path d="M30 7 L42 16 L30 25 Z" fill="#1a3356"/>
+      <path d="M42 32 H16" stroke="#e8762f" stroke-width="5" stroke-linecap="round"/>
+      <path d="M18 23 L6 32 L18 41 Z" fill="#e8762f"/>
+    </symbol>
+    <!-- Lupe (Mythos vs. Realität) -->
+    <symbol id="i-lens" viewBox="0 0 48 48">
+      <path d="M30 31 L43 44" stroke="#12243f" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="20" cy="20" r="16" fill="#2d4d79"/>
+      <path d="M20 4 A16 16 0 0 1 20 36 Z" fill="#1a3356"/>
+      <circle cx="20" cy="20" r="10.5" fill="#f8f4eb"/>
+      <path d="M15 20.5 L18.8 24.2 L25.5 16.5" fill="none" stroke="#e8762f" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Waage (Bewerter) -->
+    <symbol id="i-scale" viewBox="0 0 48 48">
+      <path d="M9 14 L3.5 29 M9 14 L14.5 29 M39 14 L33.5 29 M39 14 L44.5 29" stroke="#2d4d79" stroke-width="1.6"/>
+      <rect x="22.5" y="9" width="3" height="30" fill="#1a3356"/>
+      <rect x="6" y="11.5" width="36" height="3.2" rx="1.6" fill="#1a3356"/>
+      <path d="M13 44 Q24 35 35 44 Z" fill="#1a3356"/>
+      <circle cx="24" cy="9" r="3.6" fill="#e8762f"/>
+      <path d="M2 29 H16 A7 5.5 0 0 1 2 29 Z" fill="#e8762f"/>
+      <path d="M32 29 H46 A7 5.5 0 0 1 32 29 Z" fill="#c75d1e"/>
+    </symbol>
+    <!-- Steuerpult -->
+    <symbol id="i-console" viewBox="0 0 48 48">
+      <rect x="3" y="6" width="42" height="36" rx="4" fill="#2d4d79"/>
+      <path d="M24 6 H41 a4 4 0 0 1 4 4 V38 a4 4 0 0 1 -4 4 H24 Z" fill="#1a3356"/>
+      <g stroke="#f8f4eb" stroke-width="2" stroke-linecap="round" opacity=".55"><path d="M13 13 V35"/><path d="M24 13 V35"/><path d="M35 13 V35"/></g>
+      <rect x="8.5" y="25" width="9" height="5" rx="1.5" fill="#f8f4eb"/>
+      <rect x="19.5" y="15" width="9" height="5" rx="1.5" fill="#e8762f"/>
+      <rect x="30.5" y="21" width="9" height="5" rx="1.5" fill="#f8f4eb"/>
+    </symbol>
+    <!-- Brücke mit Lücke -->
+    <symbol id="i-bridge" viewBox="0 0 48 48">
+      <path d="M2 24 H18 V42 H13 V31 H7 V42 H2 Z" fill="#1a3356"/>
+      <path d="M30 24 H46 V42 H41 V31 H35 V42 H30 Z" fill="#2d4d79"/>
+      <path d="M15 19 Q24 7 33 19" fill="none" stroke="#e8762f" stroke-width="2.6" stroke-dasharray="3.2 3" stroke-linecap="round"/>
+      <path d="M35.5 21.5 L29.5 18.5 L35 14.5 Z" fill="#e8762f"/>
+    </symbol>
+    <!-- Ein-Schalter -->
+    <symbol id="i-power" viewBox="0 0 48 48">
+      <circle cx="24" cy="24" r="20" fill="#2d4d79"/>
+      <path d="M24 4 A20 20 0 0 1 24 44 Z" fill="#1a3356"/>
+      <path d="M17 16.5 A10.5 10.5 0 1 0 31 16.5" fill="none" stroke="#e8762f" stroke-width="3.4" stroke-linecap="round"/>
+      <path d="M24 11 V23" stroke="#e8762f" stroke-width="3.4" stroke-linecap="round"/>
+    </symbol>
+    <!-- Kreislauf -->
+    <symbol id="i-cycle" viewBox="0 0 48 48">
+      <path d="M37.2 19.2 C34 11 26 8.5 19.3 10.8 C15.6 12 12.6 15 10.8 19.2" fill="none" stroke="#1a3356" stroke-width="4.2" stroke-linecap="round"/>
+      <path d="M8.6 25.3 L6.3 17.5 L15.4 20.9 Z" fill="#1a3356" transform="translate(-0.5 0.5)"/>
+      <path d="M10.8 28.8 C14 37 22 39.5 28.7 37.2 C32.4 36 35.4 33 37.2 28.8" fill="none" stroke="#e8762f" stroke-width="4.2" stroke-linecap="round"/>
+      <path d="M39.4 22.7 L41.7 30.5 L32.6 27.1 Z" fill="#e8762f" transform="translate(0.5 -0.5)"/>
+    </symbol>
+    <!-- Scheinwerfer (Hyperfokus) -->
+    <symbol id="i-spot" viewBox="0 0 48 48">
+      <path d="M2 24 C9 13 16 8.5 24 8.5 C32 8.5 39 13 46 24 C39 35 32 39.5 24 39.5 C16 39.5 9 35 2 24 Z" fill="#2d4d79"/>
+      <path d="M2 24 H46 C39 35 32 39.5 24 39.5 C16 39.5 9 35 2 24 Z" fill="#1a3356"/>
+      <circle cx="24" cy="24" r="11" fill="#f8f4eb"/>
+      <circle cx="24" cy="24" r="8" fill="#e8762f"/>
+      <circle cx="24" cy="24" r="3.8" fill="#1a3356"/>
+      <circle cx="27" cy="20.6" r="1.8" fill="#f8f4eb"/>
+    </symbol>
+    <!-- Kleine Zeichen -->
+    <symbol id="g-x" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#a99a7c"/><path d="M5.2 5.2 L10.8 10.8 M10.8 5.2 L5.2 10.8" stroke="#f8f4eb" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="g-check" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#e8762f"/><path d="M4.6 8.3 L7 10.6 L11.5 5.6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="g-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1a3356"/><path d="M7 12.4 L10.5 15.8 L17 8.6" fill="none" stroke="#f8f4eb" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="g-warn" viewBox="0 0 24 24"><path d="M12 2 L23 21.5 H1 Z" fill="#e8762f" stroke="#e8762f" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 9 V14.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="18" r="1.5" fill="#fff"/></symbol>
+    <symbol id="g-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7.2" fill="none" stroke="#f0a066" stroke-width="1.6"/><path d="M8 7.2 V11.6" stroke="#f0a066" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="4.7" r="1.1" fill="#f0a066"/></symbol>
+    <!-- Aufgaben -->
+    <symbol id="t-plan" viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="17" rx="2" fill="#1a3356"/><path d="M2.5 6.5 a2 2 0 0 1 2 -2 H19.5 a2 2 0 0 1 2 2 V9.5 H2.5 Z" fill="#e8762f"/><rect x="6.5" y="2" width="2.4" height="5" rx="1.2" fill="#1a3356"/><rect x="15.1" y="2" width="2.4" height="5" rx="1.2" fill="#1a3356"/><g fill="#f8f4eb"><rect x="6" y="12" width="3" height="2.6"/><rect x="10.5" y="12" width="3" height="2.6"/><rect x="15" y="12" width="3" height="2.6"/><rect x="6" y="16.4" width="3" height="2.6"/><rect x="10.5" y="16.4" width="3" height="2.6"/></g></symbol>
+    <symbol id="t-mem" viewBox="0 0 24 24"><path d="M2 16 L12 21 L22 16" fill="none" stroke="#2d4d79" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M2 12 L12 17 L22 12" fill="none" stroke="#1a3356" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M12 2.5 L22 7.5 L12 12.5 L2 7.5 Z" fill="#e8762f"/></symbol>
+    <symbol id="t-filter" viewBox="0 0 24 24"><path d="M2.5 3.5 H21.5 L14.2 12.6 V19.5 L9.8 21.8 V12.6 Z" fill="#1a3356" stroke="#1a3356" stroke-width="1" stroke-linejoin="round"/><path d="M2.5 3.5 H21.5 L19.6 5.9 H4.4 Z" fill="#e8762f"/></symbol>
+    <symbol id="t-brake" viewBox="0 0 24 24"><path d="M8 1.5 H16 L22.5 8 V16 L16 22.5 H8 L1.5 16 V8 Z" fill="#1a3356"/><rect x="6" y="10.4" width="12" height="3.2" rx="1.2" fill="#e8762f"/></symbol>
+    <symbol id="t-flag" viewBox="0 0 24 24"><path d="M1.5 23 Q12 15.5 22.5 23 Z" fill="#2d4d79"/><rect x="6" y="1.5" width="2.2" height="19" rx="1" fill="#1a3356"/><path d="M8.2 2.5 H20.5 L17.6 7 L20.5 11.5 H8.2 Z" fill="#e8762f"/></symbol>
+    <!-- Auslöser -->
+    <symbol id="r-new" viewBox="0 0 24 24"><path d="M10 3 C11 9 13.5 11.5 19.5 12.5 C13.5 13.5 11 16 10 22 C9 16 6.5 13.5 0.5 12.5 C6.5 11.5 9 9 10 3 Z" fill="#e8762f"/><path d="M19.5 1 C20 3.2 20.8 4 23 4.5 C20.8 5 20 5.8 19.5 8 C19 5.8 18.2 5 16 4.5 C18.2 4 19 3.2 19.5 1 Z" fill="#1a3356"/></symbol>
+    <symbol id="r-bolt" viewBox="0 0 24 24"><path d="M14.5 1 L4 13.5 H11 L9.5 23 L20 10 H13 Z" fill="#e8762f"/><path d="M14.5 1 L11.2 10 H13 H20 L9.5 23 L11 13.5 Z" fill="#c75d1e" opacity="0"/><path d="M13 10 H20 L9.5 23 Z" fill="#c75d1e"/></symbol>
+    <symbol id="r-person" viewBox="0 0 24 24"><circle cx="9.5" cy="7.5" r="4.6" fill="#2d4d79"/><path d="M1 22.5 C1 16 4.8 13.2 9.5 13.2 C14.2 13.2 18 16 18 22.5 Z" fill="#1a3356"/><path d="M18.60 1.30 L19.83 4.50 L23.26 4.69 L20.60 6.85 L21.48 10.16 L18.60 8.30 L15.72 10.16 L16.60 6.85 L13.94 4.69 L17.37 4.50 Z" fill="#e8762f"/></symbol>
+    <symbol id="r-hour" viewBox="0 0 24 24"><rect x="3.5" y="1.5" width="17" height="3" rx="1.2" fill="#1a3356"/><rect x="3.5" y="19.5" width="17" height="3" rx="1.2" fill="#1a3356"/><path d="M6 4.5 H18 C18 9 14.5 10.6 12.6 12 C14.5 13.4 18 15 18 19.5 H6 C6 15 9.5 13.4 11.4 12 C9.5 10.6 6 9 6 4.5 Z" fill="#2d4d79"/><path d="M8.3 7 H15.7 C15 8.8 13.4 9.8 12 10.6 C10.6 9.8 9 8.8 8.3 7 Z" fill="#e8762f"/><path d="M12 15 C14 15.8 15.6 17 16.2 19.5 H7.8 C8.4 17 10 15.8 12 15 Z" fill="#e8762f"/></symbol>
+    <!-- Wecker -->
+    <symbol id="i-clock" viewBox="0 0 56 56">
+      <circle cx="13" cy="12" r="7" fill="#e8762f"/><circle cx="43" cy="12" r="7" fill="#c75d1e"/>
+      <path d="M17 46 L12 53 M39 46 L44 53" stroke="#1a3356" stroke-width="3.4" stroke-linecap="round"/>
+      <circle cx="28" cy="30" r="20" fill="#2d4d79"/>
+      <path d="M28 10 A20 20 0 0 1 28 50 Z" fill="#1a3356"/>
+      <circle cx="28" cy="30" r="14.5" fill="#f8f4eb"/>
+      <g stroke="#1a3356" stroke-width="2" stroke-linecap="round"><path d="M28 17.5 V20"/><path d="M28 40 V42.5"/><path d="M15.5 30 H18"/><path d="M38 30 H40.5"/></g>
+      <path d="M28 30 V21.5" stroke="#1a3356" stroke-width="2.8" stroke-linecap="round"/>
+      <path d="M28 30 L34.5 34" stroke="#e8762f" stroke-width="2.8" stroke-linecap="round"/>
+      <circle cx="28" cy="30" r="2.2" fill="#1a3356"/>
+    </symbol>
+    <marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#1a3356"/>
+    </marker>
+    <marker id="aho" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#e8762f"/>
+    </marker>
+  </defs>
+</svg>
+
+<!-- ===== Kopfband ===== -->
+<header class="head">
+  <div class="head-text">
+    <div class="accent"></div>
+    <h1>ADHS im Gehirn</h1>
+    <p class="sub">Kein Willensproblem, sondern ein Steuerungsproblem</p>
+  </div>
+</header>
+
+<div class="badge">
+  <svg viewBox="0 0 200 170">
+    <defs>
+      <clipPath id="cb"><path id="bp" d="M52 112 C34 108 26 90 34 76 C26 60 36 40 54 36 C60 20 80 12 98 18 C112 8 136 10 148 22 C166 20 182 34 182 52 C194 62 194 82 184 92 C188 108 176 122 160 122 C154 132 140 136 128 130 C118 138 100 138 92 130 C80 136 62 130 58 120 C55 118 53 115 52 112 Z"/></clipPath>
+      <clipPath id="cf"><path d="M0 0 H80 C70 30 76 56 66 80 C60 96 62 110 54 170 H0 Z"/></clipPath>
+    </defs>
+    <path d="M110 124 C116 140 118 152 121 164 L136 162 C132 150 132 138 135 124 Z" fill="#12243f"/>
+    <ellipse cx="152" cy="131" rx="27" ry="17" fill="#2d4d79"/>
+    <path d="M152 114 A27 17 0 0 1 152 148 Z" fill="#1a3356"/>
+    <g stroke="#f8f4eb" stroke-width="2.6" fill="none" stroke-linecap="round"><path d="M134 138 C146 135 160 135 174 139"/><path d="M139 145 C148 143 158 143 167 145"/></g>
+    <g clip-path="url(#cb)">
+      <rect width="200" height="170" fill="#1a3356"/>
+      <path d="M0 0 H200 V52 L0 88 Z" fill="#2d4d79"/>
+      <g clip-path="url(#cf)">
+        <rect width="200" height="170" fill="#c75d1e"/>
+        <path d="M0 0 H200 V52 L0 88 Z" fill="#e8762f"/>
+      </g>
+      <g stroke="#f8f4eb" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M80 0 C70 30 76 56 66 80 C60 96 62 110 54 170"/>
+        <path d="M112 14 C104 28 116 38 106 52 C98 62 108 72 98 90"/>
+        <path d="M60 102 C78 92 96 100 112 92 C126 85 138 90 150 82"/>
+        <path d="M84 120 C98 112 112 120 126 112 C136 107 146 112 158 106"/>
+        <path d="M80 42 C88 36 94 46 102 40"/>
+        <path d="M76 68 C84 62 90 72 99 66"/>
+        <path d="M126 36 C138 28 152 32 158 44 C163 54 156 62 166 70"/>
+        <path d="M118 62 C128 56 136 66 148 60"/>
+        <path d="M178 58 C170 68 180 78 172 90"/>
+        <path d="M38 62 C46 68 54 58 64 64"/>
+        <path d="M34 86 C42 90 50 82 58 88"/>
+        <path d="M50 38 C56 46 62 40 70 44"/>
+      </g>
+    </g>
+    <use href="#bp" fill="none" stroke="#f8f4eb" stroke-width="2.4"/>
+  </svg>
+</div>
+
+<!-- ===== Kernaussage ===== -->
+<section class="kern">
+  <div class="lbl">Kernaussage</div>
+  <p>ADHS heißt nicht „keine Aufmerksamkeit“. Es heißt: Aufmerksamkeit, Motivation und Verhalten zuverlässig an das anzupassen, was gerade nötig ist, <b>fällt schwer.</b></p>
+</section>
+
+<!-- ===== Abschnitte ===== -->
+<main class="grid">
+
+  <!-- 01 -->
+  <article class="panel s6">
+    <div class="ph"><div class="num">01</div><div class="pt">Das Paradox</div><svg class="ic"><use href="#i-swap"/></svg></div>
+    <div class="scene"><svg><use href="#i-mail"/></svg><p class="tx">Die wichtige E-Mail (<b>5 Minuten Arbeit</b>) bleibt <b>eine Stunde liegen</b>.</p></div>
+    <div class="scene"><svg><use href="#i-target"/></svg><p class="tx">Beim Lieblingsthema: <b>stundenlanger Hyperfokus</b>.</p></div>
+    <div class="merk2"><span class="lbl">Merksatz</span><span class="mt">Dasselbe Gehirn, andere Aktivierung.</span></div>
+  </article>
+
+  <!-- 02 -->
+  <article class="panel s6">
+    <div class="ph"><div class="num">02</div><div class="pt">Mythos vs. Realität</div><svg class="ic"><use href="#i-lens"/></svg></div>
+    <div class="mvr">
+      <div class="col myth"><div class="tag"><svg><use href="#g-x"/></svg>Mythos</div><p class="tx">faul, undiszipliniert, „ist mir egal“.</p></div>
+      <div class="vs"><span>vs.</span></div>
+      <div class="col real"><div class="tag"><svg><use href="#g-check"/></svg>Realität</div><p class="tx">neuroentwicklungs&shy;bedingte Störung der Selbststeuerung.</p></div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="panel s5">
+    <div class="ph"><div class="num">03</div><div class="pt">Der Bewerter:<small>Dopamin &amp; Noradrenalin</small></div><svg class="ic"><use href="#i-scale"/></svg></div>
+    <div class="ask">Fragt ständig:</div>
+    <div class="bubble">„Lohnt sich das jetzt?“</div>
+    <ul class="bl tx">
+      <li>Nicht einfach „zu wenig Dopamin“, sondern veränderte Signalwege.</li>
+      <li><b>Wichtig finden</b> <span class="ne">≠</span> <b>jetzt Motivation aufbringen.</b></li>
+    </ul>
+  </article>
+
+  <!-- 04 -->
+  <article class="panel s7">
+    <div class="ph"><div class="num">04</div><div class="pt">Die Steuerzentrale:<small>präfrontaler Cortex</small></div><svg class="ic"><use href="#i-console"/></svg></div>
+    <div class="pfc">
+      <div class="kpi"><div class="big">5</div><div class="kl">Aufgaben der Steuerzentrale</div></div>
+      <ul class="tasks">
+        <li><svg><use href="#t-plan"/></svg>Planen</li>
+        <li><svg><use href="#t-mem"/></svg>Arbeitsgedächtnis</li>
+        <li><svg><use href="#t-filter"/></svg>Ablenkung ausblenden</li>
+        <li><svg><use href="#t-brake"/></svg>Impulse bremsen</li>
+        <li><svg><use href="#t-flag"/></svg>Langfristige Ziele</li>
+      </ul>
+    </div>
+    <div class="note tx"><svg><use href="#g-warn"/></svg><span>Bei reizarmen Aufgaben <b>weniger stabil.</b></span></div>
+  </article>
+
+  <!-- 05 -->
+  <article class="panel s7">
+    <div class="ph"><div class="num">05</div><div class="pt">Die Lücke zwischen Wissen und Tun</div><svg class="ic"><use href="#i-bridge"/></svg></div>
+    <div class="flow">
+      <div class="fcol"><span class="lbl">Wissen</span><div class="fbox k">„Ich sollte …“</div></div>
+      <svg class="farrow" viewBox="0 0 100 40" preserveAspectRatio="none">
+        <path d="M6 20 H38" stroke="#1a3356" stroke-width="2.4" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <path d="M44 28 L50 12 M52 28 L58 12" stroke="#e8762f" stroke-width="2.6" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <path d="M64 20 H88" stroke="#1a3356" stroke-width="2.4" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/>
+        <path d="M87 13 L96 20 L87 27 Z" fill="#1a3356"/>
+      </svg>
+      <div class="fcol"><span class="lbl">Tun</span><div class="fbox t">„Ich mache es jetzt.“</div></div>
+    </div>
+    <div class="merk2"><span class="lbl">Merksatz</span><span class="mt">Ich weiß es und schaffe es trotzdem nicht anzufangen.</span></div>
+  </article>
+
+  <!-- 06 -->
+  <article class="panel s5">
+    <div class="ph"><div class="num">06</div><div class="pt">Was die Aktivierung einschaltet</div><svg class="ic"><use href="#i-power"/></svg></div>
+    <div class="kpirow"><span class="big">4</span><span class="kl">Auslöser der Aktivierung</span></div>
+    <ul class="tasks trig">
+      <li><svg><use href="#r-new"/></svg>Neuheit</li>
+      <li><svg><use href="#r-bolt"/></svg>Unmittelbare Konsequenzen</li>
+      <li><svg><use href="#r-person"/></svg>Persönliches Interesse</li>
+      <li><svg><use href="#r-hour"/></svg>Zeitdruck</li>
+    </ul>
+  </article>
+
+  <!-- 07 -->
+  <article class="panel s7">
+    <div class="ph"><div class="num">07</div><div class="pt">Die Deadline-Falle</div><svg class="ic"><use href="#i-cycle"/></svg></div>
+    <svg class="cyc" viewBox="0 0 372 166">
+      <g fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="#1a3356" marker-end="url(#ah)" d="M249.2 32.6 L253.0 33.7 L256.7 34.9 L260.3 36.2 L263.8 37.5 L267.3 38.9 L270.6 40.4 L273.9 41.9 L277.1 43.5 L280.1 45.1 L283.1 46.8 L285.9 48.5 L286.6 49.0"/>
+        <path stroke="#1a3356" marker-end="url(#ah)" d="M316.0 93.0 L315.8 95.3 L315.6 97.6 L315.1 99.9 L314.6 102.1 L313.8 104.4 L313.0 106.6 L312.0 108.8 L310.8 111.0 L309.5 113.2 L308.1 115.4 L306.5 117.5 L304.8 119.6 L303.0 121.7 L301.0 123.7 L299.7 125.0"/>
+        <path stroke="#1a3356" marker-end="url(#ah)" d="M199.2 159.6 L194.9 159.8 L190.5 160.0 L186.1 160.0 L181.8 160.0 L177.4 159.9 L172.8 159.6"/>
+        <path stroke="#1a3356" marker-end="url(#ah)" d="M72.3 125.0 L70.2 123.0 L68.3 120.9 L66.5 118.8 L64.9 116.7 L63.4 114.6 L62.0 112.4 L60.7 110.2 L59.7 108.0 L58.7 105.8 L57.9 103.5 L57.2 101.3 L56.7 99.0 L56.3 96.7 L56.0 93.0"/>
+        <path stroke="#e8762f" stroke-dasharray="5 4" marker-end="url(#aho)" d="M85.4 49.0 L88.2 47.2 L91.1 45.5 L94.1 43.9 L97.3 42.3 L100.5 40.8 L103.9 39.3 L107.3 37.9 L110.8 36.5 L114.4 35.2 L118.1 34.0 L122.8 32.6"/>
+      </g>
+      <use href="#i-clock" x="159" y="65" width="54" height="54"/>
+      <g font-family="Source Sans 3" font-weight="600" font-size="14.5" text-anchor="middle">
+        <rect x="130.0" y="9.0" width="112" height="30" rx="15" fill="#f8f4eb" stroke="#1a3356" stroke-width="1.5"/>
+        <text x="186.0" y="29.0" fill="#1a3356">Aufschieben</text>
+        <rect x="253.6" y="56.0" width="112" height="30" rx="15" fill="#f8f4eb" stroke="#1a3356" stroke-width="1.5"/>
+        <text x="309.6" y="76.0" fill="#1a3356">Deadline naht</text>
+        <rect x="206.4" y="132.0" width="112" height="30" rx="15" fill="#e8762f"/>
+        <text x="262.4" y="152.0" fill="#fff">Stress</text>
+        <rect x="53.6" y="132.0" width="112" height="30" rx="15" fill="#1a3356"/>
+        <text x="109.6" y="152.0" fill="#f8f4eb">Arbeitsphase</text>
+        <rect x="6.4" y="56.0" width="112" height="30" rx="15" fill="#f8f4eb" stroke="#1a3356" stroke-width="1.5"/>
+        <text x="62.4" y="76.0" fill="#1a3356">Erleichterung</text>
+      </g>
+      <text x="122" y="20" font-family="Source Sans 3" font-weight="600" font-style="italic" font-size="14" fill="#c75d1e" text-anchor="end">wieder von vorn</text>
+    </svg>
+  </article>
+
+  <!-- 08 -->
+  <article class="panel s5">
+    <div class="ph"><div class="num">08</div><div class="pt">Hyperfokus ist kein Widerspruch</div><svg class="ic"><use href="#i-spot"/></svg></div>
+    <div class="state tx"><svg><use href="#g-ok"/></svg><span><b>Aufmerksamkeit haben:</b> ja.</span></div>
+    <div class="state tx"><svg><use href="#g-warn"/></svg><span><b>Aufmerksamkeit steuern:</b> schwierig.</span></div>
+    <ul class="qs qhead">
+      <li><span>?</span>Wann beginnen?</li>
+      <li><span>?</span>Worauf richten?</li>
+      <li><span>?</span>Was ausblenden?</li>
+      <li><span>?</span>Wann wieder lösen?</li>
+    </ul>
+  </article>
+
+</main>
+
+<!-- ===== Fußband ===== -->
+<footer class="foot">
+  <div class="frow"><svg><use href="#g-info"/></svg><span class="lbl">Hinweise</span><ul><li>Kein Hirnscan kann ADHS diagnostizieren, es gibt nur Gruppenunterschiede.</li><li>Die Diagnose gehört zu Fachleuten.</li></ul></div>
+  <div class="src">Quelle: NeuroWissen TV, „NEUROLOGE ERKLÄRT: Das macht ADHS wirklich in deinem Gehirn“ (2026)</div>
+</footer>
+
+</body>
+</html>

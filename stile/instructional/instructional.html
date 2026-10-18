@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>ADHS im Gehirn – Instructional</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+:root{
+  --k:#161616; --sky:#7CC4EE; --red:#E5392C; --blue:#2F5DAA; --gray:#BCC3CB; --gray2:#8A939C; --yel:#FFD43B; --pink:#F6A5B5;
+  --c1:#2F6FDB; --d1:#1E56B8;
+  --c2:#14A3B0; --d2:#0B7F8A;
+  --c3:#22A447; --d3:#15803D;
+  --c4:#F2C200; --d4:#8A6A00;
+  --c5:#F07A16; --d5:#C2560A;
+  --c6:#E5392C; --d6:#C42A1F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:768px;height:1376px;overflow:hidden;background:#DADDE2}
+body{position:relative;font-family:'Inter',sans-serif;color:var(--k);font-size:15px;line-height:1.35;-webkit-font-smoothing:antialiased}
+.sheet{position:absolute;left:6px;top:6px;right:6px;bottom:6px;background:#fff;border-radius:16px;padding:16px 20px 12px 20px;display:flex;flex-direction:column}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* Kopf */
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px}
+.kicker{display:flex;align-items:center;gap:10px;font:700 13px/1 'Barlow',sans-serif;letter-spacing:.09em;text-transform:uppercase;color:#4B5563}
+.kicker .tag{background:var(--k);color:#fff;padding:5px 9px 4px;border-radius:4px;letter-spacing:.1em}
+h1{font:900 54px/1 'Archivo',sans-serif;letter-spacing:-.025em;color:var(--k);margin:9px 0 6px}
+.sub{font:600 18px/1.25 'Inter',sans-serif;color:#374151}
+.sub b{color:var(--k);font-weight:800}
+.hero{width:150px;height:104px;border:3.5px solid var(--k);background:var(--sky);flex:none;position:relative;overflow:hidden}
+.hero svg{position:absolute;inset:0;width:100%;height:100%}
+
+/* Panel-Raster */
+.grid{display:flex;flex-direction:column;gap:34px}
+.row{display:flex;justify-content:space-between;align-items:stretch}
+.panel{position:relative;border:3.5px solid var(--k);background:#fff;display:flex;flex-direction:column}
+.w{width:406px}.n{width:280px}
+.pic{position:relative;height:128px;background:var(--sky);border-bottom:3.5px solid var(--k);overflow:hidden;flex:none}
+.pic > svg.scene{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.cap{padding:10px 12px 11px 13px;flex:1}
+.badge{position:absolute;left:-16px;top:10px;width:36px;height:36px;border-radius:50%;border:3px solid var(--k);background:var(--c);color:#fff;font:900 18px/1 'Archivo',sans-serif;display:flex;align-items:center;justify-content:center;z-index:4}
+.over{font:700 12px/1 'Barlow',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--d);margin-bottom:5px}
+h2{font:800 18px/1.15 'Archivo',sans-serif;color:var(--k);letter-spacing:-.005em;margin-bottom:7px}
+.p1{--c:var(--c1);--d:var(--d1)} .p2{--c:var(--c2);--d:var(--d2)} .p3{--c:var(--c3);--d:var(--d3)}
+.p4{--c:var(--c4);--d:var(--d4)} .p4 .badge{color:var(--k)} .p5{--c:var(--c5);--d:var(--d5)} .p6{--c:var(--c6);--d:var(--d6)}
+
+/* Comic-Elemente im Bild */
+.narr{position:absolute;background:var(--yel);border:3px solid var(--k);padding:3px 8px 3px;font:800 13.5px/1.2 'Inter',sans-serif;color:var(--k);z-index:2;white-space:nowrap}
+.bub{position:absolute;background:#fff;border:3px solid var(--k);border-radius:14px;padding:4px 10px 5px;font:800 14px/1.15 'Inter',sans-serif;color:var(--k);white-space:nowrap;z-index:2}
+.bub.tail::before{content:"";position:absolute;left:var(--tx);bottom:-14px;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid var(--k)}
+.bub.tail::after{content:"";position:absolute;left:calc(var(--tx) + 3.5px);bottom:-8px;border-left:4.5px solid transparent;border-right:4.5px solid transparent;border-top:7px solid #fff}
+.bub.dash{border-style:dashed}
+.lab{position:absolute;font:800 12.5px/1 'Barlow',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--k);z-index:2}
+.tagw{position:absolute;background:#fff;border:2.5px solid var(--k);border-radius:6px;padding:3px 7px;font:800 13px/1.15 'Inter',sans-serif;color:var(--k);text-align:center;z-index:2}
+
+/* Text im Caption-Bereich */
+.li{display:flex;gap:7px;align-items:flex-start;margin-bottom:6px}
+.li .mi{width:22px;height:22px;border:2.5px solid var(--k);border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center;flex:none;margin-top:-1px}
+.li .mi svg.i{width:14px;height:14px;stroke-width:2.6}
+.narr.merk{display:flex;align-items:center;gap:8px;padding:3px 10px 3px 4px}
+.narr .ml{display:inline-flex;align-items:center;gap:4px;background:var(--k);color:#fff;font:800 12px/1 'Barlow',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:4px 7px 3px 5px;border-radius:3px}
+.narr .ml svg.i{width:14px;height:14px}
+.li p{flex:1}
+.note{display:flex;align-items:center;gap:9px;border:2.5px solid var(--k);background:#FFF6CC;border-radius:6px;padding:4px 10px 4px 5px;font-weight:700;margin-top:8px}
+.note .lbl{display:inline-flex;align-items:center;gap:4px;background:var(--k);color:#fff;font:800 12px/1 'Barlow',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:4px 7px 3px 5px;border-radius:4px;flex:none}
+.note .lbl svg.i{width:14px;height:14px}
+.note.stack{display:block;padding:6px 10px 6px 8px}
+.note.stack .lbl{margin-bottom:5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px 5px;align-items:center}
+.chips .tl{font-weight:700;margin-right:2px}
+.chip{display:inline-flex;align-items:center;gap:5px;border:2.5px solid var(--k);border-radius:999px;padding:2px 10px 2px 4px;font-weight:700;font-size:14px;background:#fff;white-space:nowrap}
+.chip b{width:19px;height:19px;border-radius:50%;background:var(--c);color:#fff;font:800 12.5px/1 'Archivo',sans-serif;display:inline-flex;align-items:center;justify-content:center}
+.act{position:absolute;left:118px;width:149px;display:flex;align-items:center;gap:7px;border:2.5px solid var(--k);border-radius:8px;padding:4px 7px 4px 4px;font-weight:800;font-size:14px;line-height:1.15;background:#fff;z-index:2}
+.act .ai{width:24px;height:24px;border-radius:50%;background:var(--c);border:2.5px solid var(--k);color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
+.act .ai svg.i{width:13px;height:13px;stroke-width:2.6}
+.warn{display:inline-flex;align-items:center;gap:5px;background:var(--red);color:#fff;border:2.5px solid var(--k);font:800 12.5px/1 'Barlow',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px 3px 6px;border-radius:5px}
+.warn svg.i{width:15px;height:15px}
+.h2row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.h2row h2{margin-bottom:0}
+
+/* Zyklus */
+.p6 .pic{flex:1;height:auto;min-height:242px}
+.p6 .cap,.p5 .cap{flex:none}
+.p5 .pic{flex:1;height:auto}
+.cnode{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:6px;background:#fff;border:3px solid var(--k);border-radius:8px;padding:3px 9px 3px 4px;font-weight:800;font-size:14px;white-space:nowrap;z-index:3}
+.cnode .cn{width:21px;height:21px;border-radius:50%;background:var(--red);border:2px solid var(--k);color:#fff;font:800 12.5px/1 'Archivo',sans-serif;display:flex;align-items:center;justify-content:center}
+.ccenter{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3px;z-index:2}
+.ccenter svg{width:66px;height:66px;display:block}
+.ccenter span{background:var(--yel);border:3px solid var(--k);padding:2px 8px;font:800 13.5px/1.2 'Inter',sans-serif;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.ccenter span svg.i{width:15px;height:15px;stroke-width:2.8}
+svg.arcs{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;z-index:2}
+
+/* Fazit */
+.fazit{margin-top:34px;flex-direction:row;--c:var(--k)}
+.fazit .pic{width:132px;height:auto;border-bottom:0;border-right:3.5px solid var(--k)}
+.fazit .cap{padding:11px 16px 12px 15px;display:flex;flex-direction:column;justify-content:center}
+.fazit .badge{background:var(--k)}
+.fazit .badge svg.i{width:20px;height:20px;stroke:#fff;stroke-width:3.4}
+.fz1{font:800 19px/1.2 'Archivo',sans-serif;margin-bottom:4px;display:flex;align-items:center;gap:9px}
+.fz1 .t{background:var(--yel);border:2.5px solid var(--k);font:800 12px/1 'Barlow',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:4px 7px 3px;border-radius:4px}
+.fz2{font-size:15.5px;line-height:1.38}
+
+/* Fuß */
+footer{margin-top:auto}
+.hint{display:flex;align-items:flex-start;gap:10px;border:2px solid #C9CED5;border-radius:8px;padding:6px 12px 6px 10px;font-size:13px;line-height:1.36;color:#374151;margin-bottom:6px}
+.hint .lbl{display:inline-flex;align-items:center;gap:5px;font:800 12px/1 'Barlow',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#4B5563;padding-top:3px;flex:none}
+.hint .lbl svg.i{width:15px;height:15px}
+.src{font-size:12px;color:#6B7280;text-align:center}
+
+#flow{position:absolute;left:0;top:0;width:768px;height:1376px;pointer-events:none;z-index:6;overflow:visible}
+</style>
+</head>
+<body>
+
+<!-- Wiederverwendbares Gehirn (flach, schwarze Kontur) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="brain" viewBox="0 0 64 50">
+      <g fill="var(--bf,#F6A5B5)" stroke="#161616" stroke-width="var(--bw,3)" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M32 6C26 1 16 2 14 9 7 9 3 15 5 21c-4 4-3 12 3 14 0 7 7 11 13 8 4 5 11 4 11 1z"/>
+        <path d="M32 6c6-5 16-4 18 3 7 0 11 6 9 12 4 4 3 12-3 14 0 7-7 11-13 8-4 5-11 4-11 1z"/>
+      </g>
+      <g fill="none" stroke="#161616" stroke-width="calc(var(--bw,3) * .8)" stroke-linecap="round">
+        <path d="M32 6v38M14 9c2 5 6 7 10 6M5 21c5 0 8 3 8 7M8 35c4-2 8-2 10-5M21 43c0-4 3-6 6-6M50 9c-2 5-6 7-10 6M59 21c-5 0-8 3-8 7M56 35c-4-2-8-2-10-5M43 43c0-4-3-6-6-6"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="sheet">
+<header>
+  <div class="hl">
+    <div class="kicker"><span class="tag">Bildanleitung</span>So funktioniert’s – in 6 Schritten verstehen</div>
+    <h1>ADHS im Gehirn</h1>
+    <p class="sub">Kein Willensproblem, sondern ein <b>Steuerungsproblem</b></p>
+  </div>
+  <div class="hero">
+    <svg viewBox="0 0 143 97" aria-hidden="true">
+      <ellipse cx="28" cy="22" rx="18" ry="7" fill="#fff"/><ellipse cx="40" cy="17" rx="11" ry="7" fill="#fff"/>
+      <ellipse cx="118" cy="80" rx="20" ry="7" fill="#fff"/><ellipse cx="106" cy="75" rx="10" ry="6" fill="#fff"/>
+      <use href="#brain" x="34" y="16" width="76" height="60" style="--bf:#F6A5B5;--bw:3.2"/>
+      <g stroke="#161616" stroke-width="3" stroke-linecap="round"><path d="M28 46h-9M124 46h-9M38 18l-6-6M106 18l6-6"/></g>
+    </svg>
+  </div>
+</header>
+
+<div class="grid">
+  <!-- Reihe 1 -->
+  <div class="row">
+    <article class="panel p1 w" id="P1">
+      <span class="badge">1</span>
+      <div class="pic">
+        <svg class="scene" viewBox="0 0 399 128" aria-hidden="true">
+          <rect x="0" y="0" width="200" height="128" fill="#B2C6D5"/>
+          <rect x="200" y="0" width="199" height="128" fill="#7CC4EE"/>
+          <g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="-4" y="80" width="206" height="56" fill="#C4CAD1"/>
+            <rect x="82" y="38" width="76" height="46" rx="3" fill="#fff"/>
+            <path d="M82 40l38 27 38-27" fill="none"/>
+            <circle cx="120" cy="65" r="6.5" fill="#E5392C" stroke-width="2.6"/>
+            <circle cx="170" cy="28" r="18" fill="#fff"/>
+            <path d="M170 28V17M170 28l8 5" fill="none"/>
+            <path d="M146 12a26 26 0 0 0-4 11M145 38a26 26 0 0 0 4 7" fill="none" stroke-width="2.5"/>
+          </g>
+          <circle cx="170" cy="28" r="2" fill="#161616"/>
+          <use href="#brain" x="26" y="18" width="50" height="39" style="--bf:#C9CED4;--bw:3.5"/>
+          <g fill="#161616"><circle cx="42" cy="68" r="2.6"/><circle cx="51" cy="68" r="2.6"/><circle cx="60" cy="68" r="2.6"/></g>
+          <g stroke="#161616" stroke-width="3" stroke-linecap="round" fill="none">
+            <path d="M226 18l-8-6M226 54l-8 6M251 8V0M276 18l8-6M276 54l8 6M220 36h-9M282 36h9"/>
+          </g>
+          <use href="#brain" x="226" y="16" width="50" height="39" style="--bf:#F6A5B5;--bw:3.5"/>
+          <rect x="200" y="80" width="199" height="56" fill="#5FB0E0"/>
+          <path d="M200 80h199" stroke="#161616" stroke-width="3"/>
+          <g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <circle cx="345" cy="52" r="31" fill="#E5392C"/>
+            <circle cx="345" cy="52" r="20.5" fill="#fff"/>
+            <circle cx="345" cy="52" r="10" fill="#E5392C"/>
+            <path d="M345 52l36-36" fill="none"/>
+            <path d="M378 19l12-3-5-5 3-11-12 5z" fill="#FFD43B" stroke-width="2.6"/>
+          </g>
+          <line x1="200" y1="0" x2="200" y2="128" stroke="#161616" stroke-width="3.5"/>
+        </svg>
+        <span class="narr merk" style="left:50%;bottom:8px;transform:translateX(-50%)"><span class="ml"><svg class="i" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg>Merke</span>Dasselbe Gehirn, andere Aktivierung.</span>
+      </div>
+      <div class="cap">
+        <div class="over">Schritt 1 · Erkennen</div>
+        <h2>Das Paradox</h2>
+        <div class="li"><span class="mi"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></span><p>Die wichtige E-Mail (5 Minuten Arbeit) bleibt eine Stunde liegen.</p></div>
+        <div class="li"><span class="mi"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/></svg></span><p>Beim Lieblingsthema: stundenlanger Hyperfokus.</p></div>
+      </div>
+    </article>
+
+    <article class="panel p2 n" id="P2">
+      <span class="badge">2</span>
+      <div class="pic">
+        <svg class="scene" viewBox="0 0 273 128" aria-hidden="true">
+          <ellipse cx="236" cy="16" rx="20" ry="6" fill="#fff"/><ellipse cx="248" cy="11" rx="11" ry="6" fill="#fff"/>
+          <ellipse cx="34" cy="62" rx="16" ry="6" fill="#fff"/>
+          <g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M118 125l6-11h25l6 11z" fill="#8A939C"/>
+            <rect x="131" y="84" width="11" height="31" fill="#BCC3CB"/>
+            <path d="M58 92 214 76" fill="none" stroke-width="4"/>
+            <path d="M58 92 38 101M58 92l20 9M214 76l-20 9M214 76l20 9" fill="none" stroke-width="2.4"/>
+            <circle cx="136.5" cy="84" r="7.5" fill="#E5392C"/>
+          </g>
+        </svg>
+        <span class="narr" style="left:22px;top:6px">Fragt ständig:</span>
+        <span class="bub tail" style="right:6px;top:33px;--tx:44px">„Lohnt sich das jetzt?“</span>
+        <span class="tagw" style="left:5px;top:99px;padding:3px 6px;background:#FFD43B;white-space:nowrap;font-size:12.5px">Wichtig finden</span>
+        <span class="tagw" style="right:5px;top:84px;padding:2px 6px;background:#FFD43B;white-space:nowrap;font-size:12.5px">jetzt Motivation<br>aufbringen</span>
+        <span class="neqb" style="position:absolute;left:122px;top:91px;width:29px;height:29px;border-radius:50%;background:var(--red);border:3px solid var(--k);color:#fff;font:800 19px/1 'Inter',sans-serif;display:flex;align-items:center;justify-content:center;z-index:3;padding-bottom:2px">≠</span>
+      </div>
+      <div class="cap">
+        <div class="over">Schritt 2 · Verstehen</div>
+        <h2>Der Bewerter: Dopamin &amp; Noradrenalin</h2>
+        <p>Nicht einfach „zu wenig Dopamin“, sondern veränderte Signalwege.</p>
+      </div>
+    </article>
+  </div>
+
+  <!-- Reihe 2 -->
+  <div class="row">
+    <article class="panel p3 w" id="P3">
+      <span class="badge">3</span>
+      <div class="pic">
+        <svg class="scene" viewBox="0 0 399 128" aria-hidden="true">
+          <ellipse cx="240" cy="70" rx="22" ry="7" fill="#fff"/><ellipse cx="252" cy="64" rx="12" ry="6" fill="#fff"/>
+          <g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <rect x="26" y="10" width="150" height="66" rx="6" fill="#22324A"/>
+            <rect x="92" y="76" width="18" height="10" fill="#8A939C"/>
+            <path d="M38 44c7-20 13-20 19 0s12 18 18 0 11-26 18 0 12 14 18 0 10-10 16 0 9 8 14 0" fill="none" stroke="#FFD43B" stroke-width="3.2"/>
+            <path d="M18 86h365l12 14H6z" fill="#D7DCE1"/>
+            <rect x="6" y="100" width="389" height="40" fill="#BCC3CB"/>
+            <circle cx="36" cy="114" r="7.5" fill="#2F5DAA"/>
+            <circle cx="62" cy="114" r="7.5" fill="#FFD43B"/>
+            <circle cx="98" cy="114" r="11" fill="#fff"/>
+            <path d="M98 114l6-6" fill="none"/>
+          </g>
+          <g stroke="#161616" stroke-width="2.6" stroke-linejoin="round">
+            <rect x="148" y="104" width="7" height="22" rx="3" fill="#6B747D"/>
+            <rect x="196" y="104" width="7" height="22" rx="3" fill="#6B747D"/>
+            <rect x="244" y="104" width="7" height="22" rx="3" fill="#6B747D"/>
+            <rect x="292" y="104" width="7" height="22" rx="3" fill="#6B747D"/>
+            <rect x="340" y="104" width="7" height="22" rx="3" fill="#6B747D"/>
+          </g>
+          <g stroke="#161616" stroke-width="3" stroke-linejoin="round" fill="#E5392C">
+            <rect x="140" y="108" width="23" height="10" rx="3"/>
+            <rect x="188" y="114" width="23" height="10" rx="3"/>
+            <rect x="236" y="104" width="23" height="10" rx="3"/>
+            <rect x="284" y="112" width="23" height="10" rx="3"/>
+            <rect x="332" y="106" width="23" height="10" rx="3"/>
+          </g>
+          <use href="#brain" x="306" y="55" width="46" height="36" style="--bf:#F6A5B5;--bw:3.6"/>
+        </svg>
+        <span class="narr" style="right:10px;top:8px;white-space:normal;width:206px;line-height:1.18">Bei reizarmen Aufgaben weniger stabil.</span>
+      </div>
+      <div class="cap">
+        <div class="over">Schritt 3 · Einordnen</div>
+        <h2>Die Steuerzentrale: präfrontaler Cortex</h2>
+        <div class="chips">
+          <span class="tl">Fünf Aufgaben:</span>
+          <span class="chip"><b>1</b>Planen</span>
+          <span class="chip"><b>2</b>Arbeitsgedächtnis</span>
+          <span class="chip"><b>3</b>Ablenkung ausblenden</span>
+          <span class="chip"><b>4</b>Impulse bremsen</span>
+          <span class="chip"><b>5</b>Langfristige Ziele</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel p4 n" id="P4">
+      <span class="badge">4</span>
+      <div class="pic">
+        <svg class="scene" viewBox="0 0 273 128" aria-hidden="true">
+          <g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M-4 132V86q34-8 66-3l42 4 4 45z" fill="#BCC3CB"/>
+            <path d="M277 132V86q-34-8-66-3l-42 4-4 45z" fill="#BCC3CB"/>
+            <path d="M124 112l9-4 3 8-9 3zM142 122l7-2 2 6-7 2z" fill="#8A939C" stroke-width="2.4"/>
+            <circle cx="42" cy="58" r="9.5" fill="#FFD9B8"/>
+            <path d="M30 84v-9a12 12 0 0 1 24 0v9z" fill="#2F5DAA"/>
+            <path d="M236 84V54" fill="none"/>
+            <path d="M236 54l24 7-24 7z" fill="#E5392C"/>
+            <path d="M64 72h42" fill="none" stroke-width="4"/>
+            <path d="M113 82l7-20M125 82l7-20" fill="none" stroke-width="3"/>
+            <path d="M140 72h70" fill="none" stroke-width="4" stroke-dasharray="1 9"/>
+          </g>
+          <path d="M220 63.5 234.3 72 220 80.5z" fill="#161616"/>
+          <g fill="#fff" stroke="#161616" stroke-width="2.4"><circle cx="46" cy="42" r="3.4"/><circle cx="50" cy="35.5" r="2.3"/></g>
+        </svg>
+        <span class="bub" style="left:24px;top:6px;border-radius:999px">„Ich sollte …“</span>
+        <span class="bub dash" style="right:6px;top:6px;white-space:normal;width:116px;text-align:center;padding:3px 6px 4px">„Ich mache es jetzt.“</span>
+        <span class="lab" style="left:12px;top:102px">Wissen</span>
+        <span class="lab" style="right:14px;top:102px">Tun</span>
+        <span class="lab" style="left:110px;top:92px;font-size:12px">Lücke</span>
+      </div>
+      <div class="cap">
+        <div class="over">Schritt 4 · Nachvollziehen</div>
+        <h2>Die Lücke zwischen Wissen und Tun</h2>
+        <div class="note stack"><span class="lbl"><svg class="i" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg>Merke</span><div>Ich weiß es und schaffe es trotzdem nicht anzufangen.</div></div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Reihe 3 -->
+  <div class="row">
+    <article class="panel p5 n" id="P5">
+      <span class="badge">5</span>
+      <div class="pic" id="P5pic">
+        <svg class="scene" id="p5svg" viewBox="0 0 273 220" preserveAspectRatio="xMinYMin meet" aria-hidden="true">
+          <ellipse cx="30" cy="204" rx="16" ry="5" fill="#fff"/><ellipse cx="200" cy="18" rx="20" ry="6" fill="#fff"/><ellipse cx="212" cy="13" rx="11" ry="5" fill="#fff"/>
+          <g transform="translate(6,0)"><g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+            <path d="M58 -4v12" fill="none"/>
+            <rect x="49" y="8" width="18" height="12" rx="2" fill="#8A939C"/>
+            <circle cx="58" cy="38" r="18" fill="#FFD43B"/>
+            <path d="M52 26v7c0 5 12 5 12 0v-7" fill="none" stroke-width="2.4"/>
+            <path d="M28 38h-8M88 38h8M35 17l-6-6M81 17l6-6M35 59l-6 6M81 59l6 6" fill="none"/>
+            <path d="M58 56v12" fill="none" stroke-dasharray="2 6"/>
+            <rect x="26" y="68" width="66" height="104" rx="8" fill="#fff"/>
+            <rect x="47" y="84" width="24" height="70" rx="5" fill="#BCC3CB"/>
+            <rect x="43" y="82" width="32" height="34" rx="5" fill="#E5392C"/>
+          </g>
+          <g fill="#161616"><circle cx="59" cy="75" r="2.3"/><circle cx="59" cy="165" r="2.3"/></g></g>
+          <g id="wires"></g>
+        </svg>
+        <div class="act" style="top:26px"><span class="ai"><svg class="i" viewBox="0 0 24 24"><path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z"/></svg></span><span>Neuheit</span></div>
+        <div class="act" style="top:64px"><span class="ai"><svg class="i" viewBox="0 0 24 24"><path d="M13 3 5 14h6l-1 7 8-11h-6z"/></svg></span><span>Unmittelbare Konsequenzen</span></div>
+        <div class="act" style="top:117px"><span class="ai"><svg class="i" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.3a4.2 4.2 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/></svg></span><span>Persönliches Interesse</span></div>
+        <div class="act" style="top:170px"><span class="ai"><svg class="i" viewBox="0 0 24 24"><path d="M6 3h12M6 21h12"/><path d="M7.5 3c0 5 4.5 6 4.5 9s-4.5 4-4.5 9M16.5 3c0 5-4.5 6-4.5 9s4.5 4 4.5 9"/></svg></span><span>Zeitdruck</span></div>
+      </div>
+      <div class="cap">
+        <div class="over">Schritt 5 · Kennen</div>
+        <h2>Was die Aktivierung einschaltet</h2>
+      </div>
+    </article>
+
+    <article class="panel p6 w" id="P6">
+      <span class="badge">6</span>
+      <div class="pic" id="cycle">
+        <svg class="arcs" id="arcs"></svg>
+        <div class="cnode"><span class="cn">1</span>Aufschieben</div>
+        <div class="cnode"><span class="cn">2</span>Deadline naht</div>
+        <div class="cnode"><span class="cn">3</span>Stress</div>
+        <div class="cnode"><span class="cn">4</span>Arbeitsphase</div>
+        <div class="cnode"><span class="cn">5</span>Erleichterung</div>
+        <div class="ccenter" id="cc">
+          <svg viewBox="0 0 66 66" aria-hidden="true">
+            <g stroke="#161616" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M20 58l-5 6M46 58l5 6" fill="none"/>
+              <path d="M5 21a11 11 0 0 1 15-15z" fill="#E5392C"/>
+              <path d="M61 21a11 11 0 0 0-15-15z" fill="#E5392C"/>
+              <circle cx="33" cy="36" r="25" fill="#E5392C"/>
+              <circle cx="33" cy="36" r="17.5" fill="#fff"/>
+              <path d="M33 36V25M33 36l8 5" fill="none"/>
+            </g>
+            <circle cx="33" cy="36" r="2.2" fill="#161616"/>
+          </svg>
+          <span><svg class="i" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.4-5.7"/><path d="M20 3.5v4.5h-4.5"/></svg>wieder von vorn</span>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="over">Schritt 6 · Durchschauen</div>
+        <div class="h2row"><h2>Die Deadline-Falle</h2><span class="warn"><svg class="i" viewBox="0 0 24 24"><path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.3" r=".5" fill="currentColor"/></svg>Achtung</span></div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<!-- Fazit -->
+<article class="panel fazit" id="PF">
+  <span class="badge"><svg class="i" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+  <div class="pic">
+    <svg class="scene" viewBox="0 0 128 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <ellipse cx="22" cy="18" rx="15" ry="6" fill="#fff"/><ellipse cx="108" cy="86" rx="16" ry="6" fill="#fff"/>
+      <g transform="translate(5,2)"><use href="#brain" x="26" y="26" width="68" height="53" style="--bf:#F6A5B5;--bw:3.4"/>
+      <g stroke="#161616" stroke-width="3" stroke-linecap="round" fill="none"><path d="M24 34l-8-5M24 70l-8 5M60 18V9M96 34l8-5M96 70l8 5M18 52H11M102 52h9"/></g></g>
+    </svg>
+  </div>
+  <div class="cap">
+    <p class="fz1"><span class="t">Fazit</span>ADHS heißt nicht „keine Aufmerksamkeit“.</p>
+    <p class="fz2">Es heißt: <b>Aufmerksamkeit, Motivation und Verhalten</b> zuverlässig an das anzupassen, was gerade nötig ist, fällt schwer.</p>
+  </div>
+</article>
+
+<footer>
+  <div class="hint"><span class="lbl"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".5" fill="currentColor"/></svg>Hinweis</span><span>Kein Hirnscan kann ADHS diagnostizieren, es gibt nur Gruppenunterschiede.<br>Die Diagnose gehört zu Fachleuten.</span></div>
+  <p class="src">Quelle: NeuroWissen TV, „NEUROLOGE ERKLÄRT: Das macht ADHS wirklich in deinem Gehirn“ (2026)</p>
+</footer>
+</div>
+
+<svg id="flow" aria-hidden="true"></svg>
+
+<script>
+const K='#161616';
+function layoutCycle(){
+  const box=document.getElementById('cycle'), svg=document.getElementById('arcs');
+  const W=box.clientWidth,H=box.clientHeight,cx=W/2,cy=H/2+2;
+  const rx=W/2-74, ry=H/2-26;
+  const angs=[-90,-18,54,126,198];
+  const nodes=[...box.querySelectorAll('.cnode')];
+  const P=t=>[cx+rx*Math.cos(t*Math.PI/180), cy+ry*Math.sin(t*Math.PI/180)];
+  nodes.forEach((n,i)=>{let [x,y]=P(angs[i]);const hw=n.offsetWidth/2;x=Math.max(hw+8,Math.min(W-hw-8,x));n.style.left=x+'px';n.style.top=y+'px';});
+  const cc=document.getElementById('cc'); cc.style.left=cx+'px'; cc.style.top=(cy+4)+'px';
+  const br=box.getBoundingClientRect();
+  const R=nodes.map(n=>{const r=n.getBoundingClientRect();return {cx:r.left-br.left+r.width/2,cy:r.top-br.top+r.height/2,hw:r.width/2,hh:r.height/2,r:8};});
+  const sd=(p,q)=>{const dx=Math.abs(p[0]-q.cx)-(q.hw-q.r),dy=Math.abs(p[1]-q.cy)-(q.hh-q.r);
+    return Math.hypot(Math.max(dx,0),Math.max(dy,0))+Math.min(Math.max(dx,dy),0)-q.r;};
+  let out='';
+  for(let i=0;i<5;i++){
+    const j=(i+1)%5; let a=angs[i], b=angs[j]; if(b<=a) b+=360;
+    let t0=a; while(sd(P(t0),R[i])<5) t0+=0.1;
+    let t1=b; while(sd(P(t1),R[j])<1.5) t1-=0.1;
+    const tip=P(t1);
+    let tb=t1,len=0,prev=tip; while(len<12){tb-=0.05;const p=P(tb);len+=Math.hypot(p[0]-prev[0],p[1]-prev[1]);prev=p;}
+    const base=P(tb),dx=tip[0]-base[0],dy=tip[1]-base[1],L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+    let d='M'+P(t0).map(v=>v.toFixed(2)).join(' ');
+    for(let t=t0+0.5;t<tb+1;t+=0.5) d+=' L'+P(Math.min(t,tb+1)).map(v=>v.toFixed(2)).join(' ');
+    const col = i===4 ? '#E5392C' : K;
+    out+=`<path d="${d}" fill="none" stroke="${col}" stroke-width="3.4" stroke-linecap="round"/>`;
+    const hw=7.5;
+    out+=`<path d="M${tip[0].toFixed(2)} ${tip[1].toFixed(2)} L${(base[0]-uy*hw).toFixed(2)} ${(base[1]+ux*hw).toFixed(2)} L${(base[0]+uy*hw).toFixed(2)} ${(base[1]-ux*hw).toFixed(2)}Z" fill="${col}"/>`;
+  }
+  svg.innerHTML=out;
+}
+function drawFlow(){
+  const svg=document.getElementById('flow');
+  const g=id=>document.getElementById(id).getBoundingClientRect();
+  const picMid=id=>{const p=document.querySelector('#'+id+' .pic').getBoundingClientRect();return p.top+p.height/2;};
+  let s='';
+  const head=(x,y,dir)=>{
+    const L=13,h=9;
+    if(dir==='r') return `<path d="M${x} ${y} L${x-L} ${y-h} L${x-L} ${y+h}Z" fill="${K}"/>`;
+    if(dir==='d') return `<path d="M${x} ${y} L${x-h} ${y-L} L${x+h} ${y-L}Z" fill="${K}"/>`;
+  };
+  const hor=(a,b,yRef)=>{const A=g(a),B=g(b);const y=picMid(yRef);const x1=A.right+3,x2=B.left;
+    s+=`<line x1="${x1}" y1="${y}" x2="${x2-11}" y2="${y}" stroke="${K}" stroke-width="5" stroke-linecap="round"/>`+head(x2,y,'r');};
+  const ret=(a,b)=>{const A=g(a),B=g(b);const x1=A.left+A.width/2,y1=A.bottom+3,x2=B.left+B.width/2,y2=B.top;const ym=(A.bottom+B.top)/2;const r=7;
+    s+=`<path d="M${x1} ${y1} V${ym-r} Q${x1} ${ym} ${x1-r} ${ym} H${x2+r} Q${x2} ${ym} ${x2} ${ym+r} V${y2-11}" fill="none" stroke="${K}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`+head(x2,y2,'d');};
+  const down=(a,b)=>{const A=g(a),B=g(b);const x=A.left+A.width/2,y1=A.bottom+3,y2=B.top;
+    s+=`<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2-11}" stroke="${K}" stroke-width="4" stroke-linecap="round"/>`+head(x,y2,'d');};
+  hor('P1','P2','P2'); ret('P2','P3'); hor('P3','P4','P4'); ret('P4','P5'); hor('P5','P6','P5'); down('P6','PF');
+  svg.innerHTML=s;
+}
+function wires(){
+  const pic=document.getElementById('P5pic'), pr=pic.getBoundingClientRect();
+  const tags=[...pic.querySelectorAll('.act')]; let o=''; const svgEl=document.getElementById('p5svg'); const sr=svgEl.getBoundingClientRect(); const sc=sr.width/273;
+  const ys=[88,108,128,148];
+  tags.forEach((t,i)=>{const r=t.getBoundingClientRect();const x1=(r.left-sr.left-1.5)/sc, y1=(r.top-sr.top+r.height/2)/sc;
+    const xt=99.5, yt=ys[i]; const dx=xt-x1, dy=yt-y1, L=Math.hypot(dx,dy), ux=dx/L, uy=dy/L;
+    const bx=xt-ux*9, by=yt-uy*9;
+    o+=`<path d="M${x1} ${y1} L${bx} ${by}" stroke="${K}" stroke-width="2.6" stroke-linecap="round" fill="none"/>`;
+    o+=`<path d="M${xt} ${yt} L${bx-uy*5.5} ${by+ux*5.5} L${bx+uy*5.5} ${by-ux*5.5}Z" fill="${K}"/>`;});
+  document.getElementById('wires').innerHTML=o;
+}
+document.fonts.ready.then(()=>{layoutCycle();wires();drawFlow();});
+</script>
+</body>
+</html>
