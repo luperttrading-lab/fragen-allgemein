@@ -3,13 +3,15 @@
 
 Aufruf:
   python3 bild.py --prompt "…" --out bild.png [--model nano_banana_pro] [--ratio 1:1]
-                  [--resolution 2K] [--seed 7] [--n 1] [--ref referenz.png …] [--rewrite]
+                  [--resolution 2K] [--seed 7] [--n 1] [--ref referenz.png …] [--no-rewrite]
+  Hinweise (Stand 18.10.2026): nano_banana_pro kennt nur aspect_ratio, image_size, model, num_images, quality,
+  resolution, rewrite_prompt, size; abgelehnte Parameter (z. B. seed) werden automatisch entfernt und protokolliert.
   python3 bild.py --check          # nur Erreichbarkeit und Schlüssel prüfen
 
 Der API-Schlüssel kommt aus der Umgebungsvariable ROUTELLM_API_KEY (ersatzweise ABACUS_API_KEY).
 Er wird nie ausgegeben. Doku: https://abacus.ai/help/route-llm/chat-completions/image-analysis
 """
-import argparse, base64, json, mimetypes, os, pathlib, sys, time, urllib.request, urllib.error
+import argparse, base64, json, mimetypes, os, pathlib, re, sys, time, urllib.request, urllib.error
 
 BASE = "https://routellm.abacus.ai/v1"
 
@@ -62,18 +64,32 @@ def check():
 
 
 def generate(a):
-    cfg = {"num_images": a.n, "rewrite_prompt": a.rewrite}
+    cfg = {"num_images": a.n, "rewrite_prompt": not a.no_rewrite}
     if a.ratio: cfg["aspect_ratio"] = a.ratio
     if a.resolution: cfg["resolution"] = a.resolution
     if a.size: cfg["size"] = a.size
     if a.seed is not None: cfg["seed"] = a.seed
     if a.negative: cfg["negative_prompt"] = a.negative
-    if a.ref: cfg["image_prompt"] = [data_url(p) for p in a.ref] if len(a.ref) > 1 else data_url(a.ref[0])
-    payload = {"model": a.model, "modalities": ["image"], "messages": [{"role": "user", "content": a.prompt}], "image_config": cfg}
+    # Referenzbilder: image_config.image_prompt wird von der API abgelehnt (Stand 18.10.2026); stattdessen als
+    # image_url-Teile in der Nachricht (OpenAI-Format).
+    content = a.prompt
+    if a.ref:
+        content = [{"type": "text", "text": a.prompt}] + [{"type": "image_url", "image_url": {"url": data_url(p)}} for p in a.ref]
     t0 = time.time()
-    st, body = http(BASE + "/chat/completions", json.dumps(payload).encode(),
-                    {"Authorization": f"Bearer {key()}", "Content-Type": "application/json"})
-    if st != 200:
+    entfernt = []  # Parameter, die der Dienst für dieses Modell ablehnt (z. B. seed bei nano_banana_pro, Stand 18.10.2026)
+    for _ in range(4):
+        payload = {"model": a.model, "modalities": ["image"], "messages": [{"role": "user", "content": content}], "image_config": cfg}
+        st, body = http(BASE + "/chat/completions", json.dumps(payload).encode(),
+                        {"Authorization": f"Bearer {key()}", "Content-Type": "application/json"})
+        if st == 200:
+            break
+        m = re.search(r"Invalid image config param (\w+)", body.decode(errors="ignore"))
+        if st == 400 and m and m.group(1) in cfg:
+            print(f"Hinweis: Parameter '{m.group(1)}' wird von {a.model} nicht unterstützt, wird entfernt und wiederholt.", file=sys.stderr)
+            cfg.pop(m.group(1)); entfernt.append(m.group(1))
+            continue
+        sys.exit(f"Fehler {st}: {body[:600].decode(errors='ignore')}")
+    else:
         sys.exit(f"Fehler {st}: {body[:600].decode(errors='ignore')}")
     resp = json.loads(body)
     msg = resp["choices"][0]["message"]
@@ -96,7 +112,8 @@ def generate(a):
         saved.append(str(target))
     usage = resp.get("usage", {})
     log = {"zeit": time.strftime("%Y-%m-%d %H:%M:%S"), "model": a.model, "cfg": {k: v for k, v in cfg.items() if k != "image_prompt"},
-           "prompt": a.prompt, "dateien": saved, "compute_points_used": usage.get("compute_points_used"), "dauer_s": round(time.time() - t0, 1)}
+           "prompt": a.prompt, "dateien": saved, "compute_points_used": usage.get("compute_points_used"), "dauer_s": round(time.time() - t0, 1),
+           "entfernte_parameter": entfernt}
     with open(out.parent / "bild_log.jsonl", "a", encoding="utf-8") as f:
         f.write(json.dumps(log, ensure_ascii=False) + "\n")
     print(json.dumps(log, ensure_ascii=False, indent=1))
@@ -112,7 +129,8 @@ if __name__ == "__main__":
     p.add_argument("--size", default=None, help="für gpt_image*/flux_pro/recraft, z. B. 1024x1536")
     p.add_argument("--seed", type=int, default=None); p.add_argument("--n", type=int, default=1)
     p.add_argument("--negative", default=None); p.add_argument("--ref", nargs="*", help="Referenzbilder (image_prompt)")
-    p.add_argument("--rewrite", action="store_true", help="Prompt vom Dienst umschreiben lassen (Standard: aus, damit 'kein Text' hält)")
+    p.add_argument("--no-rewrite", action="store_true", help="rewrite_prompt=false senden. Achtung: nano_banana_pro antwortet dann mit 400 "
+                   "'Could not generate an image prompt' (Stand 18.10.2026); Standard daher an")
     a = p.parse_args()
     if a.check: sys.exit(check())
     if not a.prompt: p.error("--prompt fehlt")

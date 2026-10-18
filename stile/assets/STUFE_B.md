@@ -34,3 +34,16 @@
 2. Stil-Konsistenz: erstes gutes Bild als `image_prompt`-Referenz für die weiteren Szenen desselben Stils.
 3. Freistellen bei Bedarf (einfarbiger Hintergrund → Pillow/rembg), Einbau in das HTML-Layout, Text pixelgenau.
 4. Für Flat-Stile (Professional, Instructional) alternativ `recraft_svg` testen: echte Vektoren, skalierbar.
+
+## Befunde aus dem ersten Bildtest (18.10.2026, Umgebung „Abacus-API“, Schlüssel in ROUTELLM_API_KEY)
+- `seed` wird abgelehnt (nano_banana_pro und recraft_svg): „Invalid image config param seed. Supported params are:
+  aspect_ratio, image_size, model, num_images, quality, resolution, rewrite_prompt, size.“ → keine Reproduzierbarkeit über seed.
+- `image_prompt` in `image_config` wird ebenfalls abgelehnt. Referenzbilder funktionieren als `image_url`-Teile
+  (data-URL) im `content` der Nachricht; bild.py macht das jetzt so.
+- `rewrite_prompt: false` → 400 „Could not generate an image prompt from the conversation“ (nano_banana_pro, mit und ohne
+  resolution). Rewrite muss an bleiben; „no text, no letters, no labels“ im Prompt hat trotzdem bei 4/4 Bildern gehalten.
+- recraft_svg: `aspect_ratio` wird abgelehnt („Supported values are: “ leer) → ohne Ratio aufrufen, Ergebnis 1024×1024,
+  echte SVG (nur <path>, kein <text>), mit großem C2PA-Metadatenblock.
+- Punkte je Bild: nano_banana_pro 1K ≈ 13 850, recraft_svg 8 000. Mit recraft_svg = 8 ct passt 1 000 Punkte ≈ 1 ct,
+  also nano_banana_pro ≈ 13,9 ct je 1K-Bild. [Wahrscheinlich, Umrechnung weiterhin nicht offiziell bestätigt]
+- abacus.ai (Doku-Seiten) ist aus der Umgebung „Abacus-API“ nicht erreichbar (Proxy 403); routellm.abacus.ai schon.
