@@ -138,8 +138,9 @@
     const R = (x, y, w, h, c) => { const r = document.createElementNS(NS, 'rect'); r.setAttribute('x', x); r.setAttribute('y', y); r.setAttribute('width', w); r.setAttribute('height', h); r.setAttribute('fill', c); m.appendChild(r); };
     R(0, 0, 768, 1376, '#fff');
     const boxes = CUT.slice();
-    document.querySelectorAll('.cut').forEach((el) => { const b = el.getBoundingClientRect(); boxes.push({ x: b.left, y: b.top, w: b.width, h: b.height }); });
-    boxes.forEach((b) => R(b.x - 7, b.y - 7, b.w + 14, b.h + 14, '#000'));
+    // HTML-Glyphen: Tintenbox statt Zeilenbox (Versalhöhe liegt bei ~0,13 bis ~0,9 der Schriftgröße)
+    document.querySelectorAll('.cut').forEach((el) => { const b = el.getBoundingClientRect(), fs = parseFloat(getComputedStyle(el).fontSize); boxes.push({ x: b.left + 2, y: b.top + fs * 0.13, w: b.width - 4, h: b.height - fs * 0.22 }); });
+    boxes.forEach((b) => R(b.x - 6, b.y - 6, b.w + 12, b.h + 12, '#000'));
     svg.querySelector('defs').appendChild(m);
     window.__cutBoxes = boxes;
   }
@@ -237,16 +238,16 @@
     const sulcus = (pts, w) => { CV(pts, { stroke: '#bcbcbc', strokeWidth: w * 2.3, roughness: 0.2 }); CV(pts, { strokeWidth: w, roughness: 0.3 }); };
     for (let i = 0; i < 19; i++) {
       const a = Math.PI * 1.03 - i * (Math.PI * 1.1 / 18);
-      const r0 = 0.965, r1 = [0.5, 0.64, 0.58, 0.7][i % 4];
+      const r0 = 0.965, r1 = [0.52, 0.66, 0.6, 0.72][i % 4];
       const pts = [];
       for (let k = 0; k <= 6; k++) {
-        const t = r0 + (r1 - r0) * k / 6; const wig = Math.sin(k * 0.95 + i * 0.8) * 4.4;
+        const t = r0 + (r1 - r0) * k / 6; const wig = Math.sin(k * 0.9 + i * 0.8) * 3.6;
         const px = cx + Math.cos(a) * rx * t - Math.sin(a) * wig, py = cy + Math.sin(a) * ry * t + Math.cos(a) * wig;
         pts.push([f.X(px), f.Y(py)]);
       }
       sulcus(pts, 1.4);
       // kurzer Seitenast
-      if (i % 2) { const b = a + 0.075, t0 = 0.86, t1 = 0.72; const q = []; for (let k = 0; k <= 3; k++) { const t = t0 + (t1 - t0) * k / 3; const wig = Math.sin(k * 1.4 + i) * 2.2; q.push([f.X(cx + Math.cos(b) * rx * t - Math.sin(b) * wig), f.Y(cy + Math.sin(b) * ry * t + Math.cos(b) * wig)]); } sulcus(q, 1.2); }
+      if (i % 3 === 1) { const b = a + 0.075, t0 = 0.86, t1 = 0.72; const q = []; for (let k = 0; k <= 3; k++) { const t = t0 + (t1 - t0) * k / 3; const wig = Math.sin(k * 1.4 + i) * 2.2; q.push([f.X(cx + Math.cos(b) * rx * t - Math.sin(b) * wig), f.Y(cy + Math.sin(b) * ry * t + Math.cos(b) * wig)]); } sulcus(q, 1.2); }
     }
     // Gyrus cinguli-Bogen über dem Balken
     P(U(f, 'M56 96 C70 44 170 32 204 86'), { strokeWidth: 1.3, roughness: 0.5 });
@@ -513,18 +514,18 @@
     // ---- Links C ----
     heads(42, 1056, 350, 150);
     bulb(40, 1062, 26, 40, {});
-    gear(40, 1130, 9, '#dcdcdc', 7);
+    gear(33, 1134, 10, '#dcdcdc', 7); // sitzt auf der Rahmenlinie
     rays(404, 1086, -Math.PI * 0.35, 3, 16, 0.5, BLUE, 2.4);
 
     // ---- Mitte: Kreislauf ----
     const nodes = [...document.querySelectorAll('.node')].map((n) => ({ el: n, b: bx(n) }));
     // Ring durch die Knotenmitten (abgerundetes Rechteck)
-    const Lx = 314, Rx = 446, Ty = 862, By = 996, rr = 40;
+    const Lx = 318, Rx = 450, Ty = 862, By = 996, rr = 40;
     const ring = `M${Lx + rr} ${Ty} L${Rx - rr} ${Ty} Q${Rx} ${Ty} ${Rx} ${Ty + rr} L${Rx} ${By - rr} Q${Rx} ${By} ${Rx - rr} ${By} L${Lx + rr} ${By} Q${Lx} ${By} ${Lx} ${By - rr} L${Lx} ${Ty + rr} Q${Lx} ${Ty} ${Lx + rr} ${Ty} Z`;
     P(ring, { strokeWidth: 2.4, roughness: 0.9, bowing: 2.2 }, G.back);
     // Pfeilspitzen auf dem Ring (Uhrzeigersinn)
-    head([382, Ty], 0, INK, 9, 2.4); head([Rx, 897], Math.PI / 2, INK, 9, 2.4); head([Rx, 965], Math.PI / 2, INK, 9, 2.4);
-    head([374, By], Math.PI, INK, 9, 2.4); head([Lx, 963], -Math.PI / 2, INK, 9, 2.4); head([Lx, 895], -Math.PI / 2, INK, 9, 2.4);
+    head([386, Ty], 0, INK, 9, 2.4); head([Rx, 897], Math.PI / 2, INK, 9, 2.4); head([Rx, 965], Math.PI / 2, INK, 9, 2.4);
+    head([378, By], Math.PI, INK, 9, 2.4); head([Lx, 963], -Math.PI / 2, INK, 9, 2.4); head([Lx, 895], -Math.PI / 2, INK, 9, 2.4);
     nodes.forEach(({ el, b }) => {
       if (el.classList.contains('red')) {
         const pts = []; const cx = b.cx, cy = b.cy, n = 9;
@@ -533,7 +534,7 @@
       } else add(rc.rectangle(b.x - 6, b.y - 4, b.w + 12, b.h + 8, O({ fill: WHITE, fillStyle: 'solid', strokeWidth: 2, roughness: 0.9 })), G.fill);
     });
     // Uhr in der Mitte
-    ICO.clock(378, 917, 24);
+    ICO.clock(382, 917, 24);
 
     // ---- Rechts A ----
     synapse(524, 506, 206, 90);
@@ -564,8 +565,6 @@
     // ---- Spruchband unten (Fazit) ----
     ribbon(112, 1304, 544, 48, 32, { curve: 8 });
 
-    // Zahnrad auf dem Rahmen unten links
-    gear(66, 1350, 11, BLUE2, 8);
     buildMask();
 
   }
