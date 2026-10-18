@@ -47,3 +47,6 @@
 - Punkte je Bild: nano_banana_pro 1K ≈ 13 850, recraft_svg 8 000. Mit recraft_svg = 8 ct passt 1 000 Punkte ≈ 1 ct,
   also nano_banana_pro ≈ 13,9 ct je 1K-Bild. [Wahrscheinlich, Umrechnung weiterhin nicht offiziell bestätigt]
 - abacus.ai (Doku-Seiten) ist aus der Umgebung „Abacus-API“ nicht erreichbar (Proxy 403); routellm.abacus.ai schon.
+- Vergleich (gleicher Tag): nano_banana_pro 2K kostet dasselbe wie 1K (13 877,8 vs. 13 889,8 Punkte) und liefert echte
+  2048×2048 px; gpt_image25 (size 1024x1024, Referenz als image_url akzeptiert) nur 687,5 Punkte je Bild.
+  Ohne Referenzbild bleibt nano_banana_pro beim Knete-Motiv, trifft aber den warmen Rosa-Beige-Ton der Vorlage schlechter.
