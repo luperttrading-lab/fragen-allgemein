@@ -44,8 +44,10 @@
   resolution). Rewrite muss an bleiben; „no text, no letters, no labels“ im Prompt hat trotzdem bei 4/4 Bildern gehalten.
 - recraft_svg: `aspect_ratio` wird abgelehnt („Supported values are: “ leer) → ohne Ratio aufrufen, Ergebnis 1024×1024,
   echte SVG (nur <path>, kein <text>), mit großem C2PA-Metadatenblock.
-- Punkte je Bild: nano_banana_pro 1K ≈ 13 850, recraft_svg 8 000. Mit recraft_svg = 8 ct passt 1 000 Punkte ≈ 1 ct,
-  also nano_banana_pro ≈ 13,9 ct je 1K-Bild. [Wahrscheinlich, Umrechnung weiterhin nicht offiziell bestätigt]
+- Punkte je Bild: nano_banana_pro 1K ≈ 13 850, recraft_svg 8 000. 1 000 Compute-Punkte = 1 Credit (Modellliste „rate“ 8 ↔
+  8 000 Punkte; Credits in der App haben wie Punkte/1000 zwei Nachkommastellen). Abo laut Nutzer: Pro 20 $/Monat mit
+  30 000 Credits → 1 Credit ≈ 0,067 ct, nano_banana_pro ≈ 0,9 ct, gpt_image25 ≈ 0,05 ct je Bild im Abo-Durchschnitt.
+  Listenpreis-Sicht (recraft_svg 8 Credits ↔ 0,08 $): 1 Credit ≈ 1 ct. Preis der Zusatzpakete unbekannt.
 - abacus.ai (Doku-Seiten) ist aus der Umgebung „Abacus-API“ nicht erreichbar (Proxy 403); routellm.abacus.ai schon.
 - Vergleich (gleicher Tag): nano_banana_pro 2K kostet dasselbe wie 1K (13 877,8 vs. 13 889,8 Punkte) und liefert echte
   2048×2048 px; gpt_image25 (size 1024x1024, Referenz als image_url akzeptiert) nur 687,5 Punkte je Bild.
