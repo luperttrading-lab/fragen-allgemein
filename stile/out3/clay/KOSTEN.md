@@ -27,13 +27,15 @@ Der Log speichert die Referenzen selbst nicht, nur die übrigen Parameter.
 **Summe Clay: 238 132,6 Punkte bei 17 Aufrufen** (Ø 14 008 je Bild).
 
 ## Umrechnung
-- 1 000 Punkte = 1 Credit (Modellliste „rate“ 8 ↔ 8 000 Punkte bei recraft_svg; App zeigt Credits mit zwei Nachkommastellen). [Wahrscheinlich]
-- Bisherige Annahme Listenpreis: 1 000 Punkte ≈ 1 US-Cent → Clay ≈ 238,1 ct ≈ 2,38 $. [Wahrscheinlich]
-- Abo-Durchschnitt (Pro, 20 $ für 30 000 Credits laut Nutzer): 1 Credit ≈ 0,067 ct → Clay ≈ 15,9 ct. [Wahrscheinlich]
+- **Gemessen 18.10.2026:** Credits-Anzeige 18:58 Uhr 11 143,43 → 19:14 Uhr 12 260,73 (Abfluss 1 117,30). Im selben Fenster
+  wurden laut Log 8 Aufrufe mit 111 729,6 Punkten fertig; 111 729,6 × 0,01 = 1 117,30. **1 Credit = 100 Punkte.** [Sicher]
+- Clay: 2 381,3 Credits = 7,9 % des Monatskontingents (Pro: 30 000 Credits für 20 $ laut Nutzer).
+- Abo-Durchschnitt 1 Credit ≈ 0,0667 ct → Clay ≈ 158,8 ct ≈ 1,59 $. [Wahrscheinlich, Abo-Preis nicht selbst geprüft]
+- Frühere Annahme „1 000 Punkte ≈ 1 ct“ (= 1 Credit) war falsch; sie unterschätzte den Credit-Verbrauch um den Faktor 10.
 
 ## Frühere Testaufrufe (getrennt, stile/out3/bild_log.jsonl)
 - 7 gespeicherte Testbilder: 77 967,3 Punkte; plus 1 Diagnoseaufruf ohne Datei: 13 837,2 Punkte → 91 804,5 Punkte.
-- Gesamt Stufe B bis jetzt: 329 937,1 Punkte ≈ 330 Credits.
+- Gesamt Stufe B bis jetzt: 329 937,1 Punkte = 3 299 Credits ≈ 2,20 $ im Abo-Durchschnitt.
 
 Fehlaufrufe (HTTP 400: seed, image_prompt, aspect_ratio bei recraft_svg, rewrite_prompt=false) lieferten keine usage-Angabe; ob sie
 Punkte kosten, ist nicht belegt.

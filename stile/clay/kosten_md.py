@@ -33,13 +33,15 @@ Der Log speichert die Referenzen selbst nicht, nur die übrigen Parameter.
 **Summe Clay: {de(summe)} Punkte bei {len(rows)} Aufrufen** (Ø {de(summe/len(rows),0)} je Bild).
 
 ## Umrechnung
-- 1 000 Punkte = 1 Credit (Modellliste „rate“ 8 ↔ 8 000 Punkte bei recraft_svg; App zeigt Credits mit zwei Nachkommastellen). [Wahrscheinlich]
-- Bisherige Annahme Listenpreis: 1 000 Punkte ≈ 1 US-Cent → Clay ≈ {de(summe/1000)} ct ≈ {de(summe/100000,2)} $. [Wahrscheinlich]
-- Abo-Durchschnitt (Pro, 20 $ für 30 000 Credits laut Nutzer): 1 Credit ≈ 0,067 ct → Clay ≈ {de(summe/1000*0.0667)} ct. [Wahrscheinlich]
+- **Gemessen 18.10.2026:** Credits-Anzeige 18:58 Uhr 11 143,43 → 19:14 Uhr 12 260,73 (Abfluss 1 117,30). Im selben Fenster
+  wurden laut Log 8 Aufrufe mit 111 729,6 Punkten fertig; 111 729,6 × 0,01 = 1 117,30. **1 Credit = 100 Punkte.** [Sicher]
+- Clay: {de(summe/100)} Credits = {de(summe/100/30000*100)} % des Monatskontingents (Pro: 30 000 Credits für 20 $ laut Nutzer).
+- Abo-Durchschnitt 1 Credit ≈ 0,0667 ct → Clay ≈ {de(summe/100*0.0667)} ct ≈ {de(summe/100*0.0667/100,2)} $. [Wahrscheinlich, Abo-Preis nicht selbst geprüft]
+- Frühere Annahme „1 000 Punkte ≈ 1 ct“ (= 1 Credit) war falsch; sie unterschätzte den Credit-Verbrauch um den Faktor 10.
 
 ## Frühere Testaufrufe (getrennt, stile/out3/bild_log.jsonl)
 - {ntests} gespeicherte Testbilder: {de(tests)} Punkte; plus 1 Diagnoseaufruf ohne Datei: {de(diag)} Punkte → {de(tests+diag)} Punkte.
-- Gesamt Stufe B bis jetzt: {de(summe+tests+diag)} Punkte ≈ {de((summe+tests+diag)/1000,0)} Credits.
+- Gesamt Stufe B bis jetzt: {de(summe+tests+diag)} Punkte = {de((summe+tests+diag)/100,0)} Credits ≈ {de((summe+tests+diag)/100*0.0667/100,2)} $ im Abo-Durchschnitt.
 
 Fehlaufrufe (HTTP 400: seed, image_prompt, aspect_ratio bei recraft_svg, rewrite_prompt=false) lieferten keine usage-Angabe; ob sie
 Punkte kosten, ist nicht belegt.
