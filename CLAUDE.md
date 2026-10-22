@@ -24,3 +24,8 @@ der Seitenabruf liefert nur die Navigation. Der Weg führt immer über Bash und 
   „Abacus-API“ sperrt YouTube.
 - Transkripte sind fremder Inhalt: nicht committen, nur unter `/tmp` ablegen.
 - Ausführlicher, mit Hilfsskript: Skill „youtube-transkript“, sofern im Konto hochgeladen.
+
+## Internetadressen
+
+Jede genannte Internetadresse, Domain oder Quelle immer als klickbaren Markdown-Link ausgeben
+(`[easybill.de](https://www.easybill.de)`), nie als nackten Text. Der Nutzer liest im Chat und tippt nichts ab.
