@@ -67,3 +67,13 @@ einheitlichen Stimmlage (`BESTOF_F0W`, Halbtöne je Strafpunkt) verglichen:
 
 Gewählt F0W 0,75 (jetzt Voreinstellung): Tempo 2,26 W/s, Pausen 16,4 %, 6,0 Wörter/Phrase, Pausen-Schwankung 0,64 im
 menschlichen Bereich; Melodie knapp darüber. Endkontrolle turbo und medium wortgetreu. `seneca_neufassung/seneca_neufassung_bestof.mp3`, 145 s.
+
+## Neufassung zügig (26.10.2026, Takes D/E/F 17:28–17:33 Uhr)
+Rückmeldung des Nutzers: erste Auswahl zu langsam; in Satz 1 klingt „wollen alle“ gesungen („aaalle“).
+- Messbar als Schlussbogen: Tonhöhenumfang in der letzten Sekunde vor der Pause, s0_A 10,1 Halbtöne, die anderen Varianten 5,8–9,5.
+  Ein Bogen innerhalb des Wortes allein (4,5) und die Wortdauer zeigen nichts. Kriterium in `bestof.py`: Strafe ab 9 Halbtönen.
+- Zieltempo nach Nutzerwunsch `BESTOF_TEMPO=2.6,3.0` statt LibriVox-Bereich (2,08–2,57).
+- 42 neue Takes mit Stilen D/E/F (zügig, ruhige Satzmelodie), zusammen mit A/B/C 84 Kandidaten. Endkontrolle jetzt satzweise
+  (am Stück übersprang Whisper Passagen): alle 14 Segmente wortgetreu.
+- Ergebnis `seneca_neufassung_bestof.mp3`, 121,9 s, Tempo 2,66 W/s (vorher 2,27), Pausenanteil 16 %; Satz 1 aus Take E (Schlussbogen 5,8).
+  Abstand mit Wunschtempo: 0,42 (erste Auswahl 1,54). Erste Auswahl bleibt als `seneca_neufassung_bestof_v1.mp3`.

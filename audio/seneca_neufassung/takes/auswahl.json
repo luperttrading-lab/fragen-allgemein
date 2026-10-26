@@ -1,21 +1,22 @@
 {
  "s0": {
-  "datei": "s0_B.flac",
-  "stil": "B",
+  "datei": "s0_E.flac",
+  "stil": "E",
   "treu": true,
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
-   "Tempo W/s": 1.7857142857142858,
-   "Pausenanteil %": 7.43801652892562,
-   "Wörter/Phrase": 4.0,
-   "Melodie-Spannweite HT": 11.78911837410989,
-   "Endabfall HT/s": -7.568130256299694,
-   "F0 Hz": 100.72884622356324,
-   "Pegel dB": -23.301080803616294
+   "Wortbogen HT": 5.793171187293425,
+   "Tempo W/s": 2.909090909090909,
+   "Pausenanteil %": 0.0,
+   "Wörter/Phrase": 8.0,
+   "Melodie-Spannweite HT": 14.059689901451272,
+   "Endabfall HT/s": -6.331091429774349,
+   "F0 Hz": 122.99614348689516,
+   "Pegel dB": -20.417085326580832
   },
-  "ki": 1.6290686084776425,
-  "gesamt": 8.097196124685784
+  "ki": 3.4784178429755483,
+  "gesamt": 4.422611014646287
  },
  "s1": {
   "datei": "s1_B.flac",
@@ -24,6 +25,7 @@
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
+   "Wortbogen HT": 9.832861858136145,
    "Tempo W/s": 2.3153252480705624,
    "Pausenanteil %": 14.191106906338694,
    "Wörter/Phrase": 5.25,
@@ -32,8 +34,8 @@
    "F0 Hz": 120.17939547052303,
    "Pegel dB": -22.2407583683253
   },
-  "ki": 0.0,
-  "gesamt": 1.3335027817141916
+  "ki": 0.9893074992023092,
+  "gesamt": 3.1193454106948226
  },
  "s2": {
   "datei": "s2_B.flac",
@@ -42,6 +44,7 @@
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
+   "Wortbogen HT": 5.642731772834648,
    "Tempo W/s": 2.4390243902439024,
    "Pausenanteil %": 0.0,
    "Wörter/Phrase": 11.0,
@@ -50,44 +53,46 @@
    "F0 Hz": 118.91360783880397,
    "Pegel dB": -20.9493749548404
   },
-  "ki": 3.1344716973036073,
-  "gesamt": 4.464988211754543
+  "ki": 3.536910721693851,
+  "gesamt": 5.6639623659231075
  },
  "s3": {
-  "datei": "s3_B.flac",
-  "stil": "B",
+  "datei": "s3_C.flac",
+  "stil": "C",
   "treu": true,
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
-   "Tempo W/s": 2.048780487804878,
-   "Pausenanteil %": 9.372236958443855,
-   "Wörter/Phrase": 5.25,
-   "Melodie-Spannweite HT": 14.096336282481696,
-   "Endabfall HT/s": 13.832699175589987,
-   "F0 Hz": 122.06571858862567,
-   "Pegel dB": -21.913882762006782
+   "Wortbogen HT": 9.909003892715479,
+   "Tempo W/s": 2.803738317757009,
+   "Pausenanteil %": 9.322033898305085,
+   "Wörter/Phrase": 7.0,
+   "Melodie-Spannweite HT": 12.624973458368798,
+   "Endabfall HT/s": -24.802819932910527,
+   "F0 Hz": 115.96479638351587,
+   "Pegel dB": -24.15614037657724
   },
-  "ki": 2.002787323510593,
-  "gesamt": 3.5098833825603646
+  "ki": 1.4035665413961405,
+  "gesamt": 3.4958732557044105
  },
  "s4": {
-  "datei": "s4_A.flac",
-  "stil": "A",
+  "datei": "s4_C.flac",
+  "stil": "C",
   "treu": true,
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
-   "Tempo W/s": 2.3668639053254434,
-   "Pausenanteil %": 2.199074074074074,
+   "Wortbogen HT": 9.640282058419382,
+   "Tempo W/s": 2.577319587628866,
+   "Pausenanteil %": 3.1210986267166043,
    "Wörter/Phrase": 10.0,
-   "Melodie-Spannweite HT": 13.500021060081188,
-   "Endabfall HT/s": 13.894039675123775,
-   "F0 Hz": 122.44703473254921,
-   "Pegel dB": -19.378806613751994
+   "Melodie-Spannweite HT": 12.112624353204014,
+   "Endabfall HT/s": 17.00853241512241,
+   "F0 Hz": 141.92569711781925,
+   "Pegel dB": -20.026231924559276
   },
-  "ki": 3.491100895867358,
-  "gesamt": 4.290034090437304
+  "ki": 2.8354982511205176,
+  "gesamt": 5.859211674353119
  },
  "s5": {
   "datei": "s5_A.flac",
@@ -96,6 +101,7 @@
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
+   "Wortbogen HT": 6.800136210204958,
    "Tempo W/s": 2.2346368715083798,
    "Pausenanteil %": 8.673469387755102,
    "Wörter/Phrase": 4.0,
@@ -104,8 +110,8 @@
    "F0 Hz": 117.53376936512723,
    "Pegel dB": -19.764190843263236
   },
-  "ki": 0.8029961548183536,
-  "gesamt": 2.81170359049808
+  "ki": 1.7164039760474046,
+  "gesamt": 4.5216465415054525
  },
  "s6": {
   "datei": "s6_A.flac",
@@ -114,6 +120,7 @@
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
+   "Wortbogen HT": 12.429176575798753,
    "Tempo W/s": 2.843601895734597,
    "Pausenanteil %": 3.4324942791762014,
    "Wörter/Phrase": 6.0,
@@ -122,26 +129,27 @@
    "F0 Hz": 119.97906603803568,
    "Pegel dB": -22.063139080837892
   },
-  "ki": 3.674171272024182,
-  "gesamt": 5.60794060013281
+  "ki": 4.249916894682981,
+  "gesamt": 5.636418035607279
  },
  "s7": {
-  "datei": "s7_B.flac",
-  "stil": "B",
+  "datei": "s7_A.flac",
+  "stil": "A",
   "treu": true,
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
-   "Tempo W/s": 2.0769700671960902,
-   "Pausenanteil %": 11.847065158858374,
-   "Wörter/Phrase": 5.666666666666667,
-   "Melodie-Spannweite HT": 12.588899618935512,
-   "Endabfall HT/s": -13.010584905525322,
-   "F0 Hz": 133.0958317963734,
-   "Pegel dB": -20.18007304415617
+   "Wortbogen HT": 9.173612485430008,
+   "Tempo W/s": 2.3399862353750858,
+   "Pausenanteil %": 4.092409240924092,
+   "Wörter/Phrase": 8.5,
+   "Melodie-Spannweite HT": 10.557924513088697,
+   "Endabfall HT/s": -7.573606473995017,
+   "F0 Hz": 133.08445478340374,
+   "Pegel dB": -22.462503899196665
   },
-  "ki": 0.7228188484340041,
-  "gesamt": 2.717236128460787
+  "ki": 2.4246042785955506,
+  "gesamt": 4.438284183207182
  },
  "s8": {
   "datei": "s8_C.flac",
@@ -150,6 +158,7 @@
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
+   "Wortbogen HT": 11.390060255404826,
    "Tempo W/s": 2.989130434782609,
    "Pausenanteil %": 13.002364066193852,
    "Wörter/Phrase": 6.6,
@@ -158,26 +167,27 @@
    "F0 Hz": 125.3320994811455,
    "Pegel dB": -18.786951080458078
   },
-  "ki": 0.9205574676370579,
-  "gesamt": 2.1378118383189166
+  "ki": 0.8499201495148626,
+  "gesamt": 1.5199063330123934
  },
  "s9": {
-  "datei": "s9_B.flac",
-  "stil": "B",
+  "datei": "s9_F.flac",
+  "stil": "F",
   "treu": true,
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
-   "Tempo W/s": 2.0429009193054135,
-   "Pausenanteil %": 11.960431654676258,
-   "Wörter/Phrase": 4.0,
-   "Melodie-Spannweite HT": 10.737722218665148,
-   "Endabfall HT/s": -3.0674959622901827,
-   "F0 Hz": 137.16358102359422,
-   "Pegel dB": -21.19147899063381
+   "Wortbogen HT": 10.324925308063243,
+   "Tempo W/s": 3.225806451612903,
+   "Pausenanteil %": 5.48780487804878,
+   "Wörter/Phrase": 10.0,
+   "Melodie-Spannweite HT": 12.581626099825836,
+   "Endabfall HT/s": -5.539218515321642,
+   "F0 Hz": 126.75859789866041,
+   "Pegel dB": -21.682183174773325
   },
-  "ki": 0.4042967954824886,
-  "gesamt": 3.161765726148161
+  "ki": 3.4916645533968063,
+  "gesamt": 4.412893642131474
  },
  "s10": {
   "datei": "s10_A.flac",
@@ -186,6 +196,7 @@
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
+   "Wortbogen HT": 7.471519678640176,
    "Tempo W/s": 2.6,
    "Pausenanteil %": 5.303030303030303,
    "Wörter/Phrase": 6.5,
@@ -194,26 +205,27 @@
    "F0 Hz": 139.3482836861083,
    "Pegel dB": -22.0780196127588
   },
-  "ki": 1.9978260228860032,
-  "gesamt": 4.64976335876165
+  "ki": 1.9327043734014655,
+  "gesamt": 4.4880074574370505
  },
  "s11": {
-  "datei": "s11_B.flac",
-  "stil": "B",
+  "datei": "s11_D.flac",
+  "stil": "D",
   "treu": true,
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
-   "Tempo W/s": 1.620947630922693,
-   "Pausenanteil %": 9.786276715410573,
-   "Wörter/Phrase": 3.25,
-   "Melodie-Spannweite HT": 10.105560016125665,
-   "Endabfall HT/s": -13.816302375416763,
-   "F0 Hz": 111.84896657998362,
-   "Pegel dB": -18.620242205847855
+   "Wortbogen HT": 9.16888764881327,
+   "Tempo W/s": 3.542234332425068,
+   "Pausenanteil %": 9.382716049382717,
+   "Wörter/Phrase": 4.333333333333333,
+   "Melodie-Spannweite HT": 9.961625598438939,
+   "Endabfall HT/s": 1.5768562001489304,
+   "F0 Hz": 128.57792251417206,
+   "Pegel dB": -21.00795116697207
   },
-  "ki": 1.8382958645297818,
-  "gesamt": 6.2187561706760945
+  "ki": 2.0117816882656174,
+  "gesamt": 3.894815959954281
  },
  "s12": {
   "datei": "s12_A.flac",
@@ -222,6 +234,7 @@
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
+   "Wortbogen HT": 11.294092665387321,
    "Tempo W/s": 2.7462121212121215,
    "Pausenanteil %": 10.35653650254669,
    "Wörter/Phrase": 9.666666666666666,
@@ -230,25 +243,26 @@
    "F0 Hz": 115.84097150265131,
    "Pegel dB": -22.121765858745892
   },
-  "ki": 1.5461161076281102,
-  "gesamt": 4.0952994772590054
+  "ki": 1.9442719570402514,
+  "gesamt": 4.06123953257659
  },
  "s13": {
-  "datei": "s13_B.flac",
-  "stil": "B",
+  "datei": "s13_D.flac",
+  "stil": "D",
   "treu": true,
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
-   "Tempo W/s": 2.087114337568058,
-   "Pausenanteil %": 4.423243712055508,
-   "Wörter/Phrase": 11.5,
-   "Melodie-Spannweite HT": 11.071544727618866,
-   "Endabfall HT/s": -4.518661703067617,
-   "F0 Hz": 132.97174385631956,
-   "Pegel dB": -19.391740286423147
+   "Wortbogen HT": 11.20191706894839,
+   "Tempo W/s": 3.050397877984085,
+   "Pausenanteil %": 5.75,
+   "Wörter/Phrase": 7.666666666666667,
+   "Melodie-Spannweite HT": 12.974057406428793,
+   "Endabfall HT/s": -12.252164640383159,
+   "F0 Hz": 114.0961093897411,
+   "Pegel dB": -21.75442704606018
   },
-  "ki": 2.649297184906291,
-  "gesamt": 4.601895024810343
+  "ki": 2.7675298557069308,
+  "gesamt": 5.728152701507221
  }
 }
