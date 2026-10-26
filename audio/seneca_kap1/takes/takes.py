@@ -2,7 +2,8 @@
 """Mehrfach-Durchläufe satzweise über die RouteLLM-API (Gemini TTS), verlustfrei als FLAC.
 
 Aufruf: python3 takes.py [segmente.json]
-Für jedes Segment und jeden Stil (takes: s0 → takes["s0"], sonst takes["rest"]) genau ein Aufruf; bei HTTP-Fehler oder leerer
+Für jedes Segment und jeden Stil (takes: s0 → takes["s0"], sonst takes["rest"]) genau ein Aufruf; vorhandene FLACs werden
+übersprungen (Wiederaufnahme nach Abbruch); bei HTTP-/Netzfehler oder leerer
 Antwort eine Wiederholung, sonst als fehlgeschlagen protokolliert. Rohes PCM (L16, s16le, 24 kHz, mono) → ffmpeg → FLAC.
 Kostenbremse: Summe output_tokens ≤ MAX_OUTPUT_TOKENS (Umgebungsvariable TAKES_MAX_OUTPUT_TOKENS, Standard 15000), sonst Stopp vor dem nächsten Aufruf.
 Schlüssel nur aus ROUTELLM_API_KEY, wird nie ausgegeben. Log: takes_log.jsonl neben der Segmentdatei.
@@ -35,6 +36,8 @@ def aufruf(modell, voice, content, timeout=600):
             return r.status, r.read()
     except urllib.error.HTTPError as e:
         return e.code, e.read()
+    except Exception as e:  # Netzfehler (Connection reset, Timeout, DNS): wie ein Fehler behandeln, Wiederholung greift
+        return 0, f"Netzfehler: {type(e).__name__}: {e}".encode()
 
 
 def main():
@@ -51,6 +54,8 @@ def main():
             print(f"STOPP Kostenbremse: output_tokens {summe_out} ≥ {MAX_OUTPUT_TOKENS}"); break
         content = cfg["anweisung"][stil] + " " + seg["sprech"]
         ziel = ordner / f"{seg['id']}_{stil}.flac"
+        if ziel.exists():  # Wiederaufnahme nach Abbruch: vorhandene Takes nicht neu erzeugen
+            print(f"überspringe {ziel.name} (vorhanden)"); erfolge += 1; continue
         for versuch in (1, 2):
             log = {"segment_id": seg["id"], "stil": stil, "versuch": versuch, "start_berlin": jetzt(), "modell": cfg["modell"], "voice": cfg["voice"]}
             t0 = time.time(); st, raw = aufruf(cfg["modell"], cfg["voice"], content)
