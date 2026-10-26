@@ -26,3 +26,17 @@ minimax_tts, seed_speech, hume (undokumentiert). Ergebnisse und Kosten: KOSTEN_A
 ## Befehle
     edge-tts --proxy "$HTTPS_PROXY" --voice de-DE-FlorianMultilingualNeural --rate=-8% --file seneca_kap1_text.txt --write-media out.mp3
     piper --model de_DE-thorsten-high.onnx --length-scale 1.1 --sentence-silence 0.4 --output_file out.wav < seneca_kap1_text.txt
+
+## Wortprüfung der Gemini-Läufe (Whisper large-v3-turbo, Gegenprobe Whisper medium; Kontrolle Edge Florian v2: 0 echte Abweichungen)
+Nicht gezählt: Schreibvarianten der Erkennung („umso“, „wie viel“, „das/dass“).
+
+| Datei | echte Abweichungen vom Buch |
+|---|---|
+| routellm_gemini25pro_onyx (v1-Text) | „hinein eilt“; „auf welchem Wege“ statt „Weg“; doppeltes „die“ |
+| routellm_gemini25pro_onyx_v2 | „hineineilt“; „auf welchem Wege“ statt „Weg“ |
+| routellm_gemini25pro_echo_v2 | „hineineilt“; „Wo diese“ statt „dieser“; „daher die Situation“ statt „da ja die Situation“ |
+| routellm_gemini25pro_onyx_v3 („hin-eilt“ im Sprechtext) | „zu Ursache“ statt „zur Ursache“; „Auf jenen lässt es“ statt „lassen es“ |
+
+Befund: Gemini 2.5 Pro TTS glättet bei jedem Lauf 1–3 Stellen nach eigenem Sprachgefühl, an wechselnden Stellen.
+Anweisungen im Prompt helfen nicht, Aussprache-Schreibweise im Sprechtext („hin-eilt“) schon. Für ein ganzes Buch:
+satz- oder absatzweise erzeugen, jeden Abschnitt per Whisper prüfen, nur fehlerhafte Abschnitte neu erzeugen, zusammensetzen.
