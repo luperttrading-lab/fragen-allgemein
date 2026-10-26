@@ -127,3 +127,20 @@ Vorgaben `audio/seneca_neufassung/takes/segmente_zuegig.json` (14 Segmente × D/
 
 Tempo-Vergleich über alle 14 Segmente: A 118,4 s · B 151,1 s · C 103,2 s · D 89,3 s · E 88,4 s · F 96,3 s. D und E sind damit
 rund 25 % schneller als A und 41 % schneller als B; der Text (270 Wörter) läuft bei E mit ≈ 183 Wörtern/min.
+
+## Neufassung v2 (überarbeiteter Text), 26.10.2026: 48 Takes A/D/E/F, Gemini 2.5 Pro TTS onyx, FLAC
+
+Vorgaben `audio/seneca_neufassung_v2/takes/segmente.json` (12 Segmente s0–s11 × A/D/E/F, 240 Wörter), gleiches Skript,
+Log `audio/seneca_neufassung_v2/takes/takes_log.jsonl`. Alle 48 Aufrufe im ersten Versuch erfolgreich.
+
+| | Wert |
+|---|---|
+| Zeitfenster (Europe/Berlin, CET) | erster Start **21:31:09**, letztes Ende **21:36:51** |
+| Aufrufe | 48 (alle HTTP 200, keine Wiederholung) |
+| Tokens gesamt | **5 424 in / 8 497 out** (Bremse 30 000 nicht erreicht) |
+| Audio gesamt | 340,4 s (A 101,5 s · D 75,7 s · E 75,9 s · F 87,3 s) |
+| Output-Token je Audiosekunde | 24,96 |
+| Dollar nach `/v1/models` (in 0,000001 $/Token, out 0) | 0,0054 $ |
+| Dollar nach Audio-Doku (out 0,005 $/1K) | **0,0479 $** |
+
+Tempo: D und E lesen die 240 Wörter in rund 76 s (≈ 190 Wörter/min), A in 101,5 s (≈ 142 Wörter/min).
