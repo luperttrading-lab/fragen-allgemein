@@ -92,3 +92,20 @@ s2_A 15:22:15–15:22:32 172/533 21,33 s · s2_B 15:22:33–15:22:51 179/650 26,
 s3_A 15:23:06–15:23:22 167/541 21,65 s · s3_B 15:23:23–15:23:38 174/558 22,33 s · s3_C 15:23:38–15:23:52 179/485 19,41 s ·
 s4_A 15:23:52–15:24:10 189/640 25,61 s · s4_B 15:24:10–15:24:34 196/851 34,05 s · s4_C 15:24:34–15:24:51 201/685 27,41 s.
 Keine Kosten-/Credit-Felder in den Antworten (wie zuvor). Stil B ist durchweg am längsten (langsamer, mehr Pausen), C am kürzesten.
+
+## Neufassung, Mehrfach-Durchläufe (26.10.2026): 42 satzweise Takes, Gemini 2.5 Pro TTS onyx, FLAC
+
+Vorgaben `audio/seneca_neufassung/takes/segmente.json` (14 Segmente s0–s13 × Stile A/B/C), Skript `audio/seneca_kap1/takes/takes.py`
+mit `TAKES_MAX_OUTPUT_TOKENS=30000`, Log `audio/seneca_neufassung/takes/takes_log.jsonl`. Alle 42 Aufrufe im ersten Versuch erfolgreich.
+
+| | Wert |
+|---|---|
+| Zeitfenster (Europe/Berlin, CET) | erster Start **15:36:57**, letztes Ende **15:42:47** |
+| Aufrufe | 42 (alle HTTP 200, keine Wiederholung) |
+| Tokens gesamt | **4 535 in / 9 305 out** (Bremse 30 000 nicht erreicht) |
+| Audio gesamt | 372,6 s (A 118,4 s · B 151,1 s · C 103,2 s) |
+| Output-Token je Audiosekunde | 24,97 |
+| Dollar nach `/v1/models` (in 0,000001 $/Token, out 0) | 0,0045 $ |
+| Dollar nach Audio-Doku (out 0,005 $/1K) | **0,0511 $** |
+
+Keine Kosten-/Credit-Felder in den Antworten. Stil B wieder am längsten (+28 % gegenüber A), C am kürzesten.
