@@ -12,7 +12,9 @@ REF = json.load(open(Path(__file__).with_name("merkmale_seneca_kap1.json"), enco
 SR = 24000; FL = 0.01
 PAUSE = {"kopf": 1.4, "satz": 0.75, "absatz": 1.4}      # Sekunden zwischen Segmenten
 import os
-F0W = float(os.environ.get("BESTOF_F0W", "0.75"))   # Halbtöne Abweichung von der Gesamtlage je Strafpunkt (kleiner = einheitlichere Stimmlage)
+F0W = float(os.environ.get("BESTOF_F0W", "0.75"))
+TEMPO = tuple(float(v) for v in os.environ["BESTOF_TEMPO"].split(",")) if os.environ.get("BESTOF_TEMPO") else None   # Zieltempo W/s, z. B. "2.6,3.0"
+BOGEN_MAX = float(os.environ.get("BESTOF_BOGEN", "8"))   # größter erlaubter Tonhöhenbogen auf einem Wort (Halbtöne), darüber klingt es gesungen   # Halbtöne Abweichung von der Gesamtlage je Strafpunkt (kleiner = einheitlichere Stimmlage)
 
 def pcm(f, sr):
     b = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(f), "-ac", "1", "-ar", str(sr), "-f", "s16le", "-"], capture_output=True, check=True).stdout
@@ -40,7 +42,8 @@ def abweichung(soll, words):
     sm = difflib.SequenceMatcher(None, a, b, autojunk=False)
     return [f"{a[max(0,i1-12):i1]}[{a[i1:i2]}→{b[j1:j2]}]" for op, i1, i2, j1, j2 in sm.get_opcodes() if op != "equal"]
 
-def bereich(k):  # Spannweite echter Vorleser ohne Extremwert oben/unten
+def bereich(k):  # Spannweite echter Vorleser ohne Extremwert oben/unten (Tempo optional nach Nutzerwunsch)
+    if k == "Tempo W/s" and TEMPO: return TEMPO
     v = sorted(REF[r][k] for r in REF if r.startswith("ref_")); return v[1], v[-2]
 
 def merkmale(x, words):
@@ -69,7 +72,12 @@ def merkmale(x, words):
     for e in enden:
         m = (t > e - 0.6) & (t <= e) & v
         if m.sum() > 15: sl.append(np.polyfit(t[m], 12 * np.log2(f0[m] / np.median(f0[v])), 1)[0])
-    return {"Tempo W/s": len(words) / sprech, "Pausenanteil %": sum(pausen) / dauer * 100,
+    bogen = 0.0   # größter Tonhöhenbogen innerhalb eines Wortes („aaalle“)
+    for w_ in words:
+        mm = (t >= w_["s"]) & (t <= w_["e"] + 0.1) & v
+        if mm.sum() >= 12:
+            stw = 12 * np.log2(f0[mm] / np.median(f0[v])); bogen = max(bogen, float(stw.max() - stw.min()))
+    return {"Wortbogen HT": bogen, "Tempo W/s": len(words) / sprech, "Pausenanteil %": sum(pausen) / dauer * 100,
             "Wörter/Phrase": len(words) / (len(pausen) + 1), "Melodie-Spannweite HT": float(np.percentile(st, 95) - np.percentile(st, 5)),
             "Endabfall HT/s": float(np.mean(sl)) if sl else 0.0, "F0 Hz": float(np.median(f0[v])), "Pegel dB": float(np.percentile(db[laut], 50))}
 
@@ -79,7 +87,7 @@ def ki_wert(m):   # 0 = alle Merkmale im Bereich echter Vorleser; sonst Summe de
     for k in PRUEF:
         lo, hi = bereich(k); w = hi - lo
         s += max(0, lo - m[k]) / w + max(0, m[k] - hi) / w
-    return s
+    return s + max(0, m.get("Wortbogen HT", 0) - BOGEN_MAX) / 4
 
 # 1) Prüfen und bewerten
 takes = {}
@@ -105,11 +113,11 @@ for sid in sorted(takes, key=ORD):
         t["gesamt"] = t["ki"] + abs(12 * np.log2(t["m"]["F0 Hz"] / f0_med)) / F0W + (abs(t["m"]["Tempo W/s"] - tempo_med) / 0.5 if SEG[sid]["absatz"] != 0 else 0)
     wahl[sid] = min(kand, key=lambda t: t["gesamt"])
 
-print("Segment Take   treu   KI-Wert Gesamt  Tempo  Pausen%  W/Phrase  Melodie  Endabfall  F0    Abweichungen (turbo)")
+print("Segment Take   treu   KI-Wert Gesamt  Tempo  Pausen%  W/Phrase  Melodie  Wortbogen  F0    Abweichungen (turbo)")
 for sid in sorted(takes, key=ORD):
     for t in sorted(takes[sid], key=lambda t: t["stil"]):
         m = t["m"]; mark = "  <== gewählt" if t is wahl[sid] else ""
-        print(f"{sid:7} {t['stil']:5} {('ja ('+t['quelle']+')') if t['treu'] else 'NEIN':12} {t['ki']:5.2f} {t.get('gesamt', float('nan')):6.2f} {m.get('Tempo W/s',0):6.2f} {m.get('Pausenanteil %',0):7.1f} {m.get('Wörter/Phrase',0):8.1f} {m.get('Melodie-Spannweite HT',0):8.1f} {m.get('Endabfall HT/s',0):9.2f} {m.get('F0 Hz',0):5.0f}  {'; '.join(t['abw_turbo'])[:90]}{mark}")
+        print(f"{sid:7} {t['stil']:5} {('ja ('+t['quelle']+')') if t['treu'] else 'NEIN':12} {t['ki']:5.2f} {t.get('gesamt', float('nan')):6.2f} {m.get('Tempo W/s',0):6.2f} {m.get('Pausenanteil %',0):7.1f} {m.get('Wörter/Phrase',0):8.1f} {m.get('Melodie-Spannweite HT',0):8.1f} {m.get('Wortbogen HT',0):9.1f} {m.get('F0 Hz',0):5.0f}  {'; '.join(t['abw_turbo'])[:90]}{mark}")
 print("Bereich echter Vorleser:", {k: tuple(round(v, 2) for v in bereich(k)) for k in PRUEF})
 
 # 3) Montage: Ränder auf Sprache schneiden (Atem/Stille weg), Lautheit angleichen, Pausen einfügen
