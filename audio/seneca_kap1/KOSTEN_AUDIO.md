@@ -27,3 +27,30 @@ vorher/nachher) zu sehen. Die Spalten Punkte/Credits bleiben leer, nichts ist ge
   (Nr. 1 unbekannt). Die Listenpreise in `/v1/models` (gpt-audio-1.5 input 0,0000025 $/Token; output-Rate dort ebenfalls angegeben)
   erlauben eine Dollar-Schätzung, der Credit-Abfluss ist nur in der App zu sehen.
 - Abweichung von der Doku: Antwortfeld `audios` (Liste) statt `audio`; `content` leer; Gemini liefert rohes PCM statt MP3, obwohl `format: mp3` verlangt war.
+
+## v2 (26.10.2026): Lesefassung v2, Gemini 2.5 Pro TTS, zwei Stimmen
+
+Text: `seneca_kap1_text.txt` (v2, 1 651 Zeichen, 267 Wörter nach Normalisierung). Anweisung: `anweisung_v2.txt` (mit Aussprachehinweisen
+„hineilt“, „Weg/Wege“). Aufruf: `tts.py --model gemini-2.5-pro-preview-tts --voice … --anweisung @anweisung_v2.txt`. Rohdaten beide Male
+`audios[0].format = "L16"` (PCM 16 Bit, 24 kHz, mono, ohne Header) → ffmpeg s16le → MP3 96 kbit/s. Zeiten Europe/Berlin (CET).
+
+| Nr. | Voice | Start | Ende | Aufruf | Datei | Dauer Datei | Tokens in/out | Pegel mittel / Spitze | Transkript |
+|---|---|---|---|---|---|---|---|---|---|
+| v2-1 | onyx (→ Fenrir) | 12:59:51 | 13:00:55 | 64,0 s | routellm_gemini25pro_onyx_v2.mp3 (1 184 301 B) | 98,7 s | 545 / 2 465 | −19,6 dB / −0,4 dB | keins geliefert (content leer) |
+| v2-2 | echo (→ Charon) | 13:01:10 | 13:02:11 | 60,5 s | routellm_gemini25pro_echo_v2.mp3 (1 320 813 B) | 110,0 s | 545 / 2 749 | −18,9 dB / −0,3 dB | keins geliefert (content leer) |
+
+**Kosten-/Credit-Felder:** keine. Geprüft wurden `usage` (nur input_tokens, output_tokens, raw_input_tokens), alle übrigen
+Top-Level-Felder der Antwort (id, object, created, model) und sämtliche HTTP-Antwort-Header (CF-RAY, Content-Type, Date, Server-Timing,
+x-envoy-upstream-service-time, x-request-id, CORS-Header, cf-cache-status, vary, server, Connection, Transfer-Encoding). Nichts davon
+nennt Punkte, Credits oder Beträge. Der Credit-Abfluss ist nur in der ChatLLM-App ablesbar.
+
+**Beobachtung:** output_tokens = 25 × Audiosekunden (2 465 / 98,7 = 24,97; 2 749 / 110,0 = 24,99). Gemini zählt Audio also mit
+25 Token je Sekunde; eine Minute Sprache = 1 500 Output-Token.
+
+**Dollar-Schätzung aus Listenpreisen** (Tokens beider Aufrufe: 1 090 in, 5 214 out):
+- `/v1/models`: input_token_rate 0,000001 $/Token, **output_token_rate 0** → 0,0011 $ für beide Aufrufe zusammen.
+- Audio-Doku laut Hauptsitzung: 0,005 $ je 1 000 Output-Token → 5 214 × 0,005 / 1 000 = 0,0261 $ plus Input 0,0011 $ = **≈ 0,027 $**
+  für beide Seiten, d. h. ≈ 1,3 ct je Aufruf bzw. 0,75 ct je Audiominute.
+- **Widerspruch:** `/v1/models` nennt für gemini-2.5-pro-preview-tts (und -flash-preview-tts) output_token_rate 0, die Doku 0,005 $/1K.
+  Ein Output-Preis von 0 ist für ein TTS-Modell unplausibel; die Modellliste ist hier wahrscheinlich unvollständig, nicht gratis.
+  Welche Zahl der Credit-Abrechnung zugrunde liegt, lässt sich nur per App-Vergleich (Credits vor/nach) klären. [Wahrscheinlich]
