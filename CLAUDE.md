@@ -29,3 +29,9 @@ der Seitenabruf liefert nur die Navigation. Der Weg führt immer über Bash und 
 
 Jede genannte Internetadresse, Domain oder Quelle immer als klickbaren Markdown-Link ausgeben
 (`[easybill.de](https://www.easybill.de)`), nie als nackten Text. Der Nutzer liest im Chat und tippt nichts ab.
+
+## Link am Ende der Antwort
+
+Wurde in der Antwort ein Artifact, eine Seite oder eine Datei veröffentlicht oder aktualisiert: den Link dazu als
+letzte Zeile vor der Kostenzeile wiederholen (`**Link:** [Name](URL)`), auch wenn er weiter oben schon steht.
+Der Nutzer liest auf dem Handy und soll den Link nicht in langen Antworten suchen müssen.
