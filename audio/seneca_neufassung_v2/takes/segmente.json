@@ -1,0 +1,110 @@
+{
+ "modell": "gemini-2.5-pro-preview-tts",
+ "voice": "onyx",
+ "anweisung": {
+  "A": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Ruhig und klar, in gemäßigtem Tempo, wie ein erfahrener Hörbuchsprecher. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "D": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Zügig und flüssig, im natürlichen Erzähltempo eines erfahrenen Sprechers; keine Silbe dehnen, keine singende Satzmelodie. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "E": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Lebendig und etwas schneller, wie ein Mensch, der einem Freund einen klugen Gedanken erzählt; ruhige, gleichmäßige Satzmelodie ohne Bögen auf einzelnen Wörtern. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "F": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Klar und zügig wie ein erfahrener Radiosprecher, kurze natürliche Pausen an den Satzzeichen, sachliche Betonung ohne Übertreibung. Sprich jedes Wort genau so, wie es dasteht. Text:"
+ },
+ "takes": {
+  "s0": [
+   "A",
+   "D",
+   "E",
+   "F"
+  ],
+  "rest": [
+   "A",
+   "D",
+   "E",
+   "F"
+  ]
+ },
+ "segmente": [
+  {
+   "id": "s0",
+   "absatz": 1,
+   "buch": "Glücklich zu leben, mein Bruder Gallio, das wollen alle.",
+   "sprech": "Glücklich zu leben, mein Bruder Gallio, das wollen alle.",
+   "woerter": 9
+  },
+  {
+   "id": "s1",
+   "absatz": 1,
+   "buch": "Doch wenn es darum geht, klar zu erkennen, wodurch ein Leben eigentlich glücklich wird, ist ihr Blick getrübt.",
+   "sprech": "Doch wenn es darum geht, klar zu erkennen, wodurch ein Leben eigentlich glücklich wird, ist ihr Blick getrübt.",
+   "woerter": 18
+  },
+  {
+   "id": "s2",
+   "absatz": 1,
+   "buch": "Und es ist so schwer, das glückliche Leben zu erreichen, dass sich jeder umso weiter davon entfernt, je hastiger er ihm zustrebt – sofern er vom Weg abgekommen ist.",
+   "sprech": "Und es ist so schwer, das glückliche Leben zu erreichen, dass sich jeder umso weiter davon entfernt, je hastiger er ihm zustrebt – sofern er vom Weg abgekommen ist.",
+   "woerter": 28
+  },
+  {
+   "id": "s3",
+   "absatz": 1,
+   "buch": "Führt sein Weg in die entgegengesetzte Richtung, wird gerade die Eile zur Ursache einer noch größeren Entfernung.",
+   "sprech": "Führt sein Weg in die entgegengesetzte Richtung, wird gerade die Eile zur Ursache einer noch größeren Entfernung.",
+   "woerter": 17
+  },
+  {
+   "id": "s4",
+   "absatz": 2,
+   "buch": "Deshalb müssen wir uns zuerst vor Augen führen, was wir erstreben.",
+   "sprech": "Deshalb müssen wir uns zuerst vor Augen führen, was wir erstreben.",
+   "woerter": 11
+  },
+  {
+   "id": "s5",
+   "absatz": 2,
+   "buch": "Dann müssen wir uns umsehen, auf welchem Weg wir am schnellsten dorthin gelangen.",
+   "sprech": "Dann müssen wir uns umsehen, auf welchem Weg wir am schnellsten dorthin gelangen.",
+   "woerter": 13
+  },
+  {
+   "id": "s6",
+   "absatz": 2,
+   "buch": "Unterwegs werden wir – wenn der Weg nur der richtige ist – erkennen, wie viel wir Tag für Tag zurücklegen und wie viel näher wir dem Ziel kommen, zu dem uns ein natürliches Verlangen treibt.",
+   "sprech": "Unterwegs werden wir – wenn der Weg nur der richtige ist – erkennen, wie viel wir Tag für Tag zurücklegen und wie viel näher wir dem Ziel kommen, zu dem uns ein natürliches Verlangen treibt.",
+   "woerter": 33
+  },
+  {
+   "id": "s7",
+   "absatz": 3,
+   "buch": "Solange wir aber ziellos umherschweifen und keinem Kundigen folgen, sondern dem Lärm und dem wirren Geschrei derer, die uns in alle Richtungen rufen, wird sich unser Leben zwischen Irrwegen aufreiben – ein Leben, das selbst dann kurz wäre, wenn wir uns Tag und Nacht um Vernunft bemühten.",
+   "sprech": "Solange wir aber ziellos umherschweifen und keinem Kundigen folgen, sondern dem Lärm und dem wirren Geschrei derer, die uns in alle Richtungen rufen, wird sich unser Leben zwischen Irrwegen aufreiben – ein Leben, das selbst dann kurz wäre, wenn wir uns Tag und Nacht um Vernunft bemühten.",
+   "woerter": 46
+  },
+  {
+   "id": "s8",
+   "absatz": 4,
+   "buch": "Darum müssen wir beides entscheiden: wohin wir streben und auf welchem Weg.",
+   "sprech": "Darum müssen wir beides entscheiden: wohin wir streben und auf welchem Weg.",
+   "woerter": 12
+  },
+  {
+   "id": "s9",
+   "absatz": 4,
+   "buch": "Und das nicht ohne einen erfahrenen Begleiter, dem die Gegend vertraut ist, in die wir aufbrechen.",
+   "sprech": "Und das nicht ohne einen erfahrenen Begleiter, dem die Gegend vertraut ist, in die wir aufbrechen.",
+   "woerter": 16
+  },
+  {
+   "id": "s10",
+   "absatz": 4,
+   "buch": "Denn hier gilt nicht dasselbe wie auf anderen Reisen: Dort verhindern ein markierter Pfad und Einheimische, die man fragen kann, dass man sich verirrt.",
+   "sprech": "Denn hier gilt nicht dasselbe wie auf anderen Reisen: Dort verhindern ein markierter Pfad und Einheimische, die man fragen kann, dass man sich verirrt.",
+   "woerter": 24
+  },
+  {
+   "id": "s11",
+   "absatz": 4,
+   "buch": "Hier aber, im Leben, trügt gerade der ausgetretenste und belebteste Weg am meisten.",
+   "sprech": "Hier aber, im Leben, trügt gerade der ausgetretenste und belebteste Weg am meisten.",
+   "woerter": 13
+  }
+ ]
+}
