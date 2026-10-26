@@ -94,18 +94,48 @@ def ki_wert(m):   # 0 = alle Merkmale im Bereich echter Vorleser; sonst Summe de
         s += max(0, lo - m[k]) / w + max(0, m[k] - hi) / w
     return s + max(0, m.get("Wortbogen HT", 0) - BOGEN_MAX) / 3
 
+def satz_ende(soll, words):
+    """Index des letzten Wortes, das noch zum Satz gehört. Folgende Wörter sind Nachlauf (Anfang des nächsten Satzes,
+    nur mitgesprochen, damit ein Abbruch von Gemini ihn trifft und nicht den Satz) und werden abgeschnitten."""
+    nb, acc = norm(soll), ""
+    for k, w_ in enumerate(words):
+        acc += norm(w_["w"])
+        if len(acc) >= len(nb) - 1: return k
+    return len(words) - 1
+
+def schnitt_nach_satz(x, t_ende):
+    """Schnittpunkt (Sample) in der Pause nach dem Satzende: erste Stille ≥ 0,12 s ab kurz vor dem letzten Wortende."""
+    n = int(SR * FL); fr = x[: len(x) // n * n].reshape(-1, n); db = 10 * np.log10((fr ** 2).mean(1) + 1e-12)
+    laut = db > max(np.percentile(db, 95) - 35, np.percentile(db, 10) + 6)
+    k, still = int(max(0, t_ende - 0.15) / FL), 0
+    while k < len(laut) and k * FL < t_ende + 1.5:
+        still = still + 1 if not laut[k] else 0
+        if still >= 12:
+            start = k - still + 1
+            j = start
+            while j < len(laut) and not laut[j]: j += 1          # Länge der Pause bis zum Nachlauf
+            return min(len(x), (start + min(12, max(3, j - start - 3))) * n)
+        k += 1
+    return None   # Satz und Nachlauf nicht durch eine Pause getrennt
+
 # 1) Prüfen und bewerten
 takes = {}
 for f in sorted(TAKES.glob("s*_*.flac")):
     sid, stil = f.stem.split("_"); soll = SEG[sid]["buch"]
-    w = stt(f, "large-v3-turbo"); d = abweichung(soll, w); quelle = "turbo"
+    alle = stt(f, "large-v3-turbo"); k = satz_ende(soll, alle); w = alle[:k + 1]; d = abweichung(soll, w); quelle = "turbo"
     if d:
-        w2 = stt(f, "medium"); d2 = abweichung(soll, w2)
+        alle2 = stt(f, "medium"); k2 = satz_ende(soll, alle2); d2 = abweichung(soll, alle2[:k2 + 1])
         quelle = "medium" if not d2 else "keins"
-        if not d2: w = w2
-    x = pcm(f, SR); m = merkmale(x, w) if len(w) > 2 else {}
+        if not d2: alle, k, w = alle2, k2, alle2[:k2 + 1]
+    x = pcm(f, SR); nachlauf = k < len(alle) - 1; schnitt = None; getrennt = True
+    if nachlauf:
+        schnitt = schnitt_nach_satz(x, w[-1]["e"]) if w else None
+        getrennt = schnitt is not None
+        if schnitt: x = x[:schnitt]
+    m = merkmale(x, w) if len(w) > 2 else {}
+    if m and not getrennt: m["Rand Ende dB"] = 0.0          # ohne Pause vor dem Nachlauf nicht sauber trennbar
     takes.setdefault(sid, []).append({"datei": f.name, "stil": stil, "treu": quelle != "keins", "quelle": quelle, "abw_turbo": d,
-                                       "words": w, "m": m, "ki": ki_wert(m) if len(w) > 2 else 9})
+                                       "words": w, "m": m, "ki": ki_wert(m) if len(w) > 2 else 9, "schnitt": schnitt, "nachlauf": nachlauf})
 
 # 2) Auswahl: wortgetreu zuerst; dann geringster KI-Wert plus Abweichung von der Gesamtlage (Tonhöhe, Tempo)
 alle = [t for v in takes.values() for t in v if t["treu"] and t["m"]]
@@ -136,6 +166,7 @@ teile, ziel, grenzen = [], np.median([wahl[s]["m"]["Pegel dB"] for s in wahl]), 
 reihen = sorted(wahl, key=ORD)
 for i, sid in enumerate(reihen):
     t = wahl[sid]; x = pcm(TAKES / t["datei"], SR).astype(np.float64)
+    if t.get("schnitt"): x = x[:t["schnitt"]]   # Nachlauf abschneiden
     n = int(SR * FL); fr = x[: len(x) // n * n].reshape(-1, n); db = 10 * np.log10((fr ** 2).mean(1) + 1e-12)
     schw = max(np.percentile(db, 95) - 35, np.percentile(db, 10) + 6)
     w0, w1 = t["words"][0]["s"], t["words"][-1]["e"]
