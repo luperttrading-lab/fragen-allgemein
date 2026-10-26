@@ -13,6 +13,7 @@ SR = 24000; FL = 0.01
 PAUSE = {"kopf": 1.4, "satz": 0.75, "absatz": 1.4}      # Sekunden zwischen Segmenten
 import os
 F0W = float(os.environ.get("BESTOF_F0W", "0.75"))
+RAND = float(os.environ.get("BESTOF_RAND", "-25"))   # Take gilt als abgeschnitten, wenn die ersten/letzten 50 ms lauter sind als Sprachpegel + RAND dB
 TEMPO = tuple(float(v) for v in os.environ["BESTOF_TEMPO"].split(",")) if os.environ.get("BESTOF_TEMPO") else None   # Zieltempo W/s, z. B. "2.6,3.0"
 BOGEN_MAX = float(os.environ.get("BESTOF_BOGEN", "9"))   # größter erlaubter Schlussbogen (Halbtöne) in der letzten Sekunde vor einer Pause; darüber klingt es gesungen („wollen aaalle“)   # Halbtöne Abweichung von der Gesamtlage je Strafpunkt (kleiner = einheitlichere Stimmlage)
 
@@ -80,7 +81,8 @@ def merkmale(x, words):
         if mm.sum() >= 15:
             stb = 12 * np.log2(fa[mm] / np.median(fa[va])); stb = stb[np.abs(stb - np.median(stb)) < 7]
             if len(stb) >= 12: bogen = max(bogen, float(np.percentile(stb, 95) - np.percentile(stb, 5)))
-    return {"Wortbogen HT": bogen, "Tempo W/s": len(words) / sprech, "Pausenanteil %": sum(pausen) / dauer * 100,
+    rand_a = float(db[:5].max() - np.percentile(db, 95)); rand_e = float(db[-5:].max() - np.percentile(db, 95))   # erste/letzte 50 ms
+    return {"Rand Anfang dB": rand_a, "Rand Ende dB": rand_e, "Wortbogen HT": bogen, "Tempo W/s": len(words) / sprech, "Pausenanteil %": sum(pausen) / dauer * 100,
             "Wörter/Phrase": len(words) / (len(pausen) + 1), "Melodie-Spannweite HT": float(np.percentile(st, 95) - np.percentile(st, 5)),
             "Endabfall HT/s": float(np.mean(sl)) if sl else 0.0, "F0 Hz": float(np.median(f0[v])), "Pegel dB": float(np.percentile(db[laut], 50))}
 
@@ -110,8 +112,13 @@ alle = [t for v in takes.values() for t in v if t["treu"] and t["m"]]
 f0_med = np.median([t["m"]["F0 Hz"] for t in alle]); tempo_med = np.median([t["m"]["Tempo W/s"] for t in alle if SEG[t["datei"].split("_")[0]]["absatz"] != 0])
 wahl = {}
 ORD = lambda s: int(s[1:])          # s2 vor s10
+nachproduzieren = []
 for sid in sorted(takes, key=ORD):
     kand = [t for t in takes[sid] if t["treu"]] or takes[sid]
+    for t in kand: t["abgeschnitten"] = bool(t["m"]) and (t["m"]["Rand Ende dB"] > RAND or t["m"]["Rand Anfang dB"] > RAND)
+    sauber = [t for t in kand if not t["abgeschnitten"]]
+    if sauber: kand = sauber
+    else: nachproduzieren.append(sid)
     for t in kand:
         t["gesamt"] = t["ki"] + abs(12 * np.log2(t["m"]["F0 Hz"] / f0_med)) / F0W + (abs(t["m"]["Tempo W/s"] - tempo_med) / 0.5 if SEG[sid]["absatz"] != 0 else 0)
     wahl[sid] = min(kand, key=lambda t: t["gesamt"])
@@ -120,7 +127,8 @@ print("Segment Take   treu   KI-Wert Gesamt  Tempo  Pausen%  W/Phrase  Melodie  
 for sid in sorted(takes, key=ORD):
     for t in sorted(takes[sid], key=lambda t: t["stil"]):
         m = t["m"]; mark = "  <== gewählt" if t is wahl[sid] else ""
-        print(f"{sid:7} {t['stil']:5} {('ja ('+t['quelle']+')') if t['treu'] else 'NEIN':12} {t['ki']:5.2f} {t.get('gesamt', float('nan')):6.2f} {m.get('Tempo W/s',0):6.2f} {m.get('Pausenanteil %',0):7.1f} {m.get('Wörter/Phrase',0):8.1f} {m.get('Melodie-Spannweite HT',0):8.1f} {m.get('Wortbogen HT',0):9.1f} {m.get('F0 Hz',0):5.0f}  {'; '.join(t['abw_turbo'])[:90]}{mark}")
+        print(f"{sid:7} {t['stil']:5} {('ja ('+t['quelle']+')') if t['treu'] else 'NEIN':12} {t['ki']:5.2f} {t.get('gesamt', float('nan')):6.2f} {m.get('Tempo W/s',0):6.2f} {m.get('Pausenanteil %',0):7.1f} {m.get('Wörter/Phrase',0):8.1f} {m.get('Melodie-Spannweite HT',0):8.1f} {m.get('Wortbogen HT',0):9.1f} {m.get('F0 Hz',0):5.0f}  {'; '.join(t['abw_turbo'])[:70]}{' [Rand abgeschnitten]' if t.get('abgeschnitten') else ''}{mark}")
+print("Nachproduzieren (kein sauberer Take):", nachproduzieren or "keins")
 print("Bereich echter Vorleser:", {k: tuple(round(v, 2) for v in bereich(k)) for k in PRUEF})
 
 # 3) Montage: Ränder auf Sprache schneiden (Atem/Stille weg), Lautheit angleichen, Pausen einfügen
@@ -135,7 +143,7 @@ for i, sid in enumerate(reihen):
     off = [k for k in range(int((w1 - 0.1) / FL), min(len(db), int((w1 + 0.6) / FL))) if db[k] > schw]
     a = max(0, (on[0] if on else int(w0 / FL)) * n - int(0.03 * SR)); b = min(len(x), ((off[-1] + 1) if off else int(w1 / FL)) * n + int(0.12 * SR))
     y = x[a:b] * 10 ** ((ziel - t["m"]["Pegel dB"]) / 20)
-    fi, fo = int(0.01 * SR), int(0.06 * SR); y[:fi] *= np.linspace(0, 1, fi); y[-fo:] *= np.linspace(1, 0, fo)
+    fi, fo = int(0.004 * SR), int(0.008 * SR); y[:fi] *= np.linspace(0, 1, fi); y[-fo:] *= np.linspace(1, 0, fo)   # nur gegen Knacken
     pos = int(0.3 * SR) + sum(len(q) for q in teile); grenzen.append((sid, pos, pos + len(y)))
     teile.append(y)
     if i < len(reihen) - 1:
