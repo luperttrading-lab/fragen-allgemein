@@ -77,3 +77,15 @@ Rückmeldung des Nutzers: erste Auswahl zu langsam; in Satz 1 klingt „wollen a
   (am Stück übersprang Whisper Passagen): alle 14 Segmente wortgetreu.
 - Ergebnis `seneca_neufassung_bestof.mp3`, 121,9 s, Tempo 2,66 W/s (vorher 2,27), Pausenanteil 16 %; Satz 1 aus Take E (Schlussbogen 5,8).
   Abstand mit Wunschtempo: 0,42 (erste Auswahl 1,54). Erste Auswahl bleibt als `seneca_neufassung_bestof_v1.mp3`.
+
+## Neufassung v2 (überarbeiteter Text, 26.10.2026 abends)
+- Befund: Gemini bricht viele Takes mitten im letzten Laut ab (erste Neufassung: 45/84 laut endend, 23/84 hart abgeschnitten;
+  Stil E 14/14). Anfänge sind sauber, die Sprache setzt nur sofort ein.
+- Gegenmittel „Nachlauf“: Satz plus die ersten vier Wörter des nächsten Satzes einsprechen (letzter Satz: „Ende des ersten
+  Kapitels.“), `bestof.py` findet das Satzende und schneidet in der Pause davor. Abgeschnittene Enden: ohne Nachlauf 21/48,
+  mit Nachlauf 10/48 (ruhige Stile G und J je 1/12).
+- Randprüfung auf Sample-Ebene (letzte 2 ms > 3 % der Spitze oder letzte 30 ms laut); abgeschnittene Takes nur, wenn kein sauberer da ist.
+- 96 Takes (A/D/E/F ohne, G/H/I/J mit Nachlauf). Gewichtung der Stimmlage verglichen: F0W 0,75 → Abstand 1,79; 1,5 → 1,33;
+  3 → 1,12 (gewählt). Alle 11 Satzübergänge klingen auf ≤ −50 dB aus, kein harter Abbruch. Endkontrolle satzweise wortgetreu.
+- Ergebnis `seneca_neufassung_v2/seneca_neufassung_v2_bestof.mp3`, 103,8 s, Tempo 2,75 W/s; noch über dem Zielbereich:
+  Wörter je Phrase 9,2 (Ziel ≤ 7,4) und Melodie 12,7 Halbtöne (≤ 11,7).
