@@ -89,3 +89,16 @@ Rückmeldung des Nutzers: erste Auswahl zu langsam; in Satz 1 klingt „wollen a
   3 → 1,12 (gewählt). Alle 11 Satzübergänge klingen auf ≤ −50 dB aus, kein harter Abbruch. Endkontrolle satzweise wortgetreu.
 - Ergebnis `seneca_neufassung_v2/seneca_neufassung_v2_bestof.mp3`, 103,8 s, Tempo 2,75 W/s; noch über dem Zielbereich:
   Wörter je Phrase 9,2 (Ziel ≤ 7,4) und Melodie 12,7 Halbtöne (≤ 11,7).
+
+## ElevenLabs eleven v4 (Aufnahmen des Nutzers, 26.10.2026)
+Christian „Warm and Captivating“ und Robert Ranger „Cool Storyteller“, je Absatz 1–2 des überarbeiteten Textes am Stück (51 s).
+Beide wortgetreu (turbo und medium), keine Atemgeräusche, saubere Enden. Vergleich auf genau diesem Textteil (Gemini-Montage auf
+denselben 7 Sätzen zugeschnitten, 56,6 s):
+
+| Fassung | Abstand | Tempo W/s | Pausen % | W/Phrase | Pausen-Schwankung | Melodie HT | Abfall HT/s |
+|---|---|---|---|---|---|---|---|
+| ElevenLabs Christian | 2,47 | 2,87 | 12,1 | 8,1 | 0,52 | 13,3 | −2,43 |
+| Gemini-Montage v2 | 3,12 | 2,63 | 12,3 | 10,9 | 0,56 | 12,8 | −2,65 |
+| ElevenLabs Robert Ranger | 4,33 | 2,93 | 12,2 | 7,7 | 0,35 | 15,4 | −2,58 |
+
+Hinweis: Der Abstand hängt vom Ausschnitt ab (Gemini-Montage auf 100 s: 1,12, auf diesen 57 s: 3,12); nur gleiche Textteile vergleichen.
