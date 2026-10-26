@@ -1,0 +1,57 @@
+{
+ "modell": "gemini-2.5-pro-preview-tts",
+ "voice": "onyx",
+ "anweisung": {
+  "A": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Ruhig und klar, in gemäßigtem Tempo, wie ein erfahrener Hörbuchsprecher. Sprich jedes Wort genau so, wie es dasteht; „hin-eilt“ wird wie ein Wort gesprochen. Text:",
+  "B": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Nachdenklich und etwas langsamer, mit natürlichen Pausen an Komma, Semikolon, Doppelpunkt und Gedankenstrich. Sprich jedes Wort genau so, wie es dasteht; „hin-eilt“ wird wie ein Wort gesprochen. Text:",
+  "C": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Gelassen und natürlich, wie ein Mensch, der einem Freund einen klugen Text vorliest; nicht gleichförmig, ohne übertriebene Betonung. Sprich jedes Wort genau so, wie es dasteht; „hin-eilt“ wird wie ein Wort gesprochen. Text:"
+ },
+ "takes": {
+  "s0": [
+   "A",
+   "C"
+  ],
+  "rest": [
+   "A",
+   "B",
+   "C"
+  ]
+ },
+ "segmente": [
+  {
+   "id": "s0",
+   "absatz": 0,
+   "buch": "Seneca. Vom glücklichen Leben. Erstes Kapitel.",
+   "sprech": "Seneca. Vom glücklichen Leben. Erstes Kapitel.",
+   "woerter": 6
+  },
+  {
+   "id": "s1",
+   "absatz": 1,
+   "buch": "Glücklich leben, mein Bruder Gallio, wollen alle; aber wenn es darum geht, zu durchschauen, was es ist, das ein glückliches Leben bewirkt, dann ist ihr Blick getrübt; und so wenig leicht ist es, das glückliche Leben zu erreichen, daß jeder sich um so weiter von ihm entfernt, je hastiger er zu ihm hineilt – wenn er sich im Weg geirrt hat: Wo dieser in die entgegengesetzte Richtung führt, wird die Eile selbst zur Ursache noch größerer Entfernung.",
+   "sprech": "Glücklich leben, mein Bruder Gallio, wollen alle; aber wenn es darum geht, zu durchschauen, was es ist, das ein glückliches Leben bewirkt, dann ist ihr Blick getrübt; und so wenig leicht ist es, das glückliche Leben zu erreichen, daß jeder sich um so weiter von ihm entfernt, je hastiger er zu ihm hin-eilt – wenn er sich im Weg geirrt hat: Wo dieser in die entgegengesetzte Richtung führt, wird die Eile selbst zur Ursache noch größerer Entfernung.",
+   "woerter": 76
+  },
+  {
+   "id": "s2",
+   "absatz": 1,
+   "buch": "Daher müssen wir uns zunächst einmal vor Augen stellen, was es ist, das wir anstreben; dann müssen wir Umschau halten, auf welchem Weg wir am schnellsten dorthin eilen können, wobei wir auf dem Marsch selbst erkennen werden – wenn er nur in die richtige Richtung geht –, wieviel täglich bewältigt wird und wieviel näher wir dem Punkt sind, zu dem uns ein natürliches Begehren hintreibt.",
+   "sprech": "Daher müssen wir uns zunächst einmal vor Augen stellen, was es ist, das wir anstreben; dann müssen wir Umschau halten, auf welchem Weg wir am schnellsten dorthin eilen können, wobei wir auf dem Marsch selbst erkennen werden – wenn er nur in die richtige Richtung geht –, wieviel täglich bewältigt wird und wieviel näher wir dem Punkt sind, zu dem uns ein natürliches Begehren hintreibt.",
+   "woerter": 63
+  },
+  {
+   "id": "s3",
+   "absatz": 2,
+   "buch": "Solange wir freilich überall umherschweifen und nicht einem Führer folgen, sondern dem Lärmen und Durcheinanderschreien von Leuten, die uns in verschiedene Richtungen rufen, wird unser Leben mit Irrtümern vertan werden – kurz wie es selbst dann ist, wenn wir uns Tag und Nacht um eine vernünftige geistige Haltung bemühen.",
+   "sprech": "Solange wir freilich überall umherschweifen und nicht einem Führer folgen, sondern dem Lärmen und Durcheinanderschreien von Leuten, die uns in verschiedene Richtungen rufen, wird unser Leben mit Irrtümern vertan werden – kurz wie es selbst dann ist, wenn wir uns Tag und Nacht um eine vernünftige geistige Haltung bemühen.",
+   "woerter": 48
+  },
+  {
+   "id": "s4",
+   "absatz": 2,
+   "buch": "Daher muß sowohl entschieden werden, wohin wir streben sollen, als auch auf welchem Wege; nicht ohne einen Mann von Erfahrung, dem die Gegenden, in die wir ziehen, genau bekannt sind, da ja die Situation hier nicht dieselbe ist wie auf den übrigen Reisen: Auf jenen lassen es ein markierter Weg und Anwohner, die man befragt, nicht zu, daß man in die Irre geht; hier dagegen täuschen gerade die ausgetretensten und belebtesten Wege am meisten.",
+   "sprech": "Daher muß sowohl entschieden werden, wohin wir streben sollen, als auch auf welchem Wege; nicht ohne einen Mann von Erfahrung, dem die Gegenden, in die wir ziehen, genau bekannt sind, da ja die Situation hier nicht dieselbe ist wie auf den übrigen Reisen: Auf jenen lassen es ein markierter Weg und Anwohner, die man befragt, nicht zu, daß man in die Irre geht; hier dagegen täuschen gerade die ausgetretensten und belebtesten Wege am meisten.",
+   "woerter": 74
+  }
+ ]
+}
