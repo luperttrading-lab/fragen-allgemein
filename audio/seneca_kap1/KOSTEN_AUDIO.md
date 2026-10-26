@@ -70,3 +70,25 @@ API-Aufruf, keine Kosten) ist im Log nicht enthalten.
 
 Kosten-/Credit-Felder: wie v2 keine. output_tokens / Sekunden = 2 657 / 106,3 = 24,99 (wieder 25 Token je Audiosekunde).
 Dollar-Schätzung: Doku-Satz 0,005 $/1K Output → 0,0133 $ + Input 0,0005 $ ≈ **1,4 ct**; nach `/v1/models` (Output 0) 0,0005 $.
+
+## Mehrfach-Durchläufe (26.10.2026): 14 satzweise Takes, Gemini 2.5 Pro TTS onyx, FLAC
+
+Skript `takes/takes.py`, Vorgaben `takes/segmente.json` (5 Segmente, Stile A/B/C, s0 nur A/C), Log `takes/takes_log.jsonl`.
+Rohdaten je Aufruf `L16` (PCM 16 Bit, 24 kHz, mono) → FLAC verlustfrei. 14 von 14 Aufrufen im ersten Versuch erfolgreich, keine Wiederholung.
+
+| | Wert |
+|---|---|
+| Zeitfenster (Europe/Berlin, CET) | erster Start **15:21:02**, letztes Ende **15:24:51** |
+| Aufrufe | 14 (alle HTTP 200) |
+| Tokens gesamt | **2 469 in / 7 864 out** (Kostenbremse 15 000 out nicht erreicht) |
+| Audio gesamt | 314,7 s (Takes 3,4 s bis 34,1 s) |
+| Output-Token je Audiosekunde | 24,99 |
+| Dollar nach `/v1/models` (in 0,000001 $/Token, out 0) | 0,0025 $ |
+| Dollar nach Audio-Doku (out 0,005 $/1K) | **0,0418 $** |
+
+Je Take (Start–Ende, Tokens in/out, Dauer): s0_A 15:21:02–15:21:08 97/106 4,25 s · s0_C 15:21:12–15:21:17 109/84 3,37 s ·
+s1_A 15:21:17–15:21:36 201/730 29,21 s · s1_B 15:21:36–15:21:57 208/797 31,89 s · s1_C 15:21:57–15:22:15 213/696 27,85 s ·
+s2_A 15:22:15–15:22:32 172/533 21,33 s · s2_B 15:22:33–15:22:51 179/650 26,01 s · s2_C 15:22:51–15:23:06 184/508 20,33 s ·
+s3_A 15:23:06–15:23:22 167/541 21,65 s · s3_B 15:23:23–15:23:38 174/558 22,33 s · s3_C 15:23:38–15:23:52 179/485 19,41 s ·
+s4_A 15:23:52–15:24:10 189/640 25,61 s · s4_B 15:24:10–15:24:34 196/851 34,05 s · s4_C 15:24:34–15:24:51 201/685 27,41 s.
+Keine Kosten-/Credit-Felder in den Antworten (wie zuvor). Stil B ist durchweg am längsten (langsamer, mehr Pausen), C am kürzesten.
