@@ -1,0 +1,121 @@
+{
+ "modell": "gemini-2.5-pro-preview-tts",
+ "voice": "onyx",
+ "anweisung": {
+  "A": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Ruhig und klar, in gemäßigtem Tempo, wie ein erfahrener Hörbuchsprecher. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "B": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Nachdenklich und etwas langsamer, mit natürlichen Pausen an Komma, Semikolon, Doppelpunkt und Gedankenstrich. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "C": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Gelassen und natürlich, wie ein Mensch, der einem Freund einen klugen Text vorliest; nicht gleichförmig, ohne übertriebene Betonung. Sprich jedes Wort genau so, wie es dasteht. Text:"
+ },
+ "takes": {
+  "rest": [
+   "A",
+   "B",
+   "C"
+  ],
+  "s0": [
+   "A",
+   "B",
+   "C"
+  ]
+ },
+ "segmente": [
+  {
+   "id": "s0",
+   "absatz": 1,
+   "buch": "Glücklich zu leben, mein lieber Gallio, wollen alle.",
+   "sprech": "Glücklich zu leben, mein lieber Gallio, wollen alle.",
+   "woerter": 8
+  },
+  {
+   "id": "s1",
+   "absatz": 1,
+   "buch": "Aber wenn es darum geht, klar zu durchschauen, was ein glückliches Leben eigentlich ausmacht, dann ist der Blick der Meisten getrübt.",
+   "sprech": "Aber wenn es darum geht, klar zu durchschauen, was ein glückliches Leben eigentlich ausmacht, dann ist der Blick der Meisten getrübt.",
+   "woerter": 21
+  },
+  {
+   "id": "s2",
+   "absatz": 1,
+   "buch": "So leicht ist es eben nicht, das wahre Glück zu finden.",
+   "sprech": "So leicht ist es eben nicht, das wahre Glück zu finden.",
+   "woerter": 11
+  },
+  {
+   "id": "s3",
+   "absatz": 1,
+   "buch": "Im Gegenteil: Je hastiger jemand darauf zustrebt – vorausgesetzt, sein Weg führt in die falsche Richtung –, desto weiter entfernt er sich davon.",
+   "sprech": "Im Gegenteil: Je hastiger jemand darauf zustrebt – vorausgesetzt, sein Weg führt in die falsche Richtung –, desto weiter entfernt er sich davon.",
+   "woerter": 21
+  },
+  {
+   "id": "s4",
+   "absatz": 1,
+   "buch": "Wer sich in die entgegengesetzte Richtung bewegt, für den wird die reine Eile nur zur Ursache einer noch größeren Entfernung.",
+   "sprech": "Wer sich in die entgegengesetzte Richtung bewegt, für den wird die reine Eile nur zur Ursache einer noch größeren Entfernung.",
+   "woerter": 20
+  },
+  {
+   "id": "s5",
+   "absatz": 2,
+   "buch": "Deshalb müssen wir uns zuallererst vor Augen führen, was wir überhaupt anstreben.",
+   "sprech": "Deshalb müssen wir uns zuallererst vor Augen führen, was wir überhaupt anstreben.",
+   "woerter": 12
+  },
+  {
+   "id": "s6",
+   "absatz": 2,
+   "buch": "Danach müssen wir prüfen, auf welchem Weg wir am schnellsten dorthin gelangen.",
+   "sprech": "Danach müssen wir prüfen, auf welchem Weg wir am schnellsten dorthin gelangen.",
+   "woerter": 12
+  },
+  {
+   "id": "s7",
+   "absatz": 2,
+   "buch": "Auf diesem Marsch selbst werden wir dann – vorausgesetzt, wir sind auf dem richtigen Kurs – merken, wie viel wir Schritt für Schritt bewältigen und wie viel näher wir dem kommen, wonach unser innerstes Wesen verlangt.",
+   "sprech": "Auf diesem Marsch selbst werden wir dann – vorausgesetzt, wir sind auf dem richtigen Kurs – merken, wie viel wir Schritt für Schritt bewältigen und wie viel näher wir dem kommen, wonach unser innerstes Wesen verlangt.",
+   "woerter": 34
+  },
+  {
+   "id": "s8",
+   "absatz": 3,
+   "buch": "Solange wir jedoch ziellos umherirren und nicht einem klaren Führer folgen, sondern auf das Lärmen und Durcheinandergeschrei von Menschen hören, die uns in die verschiedensten Richtungen rufen, wird unser Leben im Chaos versinken.",
+   "sprech": "Solange wir jedoch ziellos umherirren und nicht einem klaren Führer folgen, sondern auf das Lärmen und Durcheinandergeschrei von Menschen hören, die uns in die verschiedensten Richtungen rufen, wird unser Leben im Chaos versinken.",
+   "woerter": 33
+  },
+  {
+   "id": "s9",
+   "absatz": 3,
+   "buch": "Genau so ist es, als würden wir Tag und Nacht krampfhaft nach einer vernünftigen Haltung suchen, ohne zu wissen wohin.",
+   "sprech": "Genau so ist es, als würden wir Tag und Nacht krampfhaft nach einer vernünftigen Haltung suchen, ohne zu wissen wohin.",
+   "woerter": 20
+  },
+  {
+   "id": "s10",
+   "absatz": 4,
+   "buch": "Daher müssen wir sowohl unser Ziel als auch unseren Weg ganz bewusst bestimmen.",
+   "sprech": "Daher müssen wir sowohl unser Ziel als auch unseren Weg ganz bewusst bestimmen.",
+   "woerter": 13
+  },
+  {
+   "id": "s11",
+   "absatz": 4,
+   "buch": "Und das gelingt nicht ohne einen erfahrenen Begleiter, dem die Gegend vertraut ist.",
+   "sprech": "Und das gelingt nicht ohne einen erfahrenen Begleiter, dem die Gegend vertraut ist.",
+   "woerter": 13
+  },
+  {
+   "id": "s12",
+   "absatz": 4,
+   "buch": "Denn hier verhält es sich völlig anders als auf gewöhnlichen Reisen: Dort sorgen markierte Wege und Ortskundige, die man nach dem Weg fragt, dafür, dass man sich nicht verläuft.",
+   "sprech": "Denn hier verhält es sich völlig anders als auf gewöhnlichen Reisen: Dort sorgen markierte Wege und Ortskundige, die man nach dem Weg fragt, dafür, dass man sich nicht verläuft.",
+   "woerter": 29
+  },
+  {
+   "id": "s13",
+   "absatz": 4,
+   "buch": "Hier auf dem Lebensweg hingegen sind es gerade die ausgetretensten und am meisten belebten Pfade, die uns am sichersten in die Irre führen.",
+   "sprech": "Hier auf dem Lebensweg hingegen sind es gerade die ausgetretensten und am meisten belebten Pfade, die uns am sichersten in die Irre führen.",
+   "woerter": 23
+  }
+ ]
+}

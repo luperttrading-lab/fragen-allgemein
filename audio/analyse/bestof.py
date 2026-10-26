@@ -94,16 +94,17 @@ for f in sorted(TAKES.glob("s*_*.flac")):
 
 # 2) Auswahl: wortgetreu zuerst; dann geringster KI-Wert plus Abweichung von der Gesamtlage (Tonhöhe, Tempo)
 alle = [t for v in takes.values() for t in v if t["treu"] and t["m"]]
-f0_med = np.median([t["m"]["F0 Hz"] for t in alle]); tempo_med = np.median([t["m"]["Tempo W/s"] for t in alle if t["datei"][:2] != "s0"])
+f0_med = np.median([t["m"]["F0 Hz"] for t in alle]); tempo_med = np.median([t["m"]["Tempo W/s"] for t in alle if SEG[t["datei"].split("_")[0]]["absatz"] != 0])
 wahl = {}
-for sid in sorted(takes):
+ORD = lambda s: int(s[1:])          # s2 vor s10
+for sid in sorted(takes, key=ORD):
     kand = [t for t in takes[sid] if t["treu"]] or takes[sid]
     for t in kand:
-        t["gesamt"] = t["ki"] + abs(12 * np.log2(t["m"]["F0 Hz"] / f0_med)) / 3 + (abs(t["m"]["Tempo W/s"] - tempo_med) / 0.5 if sid != "s0" else 0)
+        t["gesamt"] = t["ki"] + abs(12 * np.log2(t["m"]["F0 Hz"] / f0_med)) / 3 + (abs(t["m"]["Tempo W/s"] - tempo_med) / 0.5 if SEG[sid]["absatz"] != 0 else 0)
     wahl[sid] = min(kand, key=lambda t: t["gesamt"])
 
 print("Segment Take   treu   KI-Wert Gesamt  Tempo  Pausen%  W/Phrase  Melodie  Endabfall  F0    Abweichungen (turbo)")
-for sid in sorted(takes):
+for sid in sorted(takes, key=ORD):
     for t in sorted(takes[sid], key=lambda t: t["stil"]):
         m = t["m"]; mark = "  <== gewählt" if t is wahl[sid] else ""
         print(f"{sid:7} {t['stil']:5} {('ja ('+t['quelle']+')') if t['treu'] else 'NEIN':12} {t['ki']:5.2f} {t.get('gesamt', float('nan')):6.2f} {m.get('Tempo W/s',0):6.2f} {m.get('Pausenanteil %',0):7.1f} {m.get('Wörter/Phrase',0):8.1f} {m.get('Melodie-Spannweite HT',0):8.1f} {m.get('Endabfall HT/s',0):9.2f} {m.get('F0 Hz',0):5.0f}  {'; '.join(t['abw_turbo'])[:90]}{mark}")
@@ -111,7 +112,7 @@ print("Bereich echter Vorleser:", {k: tuple(round(v, 2) for v in bereich(k)) for
 
 # 3) Montage: Ränder auf Sprache schneiden (Atem/Stille weg), Lautheit angleichen, Pausen einfügen
 teile, ziel = [], np.median([wahl[s]["m"]["Pegel dB"] for s in wahl])
-reihen = sorted(wahl)
+reihen = sorted(wahl, key=ORD)
 for i, sid in enumerate(reihen):
     t = wahl[sid]; x = pcm(TAKES / t["datei"], SR).astype(np.float64)
     n = int(SR * FL); fr = x[: len(x) // n * n].reshape(-1, n); db = 10 * np.log10((fr ** 2).mean(1) + 1e-12)
@@ -125,7 +126,7 @@ for i, sid in enumerate(reihen):
     teile.append(y)
     if i < len(reihen) - 1:
         nxt = SEG[reihen[i + 1]]
-        p = PAUSE["kopf"] if sid == "s0" else PAUSE["absatz"] if nxt["absatz"] != SEG[sid]["absatz"] else PAUSE["satz"]
+        p = PAUSE["kopf"] if SEG[sid]["absatz"] == 0 else PAUSE["absatz"] if nxt["absatz"] != SEG[sid]["absatz"] else PAUSE["satz"]
         teile.append(np.zeros(int(p * SR)))
 y = np.concatenate([np.zeros(int(0.3 * SR))] + teile + [np.zeros(int(0.8 * SR))])
 y = y / max(1.0, np.abs(y).max() / 0.95)
