@@ -1,27 +1,27 @@
 {
  "s0": {
-  "datei": "s0_G.flac",
-  "stil": "G",
+  "datei": "s0_K.flac",
+  "stil": "K",
   "treu": true,
   "quelle": "turbo",
   "abw_turbo": [],
   "m": {
    "Rand Anfang dB": -99.0,
    "Rand Ende dB": -99.0,
-   "Wortbogen HT": 6.7150611332273575,
-   "Tempo W/s": 2.694610778443114,
-   "Pausenanteil %": 0.0,
-   "Wörter/Phrase": 9.0,
-   "Melodie-Spannweite HT": 14.52007348509962,
-   "Endabfall HT/s": -14.174977832660394,
-   "F0 Hz": 114.58515677418802,
-   "Pegel dB": -22.312071004987246
+   "Wortbogen HT": 8.40838605474856,
+   "Tempo W/s": 2.4096385542168677,
+   "Pausenanteil %": 12.401055408970976,
+   "Wörter/Phrase": 4.0,
+   "Melodie-Spannweite HT": 10.096403049228229,
+   "Endabfall HT/s": -14.23922105359663,
+   "F0 Hz": 130.67646587438935,
+   "Pegel dB": -20.46524218348958
   },
-  "ki": 4.067774158403415,
-  "schnitt": 86880,
+  "ki": 0.7322279517358997,
+  "schnitt": 96960,
   "nachlauf": true,
   "abgeschnitten": false,
-  "gesamt": 5.292393152733411
+  "gesamt": 1.8880167165078892
  },
  "s1": {
   "datei": "s1_A.flac",
@@ -45,7 +45,7 @@
   "schnitt": null,
   "nachlauf": false,
   "abgeschnitten": false,
-  "gesamt": 1.3720853502057782
+  "gesamt": 1.3361732334636818
  },
  "s2": {
   "datei": "s2_A.flac",
@@ -69,7 +69,7 @@
   "schnitt": null,
   "nachlauf": false,
   "abgeschnitten": false,
-  "gesamt": 2.3529306750450174
+  "gesamt": 2.317018558302922
  },
  "s3": {
   "datei": "s3_J.flac",
@@ -93,7 +93,7 @@
   "schnitt": 169200,
   "nachlauf": true,
   "abgeschnitten": false,
-  "gesamt": 3.5410046745769312
+  "gesamt": 3.5050925578348355
  },
  "s4": {
   "datei": "s4_A.flac",
@@ -117,7 +117,7 @@
   "schnitt": null,
   "nachlauf": false,
   "abgeschnitten": false,
-  "gesamt": 4.036430931624943
+  "gesamt": 4.000518814882847
  },
  "s5": {
   "datei": "s5_A.flac",
@@ -141,7 +141,7 @@
   "schnitt": null,
   "nachlauf": false,
   "abgeschnitten": false,
-  "gesamt": 4.578931531309629
+  "gesamt": 4.547417035609001
  },
  "s6": {
   "datei": "s6_F.flac",
@@ -165,7 +165,7 @@
   "schnitt": null,
   "nachlauf": false,
   "abgeschnitten": false,
-  "gesamt": 3.1643722184525345
+  "gesamt": 3.195886714153162
  },
  "s7": {
   "datei": "s7_I.flac",
@@ -191,7 +191,7 @@
   "schnitt": 406800,
   "nachlauf": true,
   "abgeschnitten": false,
-  "gesamt": 2.8366328740476887
+  "gesamt": 2.800720757305593
  },
  "s8": {
   "datei": "s8_G.flac",
@@ -215,7 +215,7 @@
   "schnitt": 123360,
   "nachlauf": true,
   "abgeschnitten": false,
-  "gesamt": 3.1905789691640156
+  "gesamt": 3.1546668524219204
  },
  "s9": {
   "datei": "s9_G.flac",
@@ -239,7 +239,7 @@
   "schnitt": 124080,
   "nachlauf": true,
   "abgeschnitten": false,
-  "gesamt": 4.373475884330057
+  "gesamt": 4.409388001072153
  },
  "s10": {
   "datei": "s10_G.flac",
@@ -263,30 +263,33 @@
   "schnitt": 223440,
   "nachlauf": true,
   "abgeschnitten": false,
-  "gesamt": 2.1862206695737507
+  "gesamt": 2.1547061738731226
  },
  "s11": {
-  "datei": "s11_I.flac",
-  "stil": "I",
+  "datei": "s11_J.flac",
+  "stil": "J",
   "treu": true,
-  "quelle": "turbo",
-  "abw_turbo": [],
+  "quelle": "medium",
+  "abw_turbo": [
+   "raberimleben[t→d]",
+   "erimlebentrü[g→ck]"
+  ],
   "m": {
    "Rand Anfang dB": -99.0,
    "Rand Ende dB": -99.0,
-   "Wortbogen HT": 9.859551684019097,
-   "Tempo W/s": 3.0232558139534884,
-   "Pausenanteil %": 8.704883227176222,
+   "Wortbogen HT": 8.49155464030132,
+   "Tempo W/s": 2.2071307300509337,
+   "Pausenanteil %": 5.6089743589743595,
    "Wörter/Phrase": 6.5,
-   "Melodie-Spannweite HT": 16.226664864302364,
-   "Endabfall HT/s": -16.638397212828274,
-   "F0 Hz": 126.13156037956053,
-   "Pegel dB": -25.5622986062797
+   "Melodie-Spannweite HT": 10.890384829799494,
+   "Endabfall HT/s": -23.75575258449179,
+   "F0 Hz": 124.49019108078541,
+   "Pegel dB": -24.970520398898863
   },
-  "ki": 3.587902300792066,
-  "schnitt": 120240,
+  "ki": 2.1196894747175694,
+  "schnitt": 153360,
   "nachlauf": true,
   "abgeschnitten": false,
-  "gesamt": 3.827716074436674
+  "gesamt": 3.8093064631883684
  }
 }

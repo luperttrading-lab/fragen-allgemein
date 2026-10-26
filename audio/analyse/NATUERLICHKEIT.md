@@ -102,3 +102,8 @@ denselben 7 Sätzen zugeschnitten, 56,6 s):
 | ElevenLabs Robert Ranger | 4,33 | 2,93 | 12,2 | 7,7 | 0,35 | 15,4 | −2,58 |
 
 Hinweis: Der Abstand hängt vom Ausschnitt ab (Gemini-Montage auf 100 s: 1,12, auf diesen 57 s: 3,12); nur gleiche Textteile vergleichen.
+
+## Neufassung v2, Satz 1 ohne „zu“ (26.10.2026, 23:04 Uhr)
+Satz 1 jetzt „Glücklich leben, mein Bruder Gallio, das wollen alle.“; 6 neue Takes K–P mit Nachlauf (alte Satz-1-Takes in
+`takes/verworfen_mit_zu/`). Gewählt s0_K (sauber, Melodie 10,1 HT, Schlussbogen 8,4). Neue Montage 105,5 s, alle 11 Übergänge
+ohne harten Abbruch, satzweise wortgetreu, Abstand 0,87 (vorher 1,12): Tempo 2,73, Pausen 15,0 %, 8,4 Wörter/Phrase, Melodie 12,3 HT.
