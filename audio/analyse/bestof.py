@@ -14,7 +14,7 @@ PAUSE = {"kopf": 1.4, "satz": 0.75, "absatz": 1.4}      # Sekunden zwischen Segm
 import os
 F0W = float(os.environ.get("BESTOF_F0W", "0.75"))
 TEMPO = tuple(float(v) for v in os.environ["BESTOF_TEMPO"].split(",")) if os.environ.get("BESTOF_TEMPO") else None   # Zieltempo W/s, z. B. "2.6,3.0"
-BOGEN_MAX = float(os.environ.get("BESTOF_BOGEN", "8"))   # größter erlaubter Tonhöhenbogen auf einem Wort (Halbtöne), darüber klingt es gesungen   # Halbtöne Abweichung von der Gesamtlage je Strafpunkt (kleiner = einheitlichere Stimmlage)
+BOGEN_MAX = float(os.environ.get("BESTOF_BOGEN", "9"))   # größter erlaubter Schlussbogen (Halbtöne) in der letzten Sekunde vor einer Pause; darüber klingt es gesungen („wollen aaalle“)   # Halbtöne Abweichung von der Gesamtlage je Strafpunkt (kleiner = einheitlichere Stimmlage)
 
 def pcm(f, sr):
     b = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(f), "-ac", "1", "-ar", str(sr), "-f", "s16le", "-"], capture_output=True, check=True).stdout
@@ -27,7 +27,7 @@ def norm(t):     # Vergleich ohne Leerzeichen: umso/um so, wieviel/wie viel, hin
     return re.sub(r"[^a-zäöü0-9]", "", t)
 
 _models = {}
-def stt(f, name):
+def stt(f, name):  # f: Datei; Ergebnis gecacht im Arbeitsordner
     cache = WORK / f"{Path(f).stem}.{name}.json"
     if cache.exists(): return json.load(open(cache, encoding="utf-8"))
     from faster_whisper import WhisperModel
@@ -72,11 +72,14 @@ def merkmale(x, words):
     for e in enden:
         m = (t > e - 0.6) & (t <= e) & v
         if m.sum() > 15: sl.append(np.polyfit(t[m], 12 * np.log2(f0[m] / np.median(f0[v])), 1)[0])
-    bogen = 0.0   # größter Tonhöhenbogen innerhalb eines Wortes („aaalle“)
-    for w_ in words:
-        mm = (t >= w_["s"]) & (t <= w_["e"] + 0.1) & v
-        if mm.sum() >= 12:
-            stw = 12 * np.log2(f0[mm] / np.median(f0[v])); bogen = max(bogen, float(stw.max() - stw.min()))
+    # Schlussbogen: Tonhöhenumfang (p95−p5, Oktavfehler bereinigt) in der letzten Sekunde vor jeder Pause und am Satzende
+    pa = snd.to_pitch_ac(time_step=FL, pitch_floor=70, pitch_ceiling=300, octave_jump_cost=0.6, voicing_threshold=0.5)
+    fa = pa.selected_array["frequency"]; ta = pa.xs(); va = fa > 0; bogen = 0.0
+    for e in enden:
+        mm = (ta > e - 1.0) & (ta <= e) & va
+        if mm.sum() >= 15:
+            stb = 12 * np.log2(fa[mm] / np.median(fa[va])); stb = stb[np.abs(stb - np.median(stb)) < 7]
+            if len(stb) >= 12: bogen = max(bogen, float(np.percentile(stb, 95) - np.percentile(stb, 5)))
     return {"Wortbogen HT": bogen, "Tempo W/s": len(words) / sprech, "Pausenanteil %": sum(pausen) / dauer * 100,
             "Wörter/Phrase": len(words) / (len(pausen) + 1), "Melodie-Spannweite HT": float(np.percentile(st, 95) - np.percentile(st, 5)),
             "Endabfall HT/s": float(np.mean(sl)) if sl else 0.0, "F0 Hz": float(np.median(f0[v])), "Pegel dB": float(np.percentile(db[laut], 50))}
@@ -87,7 +90,7 @@ def ki_wert(m):   # 0 = alle Merkmale im Bereich echter Vorleser; sonst Summe de
     for k in PRUEF:
         lo, hi = bereich(k); w = hi - lo
         s += max(0, lo - m[k]) / w + max(0, m[k] - hi) / w
-    return s + max(0, m.get("Wortbogen HT", 0) - BOGEN_MAX) / 4
+    return s + max(0, m.get("Wortbogen HT", 0) - BOGEN_MAX) / 3
 
 # 1) Prüfen und bewerten
 takes = {}
@@ -113,7 +116,7 @@ for sid in sorted(takes, key=ORD):
         t["gesamt"] = t["ki"] + abs(12 * np.log2(t["m"]["F0 Hz"] / f0_med)) / F0W + (abs(t["m"]["Tempo W/s"] - tempo_med) / 0.5 if SEG[sid]["absatz"] != 0 else 0)
     wahl[sid] = min(kand, key=lambda t: t["gesamt"])
 
-print("Segment Take   treu   KI-Wert Gesamt  Tempo  Pausen%  W/Phrase  Melodie  Wortbogen  F0    Abweichungen (turbo)")
+print("Segment Take   treu   KI-Wert Gesamt  Tempo  Pausen%  W/Phrase  Melodie  Schlussb.  F0    Abweichungen (turbo)")
 for sid in sorted(takes, key=ORD):
     for t in sorted(takes[sid], key=lambda t: t["stil"]):
         m = t["m"]; mark = "  <== gewählt" if t is wahl[sid] else ""
@@ -121,7 +124,7 @@ for sid in sorted(takes, key=ORD):
 print("Bereich echter Vorleser:", {k: tuple(round(v, 2) for v in bereich(k)) for k in PRUEF})
 
 # 3) Montage: Ränder auf Sprache schneiden (Atem/Stille weg), Lautheit angleichen, Pausen einfügen
-teile, ziel = [], np.median([wahl[s]["m"]["Pegel dB"] for s in wahl])
+teile, ziel, grenzen = [], np.median([wahl[s]["m"]["Pegel dB"] for s in wahl]), []
 reihen = sorted(wahl, key=ORD)
 for i, sid in enumerate(reihen):
     t = wahl[sid]; x = pcm(TAKES / t["datei"], SR).astype(np.float64)
@@ -133,6 +136,7 @@ for i, sid in enumerate(reihen):
     a = max(0, (on[0] if on else int(w0 / FL)) * n - int(0.03 * SR)); b = min(len(x), ((off[-1] + 1) if off else int(w1 / FL)) * n + int(0.12 * SR))
     y = x[a:b] * 10 ** ((ziel - t["m"]["Pegel dB"]) / 20)
     fi, fo = int(0.01 * SR), int(0.06 * SR); y[:fi] *= np.linspace(0, 1, fi); y[-fo:] *= np.linspace(1, 0, fo)
+    pos = int(0.3 * SR) + sum(len(q) for q in teile); grenzen.append((sid, pos, pos + len(y)))
     teile.append(y)
     if i < len(reihen) - 1:
         nxt = SEG[reihen[i + 1]]
@@ -145,11 +149,20 @@ subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "s16le", "-ar", str(
 subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(roh), "-codec:a", "libmp3lame", "-q:a", "2",
                 "-metadata", "title=Vom glücklichen Leben, Kapitel 1", "-metadata", "artist=Seneca", str(OUT)], check=True)
 
-# 4) Endkontrolle des Ganzen
-soll = " ".join(SEG[s]["buch"] for s in reihen)
-for name in ("large-v3-turbo", "medium"):
-    cache = WORK / f"montage.{name}.json"
-    if cache.exists(): cache.unlink()
-    d = abweichung(soll, stt(roh, name)); print(f"Endkontrolle {name}: {'wortgetreu' if not d else d}")
+# 4) Endkontrolle satzweise (am Stück überspringt Whisper Passagen): jedes Segment der fertigen Montage einzeln prüfen
+fehler = []
+yy = pcm(roh, 16000)
+for sid, a0, a1 in grenzen:
+    teil = WORK / f"kontrolle_{sid}.wav"
+    seg = yy[int(a0 / SR * 16000):int(a1 / SR * 16000)]
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "s16le", "-ar", "16000", "-ac", "1", "-i", "-", str(teil)], input=(seg * 32767).astype(np.int16).tobytes(), check=True)
+    for name in ("large-v3-turbo", "medium"):
+        c = WORK / f"kontrolle_{sid}.{name}.json"
+        if c.exists(): c.unlink()
+    d = abweichung(SEG[sid]["buch"], stt(teil, "large-v3-turbo"))
+    if d:
+        d2 = abweichung(SEG[sid]["buch"], stt(teil, "medium"))
+        if d2: fehler.append((sid, d, d2))
+print("Endkontrolle satzweise:", "wortgetreu (alle Segmente)" if not fehler else fehler)
 json.dump({s: {k: v for k, v in wahl[s].items() if k != 'words'} for s in wahl}, open(WORK / "auswahl.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print("Dauer", round(len(y) / SR, 1), "s →", OUT)
