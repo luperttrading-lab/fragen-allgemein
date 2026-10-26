@@ -109,3 +109,21 @@ mit `TAKES_MAX_OUTPUT_TOKENS=30000`, Log `audio/seneca_neufassung/takes/takes_lo
 | Dollar nach Audio-Doku (out 0,005 $/1K) | **0,0511 $** |
 
 Keine Kosten-/Credit-Felder in den Antworten. Stil B wieder am längsten (+28 % gegenüber A), C am kürzesten.
+
+## Neufassung zügig (26.10.2026): 42 Takes mit Stilen D/E/F, Gemini 2.5 Pro TTS onyx, FLAC
+
+Vorgaben `audio/seneca_neufassung/takes/segmente_zuegig.json` (14 Segmente × D/E/F), gleiches Skript, Log angehängt an
+`audio/seneca_neufassung/takes/takes_log.jsonl`; A/B/C-Dateien unverändert. Alle 42 Aufrufe im ersten Versuch erfolgreich.
+
+| | Wert |
+|---|---|
+| Zeitfenster (Europe/Berlin, CET) | erster Start **17:28:07**, letztes Ende **17:32:54** |
+| Aufrufe | 42 (alle HTTP 200, keine Wiederholung) |
+| Tokens gesamt | **4 857 in / 6 841 out** (Bremse 30 000 nicht erreicht) |
+| Audio gesamt | 274,1 s (D 89,3 s · E 88,4 s · F 96,3 s) |
+| Output-Token je Audiosekunde | 24,96 |
+| Dollar nach `/v1/models` (in 0,000001 $/Token, out 0) | 0,0049 $ |
+| Dollar nach Audio-Doku (out 0,005 $/1K) | **0,0391 $** |
+
+Tempo-Vergleich über alle 14 Segmente: A 118,4 s · B 151,1 s · C 103,2 s · D 89,3 s · E 88,4 s · F 96,3 s. D und E sind damit
+rund 25 % schneller als A und 41 % schneller als B; der Text (270 Wörter) läuft bei E mit ≈ 183 Wörtern/min.
