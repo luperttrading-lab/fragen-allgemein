@@ -1,0 +1,34 @@
+{
+ "modell": "gemini-2.5-pro-preview-tts",
+ "voice": "onyx",
+ "anweisung": {
+  "K": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Ruhig und klar, in gemäßigtem Tempo, wie ein erfahrener Hörbuchsprecher. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "L": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Zügig und flüssig, im natürlichen Erzähltempo eines erfahrenen Sprechers; keine Silbe dehnen, keine singende Satzmelodie. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "M": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Lebendig und etwas schneller, wie ein Mensch, der einem Freund einen klugen Gedanken erzählt; ruhige, gleichmäßige Satzmelodie ohne Bögen auf einzelnen Wörtern. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "N": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Klar und zügig wie ein erfahrener Radiosprecher, kurze natürliche Pausen an den Satzzeichen, sachliche Betonung ohne Übertreibung. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "O": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Ruhig und klar, in gemäßigtem Tempo, wie ein erfahrener Hörbuchsprecher. Sprich jedes Wort genau so, wie es dasteht. Text:",
+  "P": "Lies den folgenden Text wörtlich und vollständig vor, ohne Begrüßung, ohne Kommentar, ohne etwas wegzulassen, hinzuzufügen oder zu verändern. Zügig und flüssig, im natürlichen Erzähltempo eines erfahrenen Sprechers; keine Silbe dehnen, keine singende Satzmelodie. Sprich jedes Wort genau so, wie es dasteht. Text:"
+ },
+ "takes": {
+  "s0": [
+   "K",
+   "L",
+   "M",
+   "N",
+   "O",
+   "P"
+  ],
+  "rest": []
+ },
+ "hinweis": "Nur Satz 1 neu (ohne „zu“), mit Nachlauf. K=A, L=D, M=E, N=F, O=A, P=D.",
+ "segmente": [
+  {
+   "id": "s0",
+   "absatz": 1,
+   "buch": "Glücklich leben, mein Bruder Gallio, das wollen alle.",
+   "sprech": "Glücklich leben, mein Bruder Gallio, das wollen alle. Doch wenn es darum",
+   "woerter": 8,
+   "nachlauf": "Doch wenn es darum"
+  }
+ ]
+}
