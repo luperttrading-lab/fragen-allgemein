@@ -107,3 +107,16 @@ Hinweis: Der Abstand hängt vom Ausschnitt ab (Gemini-Montage auf 100 s: 1,12, a
 Satz 1 jetzt „Glücklich leben, mein Bruder Gallio, das wollen alle.“; 6 neue Takes K–P mit Nachlauf (alte Satz-1-Takes in
 `takes/verworfen_mit_zu/`). Gewählt s0_K (sauber, Melodie 10,1 HT, Schlussbogen 8,4). Neue Montage 105,5 s, alle 11 Übergänge
 ohne harten Abbruch, satzweise wortgetreu, Abstand 0,87 (vorher 1,12): Tempo 2,73, Pausen 15,0 %, 8,4 Wörter/Phrase, Melodie 12,3 HT.
+
+## ElevenLabs Christian, ganzer überarbeiteter Text (Aufnahme des Nutzers, 26.10.2026 22:06)
+104,4 s, wortgetreu (turbo und medium), sauberes Ende. Nutzerurteil: klingt bei Wiedergabetempo 0,92–0,94 gut.
+Fest verlangsamte Fassung `christian_eleven_v4_ganz_093.mp3` (Rubber Band, tempo 0,93, Formanten erhalten), 112,2 s, wortgetreu.
+
+| Fassung | Abstand (Tempoziel 2,6–3,0) | Tempo W/s | Pausen % | W/Phrase | Pausen-Schwankung | Melodie HT | Abfall |
+|---|---|---|---|---|---|---|---|
+| Christian, Original | 2,32 | 2,61 | 11,4 | 7,1 | 0,44 | 13,2 | −2,08 |
+| Christian, 0,93 | 1,94 | 2,44 | 11,9 | 6,6 | 0,50 | 13,3 | −1,52 |
+| Gemini-Montage v2 | 0,87 | 2,73 | 15,0 | 8,4 | 0,72 | 12,3 | −1,79 |
+
+Befund: Das bevorzugte Tempo hängt von der Stimme ab (Gemini erste Neufassung: Wunsch ≈ 2,9 W/s; Christian: ≈ 2,44 W/s). Christian
+pausiert seltener und gleichförmiger; das kostet im Abstand, der Stimmklang und der durchgehende Fluss werden nicht gemessen.
