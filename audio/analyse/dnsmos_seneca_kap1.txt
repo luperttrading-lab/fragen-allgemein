@@ -1,0 +1,16 @@
+ref_Christian_Al-Kadi                P808 4.18  SIG 3.69  BAK 3.99  OVRL 3.37  n=10
+ref_Claus_Misfeldt                   P808 3.97  SIG 3.49  BAK 4.02  OVRL 3.19  n=10
+ref_Gesine                           P808 3.66  SIG 3.31  BAK 3.68  OVRL 2.89  n=10
+ref_Hans_Hafen                       P808 4.01  SIG 3.46  BAK 3.76  OVRL 3.05  n=10
+ref_Rainer                           P808 3.89  SIG 3.61  BAK 3.89  OVRL 3.25  n=10
+ref_Ramona_Deininger-Schnabel        P808 3.95  SIG 3.09  BAK 3.28  OVRL 2.56  n=10
+ref_redaer                           P808 3.92  SIG 3.61  BAK 4.06  OVRL 3.32  n=10
+tts_edge_conrad                      P808 4.16  SIG 3.61  BAK 4.15  OVRL 3.40  n=10
+tts_edge_florian                     P808 4.14  SIG 3.68  BAK 4.22  OVRL 3.50  n=8
+tts_edge_katja                       P808 4.14  SIG 3.55  BAK 4.11  OVRL 3.31  n=10
+tts_gemini_charon_v2                 P808 4.22  SIG 3.65  BAK 4.19  OVRL 3.45  n=10
+tts_gemini_fenrir_v1                 P808 4.12  SIG 3.61  BAK 4.18  OVRL 3.40  n=10
+tts_gemini_fenrir_v2                 P808 4.21  SIG 3.69  BAK 4.19  OVRL 3.48  n=9
+tts_gemini_fenrir_v3                 P808 4.29  SIG 3.70  BAK 4.15  OVRL 3.47  n=10
+tts_gpt_onyx                         P808 4.20  SIG 3.70  BAK 4.13  OVRL 3.46  n=9
+tts_piper_thorsten                   P808 3.70  SIG 3.29  BAK 4.01  OVRL 3.02  n=8
