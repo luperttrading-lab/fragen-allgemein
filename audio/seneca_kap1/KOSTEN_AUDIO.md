@@ -54,3 +54,19 @@ nennt Punkte, Credits oder Beträge. Der Credit-Abfluss ist nur in der ChatLLM-A
 - **Widerspruch:** `/v1/models` nennt für gemini-2.5-pro-preview-tts (und -flash-preview-tts) output_token_rate 0, die Doku 0,005 $/1K.
   Ein Output-Preis von 0 ist für ein TTS-Modell unplausibel; die Modellliste ist hier wahrscheinlich unvollständig, nicht gratis.
   Welche Zahl der Credit-Abrechnung zugrunde liegt, lässt sich nur per App-Vergleich (Credits vor/nach) klären. [Wahrscheinlich]
+
+## v3 (26.10.2026): Gemini 2.5 Pro TTS onyx, Aussprache-Schreibweise „hin-eilt“
+
+Whisper-Befund der Hauptsitzung zu v2: Fenrir sprach „hineineilt“ und „auf welchem Wege“ statt „Weg“, Charon „hineineilt“, „Wo diese“ statt
+„dieser“, „daher die Situation“ statt „da ja die Situation“. Die Aussprachehinweise in der Anweisung wirkten nicht.
+**Ersetzung für v3:** gesprochener Text = `seneca_kap1_text.txt` mit genau einer Ersetzung „hineilt“ → „hin-eilt“ (Scratch-Datei,
+die Textdatei im Repo ist unverändert). Anweisung `anweisung_v3.txt`: Satz zu „hineilt“ ersetzt durch „„hin-eilt“ wird wie ein Wort
+gesprochen: hin-eilt;“, Hinweis zu „Weg/Wege“ unverändert. Ein fehlgeschlagener Startversuch um 13:06 (Skript nicht gestartet, kein
+API-Aufruf, keine Kosten) ist im Log nicht enthalten.
+
+| Nr. | Voice | Start (CET) | Ende | Aufruf | Datei | Dauer Datei | Tokens in/out | Pegel mittel / Spitze | Transkript |
+|---|---|---|---|---|---|---|---|---|---|
+| v3-1 | onyx (→ Fenrir) | 13:11:45 | 13:12:47 | 61,7 s | routellm_gemini25pro_onyx_v3.mp3 (1 276 461 B) | 106,3 s | 541 / 2 657 | −19,5 dB / −1,0 dB | keins geliefert |
+
+Kosten-/Credit-Felder: wie v2 keine. output_tokens / Sekunden = 2 657 / 106,3 = 24,99 (wieder 25 Token je Audiosekunde).
+Dollar-Schätzung: Doku-Satz 0,005 $/1K Output → 0,0133 $ + Input 0,0005 $ ≈ **1,4 ct**; nach `/v1/models` (Output 0) 0,0005 $.
