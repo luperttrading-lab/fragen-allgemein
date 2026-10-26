@@ -19,6 +19,7 @@ def pcm(f, sr):
 def norm(t):     # Vergleich ohne Leerzeichen: umso/um so, wieviel/wie viel, hineilt/hin eilt gleich; das/dass/daß gleich
     t = t.lower().replace("ß", "ss")
     t = re.sub(r"\bdass\b", "das", t)
+    t = re.sub(r"\bgall?io\b", "gallio", t)   # Eigenname: Schreibweise der Erkennung schwankt (Galio/Gallio)
     return re.sub(r"[^a-zäöü0-9]", "", t)
 
 _models = {}

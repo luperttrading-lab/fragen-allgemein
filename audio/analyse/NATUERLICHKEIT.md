@@ -29,3 +29,28 @@
 - DNSMOS: alle modernen Synthese-Stimmen technisch sauberer als die LibriVox-Aufnahmen; nur Piper fällt ab.
 - Folgerung: Dieselbe Stimme schwankt zwischen zwei Durchläufen stärker als zwischen Stimmen. Für ein Buch je Absatz mehrere
   Durchläufe erzeugen, erst nach Worttreue (Whisper) filtern, dann nach Prosodie auswählen.
+
+## Best-of-N, satzweise (26.10.2026, 15:21–15:25 Uhr erzeugt)
+14 Takes Gemini 2.5 Pro TTS onyx (je Satz Stil A/B/C, Ansage A/C), Auswahl mit `bestof.py`:
+- Worttreue: 2 von 14 Takes echt fehlerhaft verworfen bzw. nicht gewählt („zielen“ statt „ziehen“ in s4_A; s1_A unklar „Galliot“).
+  „Gallio“/„Galio“ ist nur Schreibweise der Erkennung und wird gleich behandelt.
+- Gewählt: s0_C, s1_C, s2_B, s3_A, s4_B. Ränder geschnitten, Lautheit angeglichen, Pausen 1,4 s nach Ansage und zwischen
+  Absätzen, 0,75 s zwischen Sätzen. Ergebnis `seneca_kap1/seneca_kap1_bestof.mp3`, 118 s.
+- Endkontrolle: Whisper large-v3-turbo wortgetreu; medium meldete ein fehlendes „uns“, large-v3, turbo und medium auf dem
+  Ausschnitt hören es: Fehlalarm.
+- Summe der Überschreitungen der menschlichen Spannweite (in Bereichsbreiten, 6 Merkmale, 0 = ganz im Bereich):
+
+| Fassung | Abstand |
+|---|---|
+| Best-of-Montage | 0,66 |
+| Edge Katja | 2,14 |
+| Edge Conrad | 2,66 |
+| Piper Thorsten | 3,08 |
+| Gemini Fenrir v1 | 3,17 |
+| gpt-audio Onyx | 4,00 |
+| Gemini Fenrir v2 | 5,71 |
+| Gemini Charon v2 | 6,93 |
+| Edge Florian | 7,43 |
+| Gemini Fenrir v3 | 7,96 |
+
+  Montage knapp außerhalb bei Tempo (2,69 statt ≤ 2,57 W/s), Melodie (12,2 statt ≤ 11,7 HT) und Abfall (−1,71 statt ≥ −1,58).
