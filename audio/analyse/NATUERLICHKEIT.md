@@ -54,3 +54,16 @@
 | Gemini Fenrir v3 | 7,96 |
 
   Montage knapp außerhalb bei Tempo (2,69 statt ≤ 2,57 W/s), Melodie (12,2 statt ≤ 11,7 HT) und Abfall (−1,71 statt ≥ −1,58).
+
+## Neufassung (Text des Nutzers), Best-of-N (26.10.2026, Takes 15:36:57–15:42:47 Uhr)
+42 Takes Gemini 2.5 Pro TTS onyx (14 Sätze × Stil A/B/C), 9 305 Output-Token. Verworfen: s0_C („Gallie“). Gewichtung der
+einheitlichen Stimmlage (`BESTOF_F0W`, Halbtöne je Strafpunkt) verglichen:
+
+| F0W | Abstand | Melodie HT | Abfall HT/s |
+|---|---|---|---|
+| 3 | 1,77 | 13,58 | −2,34 |
+| 1,5 | 1,61 | 13,27 | −2,36 |
+| 0,75 | **0,70** | 12,81 | −1,67 |
+
+Gewählt F0W 0,75 (jetzt Voreinstellung): Tempo 2,26 W/s, Pausen 16,4 %, 6,0 Wörter/Phrase, Pausen-Schwankung 0,64 im
+menschlichen Bereich; Melodie knapp darüber. Endkontrolle turbo und medium wortgetreu. `seneca_neufassung/seneca_neufassung_bestof.mp3`, 145 s.

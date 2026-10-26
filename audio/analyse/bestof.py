@@ -11,6 +11,8 @@ CFG = json.load(open(TAKES / "segmente.json", encoding="utf-8")); SEG = {s["id"]
 REF = json.load(open(Path(__file__).with_name("merkmale_seneca_kap1.json"), encoding="utf-8"))
 SR = 24000; FL = 0.01
 PAUSE = {"kopf": 1.4, "satz": 0.75, "absatz": 1.4}      # Sekunden zwischen Segmenten
+import os
+F0W = float(os.environ.get("BESTOF_F0W", "0.75"))   # Halbtöne Abweichung von der Gesamtlage je Strafpunkt (kleiner = einheitlichere Stimmlage)
 
 def pcm(f, sr):
     b = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", str(f), "-ac", "1", "-ar", str(sr), "-f", "s16le", "-"], capture_output=True, check=True).stdout
@@ -100,7 +102,7 @@ ORD = lambda s: int(s[1:])          # s2 vor s10
 for sid in sorted(takes, key=ORD):
     kand = [t for t in takes[sid] if t["treu"]] or takes[sid]
     for t in kand:
-        t["gesamt"] = t["ki"] + abs(12 * np.log2(t["m"]["F0 Hz"] / f0_med)) / 3 + (abs(t["m"]["Tempo W/s"] - tempo_med) / 0.5 if SEG[sid]["absatz"] != 0 else 0)
+        t["gesamt"] = t["ki"] + abs(12 * np.log2(t["m"]["F0 Hz"] / f0_med)) / F0W + (abs(t["m"]["Tempo W/s"] - tempo_med) / 0.5 if SEG[sid]["absatz"] != 0 else 0)
     wahl[sid] = min(kand, key=lambda t: t["gesamt"])
 
 print("Segment Take   treu   KI-Wert Gesamt  Tempo  Pausen%  W/Phrase  Melodie  Endabfall  F0    Abweichungen (turbo)")
