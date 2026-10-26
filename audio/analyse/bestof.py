@@ -81,7 +81,10 @@ def merkmale(x, words):
         if mm.sum() >= 15:
             stb = 12 * np.log2(fa[mm] / np.median(fa[va])); stb = stb[np.abs(stb - np.median(stb)) < 7]
             if len(stb) >= 12: bogen = max(bogen, float(np.percentile(stb, 95) - np.percentile(stb, 5)))
-    rand_a = float(db[:5].max() - np.percentile(db, 95)); rand_e = float(db[-5:].max() - np.percentile(db, 95))   # erste/letzte 50 ms
+    # Abbruch erkennen: harte Schwingung in den ersten/letzten 2 ms (> 3 % der Spitze) oder kein Ausklingen (letzte 30 ms laut)
+    pk = float(np.abs(x).max()) or 1.0; k2 = int(0.002 * SR)
+    rand_a = 0.0 if np.abs(x[:k2]).max() > 0.03 * pk else -99.0
+    rand_e = 0.0 if (np.abs(x[-k2:]).max() > 0.03 * pk or db[-3:].max() > np.percentile(db, 95) - 22) else -99.0
     return {"Rand Anfang dB": rand_a, "Rand Ende dB": rand_e, "Wortbogen HT": bogen, "Tempo W/s": len(words) / sprech, "Pausenanteil %": sum(pausen) / dauer * 100,
             "Wörter/Phrase": len(words) / (len(pausen) + 1), "Melodie-Spannweite HT": float(np.percentile(st, 95) - np.percentile(st, 5)),
             "Endabfall HT/s": float(np.mean(sl)) if sl else 0.0, "F0 Hz": float(np.median(f0[v])), "Pegel dB": float(np.percentile(db[laut], 50))}
