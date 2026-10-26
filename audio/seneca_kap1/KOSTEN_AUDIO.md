@@ -163,3 +163,9 @@ belegt). takes.py fängt seitdem Netzfehler ab und überspringt bei Wiederaufnah
 | Output-Token je Audiosekunde | 24,97 |
 | Dollar nach `/v1/models` (in 0,000001 $/Token, out 0) | 0,0057 $ |
 | Dollar nach Audio-Doku (out 0,005 $/1K) | **0,0616 $** |
+
+## Neufassung v2, Satz 1 neu (26.10.2026): 6 Takes K–P für s0 („Glücklich leben, …“ ohne „zu“, mit Nachlauf)
+
+Vorgaben `audio/seneca_neufassung_v2/takes/segmente_satz1.json`, Gemini 2.5 Pro TTS onyx, FLAC `s0_{K..P}.flac`. 6/6 im ersten Versuch.
+Zeitfenster (Europe/Berlin, CET) **23:04:21 – 23:04:57**, Tokens **594 in / 717 out**, Audio 28,7 s (K 5,21 · L 4,85 · M 4,33 · N 4,93 ·
+O 5,45 · P 3,97 s). Dollar: 0,0006 $ nach `/v1/models`, 0,0042 $ nach Doku-Satz.
