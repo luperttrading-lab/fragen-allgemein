@@ -144,3 +144,22 @@ Log `audio/seneca_neufassung_v2/takes/takes_log.jsonl`. Alle 48 Aufrufe im erste
 | Dollar nach Audio-Doku (out 0,005 $/1K) | **0,0479 $** |
 
 Tempo: D und E lesen die 240 Wörter in rund 76 s (≈ 190 Wörter/min), A in 101,5 s (≈ 142 Wörter/min).
+
+## Neufassung v2, Nachlauf-Takes (26.10.2026): 48 Takes G/H/I/J mit Anfang des Folgesatzes, Gemini 2.5 Pro TTS onyx, FLAC
+
+Vorgaben `audio/seneca_neufassung_v2/takes/segmente_puffer.json` (12 Segmente × G/H/I/J, Anweisungen wie A/D/E/F, Sprechtext mit
+Nachlauf). Log angehängt an `audio/seneca_neufassung_v2/takes/takes_log.jsonl`; A/D/E/F-Dateien unverändert.
+**Zwei Läufe:** Lauf 1 brach nach 10 Takes beim 11. Aufruf (s2_I) mit „ConnectionResetError: Connection reset by peer“ ab, bevor
+eine Antwort vorlag; dieser Aufruf steht nicht im Log, sein Verbrauch ist unbekannt (ob der Dienst dafür Credits abzog, ist nicht
+belegt). takes.py fängt seitdem Netzfehler ab und überspringt bei Wiederaufnahme vorhandene FLACs. Lauf 2 erzeugte die übrigen 38.
+
+| | Wert |
+|---|---|
+| Zeitfenster Lauf 1 (Europe/Berlin, CET) | 21:41:51 – 21:43:08 (10 Takes) |
+| Zeitfenster Lauf 2 | 21:43:55 – 21:49:25 (38 Takes) |
+| Protokollierte Aufrufe | 48 (alle HTTP 200, keine Wiederholung) + 1 abgebrochener ohne Antwort |
+| Tokens gesamt (protokolliert) | **5 652 in / 11 185 out** (Bremse 30 000 nicht erreicht) |
+| Audio gesamt | 447,9 s (G 132,8 s · H 104,5 s · I 103,0 s · J 107,6 s) |
+| Output-Token je Audiosekunde | 24,97 |
+| Dollar nach `/v1/models` (in 0,000001 $/Token, out 0) | 0,0057 $ |
+| Dollar nach Audio-Doku (out 0,005 $/1K) | **0,0616 $** |
