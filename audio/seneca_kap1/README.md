@@ -1,7 +1,15 @@
 # Hörfassung Seneca, Vom glücklichen Leben, Kap. 1 (Stand 26.10.2026)
 
-Text: aus dem Foto der Buchseite abgetippt, Lesefassung (ohne Absatznummern "1 (1)", ohne Fußnotenziffer,
-Gedankenstriche durch Kommas/Punkte ersetzt, "daß" → "dass", Überschrift mit Autor vorangestellt).
+- `seneca_kap1_seite_zeilengetreu.txt`: Buchseite Zeile für Zeile, mit Trennstrichen, Absatznummern, Fußnotenziffer.
+- `seneca_kap1_text.txt`: Lesefassung v2. Wortlaut und Satzzeichen exakt wie im Buch (auch „daß“, „muß“, Gedankenstriche);
+  entfernt sind nur Absatznummern „1 (1)“ und „(2)“, Fußnotenziffer und Silbentrennung; vorangestellt die Ansage
+  „Seneca. Vom glücklichen Leben. Erstes Kapitel.“ Wortvergleich gegen die Seite: nur die Ansage weicht ab.
+- Fassung v1 (bis 26.10. 12:30) hatte zwei Wortlautfehler: „, da ja die Situation hier nicht dieselbe ist“ war zu
+  „. Denn die Situation ist hier nicht dieselbe“ umformuliert, und „– kurz wie es selbst dann ist“ hatte ein falsches
+  Komma nach „kurz“ (Sinn: „kurz, wie es [das Leben] selbst dann ist“, nicht „kurz gesagt“). Dazu Satzzeichen geglättet.
+  Alle MP3s ohne „_v2“ beruhen auf v1.
+- Prüfung der Audios: Rückschrift mit faster-whisper large-v3-turbo und Wortabgleich. Gemini 2.5 Pro TTS (v1) sprach
+  „hinein eilt“ statt „hineilt“, „auf welchem Wege“ statt „Weg“ und ein doppeltes „die“.
 
 ## Kostenlose Stimmen (hier erzeugt)
 - `seneca_edge_*.mp3`: Microsoft-Neuralstimmen über `edge-tts` (Conrad, Florian multilingual, Katja), Tempo -8 %.
