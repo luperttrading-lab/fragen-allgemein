@@ -4,14 +4,14 @@
 Aufruf: python3 takes.py [segmente.json]
 Für jedes Segment und jeden Stil (takes: s0 → takes["s0"], sonst takes["rest"]) genau ein Aufruf; bei HTTP-Fehler oder leerer
 Antwort eine Wiederholung, sonst als fehlgeschlagen protokolliert. Rohes PCM (L16, s16le, 24 kHz, mono) → ffmpeg → FLAC.
-Kostenbremse: Summe output_tokens ≤ MAX_OUTPUT_TOKENS, sonst Stopp vor dem nächsten Aufruf.
+Kostenbremse: Summe output_tokens ≤ MAX_OUTPUT_TOKENS (Umgebungsvariable TAKES_MAX_OUTPUT_TOKENS, Standard 15000), sonst Stopp vor dem nächsten Aufruf.
 Schlüssel nur aus ROUTELLM_API_KEY, wird nie ausgegeben. Log: takes_log.jsonl neben der Segmentdatei.
 """
 import base64, datetime, json, os, pathlib, re, subprocess, sys, time, urllib.error, urllib.request
 from zoneinfo import ZoneInfo
 
 BASE = "https://routellm.abacus.ai/v1"
-MAX_OUTPUT_TOKENS = 15000
+MAX_OUTPUT_TOKENS = int(os.environ.get("TAKES_MAX_OUTPUT_TOKENS", "15000"))  # Kostenbremse, per Umgebungsvariable anpassbar
 BERLIN = ZoneInfo("Europe/Berlin")
 
 
