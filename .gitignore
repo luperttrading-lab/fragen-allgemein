@@ -1,1 +1,4 @@
 __pycache__/
+video/**/tts_cache/
+video/**/*.wav
+video/**/render.log
