@@ -189,6 +189,24 @@ def scene_eleven(sc, cfg, cache):
     return x, out
 
 
+def number_sources(cfg):
+    """Quellen nach erstem Auftreten durchnummerieren; Kurzzeile je Szene, Nummern fuer die Beschreibung."""
+    reg = cfg.get('quellen')
+    if not reg:
+        return []
+    order = []
+    for sc in cfg['scenes']:
+        for q in sc.get('quellen', []):
+            if q not in reg:
+                sys.exit(f'Quelle fehlt im Verzeichnis: {q}')
+            if q not in order:
+                order.append(q)
+        if sc.get('quellen'):
+            sc['source'] = 'Quellen: ' + ' · '.join(f"[{order.index(q) + 1}] {reg[q]['kurz']}" for q in sc['quellen'])
+    cfg['_order'] = order
+    return order
+
+
 def sentence(s):
     """Satz als (Anzeigetext, Sprechtext)."""
     return (s, s) if isinstance(s, str) else (s['t'], s.get('say', s['t']))
@@ -294,17 +312,16 @@ def panel_states(sc):
         fb = font(INTER.format('SemiBold'), 25)
         txt = 'Beweislage: ' + ev.get('label', label)
         tw = d.textlength(txt, font=fb)
-        bw = int(tw + 40 + 3 * 26 + 22)
+        bw = int(tw + 52)                              # nur Farbe und Text, keine Punkte (waeren doppelt)
         tint = tuple(int(c * 0.14 + p * 0.86) for c, p in zip(col, PAPER))
         d.rounded_rectangle([TX0, by, TX0 + bw, by + 54], radius=27, fill=tint, outline=col, width=2)
-        for j in range(3):
-            cx, cy = TX0 + 30 + j * 26, by + 27
-            d.ellipse([cx - 8, cy - 8, cx + 8, cy + 8], fill=col if j < dots else None, outline=col, width=2)
-        d.text((TX0 + 30 + 3 * 26 + 6, by + 12), txt, font=fb, fill=col)
-        if any(b.get('ev') for b in sc.get('bullets', [])):   # Legende statt Fliesstext
+        d.text((TX0 + 26, by + 12), txt, font=fb, fill=col)
+        used = {b.get('ev') for b in sc.get('bullets', [])}
+        if used - {None}:                              # Legende statt Fliesstext
             fl = font(INTER.format('Regular'), 21)
             xx, yy = TX0, by + 84
-            for kind in ('stark', 'mittel', 'offen', 'keine'):
+            kinds = ['stark', 'mittel'] + (['offen'] if 'offen' in used else []) + ['keine']
+            for kind in kinds:
                 draw_mark(d, xx + 11, yy, 11, kind)
                 d.text((xx + 28, yy), MARKS[kind][2], font=fl, fill=MUTED, anchor='lm')
                 xx += 28 + int(d.textlength(MARKS[kind][2], font=fl)) + 26
@@ -499,6 +516,7 @@ def main():
     ap.add_argument('--cache', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tts_cache'))
     args = ap.parse_args()
     cfg = json.load(open(args.szenen, encoding='utf-8'))
+    number_sources(cfg)
     total, pcm = build_audio(cfg, args)
     stem = os.path.splitext(args.ausgabe)[0]
     write_wav(stem + '.wav', pcm)

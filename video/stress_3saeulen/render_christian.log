@@ -9,19 +9,19 @@ Gesamtdauer 355.3 s (5:55), 741 Woerter, Tempo 2.14 W/s Sprechzeit
   s7    321.4– 355.3 s  ( 33.9 s)  Was wirklich bleibt
      0.0 s / 355.3 s  (0 s Rechenzeit)
     30.0 s / 355.3 s  (24 s Rechenzeit)
-    60.0 s / 355.3 s  (47 s Rechenzeit)
-    90.0 s / 355.3 s  (60 s Rechenzeit)
-   120.0 s / 355.3 s  (85 s Rechenzeit)
-   150.0 s / 355.3 s  (110 s Rechenzeit)
-   180.0 s / 355.3 s  (137 s Rechenzeit)
-   210.0 s / 355.3 s  (162 s Rechenzeit)
-   240.0 s / 355.3 s  (186 s Rechenzeit)
-   270.0 s / 355.3 s  (210 s Rechenzeit)
-   300.0 s / 355.3 s  (230 s Rechenzeit)
-   330.0 s / 355.3 s  (252 s Rechenzeit)
+    60.0 s / 355.3 s  (48 s Rechenzeit)
+    90.0 s / 355.3 s  (62 s Rechenzeit)
+   120.0 s / 355.3 s  (87 s Rechenzeit)
+   150.0 s / 355.3 s  (111 s Rechenzeit)
+   180.0 s / 355.3 s  (138 s Rechenzeit)
+   210.0 s / 355.3 s  (164 s Rechenzeit)
+   240.0 s / 355.3 s  (187 s Rechenzeit)
+   270.0 s / 355.3 s  (212 s Rechenzeit)
+   300.0 s / 355.3 s  (232 s Rechenzeit)
+   330.0 s / 355.3 s  (254 s Rechenzeit)
 fertig: stress_video_christian.mp4
 
-real	4m35.767s
-user	8m46.585s
-sys	0m38.973s
+real	4m37.466s
+user	8m48.612s
+sys	0m39.915s
 WEB_FERTIG

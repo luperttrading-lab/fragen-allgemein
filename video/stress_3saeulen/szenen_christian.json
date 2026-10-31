@@ -47,7 +47,8 @@
             2752
           ]
         }
-      ]
+      ],
+      "kapitel": "Einleitung"
     },
     {
       "id": "s1",
@@ -79,7 +80,6 @@
         "label": "Kern gut belegt",
         "note": "Allostatische Last: gut belegt · drei Eimer als Tagesbudget: Vereinfachung"
       },
-      "source": "McEwen 1998, New England Journal of Medicine · Brabban & Turkington 2002 (Eimer-Bild der Psychoedukation)",
       "sentences": [
         "Der große Eimer steht für deine Belastbarkeit.",
         "Hinein fließen mentale Stressoren wie Termindruck und Sorgen.",
@@ -145,6 +145,10 @@
             1300
           ]
         }
+      ],
+      "quellen": [
+        "mcewen1998",
+        "keating"
       ]
     },
     {
@@ -182,7 +186,6 @@
         "level": "mittel",
         "note": "Kurze Pausen: kleiner, belegter Effekt · fester 90-Minuten-Takt im Wachzustand: nicht belegt"
       },
-      "source": "Kleitman 1982 · Albulescu et al. 2022, PLOS ONE · Kang & Kurtzberg 2019, J Behav Addict · Rhee & Kim 2016, Comput Hum Behav · Balban et al. 2023, Cell Rep Med",
       "sentences": [
         "Die zweite Säule ist der Rhythmus des Tages.",
         {
@@ -245,6 +248,13 @@
           ],
           "zoom": "out"
         }
+      ],
+      "quellen": [
+        "kleitman1982",
+        "albulescu2022",
+        "kang2019",
+        "rhee2016",
+        "balban2023"
       ]
     },
     {
@@ -277,7 +287,6 @@
         "level": "mittel",
         "note": "Plan beruhigt: belegt · Zeigarnik-Gedächtniseffekt: nicht verlässlich repliziert"
       },
-      "source": "Masicampo & Baumeister 2011, JPSP · Scullin et al. 2018, J Exp Psychol Gen · Ghibellini & Meier 2025, HSSC",
       "sentences": [
         "Die dritte Idee: Unerledigtes läuft im Kopf weiter, wie offene Tabs im Browser.",
         "Das geht auf den Zeigarnik-Effekt zurück: Unterbrochene Aufgaben sollen besser im Gedächtnis bleiben.",
@@ -324,6 +333,11 @@
           ],
           "zoom": "out"
         }
+      ],
+      "quellen": [
+        "masicampo2011",
+        "scullin2018",
+        "ghibellini2025"
       ]
     },
     {
@@ -350,7 +364,6 @@
         "level": "mittel",
         "note": "Kleine Beobachtungsstudien, Richtung einheitlich · dass weniger Volumen reicht, ist ungeprüft"
       },
-      "source": "Bartholomew et al. 2008 · Stults-Kolehmainen et al. 2012, 2014 · Manresa-Rocamora et al. 2021, IJERPH · Singh et al. 2023, Br J Sports Med",
       "sentences": [
         "Jetzt zum Körper.",
         "Training ist gewollter Stress: Der Körper wird belastet und passt sich in der Erholung an.",
@@ -386,6 +399,13 @@
             2460
           ]
         }
+      ],
+      "quellen": [
+        "bartholomew2008",
+        "stults2012",
+        "stults2014",
+        "manresa2021",
+        "singh2023"
       ]
     },
     {
@@ -397,11 +417,6 @@
           "t": "Stress bremst die Verdauung",
           "at": 1,
           "ev": "stark"
-        },
-        {
-          "t": "Leicht essen an harten Tagen",
-          "at": 3,
-          "ev": "offen"
         },
         {
           "t": "„Kohlenhydrate schützen“",
@@ -459,7 +474,12 @@
           ]
         }
       ],
-      "source": "Taché & Bonaz 2007, J Clin Invest · Gonzalez-Bono et al. 2002, Horm Behav · Zänkert et al. 2020"
+      "quellen": [
+        "tache2007",
+        "gonzalez2002",
+        "zaenkert2020",
+        "christ2024"
+      ]
     },
     {
       "id": "s6",
@@ -487,7 +507,6 @@
         "label": "größtenteils nicht belegt",
         "note": "Funk: kein Nachweis · Blaulicht: kleiner Effekt · Plastik: anderes Gesundheitsthema"
       },
-      "source": "WHO · Karipidis et al. 2024 und Bosch-Capblanch et al. 2024, Environment International · Chang et al. 2015, PNAS · Cajochen et al. 2022 · EFSA 2023 · EU-Verordnung 2024/3190",
       "sentences": [
         "Zum Schluss die Umwelt: Funkstrahlung, Blaulicht am Abend und Plastik.",
         "Hier muss man die Grafik deutlich korrigieren.",
@@ -535,6 +554,16 @@
             2480
           ]
         }
+      ],
+      "quellen": [
+        "who",
+        "karipidis2024",
+        "bosch2024",
+        "rubin2005",
+        "chang2015",
+        "cajochen2022",
+        "efsa2023",
+        "eu2024"
       ]
     },
     {
@@ -600,11 +629,169 @@
           "zoom": "out"
         }
       ],
-      "source": "Scott et al. 2021, Sleep Medicine Reviews · Singh et al. 2023, Br J Sports Med",
       "evidence": {
         "level": "stark",
         "label": "überwiegend gut belegt"
-      }
+      },
+      "quellen": [
+        "scott2021",
+        "singh2023",
+        "heinrichs2003",
+        "holtlunstad2010"
+      ],
+      "kapitel": "Fazit"
     }
-  ]
+  ],
+  "quellen": {
+    "mcewen1998": {
+      "kurz": "McEwen 1998",
+      "voll": "McEwen 1998, New England Journal of Medicine – allostatische Last",
+      "url": "https://doi.org/10.1056/NEJM199801153380307"
+    },
+    "keating": {
+      "kurz": "Keating (zu D. D. Palmer)",
+      "voll": "Keating zu D. D. Palmers Krankheitstheorie – Ursprung der Dreiteilung in der Chiropraktik",
+      "url": "https://chiro.org/Plus/History/Persons/PalmerDD/PalmerDD-Disease_Theory.pdf"
+    },
+    "kleitman1982": {
+      "kurz": "Kleitman 1982",
+      "voll": "Kleitman 1982, Sleep – Ruhe-Aktivitäts-Zyklus",
+      "url": "https://doi.org/10.1093/sleep/5.4.311"
+    },
+    "albulescu2022": {
+      "kurz": "Albulescu et al. 2022",
+      "voll": "Albulescu et al. 2022, PLOS ONE – Meta-Analyse Mikropausen (Energie d = 0,36, Müdigkeit d = 0,35, Leistung n. s.)",
+      "url": "https://doi.org/10.1371/journal.pone.0272460"
+    },
+    "kang2019": {
+      "kurz": "Kang & Kurtzberg 2019",
+      "voll": "Kang & Kurtzberg 2019, Journal of Behavioral Addictions – Pause am Handy: 19 % langsamer, 22 % weniger gelöst (Experiment, 414 Studierende)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7044622"
+    },
+    "rhee2016": {
+      "kurz": "Rhee & Kim 2016",
+      "voll": "Rhee & Kim 2016, Computers in Human Behavior – Handy-Mittagspause baut Erschöpfung schwächer ab (Tagebuchstudie, 450 Beschäftigte)",
+      "url": "https://doi.org/10.1016/j.chb.2015.11.056"
+    },
+    "balban2023": {
+      "kurz": "Balban et al. 2023",
+      "voll": "Balban et al. 2023, Cell Reports Medicine – zyklisches Seufzen, 108 Personen, 28 Tage",
+      "url": "https://doi.org/10.1016/j.xcrm.2022.100895"
+    },
+    "masicampo2011": {
+      "kurz": "Masicampo & Baumeister 2011",
+      "voll": "Masicampo & Baumeister 2011, Journal of Personality and Social Psychology – ein Plan stoppt ungewollte Gedanken an offene Ziele",
+      "url": "https://doi.org/10.1037/a0024192"
+    },
+    "scullin2018": {
+      "kurz": "Scullin et al. 2018",
+      "voll": "Scullin et al. 2018, Journal of Experimental Psychology: General – To-do-Liste vor dem Schlafen",
+      "url": "https://doi.org/10.1037/xge0000374"
+    },
+    "ghibellini2025": {
+      "kurz": "Ghibellini & Meier 2025",
+      "voll": "Ghibellini & Meier 2025, Humanities and Social Sciences Communications – Meta-Analyse Zeigarnik/Ovsiankina",
+      "url": "https://doi.org/10.1057/s41599-025-05000-w"
+    },
+    "bartholomew2008": {
+      "kurz": "Bartholomew et al. 2008",
+      "voll": "Bartholomew et al. 2008, Journal of Strength and Conditioning Research – weniger Kraftzuwachs bei viel Stress",
+      "url": "https://doi.org/10.1519/JSC.0b013e318173d0bf"
+    },
+    "stults2012": {
+      "kurz": "Stults-Kolehmainen & Bartholomew 2012",
+      "voll": "Stults-Kolehmainen & Bartholomew 2012, Medicine & Science in Sports & Exercise – langsamere Erholung",
+      "url": "https://doi.org/10.1249/MSS.0b013e31825f67a0"
+    },
+    "stults2014": {
+      "kurz": "Stults-Kolehmainen et al. 2014",
+      "voll": "Stults-Kolehmainen et al. 2014, Journal of Strength and Conditioning Research – Erholung über 96 Stunden",
+      "url": "https://doi.org/10.1519/JSC.0000000000000335"
+    },
+    "manresa2021": {
+      "kurz": "Manresa-Rocamora et al. 2021",
+      "voll": "Manresa-Rocamora et al. 2021, IJERPH – Training nach Tagesform (HRV) mindestens gleich wirksam wie fester Plan",
+      "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8507742/"
+    },
+    "singh2023": {
+      "kurz": "Singh et al. 2023",
+      "voll": "Singh et al. 2023, British Journal of Sports Medicine – Bewegung und psychische Gesundheit",
+      "url": "https://doi.org/10.1136/bjsports-2022-106195"
+    },
+    "tache2007": {
+      "kurz": "Taché & Bonaz 2007",
+      "voll": "Taché & Bonaz 2007, Journal of Clinical Investigation – Stress-Hormon CRF und Darmbewegung",
+      "url": "https://doi.org/10.1172/JCI30085"
+    },
+    "gonzalez2002": {
+      "kurz": "Gonzalez-Bono et al. 2002",
+      "voll": "Gonzalez-Bono et al. 2002, Hormones and Behavior – Glukose verstärkt die Cortisol-Antwort",
+      "url": "https://doi.org/10.1006/hbeh.2002.1766"
+    },
+    "zaenkert2020": {
+      "kurz": "Zänkert et al. 2020",
+      "voll": "Zänkert et al. 2020, Psychoneuroendocrinology – Replikation",
+      "url": "https://doi.org/10.1016/j.psyneuen.2020.104607"
+    },
+    "christ2024": {
+      "kurz": "Christ et al. 2024",
+      "voll": "Christ et al. 2024, Frontiers in Sports and Active Living – Kohlenhydrate im Ausdauersport",
+      "url": "https://doi.org/10.3389/fspor.2024.1264814"
+    },
+    "who": {
+      "kurz": "WHO",
+      "voll": "WHO, Fragen und Antworten zu elektromagnetischen Feldern",
+      "url": "https://www.who.int/news-room/questions-and-answers/item/radiation-electromagnetic-fields"
+    },
+    "karipidis2024": {
+      "kurz": "Karipidis et al. 2024",
+      "voll": "Karipidis et al. 2024, Environment International – Mobilfunk und Krebs",
+      "url": "https://doi.org/10.1016/j.envint.2024.108983"
+    },
+    "bosch2024": {
+      "kurz": "Bosch-Capblanch et al. 2024",
+      "voll": "Bosch-Capblanch et al. 2024, Environment International – Provokationsstudien zu Symptomen",
+      "url": "https://doi.org/10.1016/j.envint.2024.108612"
+    },
+    "rubin2005": {
+      "kurz": "Rubin et al. 2005",
+      "voll": "Rubin et al. 2005, Psychosomatic Medicine – Elektrosensibilität im Doppelblindtest",
+      "url": "https://doi.org/10.1097/01.psy.0000155664.13300.64"
+    },
+    "chang2015": {
+      "kurz": "Chang et al. 2015",
+      "voll": "Chang et al. 2015, PNAS – E-Reader vor dem Schlafen",
+      "url": "https://doi.org/10.1073/pnas.1418490112"
+    },
+    "cajochen2022": {
+      "kurz": "Cajochen et al. 2022",
+      "voll": "Cajochen et al. 2022, Lighting Research & Technology – Bildschirmlicht und Schlaf",
+      "url": "https://doi.org/10.1177/14771535221078765"
+    },
+    "efsa2023": {
+      "kurz": "EFSA 2023",
+      "voll": "EFSA 2023, Neubewertung Bisphenol A",
+      "url": "https://doi.org/10.2903/j.efsa.2023.6857"
+    },
+    "eu2024": {
+      "kurz": "EU-Verordnung 2024/3190",
+      "voll": "EU-Verordnung 2024/3190 – Bisphenol A in Lebensmittelkontaktmaterialien",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/3190/oj/eng"
+    },
+    "scott2021": {
+      "kurz": "Scott et al. 2021",
+      "voll": "Scott et al. 2021, Sleep Medicine Reviews – besserer Schlaf senkt Stress (g = −0,42)",
+      "url": "https://doi.org/10.1016/j.smrv.2021.101556"
+    },
+    "heinrichs2003": {
+      "kurz": "Heinrichs et al. 2003",
+      "voll": "Heinrichs et al. 2003, Biological Psychiatry – soziale Unterstützung senkt die Cortisol-Antwort auf Stress",
+      "url": "https://doi.org/10.1016/S0006-3223(03)00465-7"
+    },
+    "holtlunstad2010": {
+      "kurz": "Holt-Lunstad et al. 2010",
+      "voll": "Holt-Lunstad et al. 2010, PLoS Medicine – soziale Beziehungen und Sterblichkeit (148 Studien)",
+      "url": "https://doi.org/10.1371/journal.pmed.1000316"
+    }
+  }
 }
