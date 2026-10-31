@@ -1,18 +1,18 @@
-# Chronischer Stress: Was hilft wirklich? Ein Faktencheck (≈ 5 Min.)
+# Chronischer Stress: Was hilft wirklich? Ein Faktencheck (≈ 6 Min.)
 
 Grundlage ist eine KI-generierte Infografik (Gemini Notebook) zum „3-Säulen-“ bzw. „3-Eimer-Modell“. Jede Aussage ist gegen
 Studien geprüft; die Ampel im Video zeigt die Beweislage. Tippfehler der Grafik („Surgen“, „E-Malls“, „Unerladigte Aufgeben“,
 „3-3 Minuten“) sind im Bild korrigiert.
 
-## Kapitel
+## Kapitel (Fassung mit Stimme Christian, 5:55)
 0:00 Einleitung
-0:23 Säule 1: Ein Eimer, viele Zuflüsse (allostatische Last)
-1:10 Säule 2: Arbeiten in Wellen (Pausen, Atmung)
-2:02 Säule 3: Offene Schleifen schließen
-2:47 Training ist auch Stress
-3:17 Einfach essen an harten Tagen
-3:49 Strahlung, Licht, Plastik
-4:46 Fazit
+0:25 Ein Eimer, viele Zuflüsse
+1:18 Arbeiten in Wellen
+2:17 Offene Schleifen schließen
+3:06 Training ist auch Stress
+3:42 Einfach essen an harten Tagen
+4:17 Strahlung, Licht, Plastik
+5:21 Fazit
 
 ## Quellen
 **Allostatische Last / Eimer-Modell**
@@ -56,4 +56,4 @@ Studien geprüft; die Ampel im Video zeigt die Beweislage. Tippfehler der Grafik
 **Fehlende Hebel**
 - Scott et al. 2021, Sleep Medicine Reviews (besserer Schlaf senkt Stress, g = −0,42) – [doi:10.1016/j.smrv.2021.101556](https://doi.org/10.1016/j.smrv.2021.101556)
 
-Sprecherstimme: synthetisch (Microsoft Neural „Katja“ über edge-tts), vorläufig.
+Sprecherstimme: synthetisch (ElevenLabs, Stimme „Christian“, Modell Eleven v4).

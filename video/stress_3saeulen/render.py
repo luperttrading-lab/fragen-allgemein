@@ -34,6 +34,31 @@ LEVELS = {
     'schwach': ((206, 98, 46), 1, 'schwach belegt'),
     'keine': ((178, 52, 48), 0, 'nicht belegt'),
 }
+# Marker je Stichpunkt: Farbe und Zeichen
+MARKS = {
+    'stark': ((52, 128, 86), 'check', 'belegt'),
+    'mittel': ((190, 136, 30), 'tilde', 'teilweise'),
+    'offen': ((138, 132, 126), 'frage', 'ungeprüft'),
+    'keine': ((178, 52, 48), 'cross', 'nicht belegt'),
+}
+
+
+def draw_mark(d, cx, cy, r, kind):
+    col, sym, _ = MARKS[kind]
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=col)
+    w = max(3, round(r / 4.2))
+    k = r * 0.5
+    if sym == 'check':
+        d.line([(cx - k, cy + 0.05 * r), (cx - 0.15 * r, cy + k * 0.85), (cx + k * 1.05, cy - k * 0.8)],
+               fill='white', width=w, joint='curve')
+    elif sym == 'cross':
+        d.line([(cx - k * 0.8, cy - k * 0.8), (cx + k * 0.8, cy + k * 0.8)], fill='white', width=w)
+        d.line([(cx - k * 0.8, cy + k * 0.8), (cx + k * 0.8, cy - k * 0.8)], fill='white', width=w)
+    elif sym == 'tilde':
+        d.arc([cx - k * 1.3, cy - k * 0.5, cx, cy + k * 0.5], 200, 340, fill='white', width=w)
+        d.arc([cx, cy - k * 0.5, cx + k * 1.3, cy + k * 0.5], 20, 160, fill='white', width=w)
+    else:
+        d.text((cx, cy + 1), '?', font=font(INTER.format('Bold'), int(r * 1.45)), fill='white', anchor='mm')
 INTER = '/usr/share/fonts/opentype/inter/Inter-{}.otf'
 SERIF_B = '/usr/share/fonts/truetype/crosextra/Caladea-Bold.ttf'
 TX0, TX1 = 100, 760            # Textspalte links
@@ -276,7 +301,14 @@ def panel_states(sc):
             cx, cy = TX0 + 30 + j * 26, by + 27
             d.ellipse([cx - 8, cy - 8, cx + 8, cy + 8], fill=col if j < dots else None, outline=col, width=2)
         d.text((TX0 + 30 + 3 * 26 + 6, by + 12), txt, font=fb, fill=col)
-        if ev.get('note'):
+        if any(b.get('ev') for b in sc.get('bullets', [])):   # Legende statt Fliesstext
+            fl = font(INTER.format('Regular'), 21)
+            xx, yy = TX0, by + 84
+            for kind in ('stark', 'mittel', 'offen', 'keine'):
+                draw_mark(d, xx + 11, yy, 11, kind)
+                d.text((xx + 28, yy), MARKS[kind][2], font=fl, fill=MUTED, anchor='lm')
+                xx += 28 + int(d.textlength(MARKS[kind][2], font=fl)) + 26
+        elif ev.get('note'):
             fn = font(INTER.format('Regular'), 22)
             yy = by + 70
             for line in wrap(d, ev['note'], fn, TX1 - TX0 + 20):
@@ -294,10 +326,13 @@ def panel_states(sc):
     for b in sc.get('bullets', []):
         img = states[-1].copy()
         d = ImageDraw.Draw(img)
-        lines = wrap(d, b['t'], fb, TX1 - TX0 - 40)
-        d.ellipse([TX0, y + 15, TX0 + 12, y + 27], fill=ACCENT)
+        lines = wrap(d, b['t'], fb, TX1 - TX0 - 50)
+        if b.get('ev'):
+            draw_mark(d, TX0 + 15, y + 22, 16, b['ev'])
+        else:
+            d.ellipse([TX0 + 9, y + 16, TX0 + 21, y + 28], fill=ACCENT)
         for line in lines:
-            d.text((TX0 + 34, y), line, font=fb, fill=INK)
+            d.text((TX0 + 46, y), line, font=fb, fill=INK)
             y += 45
         y += 20
         states.append(img)

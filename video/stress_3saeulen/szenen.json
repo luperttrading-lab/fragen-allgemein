@@ -51,19 +51,22 @@
       "bullets": [
         {
           "t": "Stressoren addieren sich",
-          "at": 1
+          "at": 1,
+          "ev": "stark"
         },
         {
           "t": "Eine Stressachse für alles: Cortisol, Adrenalin",
-          "at": 4
+          "at": 4,
+          "ev": "stark"
         },
         {
           "t": "Fachbegriff: allostatische Last",
           "at": 5
         },
         {
-          "t": "Drei Eimer sind eine Vereinfachung",
-          "at": 6
+          "t": "Drei Eimer als festes Tagesbudget",
+          "at": 6,
+          "ev": "keine"
         }
       ],
       "evidence": {
@@ -146,23 +149,28 @@
       "bullets": [
         {
           "t": "60–90 Minuten Fokus, dann 3–5 Minuten Pause",
-          "at": 1
+          "at": 1,
+          "ev": "mittel"
         },
         {
-          "t": "Fester 90-Minuten-Takt: kaum belegt",
-          "at": 2
+          "t": "Fester 90-Minuten-Takt",
+          "at": 2,
+          "ev": "keine"
         },
         {
-          "t": "Kurze Pausen: mehr Energie, weniger Erschöpfung",
-          "at": 3
+          "t": "Kurze Pausen: mehr Energie, weniger Müdigkeit",
+          "at": 3,
+          "ev": "stark"
         },
         {
           "t": "Pause ohne Handy",
-          "at": 4
+          "at": 4,
+          "ev": "offen"
         },
         {
           "t": "Lange ausatmen",
-          "at": 6
+          "at": 6,
+          "ev": "mittel"
         }
       ],
       "evidence": {
@@ -241,19 +249,23 @@
       "bullets": [
         {
           "t": "Unerledigtes drängt sich auf",
-          "at": 0
+          "at": 0,
+          "ev": "stark"
         },
         {
-          "t": "Gedächtniseffekt: nicht verlässlich",
-          "at": 2
+          "t": "Gedächtnisvorteil für Unerledigtes",
+          "at": 2,
+          "ev": "keine"
         },
         {
-          "t": "Ein konkreter Plan reicht oft schon",
-          "at": 4
+          "t": "Ein konkreter Plan beruhigt",
+          "at": 4,
+          "ev": "stark"
         },
         {
           "t": "Abends fünf Minuten To-do-Liste",
-          "at": 5
+          "at": 5,
+          "ev": "mittel"
         }
       ],
       "evidence": {
@@ -315,16 +327,18 @@
       "headline": "Training ist auch Stress",
       "bullets": [
         {
-          "t": "Training = gewollter Stress",
+          "t": "Training ist gewollter Stress",
           "at": 1
         },
         {
           "t": "Psychischer Stress bremst die Erholung",
-          "at": 3
+          "at": 3,
+          "ev": "mittel"
         },
         {
-          "t": "An vollen Tagen: locker statt maximal",
-          "at": 4
+          "t": "An vollen Tagen locker statt maximal",
+          "at": 4,
+          "ev": "offen"
         }
       ],
       "evidence": {
@@ -376,15 +390,18 @@
       "bullets": [
         {
           "t": "Stress bremst die Verdauung",
-          "at": 1
+          "at": 1,
+          "ev": "stark"
         },
         {
-          "t": "Leicht essen: plausibel, nicht untersucht",
-          "at": 3
+          "t": "Leicht essen an harten Tagen",
+          "at": 3,
+          "ev": "offen"
         },
         {
-          "t": "„Kohlenhydrate schützen“: stimmt so nicht",
-          "at": 4
+          "t": "„Kohlenhydrate schützen“",
+          "at": 4,
+          "ev": "keine"
         }
       ],
       "evidence": {
@@ -445,16 +462,19 @@
       "headline": "Strahlung, Licht, Plastik",
       "bullets": [
         {
-          "t": "Funkstrahlung: kein Nachweis",
-          "at": 2
+          "t": "Funkstrahlung als Stressor",
+          "at": 2,
+          "ev": "keine"
         },
         {
-          "t": "Bildschirm am Abend: kleiner Effekt",
-          "at": 5
+          "t": "Bildschirm am Abend stört den Schlaf",
+          "at": 5,
+          "ev": "mittel"
         },
         {
-          "t": "Plastik: eigenes Thema, nicht Stress",
-          "at": 7
+          "t": "Plastik als Stressor",
+          "at": 7,
+          "ev": "keine"
         }
       ],
       "evidence": {
@@ -519,19 +539,23 @@
       "bullets": [
         {
           "t": "Kurze Pausen ohne Handy",
-          "at": 2
+          "at": 2,
+          "ev": "stark"
         },
         {
           "t": "Plan für Offenes",
-          "at": 2
+          "at": 2,
+          "ev": "stark"
         },
         {
           "t": "Training an den Stress anpassen",
-          "at": 2
+          "at": 2,
+          "ev": "mittel"
         },
         {
-          "t": "Schlaf, Bewegung, Menschen",
-          "at": 3
+          "t": "Schlaf, Bewegung, Kontakte",
+          "at": 3,
+          "ev": "stark"
         }
       ],
       "sentences": [
@@ -571,7 +595,11 @@
           "zoom": "out"
         }
       ],
-      "source": "Scott et al. 2021, Sleep Medicine Reviews · Singh et al. 2023, Br J Sports Med"
+      "source": "Scott et al. 2021, Sleep Medicine Reviews · Singh et al. 2023, Br J Sports Med",
+      "evidence": {
+        "level": "stark",
+        "label": "überwiegend gut belegt"
+      }
     }
   ]
 }
