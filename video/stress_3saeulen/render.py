@@ -186,6 +186,7 @@ def scene_eleven(sc, cfg, cache):
         i = min(int(round(pos * scale)), len(starts) - 1)
         out.append(max(starts[i] / tempo - lead, 0.0))
         pos += len(s) + 1
+    sc['_align'] = {'text': text, 'starts': starts, 'tempo': tempo, 'lead': lead, 'scale': scale}
     return x, out
 
 
@@ -222,6 +223,7 @@ def build_audio(cfg, args):
         sc['st'] = []
         if eleven:                                     # Szene am Stueck, Satzzeiten aus den Zeitmarken
             pcm, rel = scene_eleven(sc, cfg, args.cache)
+            sc['_align']['t0'] = t
             end = len(pcm) / SR
             for i, s in enumerate(sc['sentences']):
                 nxt = rel[i + 1] if i + 1 < len(rel) else end
@@ -455,8 +457,103 @@ def progress(arr, t, total):
     arr[H - 6:, :x] = ACCENT
 
 
+class AgendaScene:
+    """Einstieg mit Kapitel-Kacheln: sechs Bilder auf einen Blick, beim Aufzaehlen nacheinander hervorgehoben."""
+    TW, TH, GAP, Y0, ROW = 540, 300, 45, 212, 388
+
+    def __init__(self, sc, src):
+        self.sc, self.src = sc, src
+        st = sc['st']
+        self.shots = [{'t0': sc['v0'], 't1': sc['v1']}]          # fuer den Kontaktbogen
+        hi = sc.get('hervorheben_at')
+        self.h0 = st[hi][0] if hi is not None else None
+        self.h1 = self.h0 + st[hi][1] if hi is not None else None
+        wts = [word_time(sc, k['wort']) if k.get('wort') else None for k in sc['kacheln']]
+        self.wt = [w - 0.15 for w in wts] if all(w is not None for w in wts) else None
+        lg = sc.get('legende_at')
+        self.lg = st[lg][0] if lg is not None else None
+        self.x0 = (W - 3 * self.TW - 2 * self.GAP) // 2
+        self.base = Image.new('RGB', (W, H), PAPER)
+        d = ImageDraw.Draw(self.base)
+        if sc.get('kicker'):
+            d.text((W // 2, 70), sc['kicker'].upper(), font=font(INTER.format('SemiBold'), 26), fill=ACCENT, anchor='mt')
+        d.text((W // 2, 112), sc['headline'], font=font(SERIF_B, 70), fill=INK, anchor='mt')
+        self.cards = []
+        for i, k in enumerate(sc['kacheln']):
+            cx = self.x0 + (i % 3) * (self.TW + self.GAP)
+            cy = self.Y0 + (i // 3) * self.ROW
+            d.rounded_rectangle([cx, cy, cx + self.TW, cy + self.TH + 62], radius=22, fill=(255, 250, 243),
+                                outline=(232, 223, 212), width=2)
+            d.ellipse([cx + 18, cy + self.TH + 8, cx + 58, cy + self.TH + 48], fill=ACCENT)
+            d.text((cx + 38, cy + self.TH + 28), str(i + 1), font=font(INTER.format('Bold'), 24), fill='white', anchor='mm')
+            d.text((cx + 72, cy + self.TH + 28), k['t'], font=font(INTER.format('SemiBold'), 30), fill=INK, anchor='lm')
+            box = k['a']
+            bw, bh = box[2] - box[0], box[3] - box[1]
+            sc_ = min((self.TW - 40) / bw, (self.TH - 30) / bh)
+            size = (int(bw * sc_), int(bh * sc_))
+            self.cards.append({'x': cx, 'y': cy, 'box': box, 'size': size})
+        self.legend = Image.new('RGBA', (W, 60), (0, 0, 0, 0))
+        dl = ImageDraw.Draw(self.legend)
+        fl = font(INTER.format('Medium'), 28)
+        items = [('stark', 'belegt'), ('mittel', 'teilweise'), ('keine', 'nicht haltbar')]
+        widths = [44 + int(dl.textlength(t, font=fl)) for _, t in items]
+        xx = (W - sum(widths) - 60 * (len(items) - 1)) // 2
+        for (kind, t), w in zip(items, widths):
+            draw_mark(dl, xx + 15, 30, 15, kind)
+            dl.text((xx + 40, 30), t, font=fl, fill=INK, anchor='lm')
+            xx += w + 60
+
+    def frame(self, t):
+        img = self.base.copy()
+        d = ImageDraw.Draw(img)
+        u = ease((t - self.sc['v0']) / (self.sc['v1'] - self.sc['v0']))
+        active = None
+        if self.h0 is not None and self.h0 <= t < self.h1 + 0.6:
+            if self.wt:                                      # am gesprochenen Stichwort
+                past = [i for i, wt in enumerate(self.wt) if wt <= t]
+                active = past[-1] if past else None
+            else:
+                active = min(int((t - self.h0) / ((self.h1 - self.h0) / len(self.cards))), len(self.cards) - 1)
+        for i, c in enumerate(self.cards):
+            x0, y0, x1, y1 = c['box']
+            z = 0.06 * u                                     # langsames Hineinzoomen
+            dx, dy = (x1 - x0) * z / 2, (y1 - y0) * z / 2
+            pic = self.src.resize(c['size'], Image.BICUBIC, box=(x0 + dx, y0 + dy, x1 - dx, y1 - dy))
+            if active is not None and i != active:
+                pic = Image.blend(pic, Image.new('RGB', pic.size, (255, 250, 243)), 0.55)
+            px = c['x'] + (self.TW - c['size'][0]) // 2
+            py = c['y'] + 15 + (self.TH - 30 - c['size'][1]) // 2
+            img.paste(pic, (px, py), mask(c['size']))
+            if i == active:
+                d.rounded_rectangle([c['x'] - 3, c['y'] - 3, c['x'] + self.TW + 3, c['y'] + self.TH + 65],
+                                    radius=24, outline=ACCENT, width=6)
+        if self.lg is not None and t >= self.lg:
+            a = min((t - self.lg) / FADE, 1.0)
+            lay = self.legend.copy()
+            if a < 1:
+                lay.putalpha(lay.getchannel('A').point(lambda p: int(p * a)))
+            img.paste(lay, (0, 990), lay)
+        return img
+
+
+def word_time(sc, word, after=0.0):
+    """Zeitpunkt (s, absolut), an dem ein Wort gesprochen wird; None ohne Zeitmarken."""
+    al = sc.get('_align')
+    if not al:
+        return None
+    i = al['text'].find(word)
+    if i < 0:
+        return None
+    k = min(int(round(i * al['scale'])), len(al['starts']) - 1)
+    return al['t0'] + al['starts'][k] / al['tempo'] - al['lead']
+
+
+def make_scene(sc, src):
+    return AgendaScene(sc, src) if sc.get('layout') == 'kacheln' else Scene(sc, src)
+
+
 def render(cfg, src, total, out_mp4, wav, srt):
-    scenes = [Scene(sc, src) for sc in cfg['scenes']]
+    scenes = [make_scene(sc, src) for sc in cfg['scenes']]
     first = {}
     n = int(math.ceil(total * FPS))
     cmd = ['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(FPS),
@@ -489,7 +586,7 @@ def render(cfg, src, total, out_mp4, wav, srt):
 
 
 def preview(cfg, src, path):
-    scenes = [Scene(sc, src) for sc in cfg['scenes']]
+    scenes = [make_scene(sc, src) for sc in cfg['scenes']]
     thumbs = []
     for s in scenes:
         for sh in s.shots:
@@ -533,7 +630,7 @@ def main():
         return
     src = Image.open(args.grafik).convert('RGB')
     if args.bild:
-        scenes = [Scene(sc, src) for sc in cfg['scenes']]
+        scenes = [make_scene(sc, src) for sc in cfg['scenes']]
         for t in args.bild:
             k = max(i for i, sc in enumerate(cfg['scenes']) if sc['v0'] <= t)
             scenes[k].frame(t).save(f'{stem}_bild_{t:.0f}.png')

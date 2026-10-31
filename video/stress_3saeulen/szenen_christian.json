@@ -11,44 +11,79 @@
       "id": "s0",
       "kicker": "Info-Video · Faktencheck",
       "headline": "Chronischer Stress: Was hilft wirklich?",
-      "bullets": [
-        {
-          "t": "Grundlage: eine KI-Infografik",
-          "at": 2
-        },
-        {
-          "t": "Jede Aussage gegen Studien geprüft",
-          "at": 3
-        },
-        {
-          "t": "Die Ampel zeigt die Beweislage",
-          "at": 4
-        }
-      ],
       "sentences": [
         "Chronischer Stress entsteht selten durch eine einzige große Belastung.",
         "Meist ist es die Summe vieler kleiner Dinge.",
-        "Diese Infografik fasst ein beliebtes Modell dazu zusammen: drei Eimer, eine Wellenkurve und einige praktische Tipps.",
+        "Eine beliebte Infografik verspricht dagegen sechs Hebel: vom Drei-Eimer-Modell über Pausen und offene Aufgaben bis zu Training, Ernährung und Umwelt.",
         "Wir prüfen Punkt für Punkt, was die Forschung dazu sagt.",
-        "Die Ampel unten links zeigt jeweils, wie gut eine Aussage belegt ist."
+        "Die Farben zeigen jeweils, wie gut eine Aussage belegt ist: grün belegt, gelb teilweise, rot nicht haltbar."
       ],
-      "shots": [
+      "kapitel": "Einleitung",
+      "layout": "kacheln",
+      "hervorheben_at": 2,
+      "legende_at": 4,
+      "kacheln": [
         {
+          "t": "Ein Eimer, viele Zuflüsse",
           "a": [
-            0,
-            0,
-            1536,
-            1400
+            290,
+            700,
+            700,
+            1170
           ],
-          "b": [
-            0,
-            1352,
-            1536,
-            2752
-          ]
+          "wort": "Drei-Eimer"
+        },
+        {
+          "t": "Arbeiten in Wellen",
+          "a": [
+            1100,
+            640,
+            1420,
+            1040
+          ],
+          "wort": "Pausen"
+        },
+        {
+          "t": "Offene Schleifen",
+          "a": [
+            90,
+            1340,
+            670,
+            1860
+          ],
+          "wort": "offene Aufgaben"
+        },
+        {
+          "t": "Training ist auch Stress",
+          "a": [
+            60,
+            2090,
+            540,
+            2460
+          ],
+          "wort": "Training"
+        },
+        {
+          "t": "Einfach essen",
+          "a": [
+            550,
+            2080,
+            1020,
+            2460
+          ],
+          "wort": "Ernährung"
+        },
+        {
+          "t": "Strahlung, Licht, Plastik",
+          "a": [
+            1040,
+            2050,
+            1490,
+            2480
+          ],
+          "wort": "Umwelt"
         }
-      ],
-      "kapitel": "Einleitung"
+      ]
     },
     {
       "id": "s1",
@@ -617,16 +652,6 @@
             1510,
             2070
           ]
-        },
-        {
-          "at": 5,
-          "a": [
-            0,
-            0,
-            1536,
-            2752
-          ],
-          "zoom": "out"
         }
       ],
       "evidence": {
