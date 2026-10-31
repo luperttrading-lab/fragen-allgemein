@@ -3,3 +3,5 @@ video/**/tts_cache/*.mp3
 video/**/*.wav
 video/**/render.log
 video/**/*_bild_*.png
+video/**/web/*.mp4
+video/**/web/*.mp3
