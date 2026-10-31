@@ -1,0 +1,26 @@
+Gesamtdauer 355.3 s (5:55), 741 Woerter, Tempo 2.14 W/s Sprechzeit
+  s0      0.0–  25.4 s  ( 25.4 s)  Chronischer Stress: Was hilft wirklich?
+  s1     25.4–  78.3 s  ( 52.9 s)  Ein Eimer, viele Zuflüsse
+  s2     78.3– 137.6 s  ( 59.3 s)  Arbeiten in Wellen
+  s3    137.6– 186.9 s  ( 49.3 s)  Offene Schleifen schließen
+  s4    186.9– 222.1 s  ( 35.2 s)  Training ist auch Stress
+  s5    222.1– 257.1 s  ( 35.0 s)  Einfach essen an harten Tagen
+  s6    257.1– 321.4 s  ( 64.3 s)  Strahlung, Licht, Plastik
+  s7    321.4– 355.3 s  ( 33.9 s)  Was wirklich bleibt
+     0.0 s / 355.3 s  (0 s Rechenzeit)
+    30.0 s / 355.3 s  (31 s Rechenzeit)
+    60.0 s / 355.3 s  (55 s Rechenzeit)
+    90.0 s / 355.3 s  (69 s Rechenzeit)
+   120.0 s / 355.3 s  (93 s Rechenzeit)
+   150.0 s / 355.3 s  (118 s Rechenzeit)
+   180.0 s / 355.3 s  (145 s Rechenzeit)
+   210.0 s / 355.3 s  (171 s Rechenzeit)
+   240.0 s / 355.3 s  (194 s Rechenzeit)
+   270.0 s / 355.3 s  (219 s Rechenzeit)
+   300.0 s / 355.3 s  (240 s Rechenzeit)
+   330.0 s / 355.3 s  (262 s Rechenzeit)
+fertig: stress_video_christian.mp4
+
+real	4m46.388s
+user	8m44.093s
+sys	0m39.109s

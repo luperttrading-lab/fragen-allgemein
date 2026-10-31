@@ -22,7 +22,7 @@ import wave
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-W, H, FPS, SR = 1920, 1080, 25, 24000
+W, H, FPS, SR = 1920, 1080, 25, 44100
 PAPER = (250, 243, 234)
 INK = (34, 38, 50)
 ACCENT = (50, 78, 122)
@@ -66,8 +66,9 @@ def wrap(draw, text, fnt, width):
 
 
 # ---------------------------------------------------------------- Ton
-def decode(path):
-    raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', path, '-f', 's16le', '-ac', '1', '-ar', str(SR), '-'],
+def decode(path, tempo=1.0):
+    af = ['-af', f'atempo={tempo}'] if abs(tempo - 1) > 1e-3 else []
+    raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', path] + af + ['-f', 's16le', '-ac', '1', '-ar', str(SR), '-'],
                          capture_output=True, check=True).stdout
     return np.frombuffer(raw, np.int16).astype(np.float32) / 32768
 
@@ -100,6 +101,69 @@ def tts_edge(text, voice, rate, cache):
     return trim(decode(mp3))
 
 
+def tts_eleven(text, cfg, cache):
+    """Eine Szene am Stueck ueber ElevenLabs, mit Zeitmarken je Zeichen. Zwischengespeichert."""
+    import base64
+    import urllib.error
+    import urllib.request
+    sig = f"el|{cfg['voice_id']}|{cfg['model']}|{json.dumps(cfg.get('voice_settings'), sort_keys=True)}|{text}"
+    js = os.path.join(cache, hashlib.sha1(sig.encode()).hexdigest()[:16] + '.json')
+    if not os.path.exists(js):
+        body = {'text': text, 'model_id': cfg['model']}
+        if cfg.get('voice_settings'):
+            body['voice_settings'] = cfg['voice_settings']
+        url = (f"https://api.elevenlabs.io/v1/text-to-speech/{cfg['voice_id']}/with-timestamps"
+               f"?output_format=mp3_44100_128")
+        req = urllib.request.Request(url, data=json.dumps(body).encode(), headers={
+            'xi-api-key': os.environ['ELEVENLABS_API_KEY'], 'Content-Type': 'application/json'})
+        for attempt in range(4):
+            try:
+                with urllib.request.urlopen(req, timeout=300) as r:
+                    data, cost = r.read(), r.headers.get('character-cost')
+                break
+            except urllib.error.HTTPError as e:
+                if e.code in (429, 500, 502, 503) and attempt < 3:
+                    time.sleep(3 * 2 ** attempt)
+                    continue
+                sys.exit(f'ElevenLabs HTTP {e.code}: {e.read()[:300]}')
+        with open(js + '.tmp', 'wb') as f:
+            f.write(data)
+        os.replace(js + '.tmp', js)
+        with open(os.path.join(cache, 'elevenlabs_log.jsonl'), 'a') as f:
+            f.write(json.dumps({'zeit': time.strftime('%Y-%m-%d %H:%M:%S'), 'zeichen': len(text),
+                                'character_cost': cost, 'model': cfg['model'], 'voice': cfg['voice_id'],
+                                'datei': os.path.basename(js)}) + '\n')
+        print(f'  ElevenLabs: {len(text)} Zeichen, berechnet {cost}', flush=True)
+    d = json.load(open(js))
+    mp3 = js[:-5] + '.mp3'
+    if not os.path.exists(mp3):
+        with open(mp3, 'wb') as f:
+            f.write(base64.b64decode(d['audio_base64']))
+    return mp3, d['alignment']
+
+
+def scene_eleven(sc, cfg, cache):
+    """Szenen-Ton plus Satzanfaenge (s) relativ zum Ton."""
+    says = [sentence(s)[1] for s in sc['sentences']]
+    text = ' '.join(says)
+    mp3, al = tts_eleven(text, cfg, cache)
+    tempo = cfg.get('tempo', 1.0)
+    x = decode(mp3, tempo)
+    thr = 10 ** (-45 / 20) * max(np.abs(x).max(), 1e-6)
+    idx = np.where(np.abs(x) > thr)[0]
+    a, b = max(idx[0] - int(0.04 * SR), 0), idx[-1] + int(0.06 * SR)
+    x = x[a:b]
+    lead = a / SR
+    starts = al['character_start_times_seconds']
+    scale = len(starts) / max(len(text), 1)          # falls die Zeitmarken nicht 1:1 zum Text passen
+    pos, out = 0, []
+    for s in says:
+        i = min(int(round(pos * scale)), len(starts) - 1)
+        out.append(max(starts[i] / tempo - lead, 0.0))
+        pos += len(s) + 1
+    return x, out
+
+
 def sentence(s):
     """Satz als (Anzeigetext, Sprechtext)."""
     return (s, s) if isinstance(s, str) else (s['t'], s.get('say', s['t']))
@@ -108,10 +172,20 @@ def sentence(s):
 def build_audio(cfg, args):
     os.makedirs(args.cache, exist_ok=True)
     clips, t = [], 0.0
+    eleven = cfg.get('tts') == 'elevenlabs' and not args.ton_dir
     for k, sc in enumerate(cfg['scenes']):
         sc['v0'] = t
         t += LEAD if k == 0 else PRE
         sc['st'] = []
+        if eleven:                                     # Szene am Stueck, Satzzeiten aus den Zeitmarken
+            pcm, rel = scene_eleven(sc, cfg, args.cache)
+            end = len(pcm) / SR
+            for i, s in enumerate(sc['sentences']):
+                nxt = rel[i + 1] if i + 1 < len(rel) else end
+                sc['st'].append((t + rel[i], nxt - rel[i], sentence(s)[0]))
+            clips.append((t, pcm))
+            t += end + GAP_SCENE - PRE
+            continue
         for i, s in enumerate(sc['sentences']):
             shown, say = sentence(s)
             if args.ton_dir:
@@ -334,10 +408,10 @@ def render(cfg, src, total, out_mp4, wav, srt):
     first = {}
     n = int(math.ceil(total * FPS))
     cmd = ['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(FPS),
-           '-i', '-', '-i', wav, '-i', srt, '-map', '0:v', '-map', '1:a', '-map', '2:s',
+           '-i', '-', '-i', wav, '-map', '0:v', '-map', '1:a',
            '-c:v', 'libx264', '-preset', 'medium', '-crf', '24', '-pix_fmt', 'yuv420p',
-           '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-c:a', 'aac', '-b:a', '128k', '-ar', '48000',
-           '-c:s', 'mov_text', '-metadata:s:s:0', 'language=ger', '-movflags', '+faststart', '-t', f'{total:.2f}', out_mp4]
+           '-af', 'loudnorm=I=-16:TP=-1.5:LRA=11', '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', '-ac', '2',
+           '-movflags', '+faststart', '-t', f'{total:.2f}', out_mp4]
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     k = 0
     t_start = time.time()
