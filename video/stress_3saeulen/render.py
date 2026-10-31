@@ -380,7 +380,7 @@ def fit_box(a, b, img_size):
     if pw / aw > MAX_SCALE:                       # kleine Ausschnitte nicht matschig aufblasen
         pw, ph = round(aw * MAX_SCALE), round(ah * MAX_SCALE)
     if b is None:
-        z = 0.92
+        z = 0.95
         cx, cy = (a[0] + a[2]) / 2, (a[1] + a[3]) / 2
         b = [cx - aw * z / 2, cy - ah * z / 2, cx + aw * z / 2, cy + ah * z / 2]
     else:
@@ -414,7 +414,7 @@ class Scene:
         self.shots = []
         for j, sh in enumerate(sc['shots']):
             t0 = sc['v0'] if j == 0 else st[sh['at']][0] - 0.35
-            size, a, b = fit_box(sh['a'], sh.get('b'), src.size)
+            size, a, b = fit_box(sh['a'], sh['a'] if sh.get('zoom') == 'none' else sh.get('b'), src.size)
             if sh.get('zoom') == 'out':
                 a, b = b, a
             self.shots.append({'t0': t0, 'size': size, 'a': a, 'b': b})

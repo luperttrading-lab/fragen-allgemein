@@ -8,23 +8,23 @@ Gesamtdauer 361.6 s (6:01), 750 Woerter, Tempo 2.13 W/s Sprechzeit
   s6    263.3– 327.6 s  ( 64.3 s)  Strahlung, Licht, Plastik
   s7    327.6– 361.6 s  ( 33.9 s)  Was wirklich bleibt
      0.0 s / 361.6 s  (0 s Rechenzeit)
-    30.0 s / 361.6 s  (15 s Rechenzeit)
+    30.0 s / 361.6 s  (16 s Rechenzeit)
     60.0 s / 361.6 s  (41 s Rechenzeit)
-    90.0 s / 361.6 s  (54 s Rechenzeit)
+    90.0 s / 361.6 s  (56 s Rechenzeit)
    120.0 s / 361.6 s  (76 s Rechenzeit)
-   150.0 s / 361.6 s  (102 s Rechenzeit)
-   180.0 s / 361.6 s  (127 s Rechenzeit)
-   210.0 s / 361.6 s  (155 s Rechenzeit)
-   240.0 s / 361.6 s  (179 s Rechenzeit)
-   270.0 s / 361.6 s  (204 s Rechenzeit)
-   300.0 s / 361.6 s  (225 s Rechenzeit)
-   330.0 s / 361.6 s  (249 s Rechenzeit)
-   360.0 s / 361.6 s  (271 s Rechenzeit)
+   150.0 s / 361.6 s  (101 s Rechenzeit)
+   180.0 s / 361.6 s  (123 s Rechenzeit)
+   210.0 s / 361.6 s  (148 s Rechenzeit)
+   240.0 s / 361.6 s  (172 s Rechenzeit)
+   270.0 s / 361.6 s  (193 s Rechenzeit)
+   300.0 s / 361.6 s  (214 s Rechenzeit)
+   330.0 s / 361.6 s  (237 s Rechenzeit)
+   360.0 s / 361.6 s  (259 s Rechenzeit)
 fertig: stress_video_christian.mp4
 
-real	4m35.213s
-user	8m42.336s
-sys	0m39.855s
+real	4m23.915s
+user	7m57.783s
+sys	0m41.678s
 beschreibung_youtube.txt: 4780 Zeichen, 30 Quellen
 web_teilen/index.html geschrieben
 WEB_FERTIG
