@@ -38,8 +38,8 @@ LEVELS = {
 MARKS = {
     'stark': ((52, 128, 86), 'check', 'belegt'),
     'mittel': ((190, 136, 30), 'tilde', 'teilweise'),
-    'offen': ((138, 132, 126), 'frage', 'ungeprüft'),
-    'keine': ((178, 52, 48), 'cross', 'nicht belegt'),
+    'offen': ((138, 132, 126), 'frage', 'keine Studien'),
+    'keine': ((178, 52, 48), 'cross', 'nicht haltbar'),
 }
 
 

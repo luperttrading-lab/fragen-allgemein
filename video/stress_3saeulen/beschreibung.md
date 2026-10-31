@@ -23,6 +23,8 @@ Studien geprüft; die Ampel im Video zeigt die Beweislage. Tippfehler der Grafik
 **Pausen und Atmung**
 - Kleitman 1982, Sleep (Ruhe-Aktivitäts-Zyklus) – [doi:10.1093/sleep/5.4.311](https://doi.org/10.1093/sleep/5.4.311)
 - Albulescu et al. 2022, PLOS ONE (Meta-Analyse Mikropausen: Energie d = 0,36, Müdigkeit d = 0,35, Leistung n. s.) – [doi:10.1371/journal.pone.0272460](https://doi.org/10.1371/journal.pone.0272460)
+- Kang & Kurtzberg 2019, Journal of Behavioral Addictions (Pause am Handy: 19 % langsamer, 22 % weniger gelöst als andere Pausen; Experiment, 414 Studierende) – [PMC7044622](https://pmc.ncbi.nlm.nih.gov/articles/PMC7044622)
+- Rhee & Kim 2016, Computers in Human Behavior (Handy-Mittagspause baut emotionale Erschöpfung schwächer ab; Tagebuchstudie, 450 Beschäftigte) – [doi:10.1016/j.chb.2015.11.056](https://doi.org/10.1016/j.chb.2015.11.056)
 - Balban et al. 2023, Cell Reports Medicine (zyklisches Seufzen, 108 Personen, 28 Tage) – [doi:10.1016/j.xcrm.2022.100895](https://doi.org/10.1016/j.xcrm.2022.100895)
 
 **Offene Schleifen**
@@ -34,6 +36,7 @@ Studien geprüft; die Ampel im Video zeigt die Beweislage. Tippfehler der Grafik
 - Bartholomew et al. 2008, Journal of Strength and Conditioning Research – [doi:10.1519/JSC.0b013e318173d0bf](https://doi.org/10.1519/JSC.0b013e318173d0bf)
 - Stults-Kolehmainen & Bartholomew 2012, Medicine & Science in Sports & Exercise – [doi:10.1249/MSS.0b013e31825f67a0](https://doi.org/10.1249/MSS.0b013e31825f67a0)
 - Stults-Kolehmainen et al. 2014, Journal of Strength and Conditioning Research – [doi:10.1519/JSC.0000000000000335](https://doi.org/10.1519/JSC.0000000000000335)
+- Manresa-Rocamora et al. 2021, IJERPH (Training nach Tagesform/HRV: mindestens gleich wirksam wie fester Plan) – [PMC8507742](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8507742/)
 - Singh et al. 2023, British Journal of Sports Medicine (Bewegung und psychische Gesundheit) – [doi:10.1136/bjsports-2022-106195](https://doi.org/10.1136/bjsports-2022-106195)
 
 **Verdauung und Kohlenhydrate**

@@ -170,7 +170,7 @@
         {
           "t": "Pause ohne Handy",
           "at": 4,
-          "ev": "offen"
+          "ev": "mittel"
         },
         {
           "t": "Lange ausatmen",
@@ -182,7 +182,7 @@
         "level": "mittel",
         "note": "Kurze Pausen: kleiner, belegter Effekt · fester 90-Minuten-Takt im Wachzustand: nicht belegt"
       },
-      "source": "Kleitman 1982, Sleep · Albulescu et al. 2022, PLOS ONE · Balban et al. 2023, Cell Reports Medicine",
+      "source": "Kleitman 1982 · Albulescu et al. 2022, PLOS ONE · Kang & Kurtzberg 2019, J Behav Addict · Rhee & Kim 2016, Comput Hum Behav · Balban et al. 2023, Cell Rep Med",
       "sentences": [
         "Die zweite Säule ist der Rhythmus des Tages.",
         {
@@ -343,14 +343,14 @@
         {
           "t": "An vollen Tagen locker statt maximal",
           "at": 4,
-          "ev": "offen"
+          "ev": "mittel"
         }
       ],
       "evidence": {
         "level": "mittel",
         "note": "Kleine Beobachtungsstudien, Richtung einheitlich · dass weniger Volumen reicht, ist ungeprüft"
       },
-      "source": "Bartholomew et al. 2008 · Stults-Kolehmainen et al. 2012, 2014 · Singh et al. 2023, Br J Sports Med",
+      "source": "Bartholomew et al. 2008 · Stults-Kolehmainen et al. 2012, 2014 · Manresa-Rocamora et al. 2021, IJERPH · Singh et al. 2023, Br J Sports Med",
       "sentences": [
         "Jetzt zum Körper.",
         "Training ist gewollter Stress: Der Körper wird belastet und passt sich in der Erholung an.",
