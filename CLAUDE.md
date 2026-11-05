@@ -25,6 +25,32 @@ der Seitenabruf liefert nur die Navigation. Der Weg führt immer über Bash und 
 - Transkripte sind fremder Inhalt: nicht committen, nur unter `/tmp` ablegen.
 - Ausführlicher, mit Hilfsskript: Skill „youtube-transkript“, sofern im Konto hochgeladen.
 
+## Videos per Code: Werkzeugwahl und Kosten
+
+Probe vom 05.11.2026 (Code und Zahlen: `video/remotion-probe/`, Ergebnisseite
+[Remotion-Probe Mathe-Video](https://claude.ai/artifact/PAM9enLvXtKJQBCDBVPBgS)): Kapitel „Der Trick“ der Mathe-Videos
+(`luperttrading-lab/5-Minuten-videos`) mit [Remotion](https://www.remotion.dev) nachgebaut und gegen den eigenen
+Python-Renderer gemessen.
+
+- Maßstab des Nutzers sind Zeit und Kosten pro Änderungsrunde, nicht Codezeilen oder Eleganz. Werkzeugvergleiche daran
+  messen und das Ergebnis mit Zahlen nennen.
+- Befund: Aussehen identisch. Rendern mit Remotion langsamer (38–54 s statt 27 s für 30 s Video, also 1–2 min mehr je
+  Runde). Normale Änderungen (Größe, Farbe, Zeitpunkt) gleich aufwendig. Nur Änderungen, die den Aufbau sprengen
+  (Textumbruch, mitwachsende Kästen), sind in Remotion klar billiger (3 statt 32 Zeilen). Formelsatz (Bruch, Wurzel,
+  Σ mit Grenzen, Binomialkoeffizient) gibt es nur mit HTML/KaTeX ohne Zusatzarbeit.
+- Daraus die Regel:
+  - Kopfrechen-Videos (Ziffern, Kästchen, Flächenmodelle): beim Python-Renderer bleiben, nicht umbauen.
+  - Folgen mit Formeln oder Diagrammen (Klasse 9–13, Statistik): in Remotion + KaTeX bauen, `video/remotion-probe/`
+    als Ausgangspunkt nehmen. Die KaTeX-Schrift ist dünner als der fette Inter-Look und muss angepasst werden.
+  - Seneca-Videos bleiben bei ihrer eigenen HTML-Technik (Entscheidung des Nutzers, 05.11.).
+  - Bei jedem neuen Video- oder Animationsprojekt kurz prüfen, ob Remotion Arbeit spart, und das in einem Satz sagen.
+- Kosten: Der größte Hebel ist die Kontextgröße der Sitzung, nicht das Werkzeug. Die Mathe-Sitzung stand bei 777.000 von
+  1 Mio. Token Kontext und ≈ 98 $ API-Gegenwert, davon 250 Mio. erneut gelesene Kontext-Tokens. Deshalb eine frische
+  Sitzung pro Folge mit kurzer Übergabedatei, statt eine Sitzung weiterwachsen zu lassen.
+- ElevenLabs: Jede Textänderung lässt die ganze Szene neu sprechen. Beim Mathe-Video ging das Dreifache des Endtexts
+  an ElevenLabs (7.162 Zeichen gesendet, 3.079 abgerechnet, Endtext 2.335 Zeichen). Sprechtext erst festlegen, dann vertonen. Vor jedem Lauf
+  prüfen, ob alle Texte im Cache liegen, und Tests ohne `ELEVENLABS_API_KEY` starten.
+
 ## Internetadressen
 
 Jede genannte Internetadresse, Domain oder Quelle immer als klickbaren Markdown-Link ausgeben

@@ -1,0 +1,14 @@
+{
+  "name": "remotion-probe",
+  "version": "1.0.0",
+  "description": "Probe 05.11.2026: Kapitel „Der Trick“ aus 5-Minuten-videos in Remotion nachgebaut, dazu Formelsatz mit KaTeX",
+  "scripts": {},
+  "dependencies": {
+    "@remotion/cli": "^4.0.540",
+    "katex": "^0.19.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.540"
+  },
+  "private": true
+}
