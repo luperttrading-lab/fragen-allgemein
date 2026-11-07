@@ -1,4 +1,4 @@
-# Harness Engineering – Drehbuch, Entwurf 2 (07.11.2026)
+# Harness Engineering – Drehbuch, Entwurf 2.1 (07.11.2026)
 
 **Ziel:** 5 Minuten, kurzweilig, für Leute, die ChatGPT oder Claude nutzen, aber nicht programmieren. Wer zuschaut,
 soll danach wissen, was ein Harness ist, und den Begriff zuordnen können. Test, was wir zusammen produzieren können.
@@ -10,6 +10,8 @@ Inhalt angelehnt an [Alex Sprogis: „Hör auf Agents zu prompten. Starte mit Ha
 Rollen: **MARA** = Statistikerin, fragt nach. **BEN** = Entwickler, erklärt knapp.
 Kein NotebookLM-Muster: kein gegenseitiges „Genau!“ und „Wow“, keine Echo-Sätze; jede Zeile bringt etwas Neues.
 Aufbau: offene Frage am Anfang (Test mit 22 zu 17), Auflösung am Ende (Münzwurf).
+2.1: vier Sätze nach Ideen aus dem NotebookLM-Audio (Sicht des Modells auf den Tool-Call, „der Harness prüft es nach“,
+Abbruch der Schleife, Schuld nicht automatisch beim Modell), in eigenen Worten.
 
 Gegenüber Entwurf 1 gestrichen: Szene „Prompt, Context, Harness Engineering“ (nur noch ein Satz am Schluss),
 Fachwörter Linter, Unit-Test, Hook, Compaction, Context Rot, AGENTS.md.
@@ -48,7 +50,7 @@ MARA: Und genau dabei gehen Details verloren. Deshalb gehört alles Wichtige in 
 
 MARA: Zweitens: Werkzeuge. Wie drückt ein Modell, das nur Text schreibt, einen Knopf?
 
-BEN: Gar nicht. Es schreibt einen Satz in einem festen Format, etwa: Benutze das Werkzeug „Datei lesen“ für die Notizdatei. Der Harness erkennt das, drückt den Knopf und legt das Ergebnis zurück auf den Schreibtisch.
+BEN: Gar nicht. Es schreibt einen Satz in einem festen Format, etwa: Benutze das Werkzeug „Datei lesen“ für die Notizdatei. Der Harness erkennt das und drückt den Knopf. Für das Modell wirkt das wie Zauberei: Es schreibt einen Wunsch auf, und kurz darauf liegt das Ergebnis auf dem Schreibtisch.
 
 MARA: Und wenn man mehr Werkzeuge will?
 
@@ -62,7 +64,7 @@ BEN: Ein Modell, das Programmcode schreibt, kann nur nachlesen, ob er gut aussie
 
 MARA: Wie ein Schüler, der seine Klassenarbeit selbst korrigiert. Da gibt es selten eine Fünf.
 
-BEN: Deshalb lässt der Harness echte Tests laufen. Steht da „drei Tests fehlgeschlagen“, weiß das Modell: noch nicht fertig. Und ein guter Harness startet die Tests von selbst, auch wenn das Modell es vergisst.
+BEN: Deshalb lässt der Harness echte Tests laufen, und zwar von selbst. Steht da „drei Tests fehlgeschlagen“, weiß das Modell: noch nicht fertig. Es muss also nicht glauben, dass alles klappt. Der Harness prüft es nach.
 
 ## Szene 6 – Berechtigungen (Bild: Tower, Startfreigabe)
 
@@ -74,7 +76,7 @@ BEN: Der Harness prüft jeden Befehl, bevor er läuft: erlaubt, erst nachfragen 
 
 MARA: Und wie spielt das zusammen?
 
-BEN: Als Schleife. Unterlagen hinlegen, das Modell entscheidet, der Harness prüft und führt aus, das Ergebnis kommt zurück auf den Tisch. Und wieder von vorn, oft dutzende Male, bis die Aufgabe erledigt ist.
+BEN: Als Schleife. Unterlagen hinlegen, das Modell entscheidet, der Harness prüft und führt aus, das Ergebnis kommt zurück auf den Tisch. Und wieder von vorn, oft dutzende Male, bis die Aufgabe erledigt ist. Oder bis zu viel schiefgeht. Dann holt der Harness dich dazu.
 
 MARA: Das Modell entscheidet also nur, was als Nächstes passiert. Den Rest erledigt der Harness. Und deshalb schneidet dasselbe Modell in verschiedenen Programmen so unterschiedlich ab.
 
@@ -96,6 +98,6 @@ MARA: Die Kosten. Claude Code hat pro gelöster Aufgabe knapp zwei Dollar gekost
 
 ## Szene 9 – Schluss (Bild: Merksatz)
 
-BEN: Merk dir: Das Modell denkt, der Harness handelt. Deshalb reden inzwischen alle nicht mehr nur über gute Prompts, sondern über den Harness.
+BEN: Merk dir: Das Modell denkt, der Harness handelt. Und wenn dein KI-Assistent das nächste Mal Unsinn baut, liegt es vielleicht gar nicht am Modell.
 
 MARA: Und trau keiner Rangliste mit einem Versuch pro Aufgabe.
