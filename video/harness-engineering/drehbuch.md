@@ -1,4 +1,4 @@
-# Harness Engineering – Drehbuch, Entwurf 1 (07.11.2026)
+# Harness Engineering – Drehbuch, Entwurf 1.1 (07.11.2026)
 
 Eigenes Skript für zwei Sprecher, angelehnt an den Inhalt von
 [Alex Sprogis: „Hör auf Agents zu prompten. Starte mit Harness Engineering!“](https://youtu.be/SU0EyB45x6Q)
@@ -94,7 +94,7 @@ MARA: Wie spielt das alles zusammen?
 
 BEN: In einer Schleife. Erstens: Der Harness sammelt Aufgabe und Kontext. Zweitens: Das Modell wählt eine Aktion und schreibt einen Tool-Call. Drittens: Der Harness prüft die Rechte und führt aus. Viertens: Das Ergebnis geht zurück ans Modell. Und dann von vorn, bis das Ziel erreicht ist.
 
-MARA: Von vier Schritten macht das Modell also nur einen.
+MARA: Das Modell entscheidet also nur, was als Nächstes passiert. Den Rest erledigt der Harness.
 
 BEN: Und deshalb schneidet dasselbe Modell in verschiedenen Harnesses so unterschiedlich ab. Andere Werkzeuge, andere Beschreibungen, ein anderer Systemprompt, andere Prüfungen.
 
