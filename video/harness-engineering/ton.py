@@ -13,7 +13,7 @@ HIER = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(HIER, 'tts_cache')
 SR = 44100
 VORLAUF, PAUSE, NACHLAUF = 0.6, 0.8, 3.0
-EXTRA = {'s2': 1.6}  # längere Pause nach Szene 2: Übersicht „vier Teile“ stehen lassen
+EXTRA = {}  # Szenen mit längerer Pause danach, z. B. {'s2': 1.6}
 FUNK = ('highpass=f=400,highpass=f=400,lowpass=f=2800,lowpass=f=2800,lowpass=f=2800,'
         'acompressor=threshold=-24dB:ratio=6:attack=3:release=50,acrusher=bits=12:mix=0.25,volume=6dB')
 

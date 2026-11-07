@@ -1,10 +1,11 @@
-"""Sprechtexte der zwei Testvideos (07.11.2026), Grundlage Drehbuch 2.1.
+"""Sprechtexte der zwei Testvideos, Drehbuch Entwurf 3 (07.11.2026): ohne Composio-Test, mit „Wo steckt der Harness?“
+und „Was musst du tun?“; Fakten nach der Claude-Code-Dokumentation (Quellen in drehbuch.md).
 
 A: Peter erzählt allein.
-B: wie A, aber Szene 4 (Werkzeuge) und 6 (Berechtigungen) mit Funk-Einwurf: Modell (Mila) und Harness (Helmut, Funkfilter).
+B: wie A, aber Szene 5 (Werkzeuge) und 7 (Berechtigungen) mit Funk-Einwurf: Modell (Mila) und Harness (Helmut, Funkfilter).
 
 Marker ‹name› vor einem Wort setzen einen Zeitpunkt für die Bildeinblendung (film.html). Sie werden vor dem Senden
-an ElevenLabs entfernt. TTS-Schreibweisen: „Kimi K drei“ (gesprochen), im Bild „Kimi K3“.
+an ElevenLabs entfernt. Gesprochen „Claude Punkt M D“ und „Slash init“, im Bild CLAUDE.md und /init.
 """
 import re
 
@@ -14,85 +15,83 @@ STIMMEN = {'PETER': 'AMJfLTmTy3vPtjSvrGqZ',    # Peter Hartlapp – Tiefe Podcas
 
 P = 'PETER'
 
-S1 = [(P, 'Stell dir vor, du steckst ‹modell›dasselbe KI-Modell in ‹acht›acht verschiedene Programme und gibst allen '
-          'dieselben fünfundzwanzig Aufgaben. Das ‹best›beste löst zweiundzwanzig, das ‹worst›schwächste nur siebzehn. '
-          'Und ‹cc›Claude Code, eines der bekanntesten, landet im Mittelfeld. Dafür ist es das ‹teuer›langsamste und '
-          'mit Abstand das teuerste. Das Programm um das Modell herum heißt ‹harness›Harness. Wörtlich: das '
-          '‹pferd›Geschirr, mit dem man ein Pferd vor den Wagen spannt. In fünf Minuten weißt du, was so ein Harness '
-          'macht. Und am Ende zeige ich dir, ‹zweifel›warum du diesem Test trotzdem nicht trauen solltest.')]
+S1 = [(P, 'Frag Claude im ‹chat›Chat, wie man eine Datei umbenennt, und du bekommst eine Anleitung. Sag dasselbe in '
+          '‹code›Claude Code, und kurz darauf ‹fertig›ist die Datei umbenannt. Dahinter steckt ‹gleich›dasselbe Modell. '
+          'Den Unterschied macht ein Programm drumherum: der ‹harness›Harness. Wörtlich heißt das ‹pferd›Geschirr, das, '
+          'womit man ein Pferd vor den Wagen spannt. In fünf Minuten weißt du, ‹was›was so ein Harness macht, ‹wo›wo er '
+          'steckt und ‹wie›wie du ihn selbst einstellst.')]
 
-S2 = [(P, 'Was kann so ein ‹frage›Sprachmodell eigentlich allein? Erstaunlich wenig. Es sagt das ‹wort›nächste Wort '
-          'voraus, dann das nächste, und so weiter. Es kann dir ‹erklaeren›erklären, wie man eine Datei umbenennt. '
-          '‹nicht›Umbenennen kann es sie nicht. Es ist wie ein ‹pilot›Pilot ohne Flugzeug: Er weiß genau, wie Fliegen '
-          'geht, und steht trotzdem auf dem Rollfeld. Der Harness ist das ‹flugzeug›Flugzeug drumherum. Und das hat '
-          '‹vier›vier Teile.')]
+S2 = [(P, 'Ein Sprachmodell kann allein ‹wenig›erstaunlich wenig. Es sagt das ‹wort›nächste Wort voraus, dann das '
+          'nächste, und so weiter. Es ‹sieht›sieht deine Dateien nicht, es ‹vergisst›vergisst nach jeder Sitzung alles, '
+          'und es ‹kann›kann nichts ausführen. Es ist wie ein ‹pilot›Pilot ohne Flugzeug: Er weiß genau, wie Fliegen geht, '
+          'und steht trotzdem auf dem Rollfeld. Der Harness ist das ‹flugzeug›Flugzeug drumherum.')]
 
-S3 = [(P, 'Erstens: das, was das Modell ‹titel›vor Augen hat. Bevor du überhaupt etwas tippst, legt der Harness schon '
-          'Unterlagen hin: die ‹b1›Anweisungen des Herstellers, ‹b2›welcher Ordner gerade offen ist, und eine '
-          '‹b3›Notizdatei mit deinen eigenen Regeln. Dann füllt sich der Schreibtisch, mit ‹voll›jeder Nachricht und '
-          'jeder gelesenen Datei. Irgendwann ist er so voll, dass das Modell das ‹uebersieht›Wichtige übersieht. Dann '
-          '‹zusammen›fasst der Harness alles auf wenigen Seiten zusammen und wirft den Rest weg. Und dabei ‹verlust›gehen '
-          'Details verloren. Deshalb gehört alles Wichtige ‹datei›in eine Datei, nicht nur in den Chat.')]
+S3 = [(P, 'Und ‹titel›wo steckt dieser Harness? Bei Claude Code ist er ‹programm›das Programm selbst. Anthropic schreibt '
+          'in der Anleitung sinngemäß: ‹zitat›Claude Code ist die Schicht um das Modell. Sie stellt die Werkzeuge bereit '
+          'und bestimmt, was das Modell zu sehen bekommt. Das Modell läuft im ‹rz›Rechenzentrum des Anbieters. Claude Code '
+          'läuft ‹bei›bei dir: im ‹terminal›Terminal, in der ‹app›Desktop-App oder auf einem ‹cloud›Rechner in der Cloud. '
+          'Zwischen beiden geht ‹text›nur Text hin und her. Das Modell schreibt, ‹was›was getan werden soll. Claude Code '
+          '‹tut›tut es, dort, wo deine Dateien liegen. Und ‹chat›der Chat? Auch der hat so eine Schicht, nur eine '
+          '‹klein›kleinere: mit Websuche und den Dateien, die du hochlädst, aber ‹ohne›ohne direkten Zugriff auf deinen '
+          'Projektordner.')]
 
-S4_A = [(P, 'Zweitens: ‹titel›Werkzeuge. Wie drückt ein Modell, das nur Text schreiben kann, einen Knopf? ‹gar›Gar '
-            'nicht. Es schreibt einen ‹wunsch›Wunsch in einem festen Format auf, etwa: Lies die Datei mit den Notizen. '
-            'Der Harness ‹erkennt›erkennt das und drückt den Knopf. Für das Modell wirkt das wie Zauberei: Kurz darauf '
-            '‹ergebnis›liegt das Ergebnis auf dem Schreibtisch. Weitere Werkzeuge kommen über einen ‹mcp›Steckerstandard '
-            'namens MCP dazu, zum Beispiel für den Kalender oder eine Datenbank. Für das Modell ist das einfach eine '
-            '‹liste›längere Werkzeugliste.')]
+S4 = [(P, 'Der Harness hat ‹vier›vier Teile. Erstens: das, was das Modell ‹titel›vor Augen hat. Bevor du etwas tippst, '
+          'legt Claude Code schon Unterlagen hin: ‹b1›Anweisungen von Anthropic, ‹b2›welcher Ordner gerade offen ist, und '
+          'deine ‹b3›Notizdatei mit deinen Regeln. Sie heißt ‹claudemd›Claude Punkt M D. Dann füllt sich der Schreibtisch, '
+          'mit ‹voll›jeder Nachricht und jeder gelesenen Datei. Wird er zu voll, ‹zusammen›fasst Claude Code alles '
+          'zusammen und räumt den Rest ab. Dabei ‹verlust›gehen Details verloren. Deshalb gehört alles Wichtige ‹datei›in '
+          'diese Notizdatei, nicht nur in den Chat.')]
 
-S4_B = [(P, 'Zweitens: ‹titel›Werkzeuge. Wie drückt ein Modell, das nur Text schreiben kann, einen Knopf? ‹gar›Gar '
-            'nicht. Es schreibt einen Wunsch auf. Geben wir dem Modell mal eine Stimme.'),
+S5_SCHLUSS = ('Für das Modell wirkt das wie Zauberei: Kurz darauf ‹ergebnis›liegt das Ergebnis auf dem Schreibtisch. '
+              'Eingebaut sind ‹liste›Werkzeuge zum Lesen, Schreiben, Suchen und für Befehle im Terminal. Weitere schließt '
+              'du über einen ‹mcp›Steckerstandard namens MCP an, zum Beispiel für den Kalender oder eine Datenbank.')
+S5_A = [(P, 'Zweitens: ‹titel›Werkzeuge. Das Modell kann keinen Knopf drücken. Es schreibt einen ‹wunsch›Wunsch in einem '
+            'festen Format auf, etwa: Lies die Datei mit den Notizen. Claude Code ‹erkennt›erkennt das und führt es aus. '
+            + S5_SCHLUSS)]
+S5_B = [(P, 'Zweitens: ‹titel›Werkzeuge. Das Modell kann keinen Knopf drücken. Es schreibt einen Wunsch auf. Geben wir '
+            'dem Modell mal eine Stimme.'),
         ('MODELL', '‹wunsch›Ich möchte die Datei mit den Notizen lesen.'),
         (P, 'Und der Harness antwortet wie der Tower im Funk.'),
         ('HARNESS', '‹erkennt›Harness an Modell: erlaubt. Hier ist die Datei.'),
-        (P, 'Für das Modell wirkt das wie Zauberei: Kurz darauf ‹ergebnis›liegt das Ergebnis auf dem Schreibtisch. '
-            'Weitere Werkzeuge kommen über einen ‹mcp›Steckerstandard namens MCP dazu, zum Beispiel für den Kalender '
-            'oder eine Datenbank. Für das Modell ist das einfach eine ‹liste›längere Werkzeugliste.')]
+        (P, S5_SCHLUSS)]
 
-S5 = [(P, 'Drittens: die ‹titel›Prüfung. Ein Modell, das Programmcode schreibt, kann nur nachlesen, ob er gut aussieht. '
+S6 = [(P, 'Drittens: die ‹titel›Prüfung. Ein Modell, das Programmcode schreibt, kann nur nachlesen, ob er gut aussieht. '
           'Ob er wirklich läuft, weiß es nicht. Das ist wie ein ‹schueler›Schüler, der seine Klassenarbeit selbst '
-          'korrigiert. Da gibt es selten eine Fünf. Deshalb lässt der Harness ‹tests›echte Tests laufen, und zwar von '
-          'selbst. Steht da ‹rot›„drei Tests fehlgeschlagen“, weiß das Modell: noch nicht fertig. Es muss also nicht '
-          'glauben, dass alles klappt. ‹gruen›Der Harness prüft es nach.')]
+          'korrigiert. Da gibt es selten eine Fünf. Deshalb lässt der Harness ‹tests›echte Tests laufen. Steht da '
+          '‹rot›„drei Tests fehlgeschlagen“, weiß das Modell: noch nicht fertig. In Claude Code kannst du das mit '
+          'sogenannten ‹hooks›Hooks festlegen: Regeln, die nach jeder Änderung von selbst die Tests starten.')]
 
-S6_A = [(P, 'Viertens: ‹titel›Wer passt auf, dass nichts kaputtgeht? Der Harness prüft jeden Befehl, bevor er läuft: '
-            '‹ok›erlaubt, ‹frage›erst nachfragen oder ‹nein›verboten. Wie der ‹tower›Tower, der die Startfreigabe gibt. '
-            'Will das Modell zum Beispiel eine ‹db›Datenbank löschen, sagt der Harness ‹abgelehnt›Nein, oder er fragt '
-            'erst dich. Und wer ganz sicher gehen will, lässt den Agenten in einem ‹sandbox›abgeschotteten Bereich '
-            'arbeiten, einer Sandbox.')]
-
-S6_B = [(P, 'Viertens: ‹titel›Wer passt auf, dass nichts kaputtgeht? Der Harness prüft jeden Befehl, bevor er läuft: '
-            '‹ok›erlaubt, ‹frage›erst nachfragen oder ‹nein›verboten. Wie der ‹tower›Tower, der die Startfreigabe gibt.'),
+S7_ANFANG = ('Viertens: ‹titel›Wer passt auf, dass nichts kaputtgeht? Claude Code prüft jeden Befehl, bevor er läuft. '
+             'Wie der ‹tower›Tower, der jede Startfreigabe einzeln gibt.')
+S7_SCHLUSS = ('Wie streng, stellst du selbst ein: Soll Claude ‹m1›bei jeder Änderung fragen? Darf es ‹m2›Dateien ohne '
+              'Nachfrage ändern? Oder soll es ‹m3›erst nur einen Plan machen? Und wer ganz sicher gehen will, schaltet die '
+              '‹sandbox›Sandbox ein: Dann laufen Befehle in einem abgeschotteten Bereich.')
+S7_A = [(P, S7_ANFANG + ' ' + S7_SCHLUSS)]
+S7_B = [(P, S7_ANFANG),
         ('MODELL', '‹db›Ich lösche jetzt die alte Datenbank. Die stört nur.'),
         ('HARNESS', '‹abgelehnt›Harness an Modell: abgelehnt. Das muss erst der Mensch freigeben.'),
-        (P, 'Und wer ganz sicher gehen will, lässt den Agenten in einem ‹sandbox›abgeschotteten Bereich arbeiten, '
-            'einer Sandbox.')]
+        (P, S7_SCHLUSS)]
 
-S7 = [(P, 'Und wie spielt das zusammen? Als ‹titel›Schleife. ‹l1›Unterlagen hinlegen, ‹l2›das Modell entscheidet, '
-          '‹l3›der Harness prüft und führt aus, ‹l4›das Ergebnis kommt zurück auf den Tisch. Und ‹wieder›wieder von '
-          'vorn, oft dutzende Male, bis die Aufgabe erledigt ist. Oder bis zu viel schiefgeht. Dann ‹mensch›holt der '
-          'Harness dich dazu. Das Modell ‹entscheidet›entscheidet also nur, was als Nächstes passiert. Den Rest erledigt '
-          'der Harness. Und ‹deshalb›deshalb schneidet dasselbe Modell in verschiedenen Programmen so unterschiedlich ab.')]
+S8 = [(P, 'So spielt alles zusammen, in einer ‹titel›Schleife: ‹l1›Unterlagen hinlegen, ‹l2›das Modell entscheidet, '
+          '‹l3›Claude Code prüft und führt aus, ‹l4›das Ergebnis kommt zurück auf den Tisch. Und ‹wieder›wieder von vorn, '
+          'oft dutzende Male, bis die Aufgabe erledigt ist. Das Modell ‹entscheidet›entscheidet also, was als Nächstes '
+          'passiert. Alles andere macht der Harness.')]
 
-S8 = [(P, 'Und jetzt zum ‹titel›Test vom Anfang. Jedes Programm hatte nur ‹einer›einen Versuch pro Aufgabe. Zwischen '
-          'dem besten und dem schwächsten liegen ‹fuenf›fünf Aufgaben. Nehmen wir an, beide wären gleich gut. Dann ist '
-          'jede Aufgabe, die nur einer von beiden schafft, wie ein ‹muenze›Münzwurf. Fünfmal dieselbe Seite passiert in '
-          '‹sechzehn›einem von sechzehn Fällen. Und das ist noch die günstigste Rechnung. Als ‹beweis›Beweis reicht das '
-          'nicht. Dazu kommt: Alle acht liefen mit demselben fremden Modell, ‹kimi›Kimi K drei. Claude Code ist aber '
-          '‹claude›für Claude gebaut. Da sitzt also ein ‹fremd›fremder Pilot in einem Cockpit, das für jemand anderen '
-          'eingestellt ist. Was übrig bleibt, sind die ‹kosten›Kosten. Claude Code kostete pro gelöster Aufgabe ‹zwei›knapp '
-          'zwei Dollar, mit Abstand am meisten. Das ‹billig›günstigste Programm kam mit sechsundvierzig Cent aus. Claude '
-          'Code war also ‹vier›gut viermal so teuer. Selbst das ‹zweit›zweitteuerste Programm kostete nur zweiundsiebzig '
-          'Cent. Claude Code kostete ‹drei›fast das Dreifache. So ein Abstand ist kaum Zufall.')]
+S9 = [(P, 'Und ‹titel›was musst du tun, um den Harness zu benutzen? ‹nichts›Nichts extra. Wer Claude Code öffnet, im '
+          'Terminal oder im Code-Bereich der Desktop-App, benutzt ihn schon. Aber du kannst ihn ‹einstellen›einstellen, und '
+          'genau das meint Harness Engineering. Erstens: eine ‹e1›Notizdatei mit deinen Regeln. Der Befehl ‹init›Slash '
+          'init legt dir eine an. Zweitens: festlegen, ‹e2›was Claude ohne Nachfrage darf. Drittens: die ‹e3›Werkzeuge '
+          'anschließen, die du brauchst. Und viertens: ‹e4›Prüfungen von selbst laufen lassen. Dein Prompt sagt, '
+          '‹prompt›was du willst. Der Harness bestimmt, ‹harness›was Claude dafür tun kann.')]
 
-S9 = [(P, 'Merk dir: ‹denkt›Das Modell denkt, ‹handelt›der Harness handelt. Und wenn dein KI-Assistent das nächste Mal '
-          '‹unsinn›Unsinn baut, liegt es vielleicht gar nicht am Modell. Und ‹rangliste›trau keiner Rangliste mit einem '
-          'Versuch pro Aufgabe.')]
+S10 = [(P, 'Merk dir: ‹denkt›Das Modell denkt, ‹handelt›der Harness handelt. Und wenn Claude das nächste Mal '
+           '‹unsinn›etwas vergisst oder Unsinn baut, liegt es vielleicht gar nicht am Modell, sondern an seiner Umgebung.')]
 
 VARIANTEN = {
-    'A': [('s1', S1), ('s2', S2), ('s3', S3), ('s4', S4_A), ('s5', S5), ('s6', S6_A), ('s7', S7), ('s8', S8), ('s9', S9)],
-    'B': [('s1', S1), ('s2', S2), ('s3', S3), ('s4', S4_B), ('s5', S5), ('s6', S6_B), ('s7', S7), ('s8', S8), ('s9', S9)],
+    'A': [('s1', S1), ('s2', S2), ('s3', S3), ('s4', S4), ('s5', S5_A), ('s6', S6), ('s7', S7_A), ('s8', S8),
+          ('s9', S9), ('s10', S10)],
+    'B': [('s1', S1), ('s2', S2), ('s3', S3), ('s4', S4), ('s5', S5_B), ('s6', S6), ('s7', S7_B), ('s8', S8),
+          ('s9', S9), ('s10', S10)],
 }
 
 MARKER = re.compile(r'‹(\w+)›')
