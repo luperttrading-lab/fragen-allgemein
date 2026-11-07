@@ -22,7 +22,7 @@ S1 = [(P, 'Stell dir vor, du steckst ‹modell›dasselbe KI-Modell in ‹acht�
           'macht. Und am Ende zeige ich dir, ‹zweifel›warum du diesem Test trotzdem nicht trauen solltest.')]
 
 S2 = [(P, 'Was kann so ein ‹frage›Sprachmodell eigentlich allein? Erstaunlich wenig. Es sagt das ‹wort›nächste Wort '
-          'vorher, dann das nächste, und so weiter. Es kann dir ‹erklaeren›erklären, wie man eine Datei umbenennt. '
+          'voraus, dann das nächste, und so weiter. Es kann dir ‹erklaeren›erklären, wie man eine Datei umbenennt. '
           '‹nicht›Umbenennen kann es sie nicht. Es ist wie ein ‹pilot›Pilot ohne Flugzeug: Er weiß genau, wie Fliegen '
           'geht, und steht trotzdem auf dem Rollfeld. Der Harness ist das ‹flugzeug›Flugzeug drumherum. Und das hat '
           '‹vier›vier Teile.')]
