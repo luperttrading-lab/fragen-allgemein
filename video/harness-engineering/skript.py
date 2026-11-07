@@ -81,9 +81,10 @@ S8 = [(P, 'Und jetzt zum ‹titel›Test vom Anfang. Jedes Programm hatte nur �
           '‹sechzehn›einem von sechzehn Fällen. Und das ist noch die günstigste Rechnung. Als ‹beweis›Beweis reicht das '
           'nicht. Dazu kommt: Alle acht liefen mit demselben fremden Modell, ‹kimi›Kimi K drei. Claude Code ist aber '
           '‹claude›für Claude gebaut. Da sitzt also ein ‹fremd›fremder Pilot in einem Cockpit, das für jemand anderen '
-          'eingestellt ist. Was übrig bleibt, sind die ‹kosten›Kosten. Claude Code hat pro gelöster Aufgabe ‹zwei›knapp '
-          'zwei Dollar gekostet, das nächstteure Programm ‹cent›zweiundsiebzig Cent. Fast ‹drei›dreimal so viel. So ein '
-          'Abstand ist kaum Zufall.')]
+          'eingestellt ist. Was übrig bleibt, sind die ‹kosten›Kosten. Claude Code kostete pro gelöster Aufgabe ‹zwei›knapp '
+          'zwei Dollar, mit Abstand am meisten. Das ‹billig›günstigste Programm kam mit sechsundvierzig Cent aus. Claude '
+          'Code war also ‹vier›gut viermal so teuer. Selbst das ‹zweit›zweitteuerste Programm kostete nur zweiundsiebzig '
+          'Cent. Claude Code kostete ‹drei›fast das Dreifache. So ein Abstand ist kaum Zufall.')]
 
 S9 = [(P, 'Merk dir: ‹denkt›Das Modell denkt, ‹handelt›der Harness handelt. Und wenn dein KI-Assistent das nächste Mal '
           '‹unsinn›Unsinn baut, liegt es vielleicht gar nicht am Modell. Und ‹rangliste›trau keiner Rangliste mit einem '

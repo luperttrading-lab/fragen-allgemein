@@ -254,7 +254,10 @@ function aufbauen(){
     ko.insertAdjacentHTML('beforeend',`<div style="position:absolute;left:110px;top:${y+8}px;width:300px;font-size:30px;font-weight:700;text-align:right">${n}</div>
      <div class="kb" style="position:absolute;left:440px;top:${y}px;height:56px;width:${w}px;background:${hi?'#1C2430':'#0A8F80'};border-radius:0 6px 6px 0;transform-origin:left"></div>
      <div class="kw" style="position:absolute;left:${455+w}px;top:${y+6}px;font-size:34px;font-weight:800">${k.toFixed(2).replace('.',',')} $</div>`);});
-  ko.insertAdjacentHTML('beforeend','<div class="badge k3" style="left:900px;top:950px;font-size:40px;padding:14px 30px;opacity:0">≈ 2,7-mal so teuer wie der nächste</div>');
+  const tag=(cls,txt,x,y,farbe)=>ko.insertAdjacentHTML('beforeend',`<div class="badge ${cls}" style="left:${x}px;top:${y}px;background:${farbe};opacity:0">${txt}</div>`);
+  tag('tg1','günstigstes',850,276,'#0A8F80'); tag('tg2','zweitteuerstes',1000,768,'#5B6472');
+  const karte=(cls,gross,klein,x)=>ko.insertAdjacentHTML('beforeend',`<div class="karte ${cls}" style="left:${x}px;top:380px;width:340px;opacity:0;border-top:10px solid #1C2430"><div style="font-size:84px;font-weight:800;line-height:1">${gross}</div><div style="font-size:30px;font-weight:600;color:#5B6472;margin-top:12px;line-height:1.3">${klein}</div></div>`);
+  karte('vg1','4,3 ×','Claude Code im Vergleich zum günstigsten (0,46&nbsp;$)',1080); karte('vg2','2,7 ×','Claude Code im Vergleich zum zweitteuersten (0,72&nbsp;$)',1460);
 }
 
 // Szenen
@@ -340,8 +343,9 @@ R.s8=(t,c,S)=>{
   zeige($('#s8 .fr'),E(t,c.fremd,.6)*(1-E(t,c.kosten-.4,.5)),0); kb($('#s8 .fr'),t,{start:c.fremd,ende:c.kosten}); zeige($('#s8 .c1'),E(t,c.fremd+.8)*(1-E(t,c.kosten-.4,.3)));
   zeige($('#s8 .kosten'),E(t,c.kosten-.3),0);
   $$('#s8 .kb').forEach((b,i)=>b.style.transform=`scaleX(${E(t,c.kosten+.2+i*.12,.5)})`);
-  $$('#s8 .kw').forEach((w,i)=>{let p=E(t,c.kosten+.6+i*.12);if(i===7)p=E(t,c.zwei,.3);if(i===6)p=Math.max(E(t,c.kosten+1.32),E(t,c.cent,.3));w.style.opacity=p;});
-  zeige($('#s8 .k3'),E(t,c.drei,.3),0,0,1.3);
+  $$('#s8 .kw').forEach((w,i)=>{let p=E(t,c.kosten+.6+i*.12);if(i===7)p=E(t,c.zwei,.3);w.style.opacity=p;});
+  zeige($('#s8 .tg1'),E(t,c.billig,.3),0,-20); zeige($('#s8 .tg2'),E(t,c.zweit,.3),0,-20);
+  zeige($('#s8 .vg1'),E(t,c.vier,.35),20,0,1.15); zeige($('#s8 .vg2'),E(t,c.drei,.35),20,0,1.15);
 };
 R.s9=(t,c,S)=>{
   zeige($('#s9 .d1'),E(t,c.denkt-.2)); zeige($('#s9 .d2'),E(t,c.handelt-.2)); zeige($('#s9 .d3'),E(t,c.unsinn)); zeige($('#s9 .d4'),E(t,c.rangliste)); zeige($('#s9 .q'),E(t,S.ende+.3));
