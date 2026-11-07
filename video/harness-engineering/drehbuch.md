@@ -1,141 +1,101 @@
-# Harness Engineering – Drehbuch, Entwurf 1.1 (07.11.2026)
+# Harness Engineering – Drehbuch, Entwurf 2 (07.11.2026)
 
-Eigenes Skript für zwei Sprecher, angelehnt an den Inhalt von
-[Alex Sprogis: „Hör auf Agents zu prompten. Starte mit Harness Engineering!“](https://youtu.be/SU0EyB45x6Q)
-(03.11.2026, 13:50 min), mit eigenen Bildern (Pilot, Schreibtisch, Prognosemodell) und eigenem Statistik-Teil.
-Zahlenquelle: [Composio, „Best AI agent harnesses“](https://composio.dev/content/best-ai-agent-harnesses) (04.08.2026).
+**Ziel:** 5 Minuten, kurzweilig, für Leute, die ChatGPT oder Claude nutzen, aber nicht programmieren. Wer zuschaut,
+soll danach wissen, was ein Harness ist, und den Begriff zuordnen können. Test, was wir zusammen produzieren können.
 
-Rollen: **MARA** = Statistikerin, fragt kritisch nach. **BEN** = Entwickler, erklärt knapp.
+Inhalt angelehnt an [Alex Sprogis: „Hör auf Agents zu prompten. Starte mit Harness Engineering!“](https://youtu.be/SU0EyB45x6Q)
+(03.11.2026), eigene Formulierungen und Bilder, eigener Statistik-Teil. Zahlenquelle:
+[Composio, „Best AI agent harnesses“](https://composio.dev/content/best-ai-agent-harnesses) (04.08.2026).
+
+Rollen: **MARA** = Statistikerin, fragt nach. **BEN** = Entwickler, erklärt knapp.
 Kein NotebookLM-Muster: kein gegenseitiges „Genau!“ und „Wow“, keine Echo-Sätze; jede Zeile bringt etwas Neues.
+Aufbau: offene Frage am Anfang (Test mit 22 zu 17), Auflösung am Ende (Münzwurf).
 
-## Szene 1 – Einstieg (Bild: Balken, alle acht Harnesses)
+Gegenüber Entwurf 1 gestrichen: Szene „Prompt, Context, Harness Engineering“ (nur noch ein Satz am Schluss),
+Fachwörter Linter, Unit-Test, Hook, Compaction, Context Rot, AGENTS.md.
 
-BEN: Gleiches Sprachmodell, gleiche Werkzeuge, gleiche fünfundzwanzig Aufgaben. Nur die Software drumherum ist eine andere. Und plötzlich löst das eine System zweiundzwanzig Aufgaben, das andere nur siebzehn.
+## Szene 1 – Einstieg (Bild: acht Balken, Claude Code markiert)
 
-MARA: Claude Code liegt mit neunzehn im Mittelfeld, ist aber am langsamsten und am teuersten. So steht es in einem Test der Firma Composio vom August.
+BEN: Stell dir vor, du steckst dasselbe KI-Modell in acht verschiedene Programme und gibst allen dieselben fünfundzwanzig Aufgaben. Das beste löst zweiundzwanzig, das schwächste nur siebzehn.
 
-BEN: Diese Software drumherum heißt Harness. Heute geht es darum, was ein Harness ist, woraus er besteht und warum er so viel ausmacht.
+MARA: Und Claude Code, eines der bekanntesten, landet im Mittelfeld. Dafür ist es das langsamste und mit Abstand das teuerste.
 
-MARA: Und am Ende prüfen wir, ob die Zahlen halten, was sie versprechen. Kleiner Hinweis vorab: nur zum Teil.
+BEN: Das Programm um das Modell herum heißt Harness. Wörtlich: das Geschirr, mit dem man ein Pferd vor den Wagen spannt.
 
-## Szene 2 – Das Modell allein (Bild: Pilot auf dem Rollfeld, ohne Flugzeug)
+MARA: In fünf Minuten weißt du, was so ein Harness macht. Und am Ende zeige ich dir, warum du diesem Test trotzdem nicht trauen solltest.
 
-MARA: Fangen wir vorne an. Was kann ein Sprachmodell eigentlich allein?
+## Szene 2 – Pilot ohne Flugzeug (Bild: Pilot auf leerem Rollfeld)
 
-BEN: Eine einzige Sache: das nächste Stück Text vorhersagen. Es kann dir erklären, wie man eine Datei anlegt. Anlegen kann es sie nicht. Es sieht dein Projekt nicht, es vergisst nach jeder Sitzung alles, und ob sein Code läuft, weiß es auch nicht.
+MARA: Was kann so ein Sprachmodell eigentlich allein?
 
-MARA: Also ein Pilot ohne Flugzeug. Weiß genau, wie Fliegen geht, und steht trotzdem auf dem Rollfeld.
+BEN: Erstaunlich wenig. Es sagt das nächste Wort vorher, dann das nächste, und so weiter. Es kann dir erklären, wie man eine Datei umbenennt. Umbenennen kann es sie nicht.
 
-BEN: Und der Harness ist das Flugzeug: Instrumente, Steuerung, Checklisten und der Funk zum Tower. Erst Modell und Harness zusammen ergeben einen Agenten.
+MARA: Wie ein Pilot ohne Flugzeug. Weiß genau, wie Fliegen geht, und steht trotzdem auf dem Rollfeld.
 
-## Szene 3 – Vier Bausteine (Bild: vier Kacheln)
+BEN: Der Harness ist das Flugzeug drumherum. Und das hat vier Teile.
 
-MARA: Woraus besteht so ein Harness?
+## Szene 3 – Was das Modell vor Augen hat (Bild: Schreibtisch, der volläuft)
 
-BEN: Aus vier Bausteinen: Kontext, Werkzeuge, Prüfung und Berechtigungen.
+BEN: Erstens: das, was das Modell vor Augen hat. Bevor du überhaupt etwas tippst, legt der Harness schon Unterlagen hin: die Anweisungen des Herstellers, welcher Ordner gerade offen ist, und eine Notizdatei mit deinen eigenen Regeln.
 
-## Szene 4 – Kontext (Bild: Schreibtisch, der volläuft)
+MARA: Und dann füllt sich der Schreibtisch.
 
-MARA: Kontext heißt: Was weiß das Modell gerade?
+BEN: Mit jeder Nachricht und jeder gelesenen Datei. Irgendwann ist er so voll, dass das Modell das Wichtige übersieht. Dann fasst der Harness alles auf wenigen Seiten zusammen und wirft den Rest weg.
 
-BEN: Bevor du die erste Nachricht schreibst, hat der Harness schon einiges eingefügt: den Systemprompt des Anbieters, Angaben zu deinem Rechner und deinem Ordner, und deine eigenen Regeln. Bei Claude Code stehen die in der Datei CLAUDE.md, bei vielen anderen Werkzeugen heißt sie AGENTS.md.
+MARA: Und genau dabei gehen Details verloren. Deshalb gehört alles Wichtige in eine Datei, nicht nur in den Chat.
 
-MARA: Da steht dann zum Beispiel: Wir arbeiten mit Python, und nach jeder Änderung laufen die Tests.
+## Szene 4 – Werkzeuge (Bild: Textzeile wird zum Knopfdruck)
 
-BEN: Einmal geschrieben, und jede neue Sitzung startet mit diesem Wissen. Dazu kommt bei vielen Harnesses ein Gedächtnis, in dem sich der Agent selbst Notizen macht.
+MARA: Zweitens: Werkzeuge. Wie drückt ein Modell, das nur Text schreibt, einen Knopf?
 
-MARA: Und während der Arbeit?
+BEN: Gar nicht. Es schreibt einen Satz in einem festen Format, etwa: Benutze das Werkzeug „Datei lesen“ für die Notizdatei. Der Harness erkennt das, drückt den Knopf und legt das Ergebnis zurück auf den Schreibtisch.
 
-BEN: Da wird es eng, denn das Kontextfenster ist begrenzt. Stell dir einen Schreibtisch vor. Jede Nachricht, jede gelesene Datei, jedes Ergebnis landet als Blatt darauf. Je voller er wird, desto schlechter findet das Modell das Wichtige. Das nennt man Context Rot.
+MARA: Und wenn man mehr Werkzeuge will?
 
-MARA: Und wenn der Tisch voll ist?
+BEN: Dann kommen sie über einen Steckerstandard namens MCP dazu, zum Beispiel für den Kalender oder eine Datenbank. Für das Modell ist das einfach eine längere Werkzeugliste.
 
-BEN: Dann fasst der Harness alles auf wenigen Seiten zusammen und räumt den Rest ab. Das heißt Compaction. Dabei gehen Details verloren.
+## Szene 5 – Prüfung (Bild: Klassenarbeit, rot korrigiert)
 
-MARA: Deshalb gehört Wichtiges in Dateien und nicht nur in den Chat. Dateien kann der Agent jederzeit neu lesen.
+MARA: Drittens, mein Lieblingsteil: die Prüfung.
 
-## Szene 5 – Werkzeuge und MCP (Bild: Textzeile „Tool-Call“, Harness drückt den Knopf)
+BEN: Ein Modell, das Programmcode schreibt, kann nur nachlesen, ob er gut aussieht. Ob er wirklich läuft, weiß es nicht.
 
-MARA: Baustein zwei, Werkzeuge. Wie drückt ein Modell, das nur Text schreibt, einen Knopf?
+MARA: Wie ein Schüler, der seine Klassenarbeit selbst korrigiert. Da gibt es selten eine Fünf.
 
-BEN: Gar nicht. Es schreibt Text in einem festen Format, sinngemäß: Rufe das Werkzeug „Datei lesen“ auf, für die Datei README. Das ist ein Tool-Call. Der Harness erkennt das Format, führt das Werkzeug wirklich aus und gibt das Ergebnis zurück.
+BEN: Deshalb lässt der Harness echte Tests laufen. Steht da „drei Tests fehlgeschlagen“, weiß das Modell: noch nicht fertig. Und ein guter Harness startet die Tests von selbst, auch wenn das Modell es vergisst.
 
-MARA: Und das passiert in einer normalen Sitzung dutzende Male, ohne dass man es merkt.
+## Szene 6 – Berechtigungen (Bild: Tower, Startfreigabe)
 
-BEN: Über MCP, das Model Context Protocol, lassen sich außerdem fremde Systeme anschließen: Notion, der Kalender, Datenbanken. Für das Modell ist das am Ende nur eine längere Werkzeugliste.
+MARA: Viertens: Wer passt auf, dass nichts kaputtgeht?
 
-## Szene 6 – Prüfung (Bild: Tests, rot und grün)
+BEN: Der Harness prüft jeden Befehl, bevor er läuft: erlaubt, erst nachfragen oder verboten. Wie der Tower, der die Startfreigabe gibt. Und wer ganz sicher gehen will, lässt den Agenten in einem abgeschotteten Bereich arbeiten, einer Sandbox.
 
-MARA: Baustein drei, Prüfung. Das ist mein Lieblingsteil.
+## Szene 7 – Die Schleife (Bild: Kreis mit vier Schritten)
 
-BEN: Ein Modell kann seinen Code nur lesen. Ob er läuft, weiß es nicht. Fragst du es, sagt es meistens: sieht gut aus.
+MARA: Und wie spielt das zusammen?
 
-MARA: Wie ein Prognosemodell, das man nur an den Daten prüft, mit denen es gebaut wurde. Es sieht immer gut aus.
+BEN: Als Schleife. Unterlagen hinlegen, das Modell entscheidet, der Harness prüft und führt aus, das Ergebnis kommt zurück auf den Tisch. Und wieder von vorn, oft dutzende Male, bis die Aufgabe erledigt ist.
 
-BEN: Deshalb gibt der Harness echte Prüfwerkzeuge: Unit-Tests, einen Linter, der typische Fehler findet, oder einen Browser, der die App wirklich anklickt. Steht da „drei Tests fehlgeschlagen“, weiß das Modell: Ich bin noch nicht fertig.
+MARA: Das Modell entscheidet also nur, was als Nächstes passiert. Den Rest erledigt der Harness. Und deshalb schneidet dasselbe Modell in verschiedenen Programmen so unterschiedlich ab.
 
-MARA: Und wenn das Modell vergisst zu testen?
+## Szene 8 – Statistik-Check (Bild: fünf Münzen, dann acht Balken mit „alle mit Kimi K3“)
 
-BEN: Dann sorgt ein guter Harness trotzdem dafür, zum Beispiel mit Hooks. Das sind kleine Regeln, die nach jeder Änderung automatisch die Tests starten.
+MARA: Und jetzt zum Test vom Anfang. Jedes Programm hatte nur einen Versuch pro Aufgabe.
 
-## Szene 7 – Berechtigungen (Bild: Tower, Freigabe)
+BEN: Und zwischen dem besten und dem schwächsten liegen fünf Aufgaben.
 
-MARA: Und Baustein vier schützt dich.
+MARA: Nehmen wir an, beide wären gleich gut. Dann ist jede Aufgabe, die nur einer von beiden schafft, wie ein Münzwurf. Fünfmal dieselbe Seite passiert in einem von sechzehn Fällen. Und das ist noch die günstigste Rechnung. Als Beweis reicht das nicht.
 
-BEN: Die Berechtigungen. Ein Agent, der Befehle ausführen darf, kann auch Daten löschen. Deshalb prüft der Harness jeden Tool-Call, bevor er läuft: erlaubt, erst nachfragen oder verboten.
+BEN: Und was ist mit Claude Code?
 
-MARA: Wie der Tower, der jede Startfreigabe erteilt.
+MARA: Alle acht liefen mit demselben fremden Modell, Kimi K3. Claude Code ist aber für Claude gebaut. Da sitzt also ein fremder Pilot in einem Cockpit, das für jemand anderen eingestellt ist.
 
-BEN: Dazu kommt die Sandbox. Der Agent arbeitet in einem abgeschotteten Bereich und kann draußen nichts kaputt machen.
+BEN: Bleibt dann überhaupt etwas übrig?
 
-## Szene 8 – Der Agent-Loop (Bild: Kreis mit vier Schritten)
+MARA: Die Kosten. Claude Code hat pro gelöster Aufgabe knapp zwei Dollar gekostet, das nächstteure Programm zweiundsiebzig Cent. So ein Abstand ist kaum Zufall.
 
-MARA: Wie spielt das alles zusammen?
+## Szene 9 – Schluss (Bild: Merksatz)
 
-BEN: In einer Schleife. Erstens: Der Harness sammelt Aufgabe und Kontext. Zweitens: Das Modell wählt eine Aktion und schreibt einen Tool-Call. Drittens: Der Harness prüft die Rechte und führt aus. Viertens: Das Ergebnis geht zurück ans Modell. Und dann von vorn, bis das Ziel erreicht ist.
+BEN: Merk dir: Das Modell denkt, der Harness handelt. Deshalb reden inzwischen alle nicht mehr nur über gute Prompts, sondern über den Harness.
 
-MARA: Das Modell entscheidet also nur, was als Nächstes passiert. Den Rest erledigt der Harness.
-
-BEN: Und deshalb schneidet dasselbe Modell in verschiedenen Harnesses so unterschiedlich ab. Andere Werkzeuge, andere Beschreibungen, ein anderer Systemprompt, andere Prüfungen.
-
-## Szene 9 – Prompt, Context, Harness Engineering (Bild: drei Stufen)
-
-MARA: Man hört ständig Prompt Engineering, Context Engineering, Harness Engineering. Was ist der Unterschied?
-
-BEN: Das ist eher eine Entwicklung. Ende zweitausendzweiundzwanzig, mit ChatGPT, ging es um den Prompt: Wie formuliere ich die Frage? Dann kamen Werkzeuge und eigene Daten dazu, und die Frage wurde: Was gehört ins Kontextfenster und was nicht? Das ist Context Engineering.
-
-MARA: Und heute laufen Agenten stundenlang.
-
-BEN: Genau da reicht guter Kontext nicht mehr. Der Tisch läuft voll, nach der Zusammenfassung fehlen Details, und am Ende hält sich der Agent für fertig, obwohl die Hälfte fehlt. Also gestaltet man den Ablauf: eine Liste aller geplanten Funktionen, und der Agent arbeitet pro Runde genau eine ab, testet sie und speichert den Stand. Jede Runde startet mit frischem Kontext.
-
-MARA: Das ist Harness Engineering. Du gestaltest nicht mehr nur die Frage, sondern die ganze Umgebung und den Ablauf.
-
-## Szene 10 – Statistik-Check (Bild: acht Balken, Hinweis „alle mit Kimi K3“)
-
-MARA: Und jetzt zu den Zahlen vom Anfang. Da muss ich als Statistikerin einhaken.
-
-BEN: Bitte.
-
-MARA: Erstens: Jedes System hatte genau einen Versuch pro Aufgabe. Eine Aufgabe sind vier Prozentpunkte. Zwischen zweiundzwanzig und siebzehn liegen fünf Aufgaben. Wären beide Systeme gleich gut, käme so ein Abstand selbst in der günstigsten Rechnung in sechs von hundert Fällen durch Zufall zustande. Das reicht nicht als Beleg.
-
-MARA: Zweitens: Verglichen werden der Beste und der Schlechteste von acht. Wer die Extreme herauspickt, überschätzt den Unterschied fast immer.
-
-MARA: Drittens: Alle acht liefen mit demselben Modell, Kimi K3 von Moonshot. Claude Code ist für Claude gebaut, Codex für die Modelle von OpenAI. Beide liefen hier mit einem fremden Modell.
-
-BEN: Und Codex war mit siebzehn das Schlusslicht.
-
-MARA: Eben. Außerdem waren die Aufgaben Büroabläufe in Gmail, Kalender und Slack, nicht Programmieren.
-
-BEN: Was bleibt dann übrig?
-
-MARA: Die Kosten. Claude Code hat pro gelöster Aufgabe knapp zwei Dollar gekostet, das nächstteure System zweiundsiebzig Cent. Fast dreimal so viel. Ein so großer Abstand ist kaum Zufall.
-
-BEN: Also: Der Harness zählt. Aber welcher der beste ist, zeigt dieser Test nicht.
-
-## Szene 11 – Schluss (Bild: Merksätze)
-
-MARA: Zum Mitnehmen: Das Modell denkt, der Harness handelt.
-
-BEN: Und wenn du selbst mit einem Agenten arbeitest: Schreib deine Regeln in eine Datei, lass Tests automatisch laufen und fang große Aufgaben mit einer Liste an, nicht mit einem endlosen Chat.
-
-MARA: Und trau keiner Rangliste mit fünfundzwanzig Aufgaben und einem Versuch.
+MARA: Und trau keiner Rangliste mit einem Versuch pro Aufgabe.
