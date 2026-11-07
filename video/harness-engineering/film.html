@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>Harness-Video</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#F7F3EA}
+body{font-family:Inter,sans-serif;color:#1C2430;position:relative}
+.sz{position:absolute;inset:0;opacity:0}
+.a{position:absolute;opacity:0}
+.kicker{position:absolute;left:110px;top:70px;font-size:24px;font-weight:700;letter-spacing:.14em;color:#0A8F80}
+.titel{position:absolute;left:108px;top:104px;font-size:62px;font-weight:800;letter-spacing:-.01em;white-space:nowrap}
+.unter{font-size:36px;color:#5B6472;font-weight:500}
+.bild{position:absolute;overflow:hidden;border-radius:22px;background:#EFE8DA}
+.bild img{width:100%;height:100%;object-fit:cover;display:block;transform-origin:50% 50%}
+.voll{left:0;top:0;width:1920px;height:1080px;border-radius:0}
+.cap{position:absolute;padding:16px 28px;background:rgba(28,36,48,.9);color:#fff;border-radius:14px;font-size:40px;font-weight:700}
+.cap b{color:#7FD6CB}.cap i{font-style:normal;color:#F3A07A}
+.karte{position:absolute;background:#fff;border-radius:18px;box-shadow:0 2px 0 rgba(0,0,0,.06);padding:22px 28px;font-size:38px;font-weight:600}
+.stempel{position:absolute;padding:14px 30px;border:6px solid #1C2430;border-radius:14px;font-size:44px;font-weight:800;transform:rotate(-4deg);background:#F7F3EA}
+.ico{display:grid;place-items:center;border-radius:50%;color:#fff;font:800 40px 'DejaVu Sans Mono',monospace}
+.m{background:#C2410C}.h{background:#0A8F80}
+.blase{position:absolute;display:flex;gap:22px;align-items:flex-start}
+.blase .ico{flex:none;width:110px;height:110px}
+.blase .wer{font-size:26px;font-weight:800;letter-spacing:.12em;margin-bottom:8px}
+.blase .txt{font-size:46px;font-weight:600;line-height:1.3;padding:22px 30px;border-radius:22px;background:#fff;border:4px solid;border-top-left-radius:6px;max-width:1100px}
+.blase.mo .wer{color:#C2410C}.blase.mo .txt{border-color:#C2410C}
+.blase.ha .wer{color:#0A8F80}.blase.ha .txt{border-color:#0A8F80}
+.mono{font-family:'DejaVu Sans Mono',monospace;font-size:30px;color:#5B6472;margin-top:10px}
+/* Balken */
+.bars{position:absolute;left:110px;top:250px;width:1700px;height:700px}
+.bar{position:absolute;bottom:90px;width:150px;background:#0A8F80;border-radius:6px 6px 0 0;transform-origin:bottom}
+.bar.hi{background:#1C2430}
+.bwert{position:absolute;width:150px;text-align:center;font-size:40px;font-weight:800}
+.bname{position:absolute;bottom:10px;width:205px;text-align:center;font-size:27px;font-weight:700;line-height:1.15;color:#1C2430}
+.gitter{position:absolute;left:0;right:0;height:2px;background:#DDD5C5}
+.achse{position:absolute;left:0;right:0;bottom:88px;height:3px;background:#1C2430}
+.badge{position:absolute;padding:8px 18px;border-radius:999px;background:#1C2430;color:#fff;font-size:26px;font-weight:700;white-space:nowrap}
+/* Schreibtisch */
+.tisch{position:absolute;left:150px;top:250px;width:1620px;height:740px;border-radius:30px;background:#E9DFCC}
+.blatt{position:absolute;width:380px;height:250px;background:#fff;border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.12);padding:20px 24px;font-size:32px;font-weight:700;line-height:1.2}
+.blatt::after{content:"";position:absolute;left:20px;right:40px;bottom:30px;height:60px;background:repeating-linear-gradient(#E3DDD0 0 6px,transparent 6px 20px)}
+.blatt.wichtig{border:5px solid #0A8F80}
+/* Funk-Fußzeile */
+.funk{position:absolute;left:0;right:0;bottom:0;height:86px;background:#1C2430;color:#fff;display:flex;align-items:center;gap:22px;padding:0 110px;font-size:30px;font-weight:800;letter-spacing:.12em;opacity:0}
+.funk .punkt{width:22px;height:22px;border-radius:50%}
+.funk .art{color:#9AA1AB;font-weight:700}
+/* Tests */
+.tests{position:absolute;left:1000px;top:270px;width:810px;background:#fff;border-radius:22px;padding:26px 34px;box-shadow:0 2px 0 rgba(0,0,0,.06)}
+.tz{display:flex;justify-content:space-between;align-items:center;font-size:36px;font-weight:600;padding:12px 0;border-bottom:2px solid #EFE8DA}
+.tz:last-child{border:0}
+.tz span:last-child{font-weight:800;width:60px;text-align:center}
+.tkopf{font-size:40px;font-weight:800;margin-bottom:8px;height:44px}
+/* Münzen */
+.muenze{position:absolute;width:170px;height:170px;border-radius:50%;background:#0A8F80;color:#fff;display:grid;place-items:center;font-size:76px;font-weight:800;box-shadow:inset 0 0 0 10px rgba(255,255,255,.25)}
+.gross{position:absolute;font-weight:800;letter-spacing:-.02em}
+</style></head><body>
+
+<!-- S1 Einstieg -->
+<div class="sz" id="s1">
+  <div class="kicker">HARNESS ENGINEERING</div>
+  <div class="titel a t1">Ein Modell, acht Programme</div>
+  <div class="a unter u1" style="left:110px;top:186px">dasselbe KI-Modell · dieselben 25 Aufgaben · gelöste Aufgaben</div>
+  <div class="bars a" id="bars1"></div>
+  <div class="gross a w1" style="left:110px;top:330px;font-size:150px">Harness</div>
+  <div class="a unter w2" style="left:116px;top:520px;font-size:40px;line-height:1.35">die Software um das Modell herum<br><span style="color:#1C2430;font-weight:700">engl. harness = Geschirr</span></div>
+  <div class="bild a pf" style="left:900px;top:240px;width:910px;height:607px"><img src="bilder/pferd.png"></div>
+  <div class="stempel a st1" style="left:1180px;top:860px">Stimmt das wirklich?</div>
+</div>
+
+<!-- S2 Modell allein -->
+<div class="sz" id="s2">
+  <div class="kicker">HARNESS ENGINEERING</div>
+  <div class="titel a t1">Was kann ein Sprachmodell allein?</div>
+  <div class="a k1" style="left:110px;top:300px;font-size:54px;font-weight:700">Der Himmel ist <span class="tok" style="color:#C2410C">blau</span> <span class="tok" style="color:#C2410C">und</span> <span class="tok" style="color:#C2410C">fast</span> <span class="tok" style="color:#C2410C">wolkenlos</span> <span class="tok" style="color:#C2410C">…</span></div>
+  <div class="a unter k2" style="left:110px;top:390px">nächstes Wort vorhersagen, immer wieder</div>
+  <div class="karte a k3" style="left:110px;top:520px;width:900px">„So benennst du eine Datei um: …“<div class="mono">erklären: ja</div></div>
+  <div class="karte a k4" style="left:1080px;top:520px;width:720px;border:5px solid #1C2430">Datei wirklich umbenennen<div class="mono" style="color:#1C2430;font-weight:700">✕ kann es nicht</div></div>
+  <div class="bild voll a b1"><img src="bilder/pilot_rollfeld.png"></div>
+  <div class="cap a c1" style="left:110px;top:900px">Modell = <i>Pilot ohne Flugzeug</i></div>
+  <div class="bild voll a b2"><img src="bilder/cockpit.png"></div>
+  <div class="cap a c2" style="left:110px;top:900px">Harness = <b>das Flugzeug drumherum</b></div>
+  <div class="a v4" style="left:110px;top:730px;display:flex;gap:24px"></div>
+</div>
+
+<!-- S3 Kontext -->
+<div class="sz" id="s3">
+  <div class="kicker">HARNESS ENGINEERING</div>
+  <div class="titel a t1">1 · Was das Modell vor Augen hat</div>
+  <div class="tisch a ti"></div>
+  <div id="blaetter"></div>
+  <div class="cap a c1" style="left:700px;top:880px">Das Wichtige geht unter</div>
+  <div class="blatt a zs1" style="left:600px;top:420px;border:5px solid #0A8F80">Zusammenfassung</div>
+  <div class="blatt a zs2" style="left:900px;top:440px;border:5px solid #0A8F80;transform:rotate(3deg)">Zusammenfassung</div>
+  <div class="cap a c2" style="left:420px;top:760px">Harness fasst zusammen, <i>Details gehen verloren</i></div>
+  <div class="karte a c3" style="left:1290px;top:300px;width:450px;border:5px solid #0A8F80">Notizdatei<div class="mono" style="color:#0A8F80;font-weight:700">bleibt erhalten</div></div>
+  <div class="cap a c4" style="left:300px;top:880px">Wichtiges gehört in eine Datei, nicht nur in den Chat</div>
+</div>
+
+<!-- S4 Werkzeuge -->
+<div class="sz" id="s4">
+  <div class="kicker">HARNESS ENGINEERING</div>
+  <div class="titel a t1">2 · Werkzeuge</div>
+  <div class="a unter g1" style="left:110px;top:186px">Ein Modell kann keinen Knopf drücken. Es schreibt nur Text.</div>
+  <div class="blase mo a bl1" style="left:110px;top:280px"><div class="ico m">{ }</div><div><div class="wer">MODELL</div><div class="txt"></div></div></div>
+  <div class="blase ha a bl2" style="left:420px;top:560px"><div class="ico h"><svg width="44" height="44" viewBox="0 0 40 40" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="18" width="28" height="18" rx="4"/><path d="M12 18v-5a8 8 0 0 1 16 0v5"/></svg></div><div><div class="wer">HARNESS</div><div class="txt"></div></div></div>
+  <div class="blatt a erg" style="left:1380px;top:280px;width:420px;height:260px">Ergebnis:<br>Inhalt der Notizdatei</div>
+  <div class="a mcp" style="left:110px;top:700px;width:1200px;height:300px"></div>
+  <div class="karte a liste" style="left:1330px;top:600px;width:480px;font-size:34px;line-height:1.5"></div>
+</div>
+
+<!-- S5 Prüfung -->
+<div class="sz" id="s5">
+  <div class="kicker">HARNESS ENGINEERING</div>
+  <div class="titel a t1">3 · Prüfung</div>
+  <div class="a unter u1" style="left:110px;top:186px">Code lesen heißt nicht: Code läuft.</div>
+  <div class="bild a sb" style="left:110px;top:270px;width:840px;height:560px"><img src="bilder/schueler.png"></div>
+  <div class="cap a c1" style="left:130px;top:860px">korrigiert sich selbst: <i>selten eine Fünf</i></div>
+  <div class="tests a tp"><div class="tkopf"></div></div>
+  <div class="stempel a st" style="left:1180px;top:880px;border-color:#0A8F80;color:#0A8F80">Der Harness prüft nach</div>
+</div>
+
+<!-- S6 Berechtigungen -->
+<div class="sz" id="s6">
+  <div class="kicker">HARNESS ENGINEERING</div>
+  <div class="titel a t1">4 · Berechtigungen</div>
+  <div class="karte a g1" style="left:110px;top:280px;width:640px;border-left:14px solid #0A8F80">✓ erlaubt</div>
+  <div class="karte a g2" style="left:110px;top:420px;width:640px;border-left:14px solid #9AA1AB">? erst nachfragen</div>
+  <div class="karte a g3" style="left:110px;top:560px;width:640px;border-left:14px solid #B42318">✕ verboten</div>
+  <div class="bild a tw" style="left:860px;top:250px;width:950px;height:633px"><img src="bilder/tower.png"></div>
+  <div class="cap a c1" style="left:880px;top:900px">wie der Tower: <b>jede Freigabe einzeln</b></div>
+  <div class="blase mo a db" style="left:110px;top:700px"><div class="ico m">{ }</div><div><div class="wer">MODELL</div><div class="txt"></div></div></div>
+  <div class="stempel a ab" style="left:900px;top:420px;border-color:#B42318;color:#B42318;font-size:50px"></div>
+  <div class="a sbx" style="left:860px;top:250px;width:950px;height:633px"></div>
+</div>
+
+<!-- S7 Schleife -->
+<div class="sz" id="s7">
+  <div class="kicker">HARNESS ENGINEERING</div>
+  <div class="titel a t1">Die Schleife</div>
+  <div class="a lp" style="left:0;top:0;width:1920px;height:1080px"></div>
+  <div class="a zaehler" style="left:110px;top:200px;font-size:34px;font-weight:700;color:#5B6472"></div>
+  <div class="karte a mensch" style="left:110px;top:830px;width:520px;font-size:30px;border:4px solid #1C2430">Zu oft schiefgegangen?<br>Der Harness holt dich dazu.</div>
+</div>
+
+<!-- S8 Statistik -->
+<div class="sz" id="s8">
+  <div class="kicker">STATISTIK-CHECK</div>
+  <div class="titel a t1">Der Test vom Anfang</div>
+  <div class="a unter u1" style="left:110px;top:186px">gelöste Aufgaben von 25 · <b style="color:#1C2430">nur 1 Versuch je Aufgabe</b></div>
+  <div class="bars a" id="bars8"></div>
+  <div class="a kl" style="left:0;top:0;width:1920px;height:1080px"></div>
+  <div class="a mz" style="left:0;top:0;width:1920px;height:1080px"></div>
+  <div class="gross a s16" style="left:110px;top:640px;font-size:120px">1 von 16 <span style="font-size:60px;color:#5B6472">≈ 6 %</span></div>
+  <div class="a unter s16b" style="left:116px;top:800px">Fünfmal dieselbe Seite: 2 · (½)⁵ = 1/16, und das ist die günstigste Rechnung</div>
+  <div class="stempel a bw" style="left:1300px;top:660px;font-size:64px">kein Beweis</div>
+  <div class="badge a ki" style="left:600px;top:250px;font-size:32px;padding:12px 26px;background:#C2410C">alle acht mit demselben Modell: Kimi K3</div>
+  <div class="bild voll a fr"><img src="bilder/cockpit_fremd.png"></div>
+  <div class="cap a c1" style="left:110px;top:900px">fremder Pilot, <i>Cockpit für jemand anderen eingestellt</i></div>
+  <div class="a kosten" style="left:0;top:0;width:1920px;height:1080px"></div>
+</div>
+
+<!-- S9 Schluss -->
+<div class="sz" id="s9">
+  <div class="kicker">HARNESS ENGINEERING</div>
+  <div class="gross a d1" style="left:110px;top:260px;font-size:110px;color:#C2410C">Das Modell denkt.</div>
+  <div class="gross a d2" style="left:110px;top:400px;font-size:110px;color:#0A8F80">Der Harness handelt.</div>
+  <div class="a unter d3" style="left:116px;top:590px;font-size:40px">Baut die KI Unsinn, liegt es nicht immer am Modell.</div>
+  <div class="a d4" style="left:116px;top:690px;font-size:44px;font-weight:800">Trau keiner Rangliste mit einem Versuch pro Aufgabe.</div>
+  <div class="a unter q" style="left:116px;top:960px;font-size:24px">Quellen: Composio, „Best AI agent harnesses“, 04.08.2026 · Alex Sprogis, YouTube, 03.11.2026 · Bilder: GPT Image 2</div>
+</div>
+
+<div class="funk"><div class="punkt"></div><div class="art">FUNK</div><div class="wer"></div></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const cl=x=>Math.max(0,Math.min(1,x));
+const ez=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+const E=(t,c,d=.45)=>c==null?0:ez(cl((t-c)/d));
+const zeige=(el,p,dy=24,dx=0,s0=1)=>{if(!el)return;el.style.opacity=p;el.style.transform=`translate(${(1-p)*dx}px,${(1-p)*dy}px) scale(${s0+(1-s0)*p})`;};
+const kb=(el,t,S,z=.05)=>{const i=$('img',el);if(i)i.style.transform=`scale(${1+z*cl((t-S.start)/(S.ende-S.start))})`;};
+let PLAN, V, SZ={};
+
+// Daten
+const HARN=[['Oh My Pi',22],['Kimi Code',21],['Hermes Agent',20],['Claude Code',19],['Pi Agent',18],['OpenCode',18],['Grok Build',18],['Codex',17]];
+const KOST=[['Hermes Agent',.46],['Oh My Pi',.52],['Pi Agent',.57],['Kimi Code',.64],['Codex',.66],['Grok Build',.66],['OpenCode',.72],['Claude Code',1.96]];
+function balken(box){
+  const H=610-90, X0=40, dx=205;
+  for(const y of [0,5,10,15,20,25]){const g=document.createElement('div');g.className='gitter';g.style.bottom=(90+H*y/25)+'px';box.appendChild(g);}
+  const a=document.createElement('div');a.className='achse';box.appendChild(a);
+  HARN.forEach(([n,w],i)=>{
+    const b=document.createElement('div');b.className='bar';b.style.left=(X0+i*dx)+'px';b.style.height=(H*w/25)+'px';box.appendChild(b);
+    const v=document.createElement('div');v.className='bwert';v.textContent=w;v.style.left=(X0+i*dx)+'px';v.style.bottom=(90+H*w/25+8)+'px';box.appendChild(v);
+    const l=document.createElement('div');l.className='bname';l.textContent=n;l.style.left=(X0+i*dx-20)+'px';box.appendChild(l);
+  });
+  return {bars:$$('.bar',box),werte:$$('.bwert',box),namen:$$('.bname',box)};
+}
+
+function aufbauen(){
+  V=PLAN.variante; PLAN.szenen.forEach(s=>SZ[s.id]=s);
+  SZ.B1=balken($('#bars1')); SZ.B8=balken($('#bars8'));
+  // S1 Abzeichen
+  const s1=$('#s1');
+  [['bd1','am langsamsten',655,30],['bd2','am teuersten',655,88]].forEach(([c,t,x,y])=>{const d=document.createElement('div');d.className='badge a '+c;d.textContent=t;d.style.left=x+'px';d.style.top=y+'px';$('#bars1').appendChild(d);});
+  ['s3','s4','s5','s6'].forEach((id,k)=>{const c=document.createElement('div');c.style.cssText='position:absolute;right:110px;top:78px;display:flex;gap:14px';
+    for(let i=0;i<4;i++){const d=document.createElement('div');d.textContent=i+1;d.style.cssText='width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:30px;font-weight:800;'+(i===k?'background:#1C2430;color:#fff':'background:#E6DFD0;color:#8A919C');c.appendChild(d);}
+    $('#'+id).appendChild(c);});
+  // S2 vier Teile
+  ['1 Was es vor Augen hat','2 Werkzeuge','3 Prüfung','4 Berechtigungen'].forEach(t=>{const d=document.createElement('div');d.className='karte vt';d.style.position='relative';d.style.opacity=0;d.style.fontSize='32px';d.textContent=t;$('#s2 .v4').appendChild(d);});
+  // S3 Blätter
+  const bl=$('#blaetter'); const fest=[['Anweisungen des Herstellers',260,420,-3,''],['Offener Ordner',760,400,2,''],['Notizdatei: deine Regeln',1260,430,-2,'wichtig']];
+  fest.forEach(([t,x,y,r,k],i)=>{const d=document.createElement('div');d.className='blatt a f'+i+' '+k;d.textContent=t;d.style.left=x+'px';d.style.top=y+'px';d.dataset.r=r;bl.appendChild(d);});
+  let seed=3; const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+  const art=['Nachricht','Datei','Ergebnis','Nachricht','Fehlermeldung','Datei'];
+  for(let i=0;i<20;i++){const d=document.createElement('div');d.className='blatt a v';d.textContent=art[i%6];d.style.left=(190+rnd()*1180)+'px';d.style.top=(280+rnd()*450)+'px';d.dataset.r=(rnd()*24-12).toFixed(1);bl.appendChild(d);}
+  // S4 Texte je Variante
+  const tx4 = V==='B' ? ['Ich möchte die Datei mit den Notizen lesen.','✓ Harness an Modell: erlaubt. Hier ist die Datei.']
+                      : ['Lies die Datei mit den Notizen.','✓ erkannt, Knopf gedrückt: Datei wird gelesen'];
+  $('#s4 .bl1 .txt').innerHTML=tx4[0]+'<div class="mono">datei_lesen("notizen.md")</div>'; $('#s4 .bl2 .txt').textContent=tx4[1];
+  const mcp=$('#s4 .mcp'); ['Kalender','Datenbank','Notion','E-Mail'].forEach((t,i)=>{const d=document.createElement('div');d.className='karte mp';d.style.left=(i*290)+'px';d.style.top='100px';d.style.width='270px';d.style.fontSize='38px';d.style.textAlign='center';d.style.borderTop='8px solid #0A8F80';d.style.opacity=0;d.textContent=t;mcp.appendChild(d);});
+  const lab=document.createElement('div');lab.className='unter';lab.style.position='absolute';lab.style.left='0';lab.style.top='10px';lab.innerHTML='<b style="color:#1C2430">MCP</b>: ein Steckerstandard für weitere Werkzeuge';mcp.appendChild(lab);
+  $('#s4 .liste').innerHTML='<b>Werkzeugliste</b><br>'+['Datei lesen','Datei schreiben','Befehl ausführen','Websuche','+ Kalender','+ Datenbank','+ Notion','+ E-Mail'].map(t=>`<span class="li" style="opacity:0">${t}</span>`).join('<br>');
+  // S5 Tests
+  const tp=$('#s5 .tp'); for(let i=1;i<=6;i++){const d=document.createElement('div');d.className='tz';d.innerHTML=`<span>Test ${i}: ${['Anmeldung','Speichern','Suche','Export','Rechnung','Abmelden'][i-1]}</span><span>…</span>`;tp.appendChild(d);}
+  // S6 Texte
+  const tx6 = V==='B' ? ['Ich lösche jetzt die alte Datenbank. Die stört nur.','✕ abgelehnt: erst der Mensch'] : ['Datenbank löschen','✕ Nein, oder erst fragen'];
+  $('#s6 .db .txt').textContent=tx6[0]; $('#s6 .db .txt').style.maxWidth='560px'; $('#s6 .db .txt').style.fontSize='34px'; $('#s6 .ab').textContent=tx6[1];
+  $('#s6 .sbx').innerHTML=`<svg width="950" height="633"><rect x="150" y="90" width="650" height="450" rx="30" fill="rgba(10,143,128,.08)" stroke="#0A8F80" stroke-width="8" stroke-dasharray="26 14"/>
+    <circle cx="475" cy="300" r="80" fill="#C2410C"/><text x="475" y="320" text-anchor="middle" fill="#fff" font-family="DejaVu Sans Mono" font-weight="700" font-size="56">{ }</text>
+    <text x="475" y="460" text-anchor="middle" font-family="Inter" font-weight="800" font-size="44" fill="#0A8F80">Sandbox</text>
+    <text x="475" y="505" text-anchor="middle" font-family="Inter" font-weight="600" font-size="30" fill="#5B6472">abgeschotteter Bereich</text></svg>`;
+  // S7 Schleife
+  $('#s7 .lp').innerHTML=`<svg width="1920" height="1080" font-family="Inter">
+   <defs><marker id="pf" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#9AA1AB"/></marker></defs>
+   <g fill="none" stroke="#9AA1AB" stroke-width="6" stroke-linecap="round" marker-end="url(#pf)">
+    <path d="M 1052 340 A 290 290 0 0 1 1235 523"/><path d="M 1235 707 A 290 290 0 0 1 1052 890"/>
+    <path d="M 868 890 A 290 290 0 0 1 685 707"/><path d="M 685 523 A 290 290 0 0 1 868 340"/></g>
+   <circle class="lauf" cx="960" cy="325" r="16" fill="#1C2430" opacity="0"/>
+   <g class="kn" data-i="1"><circle cx="960" cy="325" r="72" fill="#0A8F80"/><text x="960" y="343" text-anchor="middle" fill="#fff" font-size="50" font-weight="800">1</text></g>
+   <g class="kn" data-i="2"><circle cx="1250" cy="615" r="72" fill="#C2410C"/><text x="1250" y="633" text-anchor="middle" fill="#fff" font-size="50" font-weight="800">2</text></g>
+   <g class="kn" data-i="3"><circle cx="960" cy="905" r="72" fill="#0A8F80"/><text x="960" y="923" text-anchor="middle" fill="#fff" font-size="50" font-weight="800">3</text></g>
+   <g class="kn" data-i="4"><circle cx="670" cy="615" r="72" fill="#0A8F80"/><text x="670" y="633" text-anchor="middle" fill="#fff" font-size="50" font-weight="800">4</text></g>
+   <g class="lb" data-i="1" font-size="38" font-weight="800"><text x="1100" y="282">Unterlagen hinlegen</text><text x="1100" y="322" font-size="28" font-weight="600" fill="#0A8F80">Harness</text></g>
+   <g class="lb" data-i="2" font-size="38" font-weight="800"><text x="1350" y="605">Modell entscheidet</text><text x="1350" y="650" font-size="28" font-weight="600" fill="#C2410C">Modell</text></g>
+   <g class="lb" data-i="3" font-size="38" font-weight="800"><text x="1115" y="935">prüfen und ausführen</text><text x="1115" y="975" font-size="28" font-weight="600" fill="#0A8F80">Harness</text></g>
+   <g class="lb" data-i="4" font-size="38" font-weight="800" text-anchor="end"><text x="570" y="605">Ergebnis zurück</text><text x="570" y="650" font-size="28" font-weight="600" fill="#0A8F80">Harness</text></g>
+   <g class="mitte" text-anchor="middle" font-weight="800" font-size="40" opacity="0"><text x="960" y="595" fill="#C2410C">Modell entscheidet.</text><text x="960" y="650" fill="#0A8F80">Harness erledigt</text><text x="960" y="700" fill="#0A8F80">den Rest.</text></g>
+  </svg>`;
+  // S8 Klammer, Münzen, Kosten
+  $('#s8 .kl').innerHTML=`<svg width="1920" height="1080" font-family="Inter"><path d="M 225 345 V 330 H 1660 V 450" fill="none" stroke="#C2410C" stroke-width="5" stroke-dasharray="14 10"/>
+    <rect x="760" y="297" width="400" height="66" rx="33" fill="#C2410C"/><text x="960" y="342" text-anchor="middle" fill="#fff" font-size="34" font-weight="800">5 Aufgaben Abstand</text></svg>`;
+  const mz=$('#s8 .mz'); for(let i=0;i<5;i++){const d=document.createElement('div');d.className='muenze';d.textContent='K';d.style.left=(110+i*210)+'px';d.style.top='330px';d.style.opacity=0;mz.appendChild(d);}
+  const lbm=document.createElement('div');lbm.className='unter';lbm.style.position='absolute';lbm.style.left='110px';lbm.style.top='540px';lbm.textContent='Wären beide gleich gut, wäre jede abweichende Aufgabe ein Münzwurf.';mz.appendChild(lbm);
+  const ko=$('#s8 .kosten'); ko.innerHTML='<div class="titel" style="left:108px;top:104px">Kosten je gelöster Aufgabe</div><div class="unter" style="position:absolute;left:110px;top:186px">US-Dollar, geschätzt aus Listenpreisen (Composio)</div>';
+  KOST.forEach(([n,k],i)=>{const y=270+i*82;const w=1150*k/2;const hi=n==='Claude Code';
+    ko.insertAdjacentHTML('beforeend',`<div style="position:absolute;left:110px;top:${y+8}px;width:300px;font-size:30px;font-weight:700;text-align:right">${n}</div>
+     <div class="kb" style="position:absolute;left:440px;top:${y}px;height:56px;width:${w}px;background:${hi?'#1C2430':'#0A8F80'};border-radius:0 6px 6px 0;transform-origin:left"></div>
+     <div class="kw" style="position:absolute;left:${455+w}px;top:${y+6}px;font-size:34px;font-weight:800">${k.toFixed(2).replace('.',',')} $</div>`);});
+  ko.insertAdjacentHTML('beforeend','<div class="badge k3" style="left:900px;top:950px;font-size:40px;padding:14px 30px;opacity:0">≈ 2,7-mal so teuer wie der nächste</div>');
+}
+
+// Szenen
+const R={};
+R.s1=(t,c,S)=>{
+  zeige($('#s1 .t1'),E(t,S.start)*(1-E(t,c.harness))); zeige($('#s1 .u1'),E(t,c.modell)*(1-E(t,c.harness)));
+  const g=E(t,c.acht-.3)*(1-E(t,c.harness)); $('#bars1').style.opacity=g; $('#bars1').style.transform='none';
+  SZ.B1.bars.forEach((b,i)=>{const p=E(t,c.acht+i*.12,.6);b.style.transform=`scaleY(${p})`;b.classList.toggle('hi',i===3&&t>=c.cc);});
+  SZ.B1.werte.forEach((w,i)=>{let p=E(t,c.acht+.5+i*.12);if(i===0)p*=1+.25*Math.sin(Math.PI*cl((t-c.best)/.6));if(i===7)p*=1+.25*Math.sin(Math.PI*cl((t-c.worst)/.6));w.style.opacity=Math.min(1,p);w.style.transform=`scale(${Math.max(1,p)})`;});
+  zeige($('#bars1 .bd1'),E(t,c.teuer)); zeige($('#bars1 .bd2'),E(t,c.teuer+.6));
+  zeige($('#s1 .w1'),E(t,c.harness)); zeige($('#s1 .w2'),E(t,c.harness+.6)); zeige($('#s1 .pf'),E(t,c.pferd,.6),0,40); kb($('#s1 .pf'),t,S);
+  zeige($('#s1 .st1'),E(t,c.zweifel,.3),0,0,1.4);
+};
+R.s2=(t,c,S)=>{
+  zeige($('#s2 .t1'),E(t,c.frage-.6)*(1-E(t,c.pilot)));
+  zeige($('#s2 .k1'),E(t,c.wort)*(1-E(t,c.pilot))); $$('#s2 .tok').forEach((x,i)=>x.style.opacity=E(t,c.wort+.6+i*.45,.2));
+  zeige($('#s2 .k2'),E(t,c.wort+.8)*(1-E(t,c.pilot)));
+  zeige($('#s2 .k3'),E(t,c.erklaeren)*(1-E(t,c.pilot))); zeige($('#s2 .k4'),E(t,c.nicht)*(1-E(t,c.pilot)));
+  const p1=E(t,c.pilot,.6)*(1-E(t,c.flugzeug,.6)); zeige($('#s2 .b1'),p1,0); zeige($('#s2 .c1'),E(t,c.pilot+.8)*(1-E(t,c.flugzeug,.3)));
+  kb($('#s2 .b1'),t,{start:c.pilot,ende:c.flugzeug+1});
+  zeige($('#s2 .b2'),E(t,c.flugzeug,.6),0); zeige($('#s2 .c2'),E(t,c.flugzeug+.6)*(1-E(t,c.vier-.2,.3))); kb($('#s2 .b2'),t,{start:c.flugzeug,ende:S.ende});
+  const v=$('#s2 .v4'); v.style.opacity=1; v.style.top='780px'; $$('#s2 .vt').forEach((x,i)=>zeige(x,E(t,c.vier+i*.25,.35)));
+};
+R.s3=(t,c,S)=>{
+  zeige($('#s3 .t1'),E(t,S.start+.3)); zeige($('#s3 .ti'),E(t,S.start+.3),0);
+  const fest=$$('#s3 .blatt.f0,#s3 .blatt.f1,#s3 .blatt.f2'), viele=$$('#s3 .blatt.v');
+  const weg=E(t,c.zusammen,.8);
+  fest.forEach((b,i)=>{const p=E(t,[c.b1,c.b2,c.b3][i],.4);b.style.opacity=p*(1-weg);b.style.transform=`translate(${weg*(700-parseFloat(b.style.left))}px,${(1-p)*-40+weg*(460-parseFloat(b.style.top))}px) rotate(${b.dataset.r}deg) scale(${1-.6*weg})`;b.style.zIndex=1;});
+  viele.forEach((b,i)=>{const p=E(t,c.voll+i*.17,.3);b.style.opacity=p*(1-weg);b.style.zIndex=2;b.style.transform=`translate(${weg*(800-parseFloat(b.style.left))}px,${(1-p)*-60+weg*(460-parseFloat(b.style.top))}px) rotate(${b.dataset.r}deg) scale(${1-.6*weg})`;});
+  zeige($('#s3 .c1'),E(t,c.uebersieht)*(1-E(t,c.zusammen,.3))); $('#s3 .c1').style.zIndex=5;
+  zeige($('#s3 .zs1'),E(t,c.zusammen+.6)); zeige($('#s3 .zs2'),E(t,c.zusammen+.8)); $('#s3 .zs2').style.transform+=' rotate(3deg)';
+  zeige($('#s3 .c2'),E(t,c.verlust)*(1-E(t,c.datei,.3))); zeige($('#s3 .c3'),E(t,c.datei),0,40); zeige($('#s3 .c4'),E(t,c.datei+.8));
+};
+R.s4=(t,c,S)=>{
+  zeige($('#s4 .t1'),E(t,c.titel-.5)); zeige($('#s4 .g1'),E(t,c.gar)*(1-E(t,c.mcp)));
+  zeige($('#s4 .bl1'),E(t,c.wunsch,.4)*(1-E(t,c.mcp)),0,-40); zeige($('#s4 .bl2'),E(t,c.erkennt,.4)*(1-E(t,c.mcp)),0,40);
+  const k=cl((t-c.erkennt)/.5); $('#s4 .bl2 .ico').style.transform=`scale(${1-.18*Math.sin(Math.PI*k)})`;
+  zeige($('#s4 .erg'),E(t,c.ergebnis,.6)*(1-E(t,c.mcp)),-80,-200);
+  zeige($('#s4 .mcp'),E(t,c.mcp)); $('#s4 .mcp').style.top='330px'; $$('#s4 .mp').forEach((x,i)=>zeige(x,E(t,c.mcp+.8+i*.35,.35)));
+  zeige($('#s4 .liste'),E(t,c.liste-3.2)); $('#s4 .liste').style.top='250px';
+  $$('#s4 .li').forEach((x,i)=>x.style.opacity=i<4?E(t,c.liste-3.0+i*.15,.3):E(t,c.liste-.4+(i-4)*.3,.3));
+};
+R.s5=(t,c,S)=>{
+  zeige($('#s5 .t1'),E(t,c.titel-.5)); zeige($('#s5 .u1'),E(t,c.titel+1));
+  zeige($('#s5 .sb'),E(t,c.schueler-.3,.6),0,-40); kb($('#s5 .sb'),t,{start:c.schueler,ende:S.ende}); zeige($('#s5 .c1'),E(t,c.schueler+1.2));
+  zeige($('#s5 .tp'),E(t,c.tests-.2),0,40);
+  const zeilen=$$('#s5 .tz'), kopf=$('#s5 .tkopf'); const rot=[1,3,4];
+  zeilen.forEach((z,i)=>{const z2=z.lastElementChild; const lauf=t>=c.tests+.4+i*.35;
+    if(t>=c.rot&&rot.includes(i)){z2.textContent='✕';z2.style.color='#B42318';z.style.background=`rgba(180,35,24,${.08*E(t,c.rot,.3)})`;}
+    else if(lauf){z2.textContent='✓';z2.style.color='#0A8F80';z.style.background='none';}
+    else{z2.textContent='…';z2.style.color='#9AA1AB';z.style.background='none';}});
+  kopf.textContent=t>=c.rot?'3 Tests fehlgeschlagen':(t>=c.tests?'Tests laufen …':''); kopf.style.color=t>=c.rot?'#B42318':'#5B6472';
+  zeige($('#s5 .st'),E(t,c.gruen,.3),0,0,1.4);
+};
+R.s6=(t,c,S)=>{
+  zeige($('#s6 .t1'),E(t,c.titel-.5));
+  zeige($('#s6 .g1'),E(t,c.ok,.35),0,-40); zeige($('#s6 .g2'),E(t,c.frage,.35),0,-40); zeige($('#s6 .g3'),E(t,c.nein,.35),0,-40);
+  const tw=E(t,c.tower,.6)*(1-E(t,c.sandbox,.5)); zeige($('#s6 .tw'),tw,0,40); kb($('#s6 .tw'),t,{start:c.tower,ende:c.sandbox}); zeige($('#s6 .c1'),E(t,c.tower+.8)*(1-E(t,c.db,.3)));
+  zeige($('#s6 .db'),E(t,c.db,.4)*(1-E(t,c.sandbox,.4)),0,-40);
+  zeige($('#s6 .ab'),E(t,c.abgelehnt,.25)*(1-E(t,c.sandbox,.4)),0,0,1.5);
+  zeige($('#s6 .sbx'),E(t,c.sandbox+.2,.5),0,0,.9);
+};
+R.s7=(t,c,S)=>{
+  zeige($('#s7 .t1'),E(t,c.titel-.6)); zeige($('#s7 .lp'),E(t,c.titel-.4),0);
+  const L=[c.l1,c.l2,c.l3,c.l4];
+  $$('#s7 .kn').forEach((g,i)=>{const p=E(t,L[i]-.1,.35);const puls=1+.15*Math.sin(Math.PI*cl((t-L[i])/.6));g.style.opacity=.25+.75*p;g.style.transformOrigin=['960px 325px','1250px 615px','960px 905px','670px 615px'][i];g.style.transform=`scale(${puls})`;});
+  $$('#s7 .lb').forEach((g,i)=>g.style.opacity=E(t,L[i]-.1,.35));
+  const lauf=$('#s7 .lauf'); const w=t-c.wieder; if(w>0&&t<c.mensch+1){const run=Math.pow(w,1.35)*1.1;const a=-Math.PI/2+run*2*Math.PI;lauf.setAttribute('cx',960+290*Math.cos(a));lauf.setAttribute('cy',615+290*Math.sin(a));lauf.setAttribute('opacity',1);$('#s7 .zaehler').textContent='Runde '+(1+Math.floor(run));}else{lauf.setAttribute('opacity',0);}
+  zeige($('#s7 .zaehler'),E(t,c.wieder)*(1-E(t,c.entscheidet)));
+  zeige($('#s7 .mensch'),E(t,c.mensch)*(1-E(t,c.entscheidet+2))); $('#s7 .mitte').setAttribute('opacity',E(t,c.entscheidet));
+};
+R.s8=(t,c,S)=>{
+  const chart=E(t,c.titel-.4)*(1-E(t,c.muenze-.3))+E(t,c.kimi-.5)*(1-E(t,c.fremd,.4));
+  zeige($('#s8 .t1'),E(t,c.titel-.6)*(1-E(t,c.kosten-.5))); zeige($('#s8 .u1'),E(t,c.einer-.2)*(1-E(t,c.muenze-.3))+E(t,c.kimi-.5)*(1-E(t,c.fremd,.4)));
+  $('#bars8').style.opacity=chart;
+  SZ.B8.bars.forEach((b,i)=>{b.style.transform='scaleY(1)';b.classList.toggle('hi',i===3&&t>=c.claude);}); SZ.B8.werte.forEach(w=>w.style.opacity=1);
+  zeige($('#s8 .kl'),E(t,c.fuenf)*(1-E(t,c.muenze-.3)),0);
+  zeige($('#s8 .mz'),E(t,c.muenze-.2)*(1-E(t,c.kimi-.5)),0);
+  $$('#s8 .muenze').forEach((m,i)=>{const p=cl((t-(c.muenze+.3+i*.5))/.6);m.style.opacity=p>0?1:0;m.style.transform=`rotateY(${(1-ez(p))*720}deg)`;});
+  zeige($('#s8 .s16'),E(t,c.sechzehn)*(1-E(t,c.kimi-.5))); zeige($('#s8 .s16b'),E(t,c.sechzehn+.8)*(1-E(t,c.kimi-.5)));
+  zeige($('#s8 .bw'),E(t,c.beweis,.3)*(1-E(t,c.kimi-.5)),0,0,1.5);
+  zeige($('#s8 .ki'),E(t,c.kimi)*(1-E(t,c.fremd,.4)));
+  zeige($('#s8 .fr'),E(t,c.fremd,.6)*(1-E(t,c.kosten-.4,.5)),0); kb($('#s8 .fr'),t,{start:c.fremd,ende:c.kosten}); zeige($('#s8 .c1'),E(t,c.fremd+.8)*(1-E(t,c.kosten-.4,.3)));
+  zeige($('#s8 .kosten'),E(t,c.kosten-.3),0);
+  $$('#s8 .kb').forEach((b,i)=>b.style.transform=`scaleX(${E(t,c.kosten+.2+i*.12,.5)})`);
+  $$('#s8 .kw').forEach((w,i)=>{let p=E(t,c.kosten+.6+i*.12);if(i===7)p=E(t,c.zwei,.3);if(i===6)p=Math.max(E(t,c.kosten+1.32),E(t,c.cent,.3));w.style.opacity=p;});
+  zeige($('#s8 .k3'),E(t,c.drei,.3),0,0,1.3);
+};
+R.s9=(t,c,S)=>{
+  zeige($('#s9 .d1'),E(t,c.denkt-.2)); zeige($('#s9 .d2'),E(t,c.handelt-.2)); zeige($('#s9 .d3'),E(t,c.unsinn)); zeige($('#s9 .d4'),E(t,c.rangliste)); zeige($('#s9 .q'),E(t,S.ende+.3));
+};
+
+function render(t){
+  const sz=PLAN.szenen;
+  sz.forEach((S,i)=>{const el=$('#'+S.id);const ein=i===0?1:E(t,S.start-.5,.5);const nx=sz[i+1];const aus=nx?E(t,nx.start-.5,.5):0;const o=ein*(1-aus);el.style.opacity=o;el.style.display=o>0?'block':'none';if(o>0)R[S.id](t,S.cues,S);});
+  // Funk-Fußzeile
+  let f=0, wer=null;
+  sz.forEach(S=>(S.segmente||[]).forEach(g=>{if(g.sprecher==='PETER')return;const p=E(t,g.start-.25,.25)*(1-E(t,g.ende-.05,.25));if(p>f){f=p;wer=g.sprecher;}}));
+  const fu=$('.funk'); fu.style.opacity=f;
+  if(wer){$('.funk .wer').textContent=wer==='MODELL'?'MODELL':'HARNESS AN MODELL';$('.funk .wer').style.color=wer==='MODELL'?'#F3A07A':'#7FD6CB';$('.funk .punkt').style.background=wer==='MODELL'?'#C2410C':'#0A8F80';$('.funk .punkt').style.opacity=.5+.5*Math.abs(Math.sin(t*5));}
+}
+window.starten=(plan)=>{PLAN=plan;aufbauen();render(0);};
+window.render=render;
+</script>
+</body></html>

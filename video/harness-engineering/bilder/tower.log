@@ -1,0 +1,16 @@
+{
+ "zeit": "2026-11-07 09:47:45",
+ "model": "gpt_image2",
+ "cfg": {
+  "num_images": 1,
+  "rewrite_prompt": true,
+  "size": "1536x1024"
+ },
+ "prompt": "An airport control tower at golden hour, an air traffic controller with headset visible behind the tower windows, a small airliner waiting on the taxiway below. Warm flat editorial illustration with subtle paper grain, calm muted palette on a warm off-white background (#F7F3EA), accents in deep teal (#0A8F80) and burnt orange (#C2410C), soft shadows, clean simple shapes, generous empty space, wide 3:2 composition. Same illustration style as the reference image. Absolutely no text, no letters, no numbers, no logos, no signs.",
+ "dateien": [
+  "tower.png"
+ ],
+ "compute_points_used": 590.5,
+ "dauer_s": 17.8,
+ "entfernte_parameter": []
+}

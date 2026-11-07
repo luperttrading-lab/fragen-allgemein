@@ -1,0 +1,16 @@
+{
+ "zeit": "2026-11-07 09:48:00",
+ "model": "gpt_image2",
+ "cfg": {
+  "num_images": 1,
+  "rewrite_prompt": true,
+  "size": "1536x1024"
+ },
+ "prompt": "A different pilot, a woman with short hair in the same teal uniform, sits in an airliner cockpit whose seat and controls are clearly adjusted for someone else: seat pushed far back, she stretches awkwardly to reach the controls, puzzled expression. Gently humorous. Warm flat editorial illustration with subtle paper grain, calm muted palette on a warm off-white background (#F7F3EA), accents in deep teal (#0A8F80) and burnt orange (#C2410C), soft shadows, clean simple shapes, generous empty space, wide 3:2 composition. Same illustration style as the reference image. Absolutely no text, no letters, no numbers, no logos, no signs.",
+ "dateien": [
+  "cockpit_fremd.png"
+ ],
+ "compute_points_used": 4238.0,
+ "dauer_s": 33.2,
+ "entfernte_parameter": []
+}
