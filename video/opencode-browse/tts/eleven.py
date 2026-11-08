@@ -16,7 +16,7 @@ BASIS = Path(__file__).resolve().parent.parent
 SKRIPT = json.loads((BASIS / 'tts/skript.json').read_text())
 STIMME = 'NBqeXKdZHweef6y0B67V'      # Christian - Warm and Captivating
 MODELL = 'eleven_v4'                # 1 Zeichen = 1 Credit (Modellliste, 08.11.2026)
-TEMPO = 0.93                        # Nutzerurteil Seneca: Christian klingt bei 0,92-0,94 gut
+TEMPO = 1.0                         # Seneca wirkte bei 0,93 besser; dieser Text ist roh schon ruhig (2,2 W/s), daher 1,0
 VORLAUF, PAUSE_NACH = 0.25, 0.7
 CACHE = BASIS / 'tts/eleven_cache'
 
@@ -93,8 +93,8 @@ def main():
             print(f"  ElevenLabs: {s['id']} …", flush=True)
             hole(s['text'], roh, al)
         ziel = BASIS / 'public' / f"{s['id']}.mp3"
-        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', str(roh), '-af', f'rubberband=tempo={TEMPO}:formant=preserved',
-                        '-b:a', '160k', str(ziel)], check=True)
+        filt = ['-af', f'rubberband=tempo={TEMPO}:formant=preserved'] if TEMPO != 1.0 else []
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', str(roh), *filt, '-b:a', '160k', str(ziel)], check=True)
         d = dauer(ziel)
         ws = woerter(s['text'], json.loads(al.read_text())['alignment'])
         zeiten['szenen'][s['id']] = {'audio': d, 'dauer': round(VORLAUF + d + PAUSE_NACH, 3), 'vorlauf': VORLAUF,

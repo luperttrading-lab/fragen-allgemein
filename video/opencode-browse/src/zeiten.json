@@ -1,139 +1,169 @@
 {
  "szenen": {
   "s01_wand": {
-   "audio": 16.224,
-   "dauer": 17.174,
+   "audio": 20.845714,
+   "dauer": 21.796,
    "vorlauf": 0.25,
    "cues": {
-    "app": 2.788,
-    "login": 8.713,
-    "leer": 12.075,
-    "keine": 13.925
+    "app": 3.21,
+    "login": 9.93,
+    "leer": 17.13,
+    "keine": 19.05
    }
   },
   "s02_browse": {
-   "audio": 20.976,
-   "dauer": 21.926,
+   "audio": 30.667755,
+   "dauer": 31.618,
    "vorlauf": 0.25,
    "cues": {
-    "titel": 1.325,
-    "bausteine": 3.163,
-    "frei": 6.975,
-    "echt": 10.238,
-    "agenten": 15.425
+    "titel": 1.45,
+    "firma": 3.29,
+    "bausteine": 8.85,
+    "frei": 14.37,
+    "echt": 19.37,
+    "agenten": 24.65
    }
   },
   "s03_kette": {
-   "audio": 27.936,
-   "dauer": 28.886,
+   "audio": 40.515918,
+   "dauer": 41.466,
    "vorlauf": 0.25,
    "cues": {
-    "n1": 5.888,
-    "n2": 10.412,
-    "n3": 16.9,
-    "n4": 21.538,
-    "aktionen": 25.262
+    "n1": 6.49,
+    "n2": 17.69,
+    "n3": 26.97,
+    "n4": 32.33,
+    "aktionen": 37.93
    }
   },
   "s04_uebergabe": {
-   "audio": 21.504,
-   "dauer": 22.454,
+   "audio": 25.39102,
+   "dauer": 26.341,
    "vorlauf": 0.25,
    "cues": {
-    "tabs": 0.3,
-    "zehn": 5.375,
-    "uebergabe": 8.688,
-    "faelle": 10.838,
-    "du": 15.775,
-    "weiter": 17.538,
-    "agent": 18.925
+    "tabs": 0.25,
+    "zehn": 6.65,
+    "uebergabe": 11.01,
+    "faelle": 13.21,
+    "du": 20.57,
+    "weiter": 22.45,
+    "agent": 23.89
    }
   },
   "s05_geheim": {
-   "audio": 15.504,
-   "dauer": 16.454,
+   "audio": 20.610612,
+   "dauer": 21.561,
    "vorlauf": 0.25,
    "cues": {
-    "tippt": 3.438,
-    "pruef": 6.0,
-    "warnung": 8.988,
-    "eins": 13.275
+    "tippt": 3.61,
+    "pruef": 6.73,
+    "warnung": 10.33,
+    "eins": 18.09
    }
   },
   "s06_lokal": {
-   "audio": 34.632,
-   "dauer": 35.582,
+   "audio": 52.114286,
+   "dauer": 53.064,
    "vorlauf": 0.25,
    "cues": {
-    "lokal": 4.875,
-    "nichts": 8.738,
-    "haken": 10.975,
-    "k4": 19.825,
-    "k64": 23.95,
-    "tools": 26.225,
-    "an": 33.538
+    "lokal": 6.89,
+    "nichts": 11.45,
+    "haken": 13.93,
+    "k4": 26.89,
+    "seite": 29.21,
+    "k64": 36.97,
+    "tools": 39.57,
+    "an": 51.13
    }
   },
   "s07_vergleich": {
-   "audio": 27.336,
-   "dauer": 28.286,
+   "audio": 41.560816,
+   "dauer": 42.511,
    "vorlauf": 0.25,
    "cues": {
-    "claude": 1.9,
-    "kosten": 8.4,
-    "alt": 16.038,
-    "neu": 20.75
+    "claude": 2.17,
+    "abo": 7.61,
+    "jedes": 16.45,
+    "kosten": 19.37,
+    "alt": 26.25,
+    "neu": 36.01
    }
   },
-  "s08_injection": {
-   "audio": 40.464,
-   "dauer": 41.414,
+  "s08_daten": {
+   "audio": 31.712653,
+   "dauer": 32.663,
    "vorlauf": 0.25,
    "cues": {
-    "versteckt": 8.562,
-    "zeile": 11.312,
-    "name": 15.875,
-    "b1": 21.825,
-    "b2": 23.95,
-    "b3": 30.45,
-    "null": 32.962,
-    "browse": 34.2
+    "daten": 2.97,
+    "mails": 12.01,
+    "lokal": 16.57,
+    "regeln": 20.09,
+    "linkedin": 25.53,
+    "bank": 27.37
    }
   },
-  "s09_schutz": {
-   "audio": 24.192,
-   "dauer": 25.142,
+  "s09_injection": {
+   "audio": 41.874286,
+   "dauer": 42.824,
    "vorlauf": 0.25,
    "cues": {
-    "relay": 2.1,
-    "code": 6.875,
-    "cookies": 9.938,
-    "liste": 13.5,
-    "zitat": 20.1
+    "versteckt": 9.61,
+    "zeile": 11.77,
+    "name": 17.29,
+    "real": 19.37,
+    "c1": 24.73,
+    "c2": 29.45,
+    "c3": 35.29,
+    "netz": 37.85
    }
   },
-  "s10_haken": {
-   "audio": 14.304,
-   "dauer": 15.254,
+  "s10_zahlen": {
+   "audio": 28.682449,
+   "dauer": 29.632,
    "vorlauf": 0.25,
    "cues": {
-    "chromium": 3.312,
-    "nicht": 6.688,
-    "neu": 9.287
+    "b1": 7.61,
+    "b2": 10.17,
+    "b3": 18.09,
+    "null": 20.93,
+    "browse": 22.09
    }
   },
-  "s11_regel": {
-   "audio": 28.224,
-   "dauer": 29.174,
+  "s11_schutz": {
+   "audio": 27.715918,
+   "dauer": 28.666,
    "vorlauf": 0.25,
    "cues": {
-    "r1": 2.1,
-    "r2": 8.3,
-    "r3": 11.688,
-    "fazit": 16.312,
-    "f1": 17.462,
-    "f2": 21.363,
-    "vorsicht": 27.25
+    "relay": 2.73,
+    "code": 8.17,
+    "cookies": 11.45,
+    "liste": 15.29,
+    "zitat": 22.89
+   }
+  },
+  "s12_haken": {
+   "audio": 17.554286,
+   "dauer": 18.504,
+   "vorlauf": 0.25,
+   "cues": {
+    "chromium": 4.25,
+    "nicht": 8.49,
+    "neu": 11.69,
+    "update": 15.73
+   }
+  },
+  "s13_regel": {
+   "audio": 33.149388,
+   "dauer": 34.099,
+   "vorlauf": 0.25,
+   "cues": {
+    "r1": 2.17,
+    "r2": 9.21,
+    "r3": 12.97,
+    "fazit": 17.85,
+    "f1": 18.97,
+    "f2": 24.09,
+    "vorsicht": 32.41
    }
   }
  },
@@ -145,11 +175,13 @@
   "s05_geheim",
   "s06_lokal",
   "s07_vergleich",
-  "s08_injection",
-  "s09_schutz",
-  "s10_haken",
-  "s11_regel"
+  "s08_daten",
+  "s09_injection",
+  "s10_zahlen",
+  "s11_schutz",
+  "s12_haken",
+  "s13_regel"
  ],
- "laenge": 281.746,
- "stimme": "de-DE-FlorianMultilingualNeural"
+ "laenge": 424.745,
+ "stimme": "ElevenLabs Christian (eleven_v4), Tempo 1.0"
 }

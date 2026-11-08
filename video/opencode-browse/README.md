@@ -4,10 +4,14 @@ Anlass: Video [„Alle zahlen für Claude in Chrome. Dabei geht es jetzt kostenl
 (ZeldoReacts, Reaktion auf ein Video des Kanals Hinter). Das Erklärvideo übernimmt weder Bild noch Ton daraus. Text und
 Grafik sind neu, die Fakten sind an den Primärquellen geprüft (Tabelle unten).
 
-- Länge 4:48 min (11 Szenen + 6 s Quellen), 1920 × 1080, 30 fps, Remotion 4.0.541. Rendern: 6:16 min auf 4 Kernen,
-  22,6 MB (`--crf=20`). Pegel der Entwurfsstimme −24,5 dB im Mittel, für YouTube vor dem Hochladen anheben.
-- Stimme im Entwurf: Microsoft Edge `de-DE-FlorianMultilingualNeural` über `edge-tts` (kostenlos). ElevenLabs erst nach
-  Freigabe des Sprechtexts (`SPRECHTEXT.md`), siehe Kostenregel in der `CLAUDE.md` des Repos.
+- **Fassung v2** (freigegeben 08.11.2026): 13 Szenen + 8 s Quellen, 7:13 min, 1920 × 1080, 30 fps, Remotion 4.0.541.
+  Fassung v1 (4:48 min, Edge-Stimme) liegt im Git-Verlauf.
+- Stimme: ElevenLabs „Christian – Warm and Captivating“ (`NBqeXKdZHweef6y0B67V`), Modell `eleven_v4`, Originaltempo.
+  Tempo 0,93 (Seneca-Vorliebe) wirkte hier zu langsam: Christian liest diesen Text roh mit 2,2 Wörtern/s.
+  Ton am Ende auf −16 LUFS normalisiert (`loudnorm`).
+- **ElevenLabs-Kosten gemessen:** 6.060 Zeichen gesendet → 2.604 Credits abgebucht (Zähler 84.217 → 86.821), also
+  ≈ 0,43 Credits je Zeichen, obwohl die Modellliste für `eleven_v4` 1,0 angibt. Probe vorher: 321 Zeichen → 138 Credits.
+  Passt zur Messung beim Mathe-Video (7.162 gesendet, 3.079 abgerechnet).
 - Werkzeugwahl: Remotion, weil das Video aus Diagrammen, Pfeilketten, Tabellen und Kästen mit Textumbruch besteht. Das
   ist der Fall, in dem Remotion in der Probe (`video/remotion-probe/`) klar billiger war.
 
@@ -27,12 +31,22 @@ Grafik sind neu, die Fakten sind an den Primärquellen geprüft (Tabelle unten).
 | Claude in Chrome nur im Abo ab 20 $/Monat | wahrscheinlich: alle bezahlten Pläne, Pro 20 $; nur Drittquellen geprüft | Websuche 08.11.2026 |
 | „Claude hat bei GitHub 112.000 Passwörter geleakt“ | nicht belegt, nicht ins Video übernommen | – |
 | „Claude in Chrome läuft mit Haiku“ | nicht belegt („mein Wissensstand“), nicht übernommen | – |
+| Claude in Chrome nur mit Claude, nur Abo | stimmt, aber es fehlt: läuft auch in Claude Code (`claude --chrome`), nur mit Abo-Login, nicht mit API-Schlüssel | [Claude-Code-Doku](https://code.claude.com/docs/en/chrome) |
+| (fehlt im Video) Firma | Anomaly (Anomaly Innovations), Firma hinter SST und OpenCode | Recherche, [anoma.ly](https://anoma.ly) |
+| (fehlt im Video) Alternativen | Playwright MCP `--extension` und Chrome DevTools MCP `--autoConnect` nutzen ebenfalls den eingeloggten Browser | Repos von Microsoft und Google |
+| (fehlt im Video) Datenschutz | Erweiterung sammelt nichts, aber gelesene Inhalte gehen an den eingestellten Modellanbieter | [Datenschutzerklärung](https://raw.githubusercontent.com/anomalyco/browse/main/store/privacy-policy.md) |
+| (fehlt im Video) echter Angriff | Brave, 20.08.2025: versteckter Reddit-Kommentar → Comet liest Gmail-Einmalcode aus und postet ihn | [brave.com](https://brave.com/blog/comet-prompt-injection/) |
+| (fehlt im Video) Angriffe im Netz | Unit 42, 03.03.2026: indirekte Prompt Injection auf echten Webseiten gefunden | [unit42](https://unit42.paloaltonetworks.com/ai-agent-prompt-injection/) |
+| (fehlt im Video) Tokens je Seite | ≈ 14.500–19.400 Tokens je voller Snapshot bei Playwright MCP (Einzelmessung) | [dev.to](https://dev.to/kuroko1t/how-accessibility-tree-formatting-affects-token-cost-in-browser-mcps-n2a) |
+| Brave-Zitat „authenticated privileges“ | so nicht im Brave-Text; dort „operates with the user's full privileges across authenticated sessions“ | brave.com |
 | Titel „geht jetzt kostenlos“ | irreführend: kostenlos ist nur das Werkzeug, das Modell kostet weiter (außer lokal) | – |
 
 ## Nachbauen
 
     python3 -m pip install edge-tts          # Proxy-CA an certifi anhängen, siehe audio/seneca_kap1/README.md
-    env -u ELEVENLABS_API_KEY python3 -I tts/entwurf.py      # public/*.mp3, src/zeiten.json, Wortzeiten
+    python3 -I tts/eleven.py                 # Vorschau: was würde ElevenLabs kosten? (sendet nichts)
+    python3 -I tts/eleven.py --ja            # vertont nur Szenen, die nicht im Cache tts/eleven_cache/ liegen
+    # kostenloser Entwurf statt ElevenLabs: env -u ELEVENLABS_API_KEY python3 -I tts/entwurf.py
     cp /usr/share/fonts/opentype/inter/Inter-{ExtraBold,Bold,Medium,Regular}.otf public/
     npm install
     B=/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell

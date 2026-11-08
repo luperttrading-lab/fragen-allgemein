@@ -71,28 +71,31 @@ export const S02 = ({c}) => {
         <div style={{fontSize: 112, fontWeight: 800, color: F.CYAN, letterSpacing: -3}}>OpenCode Browse</div>
         <div style={{fontSize: 38, fontWeight: 500, color: F.GRAU}}>dein echter Browser für KI-Agenten</div>
       </Ein>
-      <Ein t={t} at={c.bausteine} style={{...zentriert, top: 380, alignItems: 'center', gap: 40}}>
+      <Ein t={t} at={c.firma} style={{...zentriert, top: 375}}>
+        <div style={{fontSize: 30, fontWeight: 600, color: F.TEXT}}>von <span style={{color: F.CYAN, fontWeight: 800}}>Anomaly</span>, der Firma hinter dem Coding-Agenten OpenCode</div>
+      </Ein>
+      <Ein t={t} at={c.bausteine} style={{...zentriert, top: 450, alignItems: 'center', gap: 40}}>
         <Karte style={{width: 520, textAlign: 'center'}}>
           <div style={{fontSize: 36, fontWeight: 800, color: F.TEXT}}>Browser-Erweiterung</div>
           <div style={{fontSize: 26, color: F.GRAU, marginTop: 6}}>für Chrome und Co.</div>
         </Karte>
         <div style={{fontSize: 70, fontWeight: 800, color: F.GRAU}}>+</div>
         <Karte style={{width: 520, textAlign: 'center'}}>
-          <div style={{fontSize: 36, fontWeight: 800, color: F.TEXT}}>kleiner Server</div>
-          <div style={{fontSize: 26, color: F.GRAU, marginTop: 6}}>MCP, auf deinem Rechner</div>
+          <div style={{fontSize: 36, fontWeight: 800, color: F.TEXT}}>kleines Hilfsprogramm</div>
+          <div style={{fontSize: 26, color: F.GRAU, marginTop: 6}}>auf deinem Rechner</div>
         </Karte>
       </Ein>
-      <Ein t={t} at={c.frei - 1.2} style={{...zentriert, top: 590}}>
-        {[['gerade erschienen (Nov. 2026)', c.frei - 1.2], ['Open Source (MIT)', c.frei], ['kostenlos', c.frei + 0.8]].map(([s, at]) => (
+      <Ein t={t} at={c.frei} style={{...zentriert, top: 640}}>
+        {[['gerade erschienen (Nov. 2026)', c.frei], ['Open Source (MIT)', c.frei + 1.0], ['kostenlos', c.frei + 1.8]].map(([s, at]) => (
           <div key={s} style={{opacity: ein(t, at, 0.4)}}><Chip farbe={F.GRUEN}>{s}</Chip></div>
         ))}
       </Ein>
-      <Ein t={t} at={c.echt} style={{...zentriert, top: 700}}>
+      <Ein t={t} at={c.echt} style={{...zentriert, top: 740}}>
         {['deine Tabs', 'deine Logins', 'deine Erweiterungen'].map((s, i) => (
           <div key={s} style={{opacity: ein(t, c.echt + i * 0.6, 0.4)}}><Chip farbe={F.VIOLETT} gross={34}>{s}</Chip></div>
         ))}
       </Ein>
-      <Ein t={t} at={c.agenten} style={{...zentriert, top: 840, alignItems: 'center', gap: 16}}>
+      <Ein t={t} at={c.agenten} style={{...zentriert, top: 865, alignItems: 'center', gap: 16}}>
         <div style={{fontSize: 30, fontWeight: 700, color: F.GRAU, marginRight: 8}}>läuft mit</div>
         {agenten.map((s, i) => (
           <div key={s} style={{opacity: ein(t, c.agenten + 0.6 + i * 0.35, 0.35)}}>
@@ -107,12 +110,12 @@ export const S02 = ({c}) => {
 // 3 · Staffellauf: Agent → Server → Relay → Erweiterung → Chrome
 const KNOTEN = [
   {titel: 'Agent', unter: 'z. B. Claude Code', farbe: F.CYAN},
-  {titel: 'Server', unter: 'browse, per MCP', farbe: F.BLAU},
-  {titel: 'Relay', unter: '127.0.0.1:19988', farbe: F.VIOLETT},
-  {titel: 'Erweiterung', unter: 'im Browser', farbe: F.ROSA},
-  {titel: 'Chrome', unter: 'deine echte Sitzung', farbe: F.GRUEN},
+  {titel: 'Server', unter: 'Hilfsprogramm', farbe: F.BLAU},
+  {titel: 'Relay', unter: 'Vermittlungsstelle', farbe: F.VIOLETT},
+  {titel: 'Erweiterung', unter: 'in deinem Browser', farbe: F.ROSA},
+  {titel: 'Chrome', unter: 'eingebaute Fernsteuerung', farbe: F.GRUEN},
 ];
-const PFEILE = ['MCP', 'Befehl', 'WebSocket', 'Debugger'];
+const PFEILE = ['MCP-Stecker', 'Befehl', 'Leitung', 'Steuerung'];
 export const S03 = ({c}) => {
   const t = useT();
   const W = 250, G = 135, X0 = 65, Y = 480, H = 200;
@@ -234,10 +237,10 @@ export const S04 = ({c}) => {
         })}
         <Pfeil x={rx[0] + 170} y={80} laenge={rx[1] - rx[0] - 340} f={ein(t, c.faelle, 0.6)} farbe={F.GELB} />
         <Pfeil x={rx[1] + 170} y={80} laenge={rx[2] - rx[1] - 340} f={ein(t, c.weiter, 0.6)} farbe={F.GRUEN} />
-        <div style={{position: 'absolute', left: rx[0] + 150, width: rx[1] - rx[0] - 300, top: 0, display: 'flex',
-          justifyContent: 'center', gap: 12}}>
-          {['Login', '2-Faktor', 'Zahlung'].map((s, i) => (
-            <div key={s} style={{opacity: ein(t, c.faelle + 0.3 + i * 0.5, 0.35)}}><Chip farbe={F.GELB} gross={24}>{s}</Chip></div>
+        <div style={{position: 'absolute', left: rx[0] + 115, width: rx[1] - rx[0] - 230, top: 6, display: 'flex',
+          justifyContent: 'center', gap: 8}}>
+          {['Login', '2-Faktor', 'Captcha', 'Zahlung'].map((s, i) => (
+            <div key={s} style={{opacity: ein(t, c.faelle + 0.3 + i * 0.5, 0.35)}}><Chip farbe={F.GELB} gross={20}>{s}</Chip></div>
           ))}
         </div>
         <div style={{position: 'absolute', left: rx[1] + 150, width: rx[2] - rx[1] - 300, top: 0, display: 'flex',
