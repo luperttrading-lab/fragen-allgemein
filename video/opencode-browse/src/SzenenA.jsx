@@ -115,7 +115,7 @@ const KNOTEN = [
   {titel: 'Erweiterung', unter: 'in deinem Browser', farbe: F.ROSA},
   {titel: 'Chrome', unter: 'eingebaute Fernsteuerung', farbe: F.GRUEN},
 ];
-const PFEILE = ['MCP-Stecker', 'Befehl', 'Leitung', 'Steuerung'];
+const PFEILE = ['MCP', 'Befehl', 'Leitung', 'Steuerung'];
 export const S03 = ({c}) => {
   const t = useT();
   const W = 250, G = 135, X0 = 65, Y = 480, H = 200;
