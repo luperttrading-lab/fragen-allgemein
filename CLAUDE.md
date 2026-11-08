@@ -51,6 +51,12 @@ Python-Renderer gemessen.
   an ElevenLabs (7.162 Zeichen gesendet, 3.079 abgerechnet, Endtext 2.335 Zeichen). Sprechtext erst festlegen, dann vertonen. Vor jedem Lauf
   prüfen, ob alle Texte im Cache liegen, und Tests ohne `ELEVENLABS_API_KEY` starten.
 
+## App-Gestaltung: Bezug groß und oben
+
+Wunsch des Nutzers (08.11.2026, Apotheken-App): Worauf sich eine Anzeige bezieht – Ort einer Suche, gewählter
+Tag, aktive Auswahl –, steht groß und oben, auf einen Blick erkennbar, nicht als kleine graue Zeile. Bei neuen
+und bestehenden Apps des Nutzers von Anfang an so bauen.
+
 ## Internetadressen
 
 Jede genannte Internetadresse, Domain oder Quelle immer als klickbaren Markdown-Link ausgeben
