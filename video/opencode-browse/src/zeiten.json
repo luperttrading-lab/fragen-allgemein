@@ -1,0 +1,155 @@
+{
+ "szenen": {
+  "s01_wand": {
+   "audio": 16.224,
+   "dauer": 17.174,
+   "vorlauf": 0.25,
+   "cues": {
+    "app": 2.788,
+    "login": 8.713,
+    "leer": 12.075,
+    "keine": 13.925
+   }
+  },
+  "s02_browse": {
+   "audio": 20.976,
+   "dauer": 21.926,
+   "vorlauf": 0.25,
+   "cues": {
+    "titel": 1.325,
+    "bausteine": 3.163,
+    "frei": 6.975,
+    "echt": 10.238,
+    "agenten": 15.425
+   }
+  },
+  "s03_kette": {
+   "audio": 27.936,
+   "dauer": 28.886,
+   "vorlauf": 0.25,
+   "cues": {
+    "n1": 5.888,
+    "n2": 10.412,
+    "n3": 16.9,
+    "n4": 21.538,
+    "aktionen": 25.262
+   }
+  },
+  "s04_uebergabe": {
+   "audio": 21.504,
+   "dauer": 22.454,
+   "vorlauf": 0.25,
+   "cues": {
+    "tabs": 0.3,
+    "zehn": 5.375,
+    "uebergabe": 8.688,
+    "faelle": 10.838,
+    "du": 15.775,
+    "weiter": 17.538,
+    "agent": 18.925
+   }
+  },
+  "s05_geheim": {
+   "audio": 15.504,
+   "dauer": 16.454,
+   "vorlauf": 0.25,
+   "cues": {
+    "tippt": 3.438,
+    "pruef": 6.0,
+    "warnung": 8.988,
+    "eins": 13.275
+   }
+  },
+  "s06_lokal": {
+   "audio": 34.632,
+   "dauer": 35.582,
+   "vorlauf": 0.25,
+   "cues": {
+    "lokal": 4.875,
+    "nichts": 8.738,
+    "haken": 10.975,
+    "k4": 19.825,
+    "k64": 23.95,
+    "tools": 26.225,
+    "an": 33.538
+   }
+  },
+  "s07_vergleich": {
+   "audio": 27.336,
+   "dauer": 28.286,
+   "vorlauf": 0.25,
+   "cues": {
+    "claude": 1.9,
+    "kosten": 8.4,
+    "alt": 16.038,
+    "neu": 20.75
+   }
+  },
+  "s08_injection": {
+   "audio": 40.464,
+   "dauer": 41.414,
+   "vorlauf": 0.25,
+   "cues": {
+    "versteckt": 8.562,
+    "zeile": 11.312,
+    "name": 15.875,
+    "b1": 21.825,
+    "b2": 23.95,
+    "b3": 30.45,
+    "null": 32.962,
+    "browse": 34.2
+   }
+  },
+  "s09_schutz": {
+   "audio": 24.192,
+   "dauer": 25.142,
+   "vorlauf": 0.25,
+   "cues": {
+    "relay": 2.1,
+    "code": 6.875,
+    "cookies": 9.938,
+    "liste": 13.5,
+    "zitat": 20.1
+   }
+  },
+  "s10_haken": {
+   "audio": 14.304,
+   "dauer": 15.254,
+   "vorlauf": 0.25,
+   "cues": {
+    "chromium": 3.312,
+    "nicht": 6.688,
+    "neu": 9.287
+   }
+  },
+  "s11_regel": {
+   "audio": 28.224,
+   "dauer": 29.174,
+   "vorlauf": 0.25,
+   "cues": {
+    "r1": 2.1,
+    "r2": 8.3,
+    "r3": 11.688,
+    "fazit": 16.312,
+    "f1": 17.462,
+    "f2": 21.363,
+    "vorsicht": 27.25
+   }
+  }
+ },
+ "reihenfolge": [
+  "s01_wand",
+  "s02_browse",
+  "s03_kette",
+  "s04_uebergabe",
+  "s05_geheim",
+  "s06_lokal",
+  "s07_vergleich",
+  "s08_injection",
+  "s09_schutz",
+  "s10_haken",
+  "s11_regel"
+ ],
+ "laenge": 281.746,
+ "stimme": "de-DE-FlorianMultilingualNeural"
+}

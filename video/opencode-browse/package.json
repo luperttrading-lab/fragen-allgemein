@@ -1,0 +1,13 @@
+{
+  "name": "opencode-browse-erklaervideo",
+  "version": "1.0.0",
+  "description": "Erklärvideo OpenCode Browse (08.11.2026), Remotion, Aufbau nach video/remotion-probe",
+  "scripts": {},
+  "dependencies": {
+    "@remotion/cli": "^4.0.540",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remotion": "^4.0.540"
+  },
+  "private": true
+}
