@@ -4,7 +4,8 @@ Anlass: Video [„Alle zahlen für Claude in Chrome. Dabei geht es jetzt kostenl
 (ZeldoReacts, Reaktion auf ein Video des Kanals Hinter). Das Erklärvideo übernimmt weder Bild noch Ton daraus. Text und
 Grafik sind neu, die Fakten sind an den Primärquellen geprüft (Tabelle unten).
 
-- Länge 4:48 min (11 Szenen + 6 s Quellen), 1920 × 1080, 30 fps, Remotion 4.0.541.
+- Länge 4:48 min (11 Szenen + 6 s Quellen), 1920 × 1080, 30 fps, Remotion 4.0.541. Rendern: 6:16 min auf 4 Kernen,
+  22,6 MB (`--crf=20`). Pegel der Entwurfsstimme −24,5 dB im Mittel, für YouTube vor dem Hochladen anheben.
 - Stimme im Entwurf: Microsoft Edge `de-DE-FlorianMultilingualNeural` über `edge-tts` (kostenlos). ElevenLabs erst nach
   Freigabe des Sprechtexts (`SPRECHTEXT.md`), siehe Kostenregel in der `CLAUDE.md` des Repos.
 - Werkzeugwahl: Remotion, weil das Video aus Diagrammen, Pfeilketten, Tabellen und Kästen mit Textumbruch besteht. Das
