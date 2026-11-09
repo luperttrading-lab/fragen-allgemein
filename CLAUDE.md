@@ -61,3 +61,8 @@ Jede genannte Internetadresse, Domain oder Quelle immer als klickbaren Markdown-
 Wurde in der Antwort ein Artifact, eine Seite oder eine Datei veröffentlicht oder aktualisiert: den Link dazu als
 letzte Zeile vor der Kostenzeile wiederholen (`**Link:** [Name](URL)`), auch wenn er weiter oben schon steht.
 Der Nutzer liest auf dem Handy und soll den Link nicht in langen Antworten suchen müssen.
+
+**Alles zum Anklicken kommt ganz ans Ende** (Wunsch des Nutzers, 09.11.2026): Dateien, Hörproben, Bilder, Videos und
+Links stehen nach dem Erklärtext, direkt vor der Kostenzeile, nie oben. Ablauf: erst den Erklärtext schreiben, dann
+die Dateien mit `SendUserFile` schicken, danach nur noch Link-Zeile und Kostenzeile. Im Text auf die Dateien mit
+„unten“ verweisen, nicht mit „oben“.
