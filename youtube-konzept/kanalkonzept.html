@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><title>YouTube-Konzept: Kanäle, Person, Organisation</title>
+<style>
+@page{size:A4}
+:root{--navy:#23415e;--gold:#c9a227;--tinte:#1d2530;--grau:#55606b;--linie:#d8dde3;
+      --mathe:#d9730d;--mathe-h:#fdf1e4;--ges:#2e7d4f;--ges-h:#e9f5ee;--ki:#6b3fc4;--ki-h:#f1ecfb;--sen:#7a5c3a;--sen-h:#f5efe7}
+*{box-sizing:border-box}
+body{font-family:Inter,"DejaVu Sans",Arial,sans-serif;font-size:9.6pt;line-height:1.42;color:var(--tinte);margin:0}
+h1{font-size:21pt;margin:0 0 4px;letter-spacing:-.01em}
+h2{font-size:14pt;color:var(--navy);border-bottom:2px solid var(--gold);padding-bottom:3px;margin:18px 0 8px;break-after:avoid}
+h3{font-size:10.8pt;color:#7a3b26;margin:12px 0 4px;break-after:avoid}
+p{margin:4px 0}
+ul,ol{margin:3px 0 5px 18px;padding:0} li{margin:2px 0}
+a{color:var(--navy)}
+table{border-collapse:collapse;width:100%;margin:6px 0 9px;font-size:8.7pt}
+tr{break-inside:avoid}
+.fest{break-inside:avoid}
+th{background:var(--navy);color:#fff;text-align:left;padding:4px 6px;font-weight:600;vertical-align:bottom}
+td{border-bottom:1px solid var(--linie);padding:4px 6px;vertical-align:top}
+tr:nth-child(even) td{background:#f5f7f9}
+td.z,th.z{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.s,.w,.v{font-size:7.2pt;font-weight:700;padding:0 4px;border-radius:3px;white-space:nowrap;vertical-align:1px}
+.s{background:#dcefdc;color:#205a20}.w{background:#fdf0c8;color:#6b5100}.v{background:#ece4f4;color:#4d2d70}
+.e{font-size:7.2pt;font-weight:700;padding:0 4px;border-radius:3px;background:var(--navy);color:#fff;white-space:nowrap;vertical-align:1px}
+.box{border-left:4px solid var(--navy);background:#eef3f8;padding:7px 11px;margin:7px 0;break-inside:avoid}
+.warn{border-left-color:#b23a2a;background:#fbefec}
+.ok{border-left-color:#3d7d3d;background:#eef6ee}
+.title{background:var(--navy);color:#fff;padding:16px 18px 14px;margin-bottom:10px}
+.title h1{color:#fff}.title p{color:#dbe4ee;margin:2px 0}
+.pb{break-before:page}
+.small{font-size:8.2pt;color:var(--grau)}
+.kf li{margin:4px 0}
+.zwei{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.karte{border:1.2px solid var(--linie);border-radius:6px;padding:7px 10px 8px;break-inside:avoid;margin:0 0 8px}
+.karte h3{margin:0 0 3px;font-size:11.5pt}
+.karte .vers{font-weight:650;margin:0 0 4px}
+.karte table{font-size:8.3pt;margin:2px 0 0}
+.karte td{padding:2.5px 5px}.karte td:first-child{width:24%;color:var(--grau);font-weight:600}
+.karte tr:nth-child(even) td{background:transparent}
+.m{border-color:var(--mathe);background:var(--mathe-h)} .m h3{color:var(--mathe)}
+.g{border-color:var(--ges);background:var(--ges-h)} .g h3{color:var(--ges)}
+.k{border-color:var(--ki);background:var(--ki-h)} .k h3{color:var(--ki)}
+.n{border-color:var(--sen);background:var(--sen-h)} .n h3{color:var(--sen)}
+.chip{display:inline-block;font-size:7.4pt;font-weight:700;border-radius:3px;padding:0 5px;color:#fff;white-space:nowrap}
+.cm{background:var(--mathe)}.cg{background:var(--ges)}.ck{background:var(--ki)}.cn{background:var(--sen)}
+/* Organigramm */
+.org{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:6px 0 4px;break-inside:avoid}
+.knoten{border-radius:5px;padding:5px 7px;font-size:8.3pt;line-height:1.3;text-align:center}
+.knoten b{display:block;font-size:9pt}
+.top{grid-column:1 / span 4;background:var(--navy);color:#fff}
+.top small{color:#dbe4ee}
+.pfeile{grid-column:1 / span 4;text-align:center;color:var(--navy);font-size:11pt;line-height:1;letter-spacing:.2em;display:grid;grid-template-columns:repeat(4,1fr)}
+.geteilt{grid-column:1 / span 4;background:#f3f1ea;border:1px dashed #b9ab84;color:#4a4232}
+.formel{font-family:"DejaVu Sans Mono",monospace;font-size:9pt;background:#f3f5f8;border:1px solid var(--linie);border-radius:4px;padding:5px 8px;margin:5px 0;display:inline-block}
+.ebenen{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:6px 0;break-inside:avoid}
+.ebene{border:1.2px solid var(--linie);border-radius:6px;padding:6px 9px;background:#fff}
+.ebene b.t{display:block;color:var(--navy);font-size:9.6pt;margin-bottom:2px}
+.ebene .nr{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;background:var(--navy);color:#fff;font-size:8pt;font-weight:800;margin-right:4px}
+.fahr td:first-child{white-space:nowrap;font-weight:650;width:19%}
+.ent li{margin:5px 0}
+.quellen{font-size:7.9pt;line-height:1.35}
+.quellen li{margin:1.5px 0}
+</style></head><body>
+
+<div class="title">
+<h1>YouTube-Konzept: ein Kanal oder mehrere?</h1>
+<p><b>Mathe-Tricks, Gesundheits-Faktenchecks, KI-Videos (und Seneca): Kanalstruktur, die Person dahinter, Organisation, Zahlen, Recht, Fahrplan</b></p>
+<p>Stand 09.11.2026 · Grundlage: Stand der Repos <i>mathe-videos</i>, <i>5-Minuten-videos</i>, <i>ki-videos</i>, die Recherche vom 02.11. (<i>themen/beratung/recherche_A.md</i>) und neue Websuchen vom 09.11.</p>
+</div>
+
+<p class="small">Kennzeichnung: <span class="s">Sicher</span> aus Primärquelle (Google-Hilfe, Gesetzestext, eigene Messung) · <span class="w">Wahrscheinlich</span> aus seriöser Sekundärquelle oder abgeleitet · <span class="v">Vermutung</span> eigene Einschätzung, nicht belegt. <span class="e">Empfehlung</span> markiert unsere Urteile. Das sind keine Fakten. Rechtliches ist Recherche, keine Rechtsberatung.</p>
+
+<h2>1 · Das Wichtigste vorweg</h2>
+
+<div class="box warn"><b>Die unbequeme Wahrheit zuerst:</b> Ab <b>1. Februar 2027</b> verdoppelt YouTube die Hürde für Werbeeinnahmen. Neue Kanäle brauchen dann 1.000 Abos und <b>8.000 statt 4.000 Wiedergabestunden</b> in 12 Monaten (oder 20 statt 10 Mio. Shorts-Aufrufe in 90 Tagen) <span class="s">Sicher</span>. Die Hürde gilt <b>je Kanal</b>. Drei getrennte Kanäle brauchen zusammen etwa <b>dreimal so viele Aufrufe</b> wie ein gemeinsamer, bis alle drei Geld verdienen (Rechnung in Abschnitt 5). Getrennte Kanäle sind trotzdem richtig. Startet sie aber nicht alle gleichzeitig, und macht Werbegeld nicht zum Hauptziel.</div>
+
+<ol class="kf">
+<li><b>Getrennte Kanäle unter einer Dachmarke.</b> Mathe, Gesundheit und KI bekommen je einen eigenen Kanal. Gemeinsam sind nur das Inhaber-Konto, ein AdSense-Konto, eine Website mit Impressum und die Haltung „geprüft, gemessen, erklärt“. <span class="e">Empfehlung</span></li>
+<li><b>Gestaffelt starten.</b> Mathe und Gesundheit gehen jetzt online, dafür liegen Videos vor. KI kommt erst nach 3–5 Testvideos mit klarem Blickwinkel. Alle Handles sichert ihr diese Woche, das kostet nichts. <span class="e">Empfehlung</span></li>
+<li><b>Die Person dahinter.</b> Rechtlich stehst immer du (oder deine Firma) im Impressum, anonym geht nicht. Sichtbar wird es so: Gesundheit und Mathe bekommen je eine <i>eigene</i> feste Erzählstimme und eine namentlich genannte Redaktion. Den KI-Kanal machst du als Person, mit deinem Stimmklon „Lupert“ und deinem Namen, das Gesicht ist optional. Einen KI-Avatar als „Arzt“ oder Experten gibt es nicht. <span class="e">Empfehlung</span></li>
+<li><b>Der KI-Kanal ist ein Praxistest mit Messwerten und das Making-of der anderen Kanäle.</b> Eure Zahlen gibt es so auf YouTube selten: Renderzeiten, ElevenLabs-Kosten, Sitzungskosten, Stimmen-Blindtest <span class="v">Vermutung</span>. Sie veralten langsamer als Klickanleitungen zu einzelnen Werkzeugen. <span class="e">Empfehlung</span></li>
+<li><b>Geld realistisch planen.</b> Bis zur 8.000-Stunden-Hürde vergehen bei einem neuen Kanal eher Jahre als Monate <span class="v">Vermutung</span>. Der realistischere Ertragsweg ist bei Mathe die App, bei Gesundheit der Ruf, bei KI die Sichtbarkeit deiner Arbeitsweise. <span class="e">Empfehlung</span></li>
+</ol>
+
+<div class="box"><b>Eine Sache fällt im Bestand sofort auf:</b> Mathe und Gesundheit sprechen mit <b>derselben Stimme</b> (ElevenLabs „Christian“, Tempo 1,05) <span class="s">Sicher</span>, laut CLAUDE.md beider Repos. Bei getrennten Kanälen klingt das nach einer Fabrik mit zwei Etiketten. Eine der beiden Reihen sollte eine andere Stimme bekommen, bevor die Kanäle öffentlich sind (Entscheidung 6, letzte Seite).</div>
+
+<h2>2 · Ein Kanal oder mehrere?</h2>
+<p>Deine Annahme „jeweils ein Kanal“ hält. Sie hält aber aus anderen Gründen als dem oft genannten „der Algorithmus wird verwirrt“: Nach Aussage von YouTubes Empfehlungs-Team bewertet das System vor allem <b>einzelne Videos</b>, nicht Kanäle <span class="w">Wahrscheinlich</span>. Ein Themenmix wird also nicht direkt bestraft. Die echten Gründe stehen in der Tabelle.</p>
+
+<table class="fest">
+<thead><tr><th style="width:21%">Kriterium</th><th style="width:36%">A · ein gemeinsamer Kanal</th><th style="width:36%">B · getrennte Kanäle (+ Dachmarke)</th><th style="width:7%">Vorteil</th></tr></thead>
+<tr><td>Abo-Versprechen</td><td>Unklar: Wer für Kopfrechnen abonniert, bekommt Magnesium in den Abo-Feed. Er klickt nicht, also bekommt das neue Video schwache Startsignale <span class="v">Vermutung</span>.</td><td>Ein Satz je Kanal. Wer abonniert, weiß, was kommt.</td><td>B</td></tr>
+<tr><td>Zielgruppe</td><td>Mathe ab 13 („nicht speziell für Kinder“, Entscheidung 06.11.), Gesundheit Erwachsene, KI Berufstätige. Kanalbild, Trailer und Ton passen nie für alle.</td><td>Aufmachung, Stimme und Länge passen je Publikum.</td><td>B</td></tr>
+<tr><td>Risiko Verwarnung</td><td>Gesundheit ist das heikelste Thema (Richtlinie zu medizinischen Fehlinformationen). Drei Verwarnungen in 90 Tagen löschen den Kanal <span class="s">Sicher</span>, und damit auch alle Mathe-Videos.</td><td>Eine Verwarnung trifft den Kanal, auf dem sie entsteht <span class="w">Wahrscheinlich</span>. Achtung: Nach einer Sperre darf man andere Kanäle nicht zur Umgehung nutzen <span class="w">Wahrscheinlich</span>.</td><td>B</td></tr>
+<tr><td>Gesundheits-Label von YouTube</td><td>Ausgeschlossen: Der Kanal muss „in erster Linie“ Gesundheit zeigen <span class="s">Sicher</span>.</td><td>Möglich, falls später eine approbierte Fachkraft mitprüft (Voraussetzung) <span class="s">Sicher</span>.</td><td>B</td></tr>
+<tr><td>Übergabe, Verkauf</td><td>Nur alles oder nichts.</td><td>Jeder Kanal ist ein eigenes Brand-Konto und einzeln übertragbar <span class="w">Wahrscheinlich</span>.</td><td>B</td></tr>
+<tr><td>Statistik (später)</td><td colspan="2">Passt in den Mathe-Kanal, wenn dessen Name breit genug ist (nicht „Kopfrechnen“, sondern z. B. „Zahlenkopf“). Kein vierter Kanal nötig. <span class="e">Empfehlung</span></td><td>–</td></tr>
+<tr><td>Hürde Partnerprogramm</td><td>8.000 Stunden einmal sammeln.</td><td>8.000 Stunden je Kanal, zusammen ≈ 3,2-mal so viele Aufrufe (Abschnitt 5).</td><td>A</td></tr>
+<tr><td>Aufwand</td><td>Ein Auftritt, ein Kalender.</td><td>Drei Banner, drei Beschreibungen, drei Kalender.</td><td>A</td></tr>
+</table>
+
+<div class="box ok"><b>Fazit:</b> B gewinnt in sechs von acht Punkten. A gewinnt nur bei der Hürde und beim Aufwand. Die Hürde ist ein Argument für die <b>Reihenfolge</b>, nicht für einen Mischkanal. <span class="e">Empfehlung</span><br>
+<span class="small">Wann A doch richtig wäre: wenn du selbst die Marke sein willst („ich erkläre Dinge“) und vor der Kamera stehst. Persönlichkeitskanäle tragen Themenmix, weil man der Person folgt und nicht dem Thema <span class="v">Vermutung</span>. Das ist ein anderes Projekt als eure Produktion per Code und synthetischer Stimme.</span></div>
+
+<h2 class="pb">3 · Die Kanäle im Steckbrief</h2>
+<p class="small">Namen sind Vorschläge. Handles am 09.11. geprüft per Abruf von youtube.com/@name: „frei“ heißt nur, dass kein Kanal gefunden wurde. Reservierte Handles und Markenrechte sind damit nicht geprüft <span class="w">Wahrscheinlich</span>.</p>
+
+<div class="karte m">
+<h3>Mathe · Vorschlag „Zahlenkopf“</h3>
+<p class="vers">„Ein Rechentrick, den du nach drei Minuten kannst und gleich in der App übst.“</p>
+<table>
+<tr><td>Zielgruppe</td><td>ab 13 und Erwachsene, „nicht speziell für Kinder“ (deine Entscheidung 06.11.); nur dann bleiben Abspann, Infokarten und Kommentare <span class="s">Sicher</span></td></tr>
+<tr><td>Format</td><td>Folgen um 3 min (Zehner-Trick 3:19, Elfer-Trick 2:49 <span class="s">Sicher</span>), Reihe „Kopfrechnen“ mit 127 geplanten Tricks; später Reihe „Statistik leicht gemacht“ im selben Kanal</td></tr>
+<tr><td>Shorts</td><td>je Trick ein Short (30–45 s), mit dem Langvideo als verknüpftem Video <span class="w">Wahrscheinlich</span>; ideal für Entdeckung und Abos</td></tr>
+<tr><td>Stand</td><td>2 Folgen fertig, App „Kopfrechnen üben“ läuft, Verzahnung Video und App geplant (Papier 06.11.)</td></tr>
+<tr><td>Ertragsweg</td><td>App (Bezahlstufe nach Umzug weg von GitHub Pages); Werbung erst spät, denn kurze Videos sammeln langsam Stunden. Gegenmittel: alle 10 Folgen ein Sammelvideo „10 Tricks“ (≈ 25 min) <span class="e">Empfehlung</span></td></tr>
+<tr><td>Hauptrisiko</td><td>127 Folgen aus einem Baukasten könnten nach „nicht authentischen Inhalten“ (Massenware) aussehen. Gleiches Intro und Outro ist ausdrücklich erlaubt <span class="s">Sicher</span>. Jede Folge braucht eine eigene Erklärung „Warum klappt das?“ – die habt ihr schon.</td></tr>
+<tr><td>Stimme / Person</td><td>„Christian“ behalten (Tempo eingestellt); optional ein gezeichnetes Maskottchen, z. B. die Hand aus den Videos</td></tr>
+<tr><td>Namen</td><td><b>Zahlenkopf</b> (@Zahlenkopf frei) · <b>Rechenkopf</b> (@Rechenkopf frei) · belegt: @Kopfrechnen, @Mathekopf</td></tr>
+</table>
+</div>
+
+<div class="karte g">
+<h3>Gesundheit · Vorschlag „Beleglage“</h3>
+<p class="vers">„Gesundheitsbehauptungen in sechs Minuten geprüft – mit Quellen, ohne Produkte.“</p>
+<table>
+<tr><td>Zielgruppe</td><td>Erwachsene</td></tr>
+<tr><td>Format</td><td>5–6 min Faktencheck mit Beweislage-Markern, nummerierten Quellen, Stand-Datum; Strukturvorlage v2 aus dem Strategiepapier vom 02.11.</td></tr>
+<tr><td>Shorts</td><td>„Mythos in 40 Sekunden“ je Video, mit Verweis aufs Langvideo <span class="e">Empfehlung</span></td></tr>
+<tr><td>Stand</td><td>6 Themenordner im Repo (Stress, Magnesium, Magnesium 2, Tomatenmark, Guanfacin, Vitamin D) <span class="s">Sicher</span>; welche davon abgenommen sind, steht dort nicht einheitlich</td></tr>
+<tr><td>Ertragsweg</td><td>Ruf und Vertrauen; Werbung ist bei sachlichem Ton voll möglich <span class="s">Sicher</span>, Mid-Roll-Werbung aber erst ab 8 min Länge <span class="s">Sicher</span></td></tr>
+<tr><td>Hauptrisiko</td><td>Vertrauen ohne Gesicht und ohne Approbation, gegen Quarks, MAITHINK X und Arztkanäle <span class="v">Vermutung</span>. Ausgleich: Quellen, Methodenseite, keine Produkte. Der stärkste Hebel wäre eine fachliche Durchsicht durch eine Ärztin oder einen Arzt, namentlich genannt <span class="v">Vermutung</span>.</td></tr>
+<tr><td>Stimme / Person</td><td>eigene Stimme (nicht „Christian“), Kandidaten aus der Sprecherprobe; „Recherche und Text: [Name]“ in Kanalinfo und Beschreibung</td></tr>
+<tr><td>Namen</td><td><b>Beleglage</b> (@Beleglage frei) · <b>Gesund belegt</b> (@GesundBelegt frei) · belegt: @Studienlage, @Faktenlage</td></tr>
+</table>
+</div>
+
+<div class="karte k">
+<h3>KI · Vorschlag „KI nachgemessen“</h3>
+<p class="vers">„KI-Werkzeuge im Praxistest – mit Stoppuhr und Kostenzähler.“</p>
+<table>
+<tr><td>Zielgruppe</td><td>Erwachsene, die KI praktisch einsetzen wollen, ohne Programmierer zu sein <span class="v">Vermutung</span></td></tr>
+<tr><td>Format</td><td>7–12 min Test oder Vergleich (OpenCode Browse: 7:16 <span class="s">Sicher</span>); dazu Making-of der anderen Kanäle</td></tr>
+<tr><td>Themen aus eurem Bestand</td><td>Remotion gegen Python-Renderer: 38–54 s statt 27 s Renderzeit, 3 statt 32 Zeilen bei Umbau <span class="s">Sicher</span> (eigene Probe) · ElevenLabs: 7.162 Zeichen gesendet für 2.335 Zeichen Endtext <span class="s">Sicher</span> · Was eine KI-Sitzung kostet: 777.000 Token Kontext, ≈ 98 $ <span class="s">Sicher</span> · Blindtest mit 25 Stimmen (Seneca) <span class="s">Sicher</span></td></tr>
+<tr><td>Stand</td><td>1 Video (OpenCode Browse) auf der Webseite ki-videos, noch nicht auf YouTube</td></tr>
+<tr><td>Hauptrisiko</td><td>Kurze Halbwertszeit: Werkzeuge ändern sich in Wochen, viel Konkurrenz <span class="v">Vermutung</span>. Gegenmittel: Messmethode statt Klickanleitung, „Stand: Monat Jahr“ im Video</td></tr>
+<tr><td>Stimme / Person</td><td><b>du</b>: Stimmklon „Lupert“ (eigene geklonte Stimme muss YouTube nicht als KI gekennzeichnet werden <span class="s">Sicher</span>), dein Name, Trader und Statistiker als Hintergrund</td></tr>
+<tr><td>Namen</td><td><b>KI nachgemessen</b> (@KInachgemessen frei) · <b>KI mit Stoppuhr</b> (@KImitStoppuhr frei) · belegt: @nachgemessen</td></tr>
+</table>
+</div>
+
+<div class="karte n">
+<h3>Seneca · offen</h3>
+<p>Hörbuch und Hörspiel mit eigener HTML-Technik und eigener Stimme (Helmut). Passt zu keinem der drei Kanäle. Optionen: eigener Kanal (@Senecahoeren frei), Podcast statt YouTube, oder vorerst nicht veröffentlichen. Du hast Seneca nicht genannt, deshalb bleibt es hier eine Frage (Entscheidung 5).</p>
+</div>
+
+<h2>4 · Wer ist die Person dahinter?</h2>
+
+<div class="box warn"><b>Anonym geht nicht.</b> Wer einen Kanal geschäftsmäßig betreibt, braucht ein Impressum mit Name und ladungsfähiger Anschrift (§ 5 DDG, § 18 Abs. 1 MStV) <span class="s">Sicher</span>. „Geschäftsmäßig“ heißt: auf Dauer angelegt, ob mit Einnahmen oder ohne <span class="s">Sicher</span> (Medienanstalten). Das gilt für alle Kanäle, und dort steht derselbe Name. Wer sucht, verbindet die Kanäle also mit dir. Bußgeld bei Verstoß bis 50.000 € <span class="s">Sicher</span>.</div>
+
+<p>Die Frage „Wer ist die Person?“ hat drei Ebenen. Jede braucht eine eigene Antwort:</p>
+<div class="ebenen">
+<div class="ebene"><b class="t"><span class="nr">1</span>Rechtlich</b>Wer steht im Impressum? Du als Person oder eine Firma (z. B. UG). Bei journalistisch-redaktionellen Angeboten kommt zusätzlich ein „Verantwortlicher“ mit Name und Anschrift hinzu (§ 18 Abs. 2 MStV) <span class="s">Sicher</span>. Der Gesundheitskanal fällt darunter <span class="w">Wahrscheinlich</span>.</div>
+<div class="ebene"><b class="t"><span class="nr">2</span>Redaktionell</b>Wer steht für den Inhalt ein? Ein benannter Mensch, z. B. „Recherche und Text: [Name]“. Zuschauer misstrauen KI-Inhalten weniger, wenn Quellen offenliegen (Toff &amp; Simon 2024) <span class="s">Sicher</span>. Eine genannte Redaktion verstärkt das vermutlich <span class="v">Vermutung</span>.</div>
+<div class="ebene"><b class="t"><span class="nr">3</span>Sichtbar</b>Wen hört und sieht man? Gesicht, eigene Stimme, synthetische Erzählstimme, Maskottchen oder Avatar. Hier entscheidet sich das Gefühl des Kanals. Den Aufwand bestimmt aber vor allem Ebene 1.</div>
+</div>
+
+<h3>Ebene 3: Optionen im Vergleich</h3>
+<table>
+<thead><tr><th style="width:20%">Option</th><th style="width:15%">Vertrauen</th><th style="width:15%">Aufwand je Video</th><th>YouTube-Regeln und Recht</th><th style="width:15%">passt zu</th></tr></thead>
+<tr><td>Dein Gesicht vor der Kamera</td><td>hoch</td><td>hoch: Dreh, Licht, Ton, Wiederholungen</td><td>unproblematisch</td><td><span class="chip ck">KI</span> optional</td></tr>
+<tr><td>Deine Stimme (gesprochen oder Klon „Lupert“)</td><td>hoch bis mittel</td><td>gering mit Klon</td><td>Eigener Stimmklon muss nicht gekennzeichnet werden <span class="s">Sicher</span></td><td><span class="chip ck">KI</span></td></tr>
+<tr><td>Synthetische Erzählstimme und benannte Redaktion</td><td>mittel</td><td>gering, läuft schon</td><td>erlaubt; Kennzeichnung freiwillig, wie bisher „Verwendung von KI: Ja“ <span class="s">Sicher</span></td><td><span class="chip cm">Mathe</span> <span class="chip cg">Gesundheit</span></td></tr>
+<tr><td>Gezeichnetes Maskottchen</td><td>mittel, bei Jugendlichen eher höher <span class="v">Vermutung</span></td><td>mittel (einmal gestalten)</td><td>erlaubt, nicht realistisch, keine Kennzeichnung nötig <span class="s">Sicher</span></td><td><span class="chip cm">Mathe</span> optional</td></tr>
+<tr><td>KI-Avatar als Mensch oder Experte („Dr. …“)</td><td>kurzfristig hoch, bricht bei Entdeckung</td><td>mittel</td><td><b>Gesundheit: keine Werbeeinnahmen</b>. YouTube schließt KI-Personas aus, die als menschliche Experten zu Gesundheit oder Finanzen beraten <span class="s">Sicher</span>. Ein realistischer Avatar ist zudem ein Deepfake im Sinn von Art. 50 KI-Verordnung und muss gekennzeichnet werden <span class="w">Wahrscheinlich</span>.</td><td>nirgends</td></tr>
+</table>
+
+<h3>Empfehlung je Kanal</h3>
+<ul>
+<li><span class="chip cg">Gesundheit</span> synthetische Erzählstimme, ausdrücklich als Erzählstimme benannt („Sprecherstimme synthetisch, Recherche und Text von Menschen“). Dazu dein Name als Redaktion und eine Methodenseite. Später, wenn möglich, eine namentlich genannte ärztliche Durchsicht. <span class="e">Empfehlung</span></li>
+<li><span class="chip cm">Mathe</span> feste synthetische Stimme, optional ein Maskottchen. Die Person spielt hier die kleinste Rolle, die App und die Tricks tragen. <span class="e">Empfehlung</span></li>
+<li><span class="chip ck">KI</span> du selbst: Stimmklon „Lupert“, dein Name, deine Messmethode. Dieser Kanal lebt davon, dass ein echter Praktiker misst. Ein Gesicht braucht es nicht, Bildschirmaufnahmen reichen. <span class="e">Empfehlung</span></li>
+</ul>
+
+<h3>Deine Privatadresse schützen</h3>
+<ul>
+<li>Ein <b>Postfach</b> reicht nicht als Impressum-Anschrift <span class="w">Wahrscheinlich</span> (LG Traunstein 2016, nach Kanzleibericht).</li>
+<li>Eine <b>c/o-Adresse</b> ist nur zulässig, wenn dir dort Post, auch Klagen, tatsächlich zugestellt werden kann <span class="w">Wahrscheinlich</span> (OLG Hamm 2015, nach eRecht24). Bei virtuellen Büros ist das umstritten.</li>
+<li>Sauberste Lösung: eine echte Geschäftsadresse, oder eine <b>UG als Anbieterin</b> mit Firmensitz. Auch dann muss eine Person als Geschäftsführer bzw. Verantwortlicher genannt werden <span class="w">Wahrscheinlich</span>. Vor dem Start mit einer Kanzlei oder Steuerberatung klären. <span class="e">Empfehlung</span></li>
+<li>Dein Testkanal „Volumen Trader“ (@volumentrader, 1 Abonnent am 09.11. <span class="s">Sicher</span>) bleibt getrennt. Ob deine Trading-Identität mit den neuen Kanälen verbunden sein soll, entscheidest du (Entscheidung 3).</li>
+</ul>
+
+<h2 class="pb">5 · Zahlen: Was die Hürde konkret bedeutet</h2>
+
+<table>
+<thead><tr><th>Stufe</th><th>heute</th><th>ab 1. Februar 2027 (neue Bewerber)</th><th>was sie bringt</th></tr></thead>
+<tr><td>Untere Stufe</td><td>500 Abos + 3.000 Std. in 12 Mon. oder 3 Mio. Shorts-Aufrufe in 90 Tagen <span class="s">Sicher</span></td><td>unverändert <span class="s">Sicher</span></td><td>Kanalmitgliedschaft, Super Thanks, Shopping, <b>keine Werbeeinnahmen</b>. Verfügbarkeit in Deutschland nicht geprüft.</td></tr>
+<tr><td>Volles Partnerprogramm</td><td>1.000 Abos + 4.000 Std. in 12 Mon. oder 10 Mio. Shorts-Aufrufe in 90 Tagen <span class="s">Sicher</span></td><td>1.000 Abos + <b>8.000 Std.</b> in 365 Tagen oder <b>20 Mio.</b> Shorts-Aufrufe in 90 Tagen <span class="s">Sicher</span></td><td>Werbeeinnahmen, Abspann-Links nach außen. Zusätzlich gelten 2-Faktor-Anmeldung, AdSense und eine Prüfung durch Menschen <span class="s">Sicher</span>.</td></tr>
+</table>
+<p class="small">Ob eine Bewerbung vor dem 1. Februar, die erst danach geprüft wird, noch zu den alten Schwellen läuft, sagt Google nicht. „Gilt nur für neue Bewerber ab 1.2.“ stammt aus einem Forumsbeitrag, zitiert von ppc.land <span class="w">Wahrscheinlich</span>. Für euch spielt das keine Rolle: Ein neuer Kanal schafft 1.000 Abos und 4.000 Stunden nicht in zwölf Wochen <span class="v">Vermutung</span>.</p>
+
+<h3>Wie viele Aufrufe sind 8.000 Stunden?</h3>
+<p>Wiedergabestunden = Aufrufe × Videolänge × Haltequote. Umgestellt:</p>
+<p><span class="formel">Aufrufe pro Jahr = 8.000 h × 60 / (Länge in min × Haltequote)</span></p>
+<table>
+<thead><tr><th>Kanal</th><th class="z">Länge</th><th class="z">Haltequote<br>(Annahme)</th><th class="z">min je<br>Aufruf</th><th class="z">Aufrufe/Jahr<br>bei 4.000 h</th><th class="z">Aufrufe/Jahr<br>bei 8.000 h</th><th class="z">pro Woche<br>bei 8.000 h</th></tr></thead>
+<tr><td><span class="chip cm">Mathe</span></td><td class="z">3:00</td><td class="z">50 %</td><td class="z">1,50</td><td class="z">160.000</td><td class="z">320.000</td><td class="z">6.150</td></tr>
+<tr><td><span class="chip cg">Gesundheit</span></td><td class="z">6:00</td><td class="z">40 %</td><td class="z">2,40</td><td class="z">100.000</td><td class="z">200.000</td><td class="z">3.850</td></tr>
+<tr><td><span class="chip ck">KI</span></td><td class="z">7:16</td><td class="z">35 %</td><td class="z">2,54</td><td class="z">94.000</td><td class="z">189.000</td><td class="z">3.630</td></tr>
+<tr><td><b>drei Kanäle getrennt</b></td><td colspan="4"></td><td class="z"><b>709.000</b></td><td class="z"><b>13.630</b></td></tr>
+<tr><td><b>ein gemeinsamer Kanal</b></td><td colspan="4" class="small">gleiche Aufrufanteile, Ø 2,15 min je Aufruf</td><td class="z"><b>223.000</b></td><td class="z"><b>4.300</b></td></tr>
+</table>
+<p class="small">Die Haltequoten sind Annahmen, nicht gemessen. Echte Werte liefert YouTube Studio nach den ersten öffentlichen Uploads, dann neu rechnen. Der Faktor 709.000 / 223.000 ≈ <b>3,2</b> hängt nur schwach von den Annahmen ab: Bei drei Kanälen muss jeder die volle Hürde allein schaffen.</p>
+
+<div class="zwei">
+<div class="box"><b>Der Shorts-Weg ist keine Abkürzung.</b> 20 Mio. Aufrufe in 90 Tagen sind <b>222.000 Shorts-Aufrufe pro Tag</b>, und zwar jeden Tag. Shorts bringen Entdeckung und Abos. Die Hürde bringen sie einem kleinen Kanal nicht <span class="v">Vermutung</span>.</div>
+<div class="box"><b>Was Werbung einbrächte:</b> Einnahmen = Aufrufe / 1.000 × RPM. Bei 200.000 Aufrufen im Jahr und einem RPM von 1–4 € wären das <b>200–800 € im Jahr</b>. Der RPM-Bereich ist eine Annahme, wir haben ihn nicht recherchiert. Werbegeld trägt die ersten ein bis zwei Jahre nicht <span class="v">Vermutung</span>.</div>
+</div>
+
+<h3>Konsequenzen</h3>
+<ul>
+<li><b>Langes Material für Stunden, Shorts für Abos.</b> Mathe bekommt Sammelvideos, Gesundheit und KI bleiben bei 6–12 min. <span class="e">Empfehlung</span></li>
+<li><b>Bei Zeitknappheit hat ein Kanal Vorrang.</b> Wir würden Mathe wählen: Es gibt am meisten Nachschub (127 Tricks), YouTube schlägt dazu Suchbegriffe vor („kopfrechnen trick multiplizieren“, geprüft 07.11. <span class="s">Sicher</span>), und die App ist ein eigener Ertragsweg. <span class="e">Empfehlung</span></li>
+<li><b>Erfolg nicht an der Hürde messen</b>, sondern an Abos pro 1.000 Aufrufen, Haltequote nach 30 s und wiederkehrenden Zuschauern (Abschnitt 8). <span class="e">Empfehlung</span></li>
+</ul>
+
+<h2 class="pb">6 · Organisation auf YouTube</h2>
+
+<div class="org">
+<div class="knoten top"><b>Dein Google-Konto = Inhaber aller Kanäle</b><small>2-Faktor-Anmeldung an (Pflicht fürs Partnerprogramm <span class="s">Sicher</span>) · Passwort wird nie geteilt</small></div>
+<div class="pfeile"><span>↓</span><span>↓</span><span>↓</span><span>↓</span></div>
+<div class="knoten m" style="border:1.2px solid var(--mathe)"><b style="color:var(--mathe)">Brand-Konto Mathe</b>Kanal „Zahlenkopf“<br><span class="small">Repo mathe-videos</span></div>
+<div class="knoten g" style="border:1.2px solid var(--ges)"><b style="color:var(--ges)">Brand-Konto Gesundheit</b>Kanal „Beleglage“<br><span class="small">Repo 5-Minuten-videos</span></div>
+<div class="knoten k" style="border:1.2px solid var(--ki)"><b style="color:var(--ki)">Brand-Konto KI</b>Kanal „KI nachgemessen“<br><span class="small">Repo ki-videos</span></div>
+<div class="knoten n" style="border:1.2px solid var(--sen)"><b style="color:var(--sen)">Testkanal</b>„Volumen Trader“ bzw. Seneca (offen)<br><span class="small">Repo seneca-audio</span></div>
+<div class="knoten geteilt"><b>Gemeinsam für alle:</b> ein AdSense-Konto (eins pro Zahlungsempfänger erlaubt, mehrere Kanäle verknüpfbar <span class="s">Sicher</span>) · eine Website mit eigener Domain: Impressum, Datenschutz, Methodenseite, Apps, Quellendokumente · ein Unternehmen für Steuer und Rechnungen</div>
+</div>
+<p class="small">Ein Google-Konto kann mehrere Kanäle über Brand-Konten verwalten und ohne Abmelden zwischen ihnen wechseln <span class="s">Sicher</span>. Die oft genannte Obergrenze von 100 Kanälen steht nur in Drittquellen <span class="w">Wahrscheinlich</span>. Das Repo-Schema gibt es schon: ein Repo je Reihe. Es passt eins zu eins zu den Kanälen.</p>
+
+<h3>Rollen, falls „wir“ mehr als eine Person ist</h3>
+<p>YouTube vergibt Rechte je Kanal: Manager, Bearbeiter, Bearbeiter (eingeschränkt), Betrachter <span class="s">Sicher</span>. Mitstreiter bekommen „Bearbeiter“ für den Kanal, an dem sie arbeiten, nicht das Inhaber-Konto. <span class="e">Empfehlung</span></p>
+
+<h3>Checkliste je Kanal (einmal einrichten)</h3>
+<table>
+<thead><tr><th style="width:24%">Punkt</th><th>Inhalt</th></tr></thead>
+<tr><td>Name, Handle, Bild</td><td>Handle sichern; Profilbild und Banner im Stil der Reihe (Mathe: Reihen-Look des Vorschaubilds; Gesundheit: Aquarell und Ampel; KI: Messwerte)</td></tr>
+<tr><td>Kanalbeschreibung</td><td>1. Satz = Versprechen · 2. wer dahintersteht und wie geprüft wird · 3. Erscheinungsrhythmus · Hinweis auf synthetische Stimme</td></tr>
+<tr><td>Links im Kanal</td><td>Website, <b>Impressum</b> (höchstens zwei Klicks, auch ohne Anmeldung sichtbar <span class="s">Sicher</span>), Mathe zusätzlich die App</td></tr>
+<tr><td>Standards für Uploads</td><td>Beschreibungsvorlage (Einstieg je Video, Quellen bzw. App-Link, Kapitel, Impressum-Link, KI-Angabe), Kategorie „Bildung“, Sprache Deutsch, Zielgruppe „nicht speziell für Kinder“. In YouTube Studio unter Einstellungen → Standardeinstellungen für Uploads <span class="w">Wahrscheinlich</span></td></tr>
+<tr><td>Playlists</td><td>eine je Reihe (Kopfrechnen, später Statistik; Gesundheit nach Themenfeld; KI: Tests, Making-of)</td></tr>
+<tr><td>Kanaltrailer</td><td>das beste Video als Trailer für Nicht-Abonnenten, sobald drei Videos online sind</td></tr>
+<tr><td>Untertitel</td><td>automatische deutsche Untertitel prüfen; Eigennamen und Zahlen korrigieren (Sprechtext liegt als Datei vor)</td></tr>
+</table>
+
+<h3>Querverweise zwischen den Kanälen</h3>
+<table>
+<thead><tr><th style="width:24%">von → nach</th><th>sinnvoll?</th></tr></thead>
+<tr><td><span class="chip ck">KI</span> → <span class="chip cm">Mathe</span>, <span class="chip cg">Gesundheit</span></td><td><b>ja</b>: Making-of-Folgen zeigen die fertigen Videos und verlinken sie. Wer das Making-of sieht, will meist das Ergebnis sehen <span class="v">Vermutung</span>.</td></tr>
+<tr><td><span class="chip cm">Mathe</span> ↔ <span class="chip cg">Gesundheit</span></td><td><b>nein</b>, das Publikum überschneidet sich kaum. Ausnahme später: Statistik-Folgen über „N von 100“ und relative Risiken passen zu beiden.</td></tr>
+<tr><td>Rubrik „Empfohlene Kanäle“</td><td>nur KI ↔ Rest; nie alle gegenseitig, sonst wirkt es wie ein Netzwerk aus Fabrikkanälen <span class="v">Vermutung</span></td></tr>
+</table>
+<p class="small">Testen: Probe-Uploads „privat“ oder „nicht gelistet“ direkt im Zielkanal, sobald er existiert. Die Platzhalter auf „Volumen Trader“ (Elfer- und Fünfer-Trick) danach löschen und die Links in App und Abspann umstellen.</p>
+
+<h2>7 · Recht und Kennzeichnung (Kurzfassung)</h2>
+<table>
+<thead><tr><th style="width:20%">Thema</th><th>Was gilt</th><th style="width:16%">betrifft</th></tr></thead>
+<tr><td>Impressum</td><td>Name, ladungsfähige Anschrift, E-Mail und ein zweiter Kontaktweg (§ 5 DDG, § 18 Abs. 1 MStV) <span class="s">Sicher</span>. Bei journalistisch-redaktionellen Angeboten zusätzlich ein „Verantwortlicher“ (§ 18 Abs. 2 MStV) <span class="s">Sicher</span>. Bußgeld bis 50.000 €, dazu Abmahnungen <span class="s">Sicher</span>.</td><td>alle; Abs. 2 sicher bei Gesundheit</td></tr>
+<tr><td>Journalistische Sorgfalt</td><td>§ 19 MStV verlangt Prüfung auf Inhalt, Herkunft und Wahrheit, besonders bei Gesundheitsthemen (Merkblatt der Medienanstalten) <span class="s">Sicher</span>. Der Faktencheck-Kanal sollte sich als erfasst betrachten <span class="w">Wahrscheinlich</span>.</td><td><span class="chip cg">Gesundheit</span></td></tr>
+<tr><td>KI-Kennzeichnung bei YouTube</td><td>Pflicht nur bei realistisch wirkenden Inhalten (echte Person sagt Erfundenes, realistische erfundene Szenen). Animation, Produktionshilfe und eigener Stimmklon sind ausgenommen <span class="s">Sicher</span>. Die synthetische Erzählstimme freiwillig angeben wie bisher, das kostet laut YouTube keine Reichweite <span class="s">Sicher</span>.</td><td>alle</td></tr>
+<tr><td>KI-Verordnung der EU, Art. 50</td><td>Gilt seit 2. August 2026, das Omnibus-Paket hat diesen Artikel nicht verschoben <span class="w">Wahrscheinlich</span>. Deepfakes (realistische Inhalte, die echt wirken) müssen gekennzeichnet werden. KI-Texte zu Themen von öffentlichem Interesse brauchen keine Kennzeichnung, wenn ein Mensch sie redaktionell prüft und verantwortet <span class="w">Wahrscheinlich</span>. Eure Erzählstimme imitiert keine reale Person, ist also kein Deepfake <span class="v">Vermutung</span>. Realistische KI-Demos im KI-Kanal kennzeichnen.</td><td>alle, vor allem <span class="chip ck">KI</span></td></tr>
+<tr><td>Heilmittelwerbung</td><td>Keine Affiliate-Links, keine Produktnennung, keine Sponsoren. Dann ist das Video Information und keine Werbung, und das Heilmittelwerbegesetz greift nicht <span class="w">Wahrscheinlich</span>. Mit dem ersten Rabattcode kippt das.</td><td><span class="chip cg">Gesundheit</span></td></tr>
+<tr><td>Eigene Produkte</td><td>Sobald die Mathe-App eine Bezahlstufe hat, ist der Hinweis im Video Werbung für ein eigenes Produkt und muss gekennzeichnet werden (Leitfaden der Medienanstalten) <span class="s">Sicher</span>.</td><td><span class="chip cm">Mathe</span></td></tr>
+<tr><td>Werkzeug-Lizenzen</td><td>Kommerzielle Nutzung von ElevenLabs-Stimmen, Bildgeneratoren und Musik je Werkzeug prüfen, bevor Werbung läuft. Nicht recherchiert.</td><td>alle</td></tr>
+<tr><td>Steuer</td><td>Kleinunternehmerregelung seit 2025: höchstens 25.000 € Umsatz im Vorjahr und 100.000 € im laufenden Jahr <span class="w">Wahrscheinlich</span>. Ob Gewerbe angemeldet werden muss und unter welcher Firma, klärt die Steuerberatung, vor allem wenn du schon als Trader eine Firma hast.</td><td>alle</td></tr>
+</table>
+
+<h2>8 · Fahrplan</h2>
+<table class="fahr">
+<thead><tr><th>Wann</th><th>Was</th></tr></thead>
+<tr><td>diese Woche</td><td>Entscheidungen 1–7 (nächste Seite) · alle Handles sichern, auch KI · 2-Faktor-Anmeldung · Domain und Website mit Impressum, Datenschutz und Methodenseite · Stimme für Gesundheit wählen</td></tr>
+<tr><td>bis Ende November</td><td><span class="chip cm">Mathe</span> online: Zehner- und Elfer-Trick plus je ein Short; App-Links auf die echten Videos umstellen · <span class="chip cg">Gesundheit</span> online mit Rückstand, ein Video pro Woche aus den fertigen Themen</td></tr>
+<tr><td>Dezember – Januar</td><td>Einen festen Rhythmus halten, den ihr ein halbes Jahr durchhaltet. Vorschlag: Mathe 1 Folge und 2 Shorts pro Woche, Gesundheit 1 Video in 1–2 Wochen <span class="e">Empfehlung</span> · <span class="chip ck">KI</span> 3–5 Videos nicht gelistet produzieren, Blickwinkel festlegen</td></tr>
+<tr><td>ab Februar 2027</td><td><span class="chip ck">KI</span> online, erste Folge als Making-of („So bauen wir Mathe-Videos mit Code“) · neue Hürde 8.000 h gilt, Planung danach ausrichten</td></tr>
+<tr><td>nach 90 Tagen je Kanal</td><td>Kennzahlen ansehen: Haltequote nach 30 s, Klickrate der Vorschaubilder (bei der Hälfte aller Kanäle zwischen 2 und 10 % <span class="w">Wahrscheinlich</span>), Abos pro 1.000 Aufrufe, Anteil Suche gegenüber Startseite. Hochrechnung mit der Formel aus Abschnitt 5. Liegt ein Kanal unter einem Zehntel des Wochenbedarfs, ändert ihr das Format, nicht die Menge <span class="e">Empfehlung</span></td></tr>
+<tr><td>nach 6–12 Monaten</td><td>Mathe: erstes Sammelvideo, Statistik-Reihe starten? · Gesundheit: fachliche Durchsicht durch eine Ärztin oder einen Arzt suchen (Voraussetzung fürs Gesundheits-Label) · Bezahlstufe der App</td></tr>
+</table>
+
+<h2 class="pb">9 · Deine Entscheidungen</h2>
+<p>Das Konzept steht. Diese sieben Punkte kann nur ihr entscheiden. Die Reihenfolge ist nach Dringlichkeit sortiert:</p>
+<ol class="ent">
+<li><b>Ziel je Kanal.</b> Werbeeinnahmen, App-Verkäufe, Ruf, Aufträge, oder Freude am Machen? Das Konzept nimmt an: Mathe → App, Gesundheit → Ruf, KI → Sichtbarkeit. Liegt das Ziel woanders, verschiebt sich die Reihenfolge.</li>
+<li><b>Getrennte Kanäle, gestaffelt</b>, wie oben? Oder lieber nur einen Kanal starten und die anderen später?</li>
+<li><b>Wer steht im Impressum, und mit welcher Adresse?</b> Du als Person oder eine Firma? Soll dein Trading-Auftritt („Volumen Trader“) erkennbar mit den Kanälen verbunden sein?</li>
+<li><b>Trittst du im KI-Kanal selbst auf?</b> Stimmklon „Lupert“ und Name (Empfehlung), zusätzlich Gesicht, oder doch neutral?</li>
+<li><b>Seneca:</b> eigener Kanal, Podcast, oder vorerst nicht veröffentlichen?</li>
+<li><b>Stimmen:</b> Welche Reihe gibt „Christian“ ab? Vorschlag: Mathe behält ihn, Gesundheit wählt neu aus der Sprecherprobe.</li>
+<li><b>Namen:</b> Zahlenkopf / Rechenkopf · Beleglage / Gesund belegt · KI nachgemessen / KI mit Stoppuhr, oder eigene Ideen (Handles prüfen wir dann).</li>
+</ol>
+<div class="box"><b>Wer ist „wir“?</b> Arbeitet jemand mit, braucht diese Person Rechte je Kanal (Abschnitt 6). Dann sollte im Impressum oder in der Kanalinfo geklärt sein, wer wofür verantwortlich ist.</div>
+
+<h2>Quellen</h2>
+<ol class="quellen">
+<li>YouTube-Hilfe: Partnerprogramm, Überblick und Voraussetzungen (Schwellen, 2-Faktor, AdSense, Prüfung) – <a href="https://support.google.com/youtube/answer/72851?hl=de">support.google.com/youtube/answer/72851</a></li>
+<li>YouTube-Hilfe: Änderungen am Partnerprogramm ab 1. Februar 2027 (8.000 Std. / 20 Mio. Shorts; untere Stufe unverändert) – <a href="https://support.google.com/youtube/answer/12843009?hl=en-GB">support.google.com/youtube/answer/12843009</a></li>
+<li>ppc.land, 12.08.2026: „New YouTube creators face 8,000-hour bar for ad revenue from February 2027“ – <a href="https://ppc.land/new-youtube-creators-face-8-000-hour-bar-for-ad-revenue-from-february-2027/">ppc.land</a></li>
+<li>YouTube-Hilfe: Brand-Konten und Kanalberechtigungen – <a href="https://support.google.com/youtube/answer/9367690">support.google.com/youtube/answer/9367690</a>; Kanäle verwalten – <a href="https://support.google.com/youtube/answer/4642409">support.google.com/youtube/answer/4642409</a></li>
+<li>AdSense-Hilfe: ein Konto je Zahlungsempfänger – <a href="https://support.google.com/adsense/answer/72866?hl=en">support.google.com/adsense/answer/72866</a></li>
+<li>YouTube-Hilfe: Verwarnungen wegen Verstoßes gegen die Community-Richtlinien – <a href="https://support.google.com/youtube/answer/2802032">support.google.com/youtube/answer/2802032</a></li>
+<li>Search Engine Journal: YouTube-Algorithmus-Mythen, Aussagen von Todd Beaupré (Empfehlung je Video) – <a href="https://www.searchenginejournal.com/youtube-algorithm-myths-debunked-insights-from-the-growth-team/510091/">searchenginejournal.com</a></li>
+<li>KI-Verordnung Art. 50 nach dem Omnibus: Jones Walker – <a href="https://www.joneswalker.com/en/insights/blogs/ai-law-blog/yes-august-2-still-matters-the-eu-approved-a-high-risk-ai-delay-but-most-trans.html">joneswalker.com</a>; Usercentrics – <a href="https://usercentrics.com/knowledge-hub/eu-ai-act-high-risk-delay-article-50-transparency-consent/">usercentrics.com</a>; Cooley – <a href="https://cdp.cooley.com/digital-ai-omnibus-delays-key-deadlines-introduces-new-rules/">cdp.cooley.com</a></li>
+<li>eRecht24: c/o-Adresse im Impressum – <a href="https://www.e-recht24.de/impressum/8369-impressum-c-o-adresse.html">e-recht24.de</a>; IT-Recht-Kanzlei: Postfach im Impressum reicht nicht – <a href="https://www.it-recht-kanzlei.de/postfach-impressum-reicht-nicht.html">it-recht-kanzlei.de</a></li>
+<li>Finanzamt Baden-Württemberg: Kleinunternehmerregelung – <a href="https://finanzamt-bw.fv-bwl.de/%2CLde/Startseite/Service/Was%2Bist%2Bdie%2Bsogenannte%2BKleinunternehmerregelung_">finanzamt-bw.fv-bwl.de</a></li>
+<li>Recherche vom 02.11.2026 mit allen Einzelbelegen zu medizinischen Fehlinformationen, Gesundheits-Label, „nicht authentischen Inhalten“, KI-Personas, KI-Kennzeichnung (Hilfe 14328491), Mid-Rolls ab 8 min, Heilmittelwerbegesetz, § 18/19 MStV, Impressum-Bußgeld, Toff &amp; Simon 2024: <i>5-Minuten-videos/themen/beratung/recherche_A.md</i> – <a href="https://github.com/luperttrading-lab/5-Minuten-videos/blob/main/themen/beratung/recherche_A.md">GitHub</a></li>
+<li>Eigene Messungen: Remotion-Probe und ElevenLabs-Kosten (<i>fragen-allgemein/CLAUDE.md</i>), Videolängen und Stimmen (<i>mathe-videos</i>, <i>5-Minuten-videos</i>, <i>ki-videos</i>), Handle-Abruf und Testkanal per yt-dlp am 09.11.2026</li>
+</ol>
+
+</body></html>
