@@ -66,3 +66,7 @@ Der Nutzer liest auf dem Handy und soll den Link nicht in langen Antworten suche
 Links stehen nach dem Erklärtext, direkt vor der Kostenzeile, nie oben. Ablauf: erst den Erklärtext schreiben, dann
 die Dateien mit `SendUserFile` schicken, danach nur noch Link-Zeile und Kostenzeile. Im Text auf die Dateien mit
 „unten“ verweisen, nicht mit „oben“.
+
+**Nur eine Version schicken** (Wunsch des Nutzers, 09.11.2026): Pro Antwort genau die Datei, die der Nutzer
+ansehen soll. Vergleiche (vorher/nachher, Variante A/B) in ein einziges beschriftetes Bild oder eine Datei packen,
+ältere Fassungen nicht erneut schicken. Wenn doch mehrere nötig sind, im Text sagen, welche zuerst angesehen werden soll.

@@ -115,7 +115,7 @@ export const S02 = ({c}) => {
 const KNOTEN = [
   {titel: 'Agent', unter: 'z. B. Claude Code', farbe: F.CYAN},
   {titel: 'Server', unter: 'Hilfsprogramm', farbe: F.BLAU},
-  {titel: 'Relay', unter: 'Vermittlungs\u00ADstelle', farbe: F.VIOLETT},
+  {titel: 'Relay', unter: 'Vermittlungsstelle', farbe: F.VIOLETT},
   {titel: 'Erweiterung', unter: 'in deinem Browser', farbe: F.ROSA},
   {titel: 'Chrome', unter: 'eingebaute Fernsteuerung', farbe: F.GRUEN},
 ];
@@ -142,7 +142,7 @@ export const S03 = ({c}) => {
       <Kopf t={t} nr="3" titel="So kommt der Agent in deinen Browser" />
       <Ein t={t} at={c.n2 + 0.9} style={{left: xs[1] - 30, top: Y - 70, width: xs[2] + W - xs[1] + 60, height: H + 230}}>
         <div style={{width: '100%', height: '100%', border: `3px dashed ${F.VIOLETT}`, borderRadius: 30}} />
-        <div style={{position: 'absolute', bottom: 18, width: '100%', textAlign: 'center', fontSize: 30, fontWeight: 700, color: F.VIOLETT}}>
+        <div style={{position: 'absolute', bottom: 18, width: '100%', textAlign: 'center', fontSize: 26, fontWeight: 700, color: F.VIOLETT}}>
           nur auf deinem Rechner erreichbar
         </div>
       </Ein>
@@ -161,7 +161,7 @@ export const S03 = ({c}) => {
             boxShadow: `0 0 ${stab && Math.abs(stab.x - (xs[i] + W / 2)) < 60 ? 40 : 0}px ${k.farbe}`}}>
             {i === 0 && <Roboter g={74} />}
             <div style={{fontSize: 34, fontWeight: 800, color: k.farbe, whiteSpace: 'nowrap'}}>{k.titel}</div>
-            <div style={{fontSize: 28, fontWeight: 500, color: F.GRAU, textAlign: 'center', padding: '0 10px', lineHeight: 1.15}}>{k.unter}</div>
+            <div style={{fontSize: 22, fontWeight: 500, color: F.GRAU, textAlign: 'center', padding: '0 12px'}}>{k.unter}</div>
           </div>
         </Ein>
       ))}
@@ -171,7 +171,7 @@ export const S03 = ({c}) => {
           <React.Fragment key={s}>
             <Pfeil x={x} y={Y + H / 2} laenge={L} f={ein(t, pfeilAb[i], 0.5)} farbe={F.TEXT} doppelt />
             <Ein t={t} at={pfeilAb[i] + 0.2} style={{left: x - 20, top: Y + H / 2 + 30, width: L + 40, textAlign: 'center'}}>
-              <div style={{fontSize: 28, fontWeight: 700, color: F.GRAU}}>{s}</div>
+              <div style={{fontSize: 22, fontWeight: 700, color: F.GRAU}}>{s}</div>
             </Ein>
             <Ein t={t} at={pfeilAb[i] - 0.3} skala style={{left: x + L / 2 - 30, top: Y + H / 2 - 100}}>
               <div style={{width: 60, height: 60, borderRadius: 30, background: F.GELB, color: F.BG1, fontSize: 32, fontWeight: 800,
@@ -223,14 +223,14 @@ export const S04 = ({c}) => {
             </Karte>
           </Ein>
           <Ein t={t} at={c.zehn} style={{right: 40, top: 30}}>
-            <Chip farbe={F.VIOLETT} gross={28}>Agenten-Tabs: eingeklappt · nach 10 min Leerlauf zu</Chip>
+            <Chip farbe={F.VIOLETT} gross={26}>Agenten-Tabs: eingeklappt · nach 10 min Leerlauf zu</Chip>
           </Ein>
           {karteSicht > 0.01 && (
-            <div style={{position: 'absolute', left: 300, top: 95, width: 780, opacity: karteSicht,
+            <div style={{position: 'absolute', left: 300, top: 105, width: 660, opacity: karteSicht,
               transform: `translateY(${(1 - karteSicht) * 20}px)`}}>
               <Karte farbe={F.GELB} style={{padding: '24px 32px'}}>
                 <div style={{fontSize: 34, fontWeight: 800, color: F.GELB}}>Du bist dran</div>
-                <div style={{fontSize: 28, color: F.GRAU, margin: '6px 0 18px'}}>login.example.com · Anmeldung mit 2-Faktor</div>
+                <div style={{fontSize: 26, color: F.GRAU, margin: '6px 0 18px'}}>login.example.com · Anmeldung mit 2-Faktor</div>
                 <div style={{display: 'inline-block', padding: '12px 34px', borderRadius: 14, background: F.GELB, color: F.BG1,
                   fontSize: 28, fontWeight: 800, transform: `scale(${druck})`}}>Weiter</div>
               </Karte>
@@ -251,15 +251,15 @@ export const S04 = ({c}) => {
         })}
         <Pfeil x={rx[0] + 170} y={80} laenge={rx[1] - rx[0] - 340} f={ein(t, c.faelle, 0.6)} farbe={F.GELB} />
         <Pfeil x={rx[1] + 170} y={80} laenge={rx[2] - rx[1] - 340} f={ein(t, c.weiter, 0.6)} farbe={F.GRUEN} />
-        <div style={{position: 'absolute', left: rx[0] + 140, width: rx[1] - rx[0] - 280, top: 108, display: 'flex',
-          flexWrap: 'wrap', justifyContent: 'center', gap: '8px 10px'}}>
+        <div style={{position: 'absolute', left: rx[0] + 115, width: rx[1] - rx[0] - 230, top: 6, display: 'flex',
+          justifyContent: 'center', gap: 8}}>
           {['Login', '2-Faktor', 'Captcha', 'Zahlung'].map((s, i) => (
-            <div key={s} style={{opacity: ein(t, c.faelle + 0.3 + i * 0.5, 0.35)}}><Chip farbe={F.GELB} gross={26}>{s}</Chip></div>
+            <div key={s} style={{opacity: ein(t, c.faelle + 0.3 + i * 0.5, 0.35)}}><Chip farbe={F.GELB} gross={20}>{s}</Chip></div>
           ))}
         </div>
-        <div style={{position: 'absolute', left: rx[1] + 140, width: rx[2] - rx[1] - 280, top: 108, display: 'flex',
+        <div style={{position: 'absolute', left: rx[1] + 150, width: rx[2] - rx[1] - 300, top: 0, display: 'flex',
           justifyContent: 'center', opacity: ein(t, c.weiter, 0.35)}}>
-          <Chip farbe={F.GRUEN} gross={28}>Klick auf „Weiter“</Chip>
+          <Chip farbe={F.GRUEN} gross={24}>Klick auf „Weiter“</Chip>
         </div>
       </Ein>
     </>
