@@ -56,8 +56,14 @@ Python-Renderer gemessen.
 Jede genannte Internetadresse, Domain oder Quelle immer als klickbaren Markdown-Link ausgeben
 (`[easybill.de](https://www.easybill.de)`), nie als nackten Text. Der Nutzer liest im Chat und tippt nichts ab.
 
-## Link am Ende der Antwort
+## Abschluss jeder Antwort (immer gleich)
 
-Wurde in der Antwort ein Artifact, eine Seite oder eine Datei veröffentlicht oder aktualisiert: den Link dazu als
-letzte Zeile vor der Kostenzeile wiederholen (`**Link:** [Name](URL)`), auch wenn er weiter oben schon steht.
-Der Nutzer liest auf dem Handy und soll den Link nicht in langen Antworten suchen müssen.
+Wurde etwas Neues produziert oder aktualisiert (Datei, PDF, Artifact, Seite, Video), endet die Antwort immer mit
+demselben Block direkt über der Kostenzeile (Nutzerwunsch 09.11.):
+
+1. **Das Wichtigste:** 1–3 Zeilen. Was gemacht wurde, und was der Nutzer sich ansehen oder entscheiden soll.
+2. **Links:** alle aktuellen Links gebündelt als Liste (`**Link:** [Name](URL)`), auch wenn sie oben schon stehen.
+3. Kostenzeile.
+
+Das neue Produkt nicht am Anfang der Antwort ankündigen („PDF liegt oben“), sondern nur in diesem Block. Der Nutzer
+liest auf dem Handy und soll nichts in langen Antworten suchen müssen.
