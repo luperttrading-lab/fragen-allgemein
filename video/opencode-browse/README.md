@@ -4,6 +4,8 @@ Anlass: Video [„Alle zahlen für Claude in Chrome. Dabei geht es jetzt kostenl
 (ZeldoReacts, Reaktion auf ein Video des Kanals Hinter). Das Erklärvideo übernimmt weder Bild noch Ton daraus. Text und
 Grafik sind neu, die Fakten sind an den Primärquellen geprüft (Tabelle unten).
 
+- **Veröffentlicht:** [luperttrading-lab.github.io/ki-videos/opencode-browse](https://luperttrading-lab.github.io/ki-videos/opencode-browse/)
+  (Repo `luperttrading-lab/ki-videos`, Web-Fassung 9,5 MB: CRF 32, Ton mono 64 kbit/s).
 - **Fassung v2** (freigegeben 08.11.2026): 13 Szenen + 8 s Quellen, 7:13 min, 1920 × 1080, 30 fps, Remotion 4.0.541.
   Fassung v1 (4:48 min, Edge-Stimme) liegt im Git-Verlauf.
 - Stimme: ElevenLabs „Christian – Warm and Captivating“ (`NBqeXKdZHweef6y0B67V`), Modell `eleven_v4`, Originaltempo.
