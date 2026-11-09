@@ -15,17 +15,34 @@ Mit OpenCode Browse benutzen KI-Agenten wie Claude Code, Codex oder Cursor deine
 Kapitel:
 0:00 Das Problem: die Login-Wand
 0:25 Die Lösung: OpenCode Browse
-0:56 So kommt der Agent in deinen Browser
-1:38 Im Hintergrund, mit Übergabe an dich
-2:04 Passwörter, ohne dass der Agent sie sieht
-2:26 Jedes Modell, auch lokal: zwei Haken
-3:19 Und Claude in Chrome?
-4:01 Datenschutz und Regeln
-4:34 Das Risiko: Prompt Injection
-5:17 Wie oft gelingt so ein Angriff?
-5:47 Was OpenCode Browse selbst absichert
-6:15 Zwei praktische Haken
-6:34 Faustregel und Fazit
+1:01 So kommt der Agent in deinen Browser
+1:42 Im Hintergrund, mit Übergabe an dich
+2:16 Passwörter, ohne dass der Agent sie sieht
+2:38 Jedes Modell, auch lokal: zwei Haken
+3:31 Agent oder Werkzeug? Claude in Chrome im Vergleich
+4:34 Datenschutz und Regeln
+5:07 Das Risiko: Prompt Injection
+5:50 Wie oft gelingt so ein Angriff?
+6:20 Was OpenCode Browse selbst absichert
+6:48 Zwei praktische Haken
+7:10 Faustregel und Fazit
+
+Begriffe aus dem Video:
+Cookies: Mini-Dateien, mit denen Webseiten dich wiedererkennen und eingeloggt halten
+Coding-Agent: KI, die selbstständig programmiert, z. B. OpenCode, Claude Code, Codex
+Open Source: Software mit öffentlichem Quellcode: jeder kann sie prüfen und nutzen
+Claude Code: Anthropics Coding-Agent für die Kommandozeile (Terminal)
+MCP: Model Context Protocol: offener Standard, über den KI-Agenten Werkzeuge anschließen
+Relay: Vermittlungsstelle auf deinem Rechner, die Befehle an den Browser weiterreicht
+Captcha: Test, ob ein Mensch vor dem Bildschirm sitzt, z. B. Bilder anklicken
+Zwei-Faktor-Anmeldung: Login mit Passwort plus Einmalcode, z. B. aus einer Authenticator-App
+Ollama: kostenloses Programm, das KI-Modelle auf dem eigenen Rechner ausführt
+Token: Wortstück: KI-Modelle zählen Text und Kosten in Tokens
+Tool-Aufruf: Befehl des Modells an ein Werkzeug, z. B. „klicke hier“ oder „lies die Seite“
+API-Schlüssel: Zugang zu einem KI-Modell per Programm: bezahlt wird nach Verbrauch statt per Abo
+Playwright MCP, Chrome DevTools MCP: kostenlose Werkzeuge von Microsoft und Google, mit denen KI-Agenten Browser steuern
+Prompt Injection: versteckte Anweisungen in Texten oder Webseiten, die eine KI befolgt, obwohl du sie nicht gegeben hast
+Browserprofil: getrennter Bereich im Browser mit eigenen Logins, Cookies und Lesezeichen
 
 Quellen:
 OpenCode Browse: https://github.com/anomalyco/browse

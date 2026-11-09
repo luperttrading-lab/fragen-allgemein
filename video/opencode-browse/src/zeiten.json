@@ -13,42 +13,43 @@
    "begriffe": [
     {
      "begriff": "Cookies",
-     "erklaerung": "kleine Dateien, mit denen Webseiten dich wiedererkennen, etwa damit du eingeloggt bleibst",
+     "erklaerung": "Mini-Dateien, mit denen Webseiten dich wiedererkennen und eingeloggt halten",
      "pos": "l",
+     "breite": 820,
      "t": 19.37
     }
    ]
   },
   "s02_browse": {
-   "audio": 30.667755,
-   "dauer": 31.618,
+   "audio": 35.160816,
+   "dauer": 36.111,
    "vorlauf": 0.25,
    "cues": {
-    "titel": 1.45,
-    "firma": 3.29,
-    "bausteine": 8.85,
-    "frei": 14.37,
-    "echt": 19.37,
-    "agenten": 24.65
+    "titel": 1.53,
+    "firma": 3.21,
+    "bausteine": 13.01,
+    "frei": 18.41,
+    "echt": 23.69,
+    "agenten": 28.97
    },
    "begriffe": [
     {
      "begriff": "Coding-Agent",
      "erklaerung": "KI, die selbstständig programmiert, z. B. OpenCode, Claude Code, Codex",
      "pos": "r",
-     "t": 5.85
+     "t": 7.13
     },
     {
      "begriff": "Open Source",
      "erklaerung": "Software mit öffentlichem Quellcode: jeder kann sie prüfen und nutzen",
      "pos": "r",
-     "t": 15.69
+     "t": 19.77
     },
     {
      "begriff": "Claude Code",
      "erklaerung": "Anthropics Coding-Agent für die Kommandozeile (Terminal)",
      "pos": "r",
-     "t": 26.81
+     "t": 31.21
     }
    ]
   },
@@ -80,24 +81,25 @@
    ]
   },
   "s04_uebergabe": {
-   "audio": 25.39102,
-   "dauer": 26.341,
+   "audio": 32.992653,
+   "dauer": 33.943,
    "vorlauf": 0.25,
    "cues": {
     "tabs": 0.25,
-    "zehn": 6.65,
-    "uebergabe": 11.01,
-    "faelle": 13.21,
-    "du": 20.57,
-    "weiter": 22.45,
-    "agent": 23.89
+    "zehn": 6.41,
+    "webapp": 10.73,
+    "uebergabe": 19.29,
+    "faelle": 21.45,
+    "du": 28.17,
+    "weiter": 30.13,
+    "agent": 31.53
    },
    "begriffe": [
     {
      "begriff": "Captcha",
      "erklaerung": "Test, ob ein Mensch vor dem Bildschirm sitzt, z. B. Bilder anklicken",
      "pos": "l",
-     "t": 16.49
+     "t": 24.49
     }
    ]
   },
@@ -115,7 +117,7 @@
     {
      "begriff": "Zwei-Faktor-Anmeldung",
      "erklaerung": "Login mit Passwort plus Einmalcode, z. B. aus einer Authenticator-App",
-     "pos": "l",
+     "pos": "r",
      "t": 14.73
     }
    ]
@@ -156,29 +158,33 @@
    ]
   },
   "s07_vergleich": {
-   "audio": 41.560816,
-   "dauer": 42.511,
+   "audio": 62.51102,
+   "dauer": 63.461,
    "vorlauf": 0.25,
    "cues": {
-    "claude": 2.17,
-    "abo": 7.61,
-    "jedes": 16.45,
-    "kosten": 19.37,
-    "alt": 26.25,
-    "neu": 36.01
+    "ebene": 2.25,
+    "agent": 8.97,
+    "werkzeug": 11.13,
+    "gegen": 15.93,
+    "claude": 19.09,
+    "abo": 24.09,
+    "jedes": 36.29,
+    "kosten": 39.45,
+    "alt": 46.49,
+    "neu": 56.73
    },
    "begriffe": [
     {
      "begriff": "API-Schlüssel",
      "erklaerung": "Zugang zu einem KI-Modell per Programm: bezahlt wird nach Verbrauch statt per Abo",
      "pos": "r",
-     "t": 13.37
+     "t": 30.09
     },
     {
      "begriff": "Playwright MCP, Chrome DevTools MCP",
      "erklaerung": "kostenlose Werkzeuge von Microsoft und Google, mit denen KI-Agenten Browser steuern",
      "pos": "r",
-     "t": 29.05
+     "t": 49.45
     }
    ]
   },
@@ -246,14 +252,15 @@
    "begriffe": []
   },
   "s12_haken": {
-   "audio": 17.554286,
-   "dauer": 18.504,
+   "audio": 20.924082,
+   "dauer": 21.874,
    "vorlauf": 0.25,
    "cues": {
-    "chromium": 4.25,
-    "nicht": 8.49,
-    "neu": 11.69,
-    "update": 15.73
+    "chromium": 4.33,
+    "nicht": 8.73,
+    "handy": 11.37,
+    "neu": 15.05,
+    "update": 19.09
    },
    "begriffe": []
   },
@@ -295,6 +302,6 @@
   "s12_haken",
   "s13_regel"
  ],
- "laenge": 424.745,
+ "laenge": 461.16,
  "stimme": "ElevenLabs Christian (eleven_v4), Tempo 1.0"
 }

@@ -1,6 +1,6 @@
 {
   "stand": "08.11.2026",
-  "fassung": "v2 freigegeben 08.11.2026 (ohne Satz zu Startfehlern in s12)",
+  "fassung": "v3 freigegeben 09.11.2026 (Begriffe, Einordnung Claude Code, Web-App-Test, nur Computer)",
   "stimme_entwurf": "de-DE-FlorianMultilingualNeural",
   "szenen": [
     {
@@ -16,14 +16,15 @@
         {
           "wort": "Cookies",
           "begriff": "Cookies",
-          "erklaerung": "kleine Dateien, mit denen Webseiten dich wiedererkennen, etwa damit du eingeloggt bleibst",
-          "pos": "l"
+          "erklaerung": "Mini-Dateien, mit denen Webseiten dich wiedererkennen und eingeloggt halten",
+          "pos": "l",
+          "breite": 820
         }
       ]
     },
     {
       "id": "s02_browse",
-      "text": "Genau hier setzt OpenCode Browse an. Es kommt von Anomaly, der Firma hinter dem Coding-Agenten OpenCode. Das Werkzeug besteht aus einer Browser-Erweiterung und einem kleinen Hilfsprogramm auf deinem Rechner. Es ist gerade erst erschienen, Open Source und kostenlos. Damit benutzt dein Agent deinen echten Browser: deine Tabs, deine Logins, deine Erweiterungen. Und das nicht nur in OpenCode, sondern auch in Claude Code, Codex, Cursor und vielen weiteren Agenten.",
+      "text": "Genau hier setzt OpenCode Browse an. Es kommt von Anomaly, der Firma hinter OpenCode, einem Coding-Agenten, also einer KI, die selbstständig programmiert. Das Werkzeug besteht aus einer Browser-Erweiterung und einem kleinen Hilfsprogramm auf deinem Rechner. Es ist gerade erst erschienen, Open Source und kostenlos. Damit benutzt dein Agent deinen echten Browser: deine Tabs, deine Logins, deine Erweiterungen. Und das nicht nur in OpenCode, sondern auch in Claude Code, Codex, Cursor und vielen weiteren Agenten.",
       "cues": {
         "titel": "OpenCode Browse",
         "firma": "Es kommt von",
@@ -81,10 +82,11 @@
     },
     {
       "id": "s04_uebergabe",
-      "text": "Die Tabs des Agenten öffnen sich im Hintergrund, in einer eingeklappten Gruppe, und schließen sich nach zehn Minuten ohne Benutzung von selbst. Das Wichtigste ist aber die Übergabe. Stößt der Agent auf einen Login, eine Zwei-Faktor-Abfrage, ein Captcha oder eine Zahlung, gibt er dir den Tab. Du erledigst den heiklen Teil, klickst auf Weiter, und der Agent macht dort weiter.",
+      "text": "Die Tabs des Agenten öffnen sich im Hintergrund, in einer eingeklappten Gruppe, und schließen sich nach zehn Minuten ohne Benutzung von selbst. So kann der Agent zum Beispiel deine eigene Web-App im eingeloggten Zustand durchklicken und Fehler auf Screenshots finden, wie ein echter Nutzer. Das Wichtigste ist aber die Übergabe. Stößt der Agent auf einen Login, eine Zwei-Faktor-Abfrage, ein Captcha oder eine Zahlung, gibt er dir den Tab. Du erledigst den heiklen Teil, klickst auf Weiter, und der Agent macht dort weiter.",
       "cues": {
         "tabs": "Die Tabs",
         "zehn": "zehn Minuten",
+        "webapp": "deine eigene Web-App",
         "uebergabe": "die Übergabe",
         "faelle": "auf einen Login",
         "du": "Du erledigst",
@@ -114,7 +116,7 @@
           "wort": "Authenticator-App",
           "begriff": "Zwei-Faktor-Anmeldung",
           "erklaerung": "Login mit Passwort plus Einmalcode, z. B. aus einer Authenticator-App",
-          "pos": "l"
+          "pos": "r"
         }
       ]
     },
@@ -154,9 +156,13 @@
     },
     {
       "id": "s07_vergleich",
-      "text": "Und Claude in Chrome? Das ist Anthropics eigene Erweiterung, inzwischen auch direkt in Claude Code nutzbar. Aber nur mit Claude und nur mit einem Claude-Abo, ab zwanzig Dollar im Monat. Mit einem API-Schlüssel geht es nicht. OpenCode Browse dagegen nimmt jedes Modell. Wichtig: Kostenlos ist dabei nur das Werkzeug. Das Modell kostet weiter Geld, außer es läuft bei dir lokal. Und ganz neu ist die Idee nicht: Auch Microsofts Playwright MCP und Googles Chrome DevTools MCP können sich mit deinem eingeloggten Browser verbinden. Neu ist das Komplettpaket: eine Installation, Übergaben, Passwörter, Aufzeichnung.",
+      "text": "Und Claude in Chrome? Wichtig zur Einordnung: Claude Code ist kein Gegenstück zu OpenCode Browse. Claude Code ist ein Agent, OpenCode Browse ein Werkzeug für Agenten, und Claude Code kann es sogar benutzen. Das eigentliche Gegenstück ist Claude in Chrome, Anthropics eigene Erweiterung, inzwischen auch direkt in Claude Code nutzbar. Aber nur mit Claude und nur mit einem Claude-Abo, ab zwanzig Dollar im Monat. Mit einem API-Schlüssel, also mit Bezahlung nach Verbrauch statt per Abo, geht es nicht. OpenCode Browse dagegen nimmt jedes Modell. Wichtig: Kostenlos ist dabei nur das Werkzeug. Das Modell kostet weiter Geld, außer es läuft bei dir lokal. Und ganz neu ist die Idee nicht: Auch Microsofts Playwright MCP und Googles Chrome DevTools MCP können sich mit deinem eingeloggten Browser verbinden. Neu ist das Komplettpaket: eine Installation, Übergaben, Passwörter, Aufzeichnung.",
       "cues": {
-        "claude": "Das ist Anthropics",
+        "ebene": "Wichtig zur Einordnung",
+        "agent": "ein Agent",
+        "werkzeug": "ein Werkzeug",
+        "gegen": "Das eigentliche",
+        "claude": "Anthropics eigene Erweiterung",
         "abo": "Aber nur",
         "jedes": "dagegen nimmt",
         "kosten": "Kostenlos ist",
@@ -236,10 +242,11 @@
     },
     {
       "id": "s12_haken",
-      "text": "Dazu zwei praktische Haken. Es läuft nur in Browsern auf Chrome-Basis wie Chrome, Edge, Brave oder Arc, nicht in Firefox oder Safari. Und es ist brandneu, Version null punkt null punkt fünfzehn. Updates spielt es ab Werk selbst ein.",
+      "text": "Dazu zwei praktische Haken. Es läuft nur in Browsern auf Chrome-Basis wie Chrome, Edge, Brave oder Arc, nicht in Firefox oder Safari, und nur auf dem Computer, nicht auf dem Handy. Und es ist brandneu, Version null punkt null punkt fünfzehn. Updates spielt es ab Werk selbst ein.",
       "cues": {
         "chromium": "auf Chrome-Basis",
         "nicht": "nicht in Firefox",
+        "handy": "nur auf dem Computer",
         "neu": "brandneu",
         "update": "Updates spielt"
       }

@@ -25,7 +25,7 @@ export const S01 = ({c}) => {
         <div style={{fontSize: 28, fontWeight: 500, color: F.GRAU, marginTop: 6}}>Aufgaben</div>
       </Ein>
       {aufgaben.map(([s, at, ok], i) => (
-        <Ein key={s} t={t} at={at} dx={-30} dy={0} style={{left: 130, top: 470 + i * 118}}>
+        <Ein key={s} t={t} at={at} dx={-30} dy={0} style={{left: 130, top: 430 + i * 112}}>
           <Karte farbe={ok ? F.GRUEN : F.ROT} style={{width: 560, padding: '22px 30px', display: 'flex', alignItems: 'center', gap: 22}}>
             {ok ? <Haken g={44} /> : <Kreuz g={44} />}
             <div style={{fontSize: 36, fontWeight: 700, color: F.TEXT}}>{s}</div>
@@ -33,23 +33,23 @@ export const S01 = ({c}) => {
         </Ein>
       ))}
       <Ein t={t} at={c.login - 0.3} dx={40} dy={0} style={{left: 880, top: 190}}>
-        <Browser breite={920} hoehe={600} url="https://dashboard.example.com/login" tabs={[{el: <Tab aktiv>Anmelden</Tab>}]}>
-          <div style={{position: 'absolute', left: 230, top: 50, width: 460}}>
-            <div style={{display: 'flex', justifyContent: 'center', transform: `scale(${1 + 0.25 * Math.sin(Math.PI * stoss)})`}}><Schloss g={84} /></div>
-            <div style={{fontSize: 38, fontWeight: 800, color: F.TEXT, textAlign: 'center', margin: '14px 0 26px'}}>Anmelden</div>
+        <Browser breite={920} hoehe={520} url="https://dashboard.example.com/login" tabs={[{el: <Tab aktiv>Anmelden</Tab>}]}>
+          <div style={{position: 'absolute', left: 230, top: 24, width: 460}}>
+            <div style={{display: 'flex', justifyContent: 'center', transform: `scale(${1 + 0.25 * Math.sin(Math.PI * stoss)})`}}><Schloss g={62} /></div>
+            <div style={{fontSize: 36, fontWeight: 800, color: F.TEXT, textAlign: 'center', margin: '8px 0 18px'}}>Anmelden</div>
             {['E-Mail', 'Passwort'].map((s) => (
-              <div key={s} style={{height: 62, borderRadius: 14, border: `3px solid ${F.RAND}`, marginBottom: 18, color: F.DUNKEL,
+              <div key={s} style={{height: 56, borderRadius: 14, border: `3px solid ${F.RAND}`, marginBottom: 14, color: F.DUNKEL,
                 fontSize: 26, display: 'flex', alignItems: 'center', padding: '0 20px'}}>{s}</div>
             ))}
-            <div style={{height: 62, borderRadius: 14, background: F.BLAU, color: F.BG1, fontSize: 28, fontWeight: 800,
+            <div style={{height: 56, borderRadius: 14, background: F.BLAU, color: F.BG1, fontSize: 28, fontWeight: 800,
               display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Anmelden</div>
           </div>
         </Browser>
       </Ein>
-      <Ein t={t} at={c.leer} style={{left: 880, top: 830, width: 920}}>
+      <Ein t={t} at={c.leer} style={{left: 880, top: 735, width: 920}}>
         <div style={{fontSize: 34, fontWeight: 800, color: F.TEXT, marginBottom: 18}}>Agenten-Browser: frisch und leer</div>
       </Ein>
-      <Ein t={t} at={c.keine} style={{left: 880, top: 900}}>
+      <Ein t={t} at={c.keine} style={{left: 880, top: 800}}>
         <div style={{display: 'flex', gap: 20}}>
           <Chip farbe={F.ROT}><Kreuz g={30} />keine Cookies</Chip>
           <Chip farbe={F.ROT}><Kreuz g={30} />keine Anmeldung</Chip>
@@ -213,9 +213,15 @@ export const S04 = ({c}) => {
           {el: <div style={{height: 44, display: 'flex', alignItems: 'center', opacity: ein(t, c.tabs + 1.2, 0.4)}}>
             <Chip farbe={F.VIOLETT} gross={22} gefuellt>Agents · 3</Chip></div>},
         ]}>
-          <div style={{position: 'absolute', left: 40, top: 40, display: 'flex', flexDirection: 'column', gap: 22, opacity: 1 - 0.6 * karteSicht}}>
+          <div style={{position: 'absolute', left: 40, top: 40, display: 'flex', flexDirection: 'column', gap: 22, opacity: (1 - 0.6 * karteSicht) * (1 - 0.8 * ein(t, c.webapp, 0.4) * aus(t, c.uebergabe - 0.3, 0.4))}}>
             <Zeile breite={620} /><Zeile breite={880} /><Zeile breite={760} /><Zeile breite={540} /><Zeile breite={700} />
           </div>
+          <Ein t={t} at={c.webapp} bis={c.uebergabe - 0.3} style={{left: 40, top: 110}}>
+            <Karte farbe={F.CYAN} style={{padding: '18px 28px', width: 820}}>
+              <div style={{fontSize: 30, fontWeight: 800, color: F.CYAN}}>Beispiel: deine eigene Web-App testen</div>
+              <div style={{fontSize: 25, color: F.TEXT, marginTop: 6}}>im eingeloggten Zustand durchklicken, Fehler auf Screenshots finden, wie ein echter Nutzer</div>
+            </Karte>
+          </Ein>
           <Ein t={t} at={c.zehn} style={{right: 40, top: 30}}>
             <Chip farbe={F.VIOLETT} gross={26}>Agenten-Tabs: eingeklappt · nach 10 min Leerlauf zu</Chip>
           </Ein>

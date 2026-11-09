@@ -192,6 +192,8 @@ export const S12 = ({c}) => {
       <Ein t={t} at={c.nicht} style={{left: 140, top: 345, display: 'flex', gap: 16}}>
         <Chip farbe={F.ROT}><Kreuz g={30} />Firefox</Chip>
         <Chip farbe={F.ROT}><Kreuz g={30} />Safari</Chip>
+        <div style={{width: 30}} />
+        <div style={{opacity: ein(t, c.handy, 0.4)}}><Chip farbe={F.ROT}><Kreuz g={30} />nur am Computer, nicht auf dem Handy</Chip></div>
       </Ein>
       <Ein t={t} at={c.neu} style={{left: 140, top: 540, width: 1640}}>
         <Karte farbe={F.GELB} style={{display: 'flex', alignItems: 'center', gap: 50, padding: '34px 44px'}}>

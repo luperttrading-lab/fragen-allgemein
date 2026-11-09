@@ -71,7 +71,7 @@ def begriffe_finden(ws, begriffe, sid):
     res = []
     for b in begriffe:
         t = cues_finden(ws, {'x': b['wort']}, sid)['x']
-        res.append({**{k: b[k] for k in ('begriff', 'erklaerung', 'pos')}, 't': t})
+        res.append({**{k: b[k] for k in ('begriff', 'erklaerung', 'pos', 'breite') if k in b}, 't': t})
     return res
 
 

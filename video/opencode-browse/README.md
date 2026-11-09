@@ -6,6 +6,11 @@ Grafik sind neu, die Fakten sind an den Primärquellen geprüft (Tabelle unten).
 
 - **Veröffentlicht:** [luperttrading-lab.github.io/ki-videos/opencode-browse](https://luperttrading-lab.github.io/ki-videos/opencode-browse/)
   (Repo `luperttrading-lab/ki-videos`, Web-Fassung 9,5 MB: CRF 32, Ton mono 64 kbit/s).
+- **Endfassung v3** (09.11.2026): 7:53 min, Titelkarte (3,5 s), 14 Begriffs-Einblendungen (Zeit aus den Wortmarken),
+  Einordnung „Agent oder Werkzeug“ in Szene 7, Web-App-Test in Szene 4, „nur am Computer“ in Szene 12.
+  ElevenLabs gesamt: 2.604 + 826 = **3.430 Credits** (Zähler 84.217 → 87.647).
+  Ausgabe: `out/opencode-browse_final.mp4` (Szene 1 einzeln nachgerendert und per concat-Filter eingesetzt;
+  der concat-Demuxer brach dabei die Bildspur nach 80 s ab, weil die Teile yuvj420p und yuv420p hatten).
 - **Fassung v2** (freigegeben 08.11.2026): 13 Szenen + 8 s Quellen, 7:13 min, 1920 × 1080, 30 fps, Remotion 4.0.541.
   Fassung v1 (4:48 min, Edge-Stimme) liegt im Git-Verlauf.
 - Stimme: ElevenLabs „Christian – Warm and Captivating“ (`NBqeXKdZHweef6y0B67V`), Modell `eleven_v4`, Originaltempo.

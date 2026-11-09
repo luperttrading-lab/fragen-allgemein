@@ -20,7 +20,7 @@ export const Begriffe = ({liste = []}) => {
     if (a <= 0.01) return null;
     const seite = b.pos === 'l' ? {left: 70} : {right: 70};
     return (
-      <div key={b.begriff} style={{position: 'absolute', bottom: 36, ...seite, maxWidth: 900, opacity: a,
+      <div key={b.begriff} style={{position: 'absolute', bottom: 36, ...seite, maxWidth: b.breite || 900, opacity: a,
         transform: `translateY(${(1 - a) * 30}px)`, background: 'rgba(11,18,32,0.95)', border: `3px solid ${F.VIOLETT}`,
         borderRadius: 22, padding: '16px 30px 20px 22px', boxShadow: '0 18px 50px rgba(0,0,0,.55)', display: 'flex', gap: 20}}>
         <Symbol />

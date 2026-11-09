@@ -99,8 +99,8 @@ export const S06 = ({c}) => {
             </div>
           </Ein>
           <Ein t={t} at={c.nichts} style={{left: 120, top: 210, width: 1380, height: 560}}>
-            <div style={{position: 'absolute', left: 0, top: 170, width: 1380, height: 410, border: `4px dashed ${F.GRUEN}`, borderRadius: 34}} />
-            <div style={{position: 'absolute', left: 0, top: 600, width: 1380, textAlign: 'center', fontSize: 34, fontWeight: 800, color: F.GRUEN}}>
+            <div style={{position: 'absolute', left: 0, top: 170, width: 1380, height: 380, border: `4px dashed ${F.GRUEN}`, borderRadius: 34}} />
+            <div style={{position: 'absolute', left: 0, top: 565, width: 1380, textAlign: 'center', fontSize: 34, fontWeight: 800, color: F.GRUEN}}>
               Dann verlässt nichts deinen Rechner
             </div>
           </Ein>
@@ -124,7 +124,7 @@ export const S06 = ({c}) => {
           </div>
         </Karte>
       </Ein>
-      <Ein t={t} at={c.tools} style={{left: 90, top: 745, width: 1740}}>
+      <Ein t={t} at={c.tools} style={{left: 90, top: 640, width: 1740}}>
         <Karte farbe={F.GELB} style={{padding: '26px 40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
           <div>
             <div style={{fontSize: 36, fontWeight: 800, color: F.GELB}}>Haken 2 · Tool-Aufrufe</div>
@@ -144,9 +144,21 @@ export const S06 = ({c}) => {
   );
 };
 
-// 7 · Vergleich mit Claude in Chrome
+// 7 · Einordnung (zwei Ebenen) und Vergleich mit Claude in Chrome
+const Ebene = ({titel, unter, y, kinder}) => (
+  <div style={{position: 'absolute', left: 140, top: y, width: 1640}}>
+    <div style={{fontSize: 30, fontWeight: 800, color: F.GRAU}}>{titel} <span style={{fontWeight: 500}}>{unter}</span></div>
+    <div style={{display: 'flex', gap: 22, marginTop: 18, alignItems: 'center'}}>{kinder}</div>
+  </div>
+);
+const Kachel = ({txt, farbe, an}) => (
+  <div style={{padding: '16px 34px', borderRadius: 20, border: `4px solid ${farbe}`, background: an ? `${farbe}33` : F.KARTE,
+    color: an ? F.TEXT : farbe, fontSize: 40, fontWeight: 800, boxShadow: an ? `0 0 34px ${farbe}` : 'none',
+    transform: `scale(${an ? 1.06 : 1})`}}>{txt}</div>
+);
 export const S07 = ({c}) => {
   const t = useT();
+  const teilA = ein(t, c.ebene - 0.2, 0.5) * aus(t, c.claude - 0.4, 0.5);
   const sp = [280, 720, 640];
   const zeilen = [
     ['Modell', 'nur Claude', 'jedes, auch lokal', c.abo],
@@ -157,8 +169,32 @@ export const S07 = ({c}) => {
   const kostenSicht = ein(t, c.kosten, 0.5) * aus(t, c.alt - 0.2, 0.4);
   return (
     <>
-      <Kopf t={t} nr="7" titel="Und Claude in Chrome?" />
-      <Ein t={t} at={0.4} style={{left: 140, top: 150}}>
+      <Kopf t={t} nr="7" titel={t < c.claude - 0.4 ? 'Erst einordnen: Agent oder Werkzeug?' : 'Und Claude in Chrome?'} />
+      {teilA > 0.01 && (
+        <div style={{position: 'absolute', inset: 0, opacity: teilA}}>
+          <Ebene titel="Agent" unter="(die KI, die arbeitet)" y={190} kinder={<>
+            <Kachel txt="Claude Code" farbe={F.GELB} an={t > c.agent && t < c.werkzeug + 1} />
+            <Kachel txt="OpenCode" farbe={F.CYAN} />
+            <Kachel txt="Codex" farbe={F.CYAN} />
+            <Kachel txt="Cursor" farbe={F.CYAN} />
+          </>} />
+          <div style={{position: 'absolute', left: 140, top: 395, fontSize: 30, fontWeight: 700, color: F.GRAU,
+            opacity: ein(t, c.werkzeug, 0.4)}}>↓ benutzt</div>
+          <Ebene titel="Werkzeug" unter="(bringt den Agenten in deinen Browser)" y={470} kinder={<>
+            <Kachel txt="Claude in Chrome" farbe={F.GELB} an={t > c.gegen} />
+            <div style={{fontSize: 34, fontWeight: 800, color: F.TEXT, opacity: ein(t, c.gegen, 0.4), padding: '0 10px', textAlign: 'center'}}>
+              ⟷<div style={{fontSize: 22, color: F.GRAU}}>Gegenstücke</div></div>
+            <Kachel txt="OpenCode Browse" farbe={F.CYAN} an={t > c.werkzeug} />
+          </>} />
+          <Ein t={t} at={c.ebene + 1.0} style={{left: 140, top: 720, width: 1640}}>
+            <Karte farbe={F.ROT} style={{display: 'inline-flex', alignItems: 'center', gap: 20, padding: '18px 30px'}}>
+              <Kreuz g={44} />
+              <div style={{fontSize: 34, fontWeight: 800, color: F.TEXT}}>Claude Code ist kein Gegenstück zu OpenCode Browse</div>
+            </Karte>
+          </Ein>
+        </div>
+      )}
+      <Ein t={t} at={c.claude} style={{left: 140, top: 150}}>
         <div style={{display: 'flex', borderBottom: `3px solid ${F.RAND}`, paddingBottom: 14}}>
           <div style={{width: sp[0]}} />
           <div style={{width: sp[1], fontSize: 36, fontWeight: 800, color: F.GELB}}>Claude in Chrome</div>
