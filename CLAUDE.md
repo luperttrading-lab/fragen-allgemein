@@ -57,6 +57,9 @@ Wunsch des Nutzers (08.11.2026, Apotheken-App): Worauf sich eine Anzeige bezieht
 Tag, aktive Auswahl –, steht groß und oben, auf einen Blick erkennbar, nicht als kleine graue Zeile. Bei neuen
 und bestehenden Apps des Nutzers von Anfang an so bauen.
 
+Bedienleisten (Filter, Umschalter) bleiben in einer Zeile, springen nicht, wenn sich Zahlen ändern, und schneiden
+nichts ab (09.11.2026). Vor dem Ausliefern auf schmalem (iPhone SE) und normalem Telefon messen.
+
 ## Internetadressen
 
 Jede genannte Internetadresse, Domain oder Quelle immer als klickbaren Markdown-Link ausgeben
