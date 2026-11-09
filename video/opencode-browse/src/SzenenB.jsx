@@ -238,8 +238,8 @@ export const S08 = ({c}) => {
   return (
     <>
       <Kopf t={t} nr="8" titel="Zwei Dinge, die oft untergehen" farbe={F.VIOLETT} />
-      <Ein t={t} at={c.daten} style={{left: X0, top: 165}}>
-        <div style={{fontSize: 36, fontWeight: 800, color: F.VIOLETT}}>1 · Datenschutz</div>
+      <Ein t={t} at={0.4} style={{left: X0, top: 165}}>
+        <div style={{fontSize: 36, fontWeight: 800, color: F.VIOLETT, opacity: 0.35 + 0.65 * ein(t, c.daten, 0.4)}}>1 · Datenschutz</div>
       </Ein>
       <Ein t={t} at={c.daten + 0.6} style={{left: 0, top: 0, width: 1000, height: 1080}}>
         {[[<Brief g={64} />, 'dein Postfach', F.TEXT], [<Roboter g={70} />, 'Agent liest', F.CYAN], [<Wolke g={90} />, 'Modell-Anbieter (Cloud)', F.BLAU]]
@@ -263,9 +263,9 @@ export const S08 = ({c}) => {
         <div style={{position: 'absolute', left: X0 - 20, top: Y2 - 20, width: 880, height: 210, border: `4px dashed ${F.GRUEN}`, borderRadius: 30}} />
         <div style={{position: 'absolute', left: X0, top: Y2 + 210, fontSize: 30, fontWeight: 800, color: F.GRUEN}}>bleibt auf deinem Rechner</div>
       </Ein>
-      <div style={{position: 'absolute', left: 1005, top: 170, width: 4, height: 760, background: F.KARTE2, opacity: ein(t, c.regeln - 0.3, 0.4)}} />
-      <Ein t={t} at={c.regeln} style={{left: 1060, top: 165}}>
-        <div style={{fontSize: 36, fontWeight: 800, color: F.VIOLETT}}>2 · Regeln</div>
+      <div style={{position: 'absolute', left: 1005, top: 170, width: 4, height: 760, background: F.KARTE2, opacity: ein(t, 0.6, 0.4)}} />
+      <Ein t={t} at={0.8} style={{left: 1060, top: 165}}>
+        <div style={{fontSize: 36, fontWeight: 800, color: F.VIOLETT, opacity: 0.35 + 0.65 * ein(t, c.regeln, 0.4)}}>2 · Regeln</div>
       </Ein>
       <Ein t={t} at={c.linkedin - 0.6} style={{left: 1060, top: 260, width: 770}}>
         <Karte farbe={F.GELB}>

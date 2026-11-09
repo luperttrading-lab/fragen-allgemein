@@ -59,47 +59,51 @@ export const S01 = ({c}) => {
   );
 };
 
-// 2 · Die Lösung
+// 2 · Die Lösung: immer nur ein Gedanke gleichzeitig
 export const S02 = ({c}) => {
   const t = useT();
   const zentriert = {left: 0, width: 1920, display: 'flex', justifyContent: 'center', gap: 24};
+  const phase1 = aus(t, c.echt - 0.4, 0.5);
   const agenten = ['OpenCode', 'Claude Code', 'Codex', 'Cursor', 'Gemini CLI', 'Zed', '+ viele mehr'];
   return (
     <>
       <Kopf t={t} nr="2" titel="Die Lösung" />
-      <Ein t={t} at={c.titel} skala style={{...zentriert, top: 120, flexDirection: 'column', alignItems: 'center'}}>
-        <div style={{fontSize: 112, fontWeight: 800, color: F.CYAN, letterSpacing: -3}}>OpenCode Browse</div>
-        <div style={{fontSize: 38, fontWeight: 500, color: F.GRAU}}>dein echter Browser für KI-Agenten</div>
+      <Ein t={t} at={c.titel} skala style={{...zentriert, top: 150}}>
+        <div style={{fontSize: 124, fontWeight: 800, color: F.CYAN, letterSpacing: -3}}>OpenCode Browse</div>
       </Ein>
-      <Ein t={t} at={c.firma} style={{...zentriert, top: 340}}>
-        <div style={{fontSize: 30, fontWeight: 600, color: F.TEXT}}>von <span style={{color: F.CYAN, fontWeight: 800}}>Anomaly</span>, der Firma hinter dem Coding-Agenten OpenCode</div>
+      <Ein t={t} at={c.firma} style={{...zentriert, top: 318}}>
+        <div style={{fontSize: 36, fontWeight: 600, color: F.GRAU}}>von <span style={{color: F.TEXT, fontWeight: 800}}>Anomaly</span>, der Firma hinter OpenCode</div>
       </Ein>
-      <Ein t={t} at={c.bausteine} style={{...zentriert, top: 405, alignItems: 'center', gap: 40}}>
-        <Karte style={{width: 520, textAlign: 'center'}}>
-          <div style={{fontSize: 36, fontWeight: 800, color: F.TEXT}}>Browser-Erweiterung</div>
-          <div style={{fontSize: 26, color: F.GRAU, marginTop: 6}}>für Chrome und Co.</div>
-        </Karte>
-        <div style={{fontSize: 70, fontWeight: 800, color: F.GRAU}}>+</div>
-        <Karte style={{width: 520, textAlign: 'center'}}>
-          <div style={{fontSize: 36, fontWeight: 800, color: F.TEXT}}>kleines Hilfsprogramm</div>
-          <div style={{fontSize: 26, color: F.GRAU, marginTop: 6}}>auf deinem Rechner</div>
-        </Karte>
-      </Ein>
-      <Ein t={t} at={c.frei} style={{...zentriert, top: 585}}>
-        {[['gerade erschienen (Nov. 2026)', c.frei], ['Open Source (MIT)', c.frei + 1.0], ['kostenlos', c.frei + 1.8]].map(([s, at]) => (
-          <div key={s} style={{opacity: ein(t, at, 0.4)}}><Chip farbe={F.GRUEN}>{s}</Chip></div>
-        ))}
-      </Ein>
-      <Ein t={t} at={c.echt} style={{...zentriert, top: 672}}>
+      {phase1 > 0.01 && (
+        <div style={{position: 'absolute', inset: 0, opacity: phase1}}>
+          <Ein t={t} at={c.bausteine} style={{...zentriert, top: 440, alignItems: 'center', gap: 40}}>
+            <Karte style={{width: 540, textAlign: 'center'}}>
+              <div style={{fontSize: 38, fontWeight: 800, color: F.TEXT}}>Browser-Erweiterung</div>
+              <div style={{fontSize: 27, color: F.GRAU, marginTop: 6}}>für Chrome und Co.</div>
+            </Karte>
+            <div style={{fontSize: 70, fontWeight: 800, color: F.GRAU}}>+</div>
+            <Karte style={{width: 540, textAlign: 'center'}}>
+              <div style={{fontSize: 38, fontWeight: 800, color: F.TEXT}}>kleines Hilfsprogramm</div>
+              <div style={{fontSize: 27, color: F.GRAU, marginTop: 6}}>auf deinem Rechner</div>
+            </Karte>
+          </Ein>
+          <Ein t={t} at={c.frei} style={{...zentriert, top: 660}}>
+            {[['gerade erschienen', c.frei], ['Open Source', c.frei + 1.0], ['kostenlos', c.frei + 1.8]].map(([s, at]) => (
+              <div key={s} style={{opacity: ein(t, at, 0.4)}}><Chip farbe={F.GRUEN} gross={34}>{s}</Chip></div>
+            ))}
+          </Ein>
+        </div>
+      )}
+      <Ein t={t} at={c.echt} style={{...zentriert, top: 450, gap: 34}}>
         {['deine Tabs', 'deine Logins', 'deine Erweiterungen'].map((s, i) => (
-          <div key={s} style={{opacity: ein(t, c.echt + i * 0.6, 0.4)}}><Chip farbe={F.VIOLETT} gross={34}>{s}</Chip></div>
+          <div key={s} style={{opacity: ein(t, c.echt + i * 0.6, 0.4)}}><Chip farbe={F.VIOLETT} gross={46}>{s}</Chip></div>
         ))}
       </Ein>
-      <Ein t={t} at={c.agenten} style={{...zentriert, top: 762, alignItems: 'center', gap: 16}}>
-        <div style={{fontSize: 30, fontWeight: 700, color: F.GRAU, marginRight: 8}}>läuft mit</div>
+      <Ein t={t} at={c.agenten} style={{...zentriert, top: 640, alignItems: 'center', gap: 16}}>
+        <div style={{fontSize: 32, fontWeight: 700, color: F.GRAU, marginRight: 8}}>läuft mit</div>
         {agenten.map((s, i) => (
           <div key={s} style={{opacity: ein(t, c.agenten + 0.6 + i * 0.35, 0.35)}}>
-            <Chip farbe={i === agenten.length - 1 ? F.GRAU : F.CYAN} gross={28}>{s}</Chip>
+            <Chip farbe={i === agenten.length - 1 ? F.GRAU : F.CYAN} gross={30}>{s}</Chip>
           </div>
         ))}
       </Ein>
@@ -146,6 +150,10 @@ export const S03 = ({c}) => {
         <div style={{position: 'absolute', left: stab.x - 16, top: Y + H / 2 - 16, width: 32, height: 32, borderRadius: 16,
           background: stab.farbe, boxShadow: `0 0 30px ${stab.farbe}`}} />
       )}
+      {KNOTEN.map((k, i) => t > c.stationen && t < knotenAb[i] + 0.3 && (
+        <div key={`p${i}`} style={{position: 'absolute', left: xs[i], top: Y, width: W, height: H, borderRadius: 26,
+          border: `3px dashed ${F.RAND}`, opacity: ein(t, c.stationen + i * 0.15, 0.4) * aus(t, knotenAb[i], 0.3)}} />
+      ))}
       {KNOTEN.map((k, i) => (
         <Ein key={k.titel} t={t} at={knotenAb[i]} skala style={{left: xs[i], top: Y}}>
           <div style={{width: W, height: H, borderRadius: 26, background: F.KARTE, border: `4px solid ${k.farbe}`,
@@ -172,7 +180,7 @@ export const S03 = ({c}) => {
           </React.Fragment>
         );
       })}
-      <Ein t={t} at={c.n1 + 0.2} style={{left: 0, width: 1920, top: 290, textAlign: 'center'}}>
+      <Ein t={t} at={c.stationen} style={{left: 0, width: 1920, top: 290, textAlign: 'center'}}>
         <div style={{fontSize: 34, fontWeight: 600, color: F.GRAU}}>vier Stationen, jeder Befehl läuft wie ein Staffelstab hindurch</div>
       </Ein>
       <Ein t={t} at={c.aktionen} style={{left: 0, width: 1920, top: 870, display: 'flex', justifyContent: 'center', gap: 22}}>

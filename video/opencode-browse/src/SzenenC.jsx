@@ -99,21 +99,26 @@ export const S10 = ({c}) => {
         const at = c[b.cue];
         const h = b.wert * proProzent * feder((t - at) / 0.9);
         const x = 220 + i * 330;
-        if (t < at - 0.3) return null;
+        const da = ein(t, at - 0.3, 0.3);
         return (
-          <div key={i} style={{position: 'absolute', left: x, top: 0, width: 230, opacity: ein(t, at - 0.3, 0.3)}}>
-            <div style={{position: 'absolute', top: basis - Math.max(h, 4), width: 230, height: Math.max(h, 4), background: b.farbe, borderRadius: '14px 14px 0 0'}} />
-            <div style={{position: 'absolute', top: basis - Math.max(h, 4) - 100, width: 230, textAlign: 'center'}}>
-              <div style={{fontSize: 46, fontWeight: 800, color: b.farbe}}>{b.txt}</div>
-              <div style={{fontSize: 24, fontWeight: 600, color: F.GRAU}}>{b.zusatz}</div>
-            </div>
-            <div style={{position: 'absolute', top: basis + 16, width: 270, left: -20, textAlign: 'center', fontSize: 23, fontWeight: 600, color: F.GRAU, lineHeight: 1.35}}>
+          <div key={i} style={{position: 'absolute', left: x, top: 0, width: 230, opacity: ein(t, 0.8 + i * 0.2, 0.4)}}>
+            <div style={{position: 'absolute', top: basis - 160, width: 230, height: 160, border: `3px dashed ${F.RAND}`, borderBottom: 'none',
+              borderRadius: '14px 14px 0 0', opacity: 1 - da}} />
+            {da > 0.01 && <>
+              <div style={{position: 'absolute', top: basis - Math.max(h, 4), width: 230, height: Math.max(h, 4), background: b.farbe, borderRadius: '14px 14px 0 0', opacity: da}} />
+              <div style={{position: 'absolute', top: basis - Math.max(h, 4) - 100, width: 230, textAlign: 'center', opacity: da}}>
+                <div style={{fontSize: 46, fontWeight: 800, color: b.farbe}}>{b.txt}</div>
+                <div style={{fontSize: 24, fontWeight: 600, color: F.GRAU}}>{b.zusatz}</div>
+              </div>
+            </>}
+            <div style={{position: 'absolute', top: basis + 16, width: 270, left: -20, textAlign: 'center', fontSize: 23, fontWeight: 600,
+              color: da > 0.5 ? F.TEXT : F.GRAU, lineHeight: 1.35}}>
               {b.unter.map((u) => <div key={u}>{u}</div>)}
             </div>
           </div>
         );
       })}
-      {t > c.b1 - 0.5 && <div style={{position: 'absolute', left: 190, top: basis, width: 1300, height: 3, background: F.RAND, opacity: ein(t, c.b1 - 0.5, 0.4)}} />}
+      <div style={{position: 'absolute', left: 190, top: basis, width: 1300, height: 3, background: F.RAND, opacity: ein(t, 0.6, 0.4)}} />
       <Ein t={t} at={c.browse} style={{left: 220 + 3 * 330, top: 0, width: 230, height: 1080}}>
         <div style={{position: 'absolute', top: basis - 300, width: 230, height: 300, border: `4px dashed ${F.CYAN}`, borderBottom: 'none',
           borderRadius: '14px 14px 0 0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 120, fontWeight: 800, color: F.CYAN}}>?</div>
@@ -173,17 +178,22 @@ export const S12 = ({c}) => {
   return (
     <>
       <Kopf t={t} nr="12" titel="Zwei praktische Haken" farbe={F.GELB} />
-      <Ein t={t} at={c.chromium} style={{left: 140, top: 200}}>
-        <div style={{fontSize: 34, fontWeight: 800, color: F.TEXT, marginBottom: 20}}>Nur Browser auf Chrome-Basis</div>
+      <Ein t={t} at={0.4} style={{left: 140, top: 190}}>
+        <div style={{fontSize: 38, fontWeight: 800, color: F.TEXT, opacity: 0.35 + 0.65 * ein(t, c.chromium, 0.4)}}>1 · Nur Browser auf Chrome-Basis</div>
+      </Ein>
+      <Ein t={t} at={0.8} style={{left: 140, top: 470}}>
+        <div style={{fontSize: 38, fontWeight: 800, color: F.TEXT, opacity: 0.35 + 0.65 * ein(t, c.neu, 0.4)}}>2 · Brandneu</div>
+      </Ein>
+      <Ein t={t} at={c.chromium} style={{left: 140, top: 262}}>
         <div style={{display: 'flex', gap: 16, flexWrap: 'wrap', width: 1640}}>
           {ja.map((s, i) => <div key={s} style={{opacity: ein(t, c.chromium + 0.3 + i * 0.22, 0.3)}}><Chip farbe={F.GRUEN}><Haken g={30} />{s}</Chip></div>)}
         </div>
       </Ein>
-      <Ein t={t} at={c.nicht} style={{left: 140, top: 400, display: 'flex', gap: 16}}>
+      <Ein t={t} at={c.nicht} style={{left: 140, top: 345, display: 'flex', gap: 16}}>
         <Chip farbe={F.ROT}><Kreuz g={30} />Firefox</Chip>
         <Chip farbe={F.ROT}><Kreuz g={30} />Safari</Chip>
       </Ein>
-      <Ein t={t} at={c.neu} style={{left: 140, top: 560, width: 1640}}>
+      <Ein t={t} at={c.neu} style={{left: 140, top: 540, width: 1640}}>
         <Karte farbe={F.GELB} style={{display: 'flex', alignItems: 'center', gap: 50, padding: '34px 44px'}}>
           <div style={{fontSize: 110, fontWeight: 800, color: F.GELB, fontFamily: MONO, letterSpacing: -4}}>0.0.15</div>
           <div>

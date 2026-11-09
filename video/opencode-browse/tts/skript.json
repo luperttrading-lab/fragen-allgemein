@@ -57,6 +57,7 @@
       "id": "s03_kette",
       "text": "Wie kommt der Agent in deinen Browser? Über vier Stationen, wie bei einem Staffellauf. Erstens: Der Agent spricht mit dem Hilfsprogramm, dem Browse-Server. Das läuft über MCP, den gängigen Stecker, mit dem KI-Agenten Werkzeuge anschließen. Zweitens: Der Server gibt jeden Befehl an eine Vermittlungsstelle weiter, das Relay. Es ist nur auf deinem eigenen Rechner erreichbar. Drittens: Die Erweiterung in deinem Browser hält eine Leitung zu diesem Relay. Und viertens steuert sie Chrome über die Fernsteuerung, die Chrome für Entwickler eingebaut hat: klicken, tippen, scrollen, lesen.",
       "cues": {
+        "stationen": "vier Stationen",
         "n1": "Erstens",
         "n2": "Zweitens",
         "n3": "Drittens",
