@@ -1,7 +1,11 @@
 import React from 'react';
-import {Composition} from 'remotion';
+import {Composition, Still} from 'remotion';
 import {Video, gesamtFrames} from './Video';
+import {Titelkarte, ThumbnailA, ThumbnailB} from './Titel';
 
-export const RemotionRoot = () => (
+export const RemotionRoot = () => (<>
   <Composition id="Erklaervideo" component={Video} durationInFrames={gesamtFrames} fps={30} width={1920} height={1080} />
-);
+  <Still id="Titelbild" component={Titelkarte} defaultProps={{animiert: false}} width={1920} height={1080} />
+  <Still id="ThumbnailA" component={ThumbnailA} width={1920} height={1080} />
+  <Still id="ThumbnailB" component={ThumbnailB} width={1920} height={1080} />
+</>);

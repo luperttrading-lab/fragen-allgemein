@@ -5,14 +5,16 @@ import {F, SCHRIFT, glatt, useSchriften} from './lib';
 import {S01, S02, S03, S04} from './SzenenA';
 import {S05, S06, S07, S08} from './SzenenB';
 import {S09, S10, S11, S12, S13, Abspann} from './SzenenC';
+import {Intro} from './Titel';
 import Z from './zeiten.json';
 
 const FPS = 30;
 const KOMP = {s01_wand: S01, s02_browse: S02, s03_kette: S03, s04_uebergabe: S04, s05_geheim: S05, s06_lokal: S06,
   s07_vergleich: S07, s08_daten: S08, s09_injection: S09, s10_zahlen: S10, s11_schutz: S11, s12_haken: S12, s13_regel: S13};
 const ABSPANN = 8;
+export const INTRO = Math.round(3.5 * FPS);   // stille Titelkarte vor Szene 1
 
-let start = 0;
+let start = INTRO;
 const PLAN = Z.reihenfolge.map((id) => {
   const s = Z.szenen[id];
   const frames = Math.round(s.dauer * FPS);
@@ -46,6 +48,9 @@ export const Video = () => {
   return (
     <AbsoluteFill style={{fontFamily: SCHRIFT, color: F.TEXT}}>
       <Hintergrund />
+      {bereit && (
+        <Sequence from={0} durationInFrames={INTRO} name="Titelkarte"><Intro frames={INTRO} /></Sequence>
+      )}
       {bereit && PLAN.map(({id, von, frames, s}) => {
         const K = KOMP[id];
         return (
