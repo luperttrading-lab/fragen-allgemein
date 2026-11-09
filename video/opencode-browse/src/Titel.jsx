@@ -26,27 +26,37 @@ const Motiv = ({x, y, g = 1}) => (
   </div>
 );
 
+// Großes Layout: Thema riesig, darunter drei farbige Punkte untereinander (Wunsch des Nutzers, 09.11.)
+const PUNKTE = [['Wie es funktioniert', F.GRUEN], ['Was es kostet', F.GELB], ['Wo das Risiko liegt', F.ROT]];
+const GrossLayout = ({a = () => 1, kopf = false}) => (
+  <>
+    <div style={{position: 'absolute', left: 90, top: kopf ? 70 : 80, width: 1150}}>
+      {kopf && <div style={{fontSize: 34, fontWeight: 700, color: F.GRAU, letterSpacing: 2, opacity: a(0.1)}}>ERKLÄRVIDEO</div>}
+      <div style={{fontSize: 215, fontWeight: 800, color: F.CYAN, letterSpacing: -8, lineHeight: 0.92, opacity: a(0.2)}}>OpenCode<br />Browse</div>
+      <div style={{fontSize: 58, fontWeight: 800, color: F.TEXT, marginTop: 22, opacity: a(0.5)}}>KI-Agenten im echten Browser</div>
+      <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16, marginTop: 34}}>
+        {PUNKTE.map(([txt, farbe], i) => (
+          <div key={txt} style={{background: farbe, color: F.BG1, fontSize: 70, fontWeight: 800, padding: '6px 36px', borderRadius: 20,
+            opacity: a(0.9 + i * 0.35), transform: `translateX(${(1 - a(0.9 + i * 0.35)) * -40}px)`}}>{txt}</div>
+        ))}
+      </div>
+    </div>
+    <div style={{opacity: a(0.4)}}><Motiv x={1215} y={kopf ? 400 : 380} g={0.8} /></div>
+    {kopf && <div style={{position: 'absolute', right: 70, bottom: 50, fontSize: 26, fontWeight: 600, color: F.DUNKEL, opacity: a(1.2)}}>Stand: November 2026</div>}
+  </>
+);
+
 // Titelkarte: Intro im Video und Vorschaubild der Webseite
 export const Titelkarte = ({animiert = true}) => {
   useSchriften();
   const t = useT();
-  const a = (at) => (animiert ? ein(t, at, 0.5) : 1);
-  return (
-    <Hintergrund>
-      <div style={{position: 'absolute', left: 120, top: 250, width: 1000}}>
-        <div style={{fontSize: 34, fontWeight: 700, color: F.GRAU, opacity: a(0.1), letterSpacing: 1}}>ERKLÄRVIDEO</div>
-        <div style={{fontSize: 128, fontWeight: 800, color: F.CYAN, letterSpacing: -4, lineHeight: 1.0, marginTop: 10, opacity: a(0.2)}}>OpenCode<br />Browse</div>
-        <div style={{fontSize: 46, fontWeight: 700, color: F.TEXT, marginTop: 26, opacity: a(0.6)}}>KI-Agenten im echten Browser</div>
-        <div style={{display: 'flex', gap: 16, marginTop: 40, flexWrap: 'wrap', opacity: a(1.0)}}>
-          <Chip farbe={F.GRUEN} gross={28}>wie es funktioniert</Chip>
-          <Chip farbe={F.GELB} gross={28}>was es kostet</Chip>
-          <Chip farbe={F.ROT} gross={28}>wo das Risiko liegt</Chip>
-        </div>
-      </div>
-      <div style={{opacity: a(0.4)}}><Motiv x={1080} y={230} g={1} /></div>
-      <div style={{position: 'absolute', left: 120, bottom: 70, fontSize: 26, fontWeight: 600, color: F.DUNKEL, opacity: a(1.2)}}>Stand: November 2026</div>
-    </Hintergrund>
-  );
+  return <Hintergrund><GrossLayout kopf a={(at) => (animiert ? ein(t, at, 0.5) : 1)} /></Hintergrund>;
+};
+
+// Thumbnail C: wie Titelkarte, ohne Kopf- und Fußzeile
+export const ThumbnailC = () => {
+  useSchriften();
+  return <Hintergrund><GrossLayout /></Hintergrund>;
 };
 
 // Intro im Video: Titelkarte mit Blende
