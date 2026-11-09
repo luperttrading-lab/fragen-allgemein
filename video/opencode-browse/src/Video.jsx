@@ -6,6 +6,7 @@ import {S01, S02, S03, S04} from './SzenenA';
 import {S05, S06, S07, S08} from './SzenenB';
 import {S09, S10, S11, S12, S13, Abspann} from './SzenenC';
 import {Intro} from './Titel';
+import {Begriffe} from './Begriff';
 import Z from './zeiten.json';
 
 const FPS = 30;
@@ -55,7 +56,7 @@ export const Video = () => {
         const K = KOMP[id];
         return (
           <Sequence key={id} from={von} durationInFrames={frames} name={id}>
-            <Blende frames={frames}><K c={s.cues} /></Blende>
+            <Blende frames={frames}><K c={s.cues} /><Begriffe liste={s.begriffe} /></Blende>
             <Sequence from={Math.round(s.vorlauf * FPS)} name={`${id} Ton`}>
               <Audio src={staticFile(`${id}.mp3`)} />
             </Sequence>

@@ -9,7 +9,15 @@
     "login": 9.93,
     "leer": 17.13,
     "keine": 19.05
-   }
+   },
+   "begriffe": [
+    {
+     "begriff": "Cookies",
+     "erklaerung": "kleine Dateien, mit denen Webseiten dich wiedererkennen, etwa damit du eingeloggt bleibst",
+     "pos": "l",
+     "t": 19.37
+    }
+   ]
   },
   "s02_browse": {
    "audio": 30.667755,
@@ -22,7 +30,27 @@
     "frei": 14.37,
     "echt": 19.37,
     "agenten": 24.65
-   }
+   },
+   "begriffe": [
+    {
+     "begriff": "Coding-Agent",
+     "erklaerung": "KI, die selbstständig programmiert, z. B. OpenCode, Claude Code, Codex",
+     "pos": "r",
+     "t": 5.85
+    },
+    {
+     "begriff": "Open Source",
+     "erklaerung": "Software mit öffentlichem Quellcode: jeder kann sie prüfen und nutzen",
+     "pos": "r",
+     "t": 15.69
+    },
+    {
+     "begriff": "Claude Code",
+     "erklaerung": "Anthropics Coding-Agent für die Kommandozeile (Terminal)",
+     "pos": "r",
+     "t": 26.81
+    }
+   ]
   },
   "s03_kette": {
    "audio": 40.515918,
@@ -34,7 +62,21 @@
     "n3": 26.97,
     "n4": 32.33,
     "aktionen": 37.93
-   }
+   },
+   "begriffe": [
+    {
+     "begriff": "MCP",
+     "erklaerung": "Model Context Protocol: offener Standard, über den KI-Agenten Werkzeuge anschließen",
+     "pos": "l",
+     "t": 12.41
+    },
+    {
+     "begriff": "Relay",
+     "erklaerung": "Vermittlungsstelle auf deinem Rechner, die Befehle an den Browser weiterreicht",
+     "pos": "l",
+     "t": 22.53
+    }
+   ]
   },
   "s04_uebergabe": {
    "audio": 25.39102,
@@ -48,7 +90,15 @@
     "du": 20.57,
     "weiter": 22.45,
     "agent": 23.89
-   }
+   },
+   "begriffe": [
+    {
+     "begriff": "Captcha",
+     "erklaerung": "Test, ob ein Mensch vor dem Bildschirm sitzt, z. B. Bilder anklicken",
+     "pos": "l",
+     "t": 16.49
+    }
+   ]
   },
   "s05_geheim": {
    "audio": 20.610612,
@@ -59,7 +109,15 @@
     "pruef": 6.73,
     "warnung": 10.33,
     "eins": 18.09
-   }
+   },
+   "begriffe": [
+    {
+     "begriff": "Zwei-Faktor-Anmeldung",
+     "erklaerung": "Login mit Passwort plus Einmalcode, z. B. aus einer Authenticator-App",
+     "pos": "l",
+     "t": 14.73
+    }
+   ]
   },
   "s06_lokal": {
    "audio": 52.114286,
@@ -74,7 +132,27 @@
     "k64": 36.97,
     "tools": 39.57,
     "an": 51.13
-   }
+   },
+   "begriffe": [
+    {
+     "begriff": "Ollama",
+     "erklaerung": "kostenloses Programm, das KI-Modelle auf dem eigenen Rechner ausführt",
+     "pos": "r",
+     "t": 10.33
+    },
+    {
+     "begriff": "Token",
+     "erklaerung": "Wortstück: KI-Modelle zählen Text und Kosten in Tokens",
+     "pos": "r",
+     "t": 20.65
+    },
+    {
+     "begriff": "Tool-Aufruf",
+     "erklaerung": "Befehl des Modells an ein Werkzeug, z. B. „klicke hier“ oder „lies die Seite“",
+     "pos": "r",
+     "t": 46.81
+    }
+   ]
   },
   "s07_vergleich": {
    "audio": 41.560816,
@@ -87,7 +165,21 @@
     "kosten": 19.37,
     "alt": 26.25,
     "neu": 36.01
-   }
+   },
+   "begriffe": [
+    {
+     "begriff": "API-Schlüssel",
+     "erklaerung": "Zugang zu einem KI-Modell per Programm: bezahlt wird nach Verbrauch statt per Abo",
+     "pos": "r",
+     "t": 13.37
+    },
+    {
+     "begriff": "Playwright MCP, Chrome DevTools MCP",
+     "erklaerung": "kostenlose Werkzeuge von Microsoft und Google, mit denen KI-Agenten Browser steuern",
+     "pos": "r",
+     "t": 29.05
+    }
+   ]
   },
   "s08_daten": {
    "audio": 31.712653,
@@ -100,7 +192,8 @@
     "regeln": 20.09,
     "linkedin": 25.53,
     "bank": 27.37
-   }
+   },
+   "begriffe": []
   },
   "s09_injection": {
    "audio": 41.874286,
@@ -115,7 +208,15 @@
     "c2": 29.45,
     "c3": 35.29,
     "netz": 37.85
-   }
+   },
+   "begriffe": [
+    {
+     "begriff": "Prompt Injection",
+     "erklaerung": "versteckte Anweisungen in Texten oder Webseiten, die eine KI befolgt, obwohl du sie nicht gegeben hast",
+     "pos": "w",
+     "t": 17.29
+    }
+   ]
   },
   "s10_zahlen": {
    "audio": 28.682449,
@@ -127,7 +228,8 @@
     "b3": 18.09,
     "null": 20.93,
     "browse": 22.09
-   }
+   },
+   "begriffe": []
   },
   "s11_schutz": {
    "audio": 27.715918,
@@ -139,7 +241,8 @@
     "cookies": 11.45,
     "liste": 15.29,
     "zitat": 22.89
-   }
+   },
+   "begriffe": []
   },
   "s12_haken": {
    "audio": 17.554286,
@@ -150,7 +253,8 @@
     "nicht": 8.49,
     "neu": 11.69,
     "update": 15.73
-   }
+   },
+   "begriffe": []
   },
   "s13_regel": {
    "audio": 33.149388,
@@ -164,7 +268,15 @@
     "f1": 18.97,
     "f2": 24.09,
     "vorsicht": 32.41
-   }
+   },
+   "begriffe": [
+    {
+     "begriff": "Browserprofil",
+     "erklaerung": "getrennter Bereich im Browser mit eigenen Logins, Cookies und Lesezeichen",
+     "pos": "r",
+     "t": 4.89
+    }
+   ]
   }
  },
  "reihenfolge": [

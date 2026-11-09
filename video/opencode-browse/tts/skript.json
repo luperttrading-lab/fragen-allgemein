@@ -11,7 +11,15 @@
         "login": "vor einem Login",
         "leer": "frischen, leeren",
         "keine": "Keine Cookies"
-      }
+      },
+      "begriffe": [
+        {
+          "wort": "Cookies",
+          "begriff": "Cookies",
+          "erklaerung": "kleine Dateien, mit denen Webseiten dich wiedererkennen, etwa damit du eingeloggt bleibst",
+          "pos": "l"
+        }
+      ]
     },
     {
       "id": "s02_browse",
@@ -23,7 +31,27 @@
         "frei": "gerade erst",
         "echt": "deinen echten Browser",
         "agenten": "nicht nur in OpenCode"
-      }
+      },
+      "begriffe": [
+        {
+          "wort": "Coding-Agenten",
+          "begriff": "Coding-Agent",
+          "erklaerung": "KI, die selbstständig programmiert, z. B. OpenCode, Claude Code, Codex",
+          "pos": "r"
+        },
+        {
+          "wort": "Open Source",
+          "begriff": "Open Source",
+          "erklaerung": "Software mit öffentlichem Quellcode: jeder kann sie prüfen und nutzen",
+          "pos": "r"
+        },
+        {
+          "wort": "Claude Code",
+          "begriff": "Claude Code",
+          "erklaerung": "Anthropics Coding-Agent für die Kommandozeile (Terminal)",
+          "pos": "r"
+        }
+      ]
     },
     {
       "id": "s03_kette",
@@ -34,7 +62,21 @@
         "n3": "Drittens",
         "n4": "viertens",
         "aktionen": "klicken"
-      }
+      },
+      "begriffe": [
+        {
+          "wort": "MCP",
+          "begriff": "MCP",
+          "erklaerung": "Model Context Protocol: offener Standard, über den KI-Agenten Werkzeuge anschließen",
+          "pos": "l"
+        },
+        {
+          "wort": "das Relay",
+          "begriff": "Relay",
+          "erklaerung": "Vermittlungsstelle auf deinem Rechner, die Befehle an den Browser weiterreicht",
+          "pos": "l"
+        }
+      ]
     },
     {
       "id": "s04_uebergabe",
@@ -47,7 +89,15 @@
         "du": "Du erledigst",
         "weiter": "klickst auf Weiter",
         "agent": "der Agent macht"
-      }
+      },
+      "begriffe": [
+        {
+          "wort": "ein Captcha",
+          "begriff": "Captcha",
+          "erklaerung": "Test, ob ein Mensch vor dem Bildschirm sitzt, z. B. Bilder anklicken",
+          "pos": "l"
+        }
+      ]
     },
     {
       "id": "s05_geheim",
@@ -57,7 +107,15 @@
         "pruef": "nur, wenn",
         "warnung": "Eines solltest",
         "eins": "Sonst wird"
-      }
+      },
+      "begriffe": [
+        {
+          "wort": "Authenticator-App",
+          "begriff": "Zwei-Faktor-Anmeldung",
+          "erklaerung": "Login mit Passwort plus Einmalcode, z. B. aus einer Authenticator-App",
+          "pos": "l"
+        }
+      ]
     },
     {
       "id": "s06_lokal",
@@ -71,7 +129,27 @@
         "k64": "mindestens vierundsechzigtausend",
         "tools": "Zweitens Werkzeuge",
         "an": "eingeschaltet"
-      }
+      },
+      "begriffe": [
+        {
+          "wort": "Ollama",
+          "begriff": "Ollama",
+          "erklaerung": "kostenloses Programm, das KI-Modelle auf dem eigenen Rechner ausführt",
+          "pos": "r"
+        },
+        {
+          "wort": "Tokens",
+          "begriff": "Token",
+          "erklaerung": "Wortstück: KI-Modelle zählen Text und Kosten in Tokens",
+          "pos": "r"
+        },
+        {
+          "wort": "Tool-Aufrufen",
+          "begriff": "Tool-Aufruf",
+          "erklaerung": "Befehl des Modells an ein Werkzeug, z. B. „klicke hier“ oder „lies die Seite“",
+          "pos": "r"
+        }
+      ]
     },
     {
       "id": "s07_vergleich",
@@ -83,7 +161,21 @@
         "kosten": "Kostenlos ist",
         "alt": "ganz neu",
         "neu": "Neu ist das"
-      }
+      },
+      "begriffe": [
+        {
+          "wort": "API-Schlüssel",
+          "begriff": "API-Schlüssel",
+          "erklaerung": "Zugang zu einem KI-Modell per Programm: bezahlt wird nach Verbrauch statt per Abo",
+          "pos": "r"
+        },
+        {
+          "wort": "Playwright MCP",
+          "begriff": "Playwright MCP, Chrome DevTools MCP",
+          "erklaerung": "kostenlose Werkzeuge von Microsoft und Google, mit denen KI-Agenten Browser steuern",
+          "pos": "r"
+        }
+      ]
     },
     {
       "id": "s08_daten",
@@ -109,7 +201,15 @@
         "c2": "die E-Mail-Adresse",
         "c3": "Damit ließ",
         "netz": "Inzwischen finden"
-      }
+      },
+      "begriffe": [
+        {
+          "wort": "Prompt Injection",
+          "begriff": "Prompt Injection",
+          "erklaerung": "versteckte Anweisungen in Texten oder Webseiten, die eine KI befolgt, obwohl du sie nicht gegeben hast",
+          "pos": "w"
+        }
+      ]
     },
     {
       "id": "s10_zahlen",
@@ -154,7 +254,15 @@
         "f1": "Nutzt du",
         "f2": "Willst du",
         "vorsicht": "Mit Vorsicht"
-      }
+      },
+      "begriffe": [
+        {
+          "wort": "Browserprofil",
+          "begriff": "Browserprofil",
+          "erklaerung": "getrennter Bereich im Browser mit eigenen Logins, Cookies und Lesezeichen",
+          "pos": "r"
+        }
+      ]
     }
   ]
 }

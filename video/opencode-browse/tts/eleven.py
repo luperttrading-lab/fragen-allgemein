@@ -66,6 +66,15 @@ def cues_finden(ws, cues, sid):
     return res
 
 
+def begriffe_finden(ws, begriffe, sid):
+    """Begriffs-Einblendungen: erstes Vorkommen des Wortes in der Szene, unabhängig von den Cues."""
+    res = []
+    for b in begriffe:
+        t = cues_finden(ws, {'x': b['wort']}, sid)['x']
+        res.append({**{k: b[k] for k in ('begriff', 'erklaerung', 'pos')}, 't': t})
+    return res
+
+
 def dauer(datei):
     return float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(datei)],
                                 capture_output=True, text=True, check=True).stdout)
@@ -98,7 +107,8 @@ def main():
         d = dauer(ziel)
         ws = woerter(s['text'], json.loads(al.read_text())['alignment'])
         zeiten['szenen'][s['id']] = {'audio': d, 'dauer': round(VORLAUF + d + PAUSE_NACH, 3), 'vorlauf': VORLAUF,
-                                     'cues': cues_finden(ws, s['cues'], s['id'])}
+                                     'cues': cues_finden(ws, s['cues'], s['id']),
+                                     'begriffe': begriffe_finden(ws, s.get('begriffe', []), s['id'])}
         print(f"  {s['id']}: {d:5.1f} s")
     reihen = [s['id'] for s in SKRIPT['szenen']]
     zeiten['reihenfolge'] = reihen
