@@ -23,7 +23,7 @@ Kapitel:
 4:34 Datenschutz und Regeln
 5:07 Das Risiko: Prompt Injection
 5:50 Wie oft gelingt so ein Angriff?
-6:20 Was OpenCode Browse selbst absichert
+6:19 Was OpenCode Browse selbst absichert
 6:48 Zwei praktische Haken
 7:10 Faustregel und Fazit
 
