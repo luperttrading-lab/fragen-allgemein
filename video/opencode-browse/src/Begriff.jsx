@@ -25,9 +25,9 @@ export const Begriffe = ({liste = []}) => {
         borderRadius: 22, padding: '16px 30px 20px 22px', boxShadow: '0 18px 50px rgba(0,0,0,.55)', display: 'flex', gap: 20}}>
         <Symbol />
         <div>
-          <div style={{fontSize: 22, fontWeight: 800, color: F.VIOLETT, letterSpacing: 3}}>BEGRIFF</div>
+          <div style={{fontSize: 24, fontWeight: 800, color: F.VIOLETT, letterSpacing: 3}}>BEGRIFF</div>
           <div style={{fontSize: 44, fontWeight: 800, color: F.TEXT, lineHeight: 1.1, marginTop: 2}}>{b.begriff}</div>
-          <div style={{fontSize: 30, fontWeight: 500, color: '#cbd5e1', lineHeight: 1.3, marginTop: 6}}>{b.erklaerung}</div>
+          <div style={{fontSize: 34, fontWeight: 500, color: '#cbd5e1', lineHeight: 1.28, marginTop: 6}}>{b.erklaerung}</div>
         </div>
       </div>
     );

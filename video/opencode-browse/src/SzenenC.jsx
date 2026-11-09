@@ -108,11 +108,11 @@ export const S10 = ({c}) => {
               <div style={{position: 'absolute', top: basis - Math.max(h, 4), width: 230, height: Math.max(h, 4), background: b.farbe, borderRadius: '14px 14px 0 0', opacity: da}} />
               <div style={{position: 'absolute', top: basis - Math.max(h, 4) - 100, width: 230, textAlign: 'center', opacity: da}}>
                 <div style={{fontSize: 46, fontWeight: 800, color: b.farbe}}>{b.txt}</div>
-                <div style={{fontSize: 24, fontWeight: 600, color: F.GRAU}}>{b.zusatz}</div>
+                <div style={{fontSize: 28, fontWeight: 600, color: F.GRAU}}>{b.zusatz}</div>
               </div>
             </>}
-            <div style={{position: 'absolute', top: basis + 16, width: 270, left: -20, textAlign: 'center', fontSize: 23, fontWeight: 600,
-              color: da > 0.5 ? F.TEXT : F.GRAU, lineHeight: 1.35}}>
+            <div style={{position: 'absolute', top: basis + 16, width: 310, left: -40, textAlign: 'center', fontSize: 28, fontWeight: 600,
+              color: da > 0.5 ? F.TEXT : F.GRAU, lineHeight: 1.25}}>
               {b.unter.map((u) => <div key={u}>{u}</div>)}
             </div>
           </div>
@@ -122,14 +122,14 @@ export const S10 = ({c}) => {
       <Ein t={t} at={c.browse} style={{left: 220 + 3 * 330, top: 0, width: 230, height: 1080}}>
         <div style={{position: 'absolute', top: basis - 300, width: 230, height: 300, border: `4px dashed ${F.CYAN}`, borderBottom: 'none',
           borderRadius: '14px 14px 0 0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 120, fontWeight: 800, color: F.CYAN}}>?</div>
-        <div style={{position: 'absolute', top: basis + 16, width: 270, left: -20, textAlign: 'center', fontSize: 23, fontWeight: 600, color: F.CYAN, lineHeight: 1.35}}>
+        <div style={{position: 'absolute', top: basis + 16, width: 310, left: -40, textAlign: 'center', fontSize: 28, fontWeight: 600, color: F.CYAN, lineHeight: 1.25}}>
           <div>OpenCode Browse</div><div>+ dein Modell: nie gemessen</div>
         </div>
       </Ein>
       <Ein t={t} at={c.null} style={{left: 1490, top: 250, width: 360}}>
         <Karte farbe={F.ROT} style={{padding: '24px 26px'}}>
           <div style={{fontSize: 32, fontWeight: 800, color: F.ROT}}>Besser, aber nicht null</div>
-          <div style={{fontSize: 24, color: F.TEXT, marginTop: 10}}>„Kein Browser-Agent ist immun“, sagt Anthropic selbst.</div>
+          <div style={{fontSize: 28, color: F.TEXT, marginTop: 10}}>„Kein Browser-Agent ist immun“, sagt Anthropic selbst.</div>
         </Karte>
       </Ein>
       <Quelle t={t} at={c.b1}>anthropic.com/news/claude-for-chrome (Aug. 2025, 123 Testfälle) · anthropic.com/research/prompt-injection-defenses (Nov. 2025, adaptiver Angreifer, Opus 4.5). Unterschiedliche Tests, Zahlen nicht direkt vergleichbar.</Quelle>
@@ -155,7 +155,7 @@ export const S11 = ({c}) => {
             {art === 'ok' ? <Haken g={50} /> : <Warn g={50} />}
             <div>
               <div style={{fontSize: 34, fontWeight: 800, color: F.TEXT}}>{a}</div>
-              <div style={{fontSize: 26, color: F.GRAU, marginTop: 2}}>{b}</div>
+              <div style={{fontSize: 30, color: F.GRAU, marginTop: 2}}>{b}</div>
             </div>
           </Karte>
         </Ein>

@@ -8,6 +8,6 @@ const comp = await selectComposition({serveUrl, id: 'Erklaervideo', browserExecu
 for (const s of process.argv.slice(2)) {
   const frame = Math.round(parseFloat(s) * 30);
   const out = `out/still_${String(s).replace('.', '_')}.png`;
-  await renderStill({serveUrl, composition: comp, frame, output: out, browserExecutable: B, scale: 0.5});
+  await renderStill({serveUrl, composition: comp, frame, output: out, browserExecutable: B, scale: Number(process.env.SKALA || 0.5)});
   console.log(out);
 }
