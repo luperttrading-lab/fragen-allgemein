@@ -203,18 +203,18 @@
    "begriffe": []
   },
   "s09_injection": {
-   "audio": 41.874286,
-   "dauer": 42.824,
+   "audio": 41.639184,
+   "dauer": 42.589,
    "vorlauf": 0.25,
    "cues": {
     "versteckt": 9.61,
     "zeile": 11.77,
     "name": 17.29,
-    "real": 19.37,
-    "c1": 24.73,
-    "c2": 29.45,
+    "real": 19.45,
+    "c1": 24.57,
+    "c2": 29.29,
     "c3": 35.29,
-    "netz": 37.85
+    "netz": 37.61
    },
    "begriffe": [
     {
@@ -302,6 +302,6 @@
   "s12_haken",
   "s13_regel"
  ],
- "laenge": 461.16,
+ "laenge": 460.925,
  "stimme": "ElevenLabs Christian (eleven_v4), Tempo 1.0"
 }
