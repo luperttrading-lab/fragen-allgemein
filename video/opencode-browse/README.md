@@ -6,6 +6,9 @@ Grafik sind neu, die Fakten sind an den Primärquellen geprüft (Tabelle unten).
 
 - **Veröffentlicht:** [luperttrading-lab.github.io/ki-videos/opencode-browse](https://luperttrading-lab.github.io/ki-videos/opencode-browse/)
   (Repo `luperttrading-lab/ki-videos`, Web-Fassung 9,5 MB: CRF 32, Ton mono 64 kbit/s).
+- **Endfassung v5** (09.11.2026 abends): Szene 9 neu gesprochen (Betonung auf „alles“: „liest auf einer Seite alles“),
+  Schrift in Szene 10/11 größer (Szene 3/4 bewusst nicht, Abstände wurden schlechter). ElevenLabs gesamt für das
+  Video: 3.430 + 62 (Hörproben) + 260 (Szene 9) = **3.752 Credits**.
 - **Endfassung v3** (09.11.2026): 7:53 min, Titelkarte (3,5 s), 14 Begriffs-Einblendungen (Zeit aus den Wortmarken),
   Einordnung „Agent oder Werkzeug“ in Szene 7, Web-App-Test in Szene 4, „nur am Computer“ in Szene 12.
   ElevenLabs gesamt: 2.604 + 826 = **3.430 Credits** (Zähler 84.217 → 87.647).
