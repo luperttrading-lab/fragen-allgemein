@@ -61,3 +61,7 @@ Jede genannte Internetadresse, Domain oder Quelle immer als klickbaren Markdown-
 Wurde in der Antwort ein Artifact, eine Seite oder eine Datei veröffentlicht oder aktualisiert: den Link dazu als
 letzte Zeile vor der Kostenzeile wiederholen (`**Link:** [Name](URL)`), auch wenn er weiter oben schon steht.
 Der Nutzer liest auf dem Handy und soll den Link nicht in langen Antworten suchen müssen.
+
+Ausnahme: Code, Skripte und Repo-Ordner nicht verlinken, die schaut der Nutzer nicht an (Wunsch vom 10.11.).
+Bei Bildern, Postern und anderen Ergebnissen stattdessen am Ende der Antwort die fertigen, ansehbaren Dateien
+schicken (SendUserFile), zuerst eine handyfreundliche Vorschau, dann die Druck- bzw. Enddateien.
