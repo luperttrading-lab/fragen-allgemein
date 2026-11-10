@@ -25,6 +25,10 @@ Ergebnis je Textfassung in `out/`: JPEG und PDF, einmal exakt 675 × 480 mm, ein
   - Die Doppler-Aufhellung ist `g^2,2` statt physikalisch `g^3…4`, wie bei Interstellar, sonst wäre eine Seite fast schwarz.
   - Die Scheibe leuchtet bis r = 3,8 M statt nur bis zur ISCO bei 6 M (Look eines schnell rotierenden Lochs).
   - Die Textur (Schlieren, Flocken) und der Jet sind gestaltet.
+  - Die Scheibe ist als optisch dünne Leuchtschicht gerechnet, die Helligkeit wächst mit dem Lichtweg 1/cos θ.
+    Den Auftreffwinkel liefert die Bahn geschlossen: cos θ = √(a² + c²) / √(r²/b² + 2/r).
+    Deshalb ist das Band von der Seite hell und deckend, der gelinste Halo und der untere Ring sind zart.
+    Außen dunkelt Staub ab.
   - Die Sterne sind ungelinst: Im Bildausschnitt läge sonst fast alles im Einstein-Ring und die Sterne würden zu Bögen.
 - Textfassung `korrigiert` berichtigt zwei Aussagen der Vorlage:
   - Der Photonenring liegt beim 1,5-Fachen des Horizontradius, nicht „knapp darüber“.

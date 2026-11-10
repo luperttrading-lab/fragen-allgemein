@@ -100,7 +100,7 @@ def layout(meta, bh):
         return (cx + dist * rs * math.cos(a), cy - dist * rs * math.sin(a) * asp)
 
     return {
-        'jets': dict(head=(0.112, 0.312), line=((0.196, 0.282), at(119, 2.85))),
+        'jets': dict(head=(0.112, 0.312), line=((0.170, 0.290), at(119, 3.0))),
         'photon': dict(head=(0.075, 0.543), line=((0.282, 0.552), at(172, 1.04))),
         'disc': dict(head=(0.789, 0.466), line=((0.842, 0.440), at(29, 3.35))),
         'horizon': dict(head=(0.684, 0.662), line=((0.700, 0.632), at(42, 0.62))),

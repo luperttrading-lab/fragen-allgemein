@@ -35,18 +35,21 @@ FULL_W, FULL_H = TRIM_W + 2 * BLEED, TRIM_H + 2 * BLEED
 # ------------------------------------------------------------------ Szene
 CAM = dict(
     r0=300.0,          # Abstand Kamera - Loch (in M)
-    incl=85.0,         # Winkel Sichtlinie zur Scheibennormalen (90 = genau seitlich)
+    incl=87.0,         # Winkel Sichtlinie zur Scheibennormalen (90 = genau seitlich)
     roll=29.0,         # Drehung im Bild: Scheibe steigt nach rechts an
     cx=0.502,          # Lage des Lochs im beschnittenen Format (Anteil Breite)
     cy=0.545,          # (Anteil Hoehe, von oben)
-    shadow_r=0.079,    # Schattenradius als Anteil der Breite
+    shadow_r=0.075,    # Schattenradius als Anteil der Breite
 )
 DISK = dict(
     r_in=3.8, r_out=30.0,  # Emission reicht bis nahe an den Photonenring (wie bei schneller Rotation)
     spin=+1,           # Drehsinn: +1 = linke Seite kommt auf uns zu (heller)
     beam=2.2,          # Exponent der Doppler-Aufhellung (Physik: 3-4; abgeschwaecht)
-    tshift=0.7,        # wie stark g die Farbtemperatur verschiebt
-    layers=[(0.0, 0.0), (1.6, 15.0), (-1.6, 15.0), (2.4, 100.0), (-2.4, 100.0)],  # (Kippung Grad, Achse Grad)
+    tshift=0.7,
+    src=24.0,          # Quellfunktion (Helligkeit der leuchtenden Schicht)
+    tau_e=0.035,       # optische Tiefe der Leuchtschicht senkrecht (wird durch cos(theta) geteilt)
+    tau_d=0.08,        # Staub aussen (macht das Band von der Seite deckend)       # wie stark g die Farbtemperatur verschiebt
+    layers=[(0.0, 0.0), (2.2, 15.0), (-2.2, 15.0), (3.2, 100.0), (-3.2, 100.0)],  # (Kippung Grad, Achse Grad)
 )
 
 
@@ -150,12 +153,12 @@ def sample_tex(tex, s, psi):
 
 
 RAMP_X = np.array([0.0, 0.18, 0.38, 0.58, 0.78, 1.0])
-RAMP_C = np.array([[0.035, 0.012, 0.006],
-                   [0.25, 0.085, 0.030],
-                   [0.68, 0.30, 0.11],
-                   [0.95, 0.58, 0.31],
-                   [1.00, 0.82, 0.64],
-                   [1.00, 0.97, 0.93]])
+RAMP_C = np.array([[0.030, 0.012, 0.006],
+                   [0.22, 0.085, 0.035],
+                   [0.56, 0.26, 0.12],
+                   [0.86, 0.56, 0.37],
+                   [0.97, 0.86, 0.76],
+                   [1.00, 0.98, 0.96]])
 
 
 def ramp(h):
@@ -268,6 +271,10 @@ def trace_rows(job):
             psi = spin * phid + 1.9 * s + li * 1.37
             st, ev, cl = sample_tex(tex, s + li * 0.031, psi)
             x6 = 6.0 / rr
+            # Neigung des Strahls gegen die Scheibe beim Durchstoss (geschlossen aus der Bahngleichung):
+            # cos(theta) = sqrt(a^2 + c^2) / sqrt(r^2/b^2 + 2/r)  ->  Lichtweg durch die Schicht ~ 1/cos
+            cth = np.sqrt(a * a + c[idx] ** 2) / np.sqrt(rr ** 2 / b[idx] ** 2 + 2.0 / rr)
+            cth = np.clip(cth, 0.035, 1.0)
             edge = np.clip((rr - dk['r_in']) / 2.0, 0, 1)
             edge = edge * edge * (3 - 2 * edge)
             # Doppler + Gravitation
@@ -279,22 +286,31 @@ def trace_rows(job):
                 dens = 1 / (1 + np.exp(-(2.7 * st * (0.65 + 0.35 * np.tanh(ev)) + 0.9 * cl + 0.15)))
             else:   # gekippte Lagen: nur Flocken -> Volumen an den Kanten
                 dens = 1 / (1 + np.exp(-(2.8 * cl + 1.2 * st - 2.0)))
-            prof = edge * x6 ** 1.25 * fade
-            heat = np.clip(0.08 + 0.97 * x6 ** 0.8, 0, 1.15) * (0.42 + 0.72 * dens)
+            prof = edge * x6 ** 2.4 * fade + 0.07 * edge * fade
+            heat = np.clip(0.10 + 1.05 * x6 ** 0.9, 0, 1.2) * (0.42 + 0.72 * dens)
             heat = heat * g ** dk['tshift']
-            inten = 2.8 * prof * (0.08 + 1.5 * dens ** 2.0) * g ** dk['beam']
+            S = dk['src'] * prof * (0.08 + 1.5 * dens ** 2.0) * g ** dk['beam']     # Quellfunktion
+            if kk == 1:
+                S *= 0.45
             if li > 0:
-                inten *= 0.8
+                S *= 0.8
             if kk == 0:   # Vorderseite: wir sehen auf die kuehlere, staubige Oberkante -> Rostbraun
                 front = np.clip(-P[:, 1] / rr, 0, 1) ** 2
-                inten *= 1 - 0.45 * front
-                heat *= 1 - 0.25 * front
-            tau = (0.15 + 3.2 * dens ** 1.5) * (0.3 + 0.7 * np.clip((rr - 5.0) / 6, 0, 1)) * fade ** 0.5
-            tau *= 0.75 if li > 0 else 1.0
-            alpha = (1 - np.exp(-tau)).astype(np.float32)
-            em = ramp(heat) * inten[:, None]
+                S *= 1 - 0.72 * front
+                heat *= 1 - 0.38 * front
+            # Optisch duenne Schicht: Tiefe waechst mit dem Lichtweg 1/cos(theta).
+            # Seitlich (Band) langer Weg -> hell und deckend; steil (gelinster Halo, unterer Ring) -> zart.
+            inner = 0.4 + 0.6 * np.clip((rr - 5.0) / 6, 0, 1)
+            tau_e = dk['tau_e'] * (0.2 + dens ** 1.3) * inner * fade ** 0.5 / cth
+            tau_d = dk['tau_d'] * dens ** 1.2 * np.clip((rr - 8.0) / 10, 0, 1) * fade ** 0.5 / cth   # Staub aussen
+            if li > 0:
+                tau_e *= 0.7
+                tau_d *= 0.7
+            emit = (S * (1 - np.exp(-tau_e))).astype(np.float32)
+            alpha = (1 - np.exp(-(tau_e + tau_d))).astype(np.float32)
+            em = ramp(heat) * emit[:, None]
             Ti = T[idx]
-            col[idx] += (Ti * alpha)[:, None] * em.astype(np.float32)
+            col[idx] += Ti[:, None] * em.astype(np.float32)
             T[idx] = Ti * (1 - alpha)
 
     # Hintergrund nur dort, wo der Strahl entkommt (nicht eingefangen)
@@ -311,11 +327,11 @@ def star_layer(W, H, scale, seed=3):
     rng = np.random.default_rng(seed)
     img = np.zeros((H, W, 3), np.float32)
     area = W * H / (scale ** 2)
-    n = int(area * 0.0010)
+    n = int(area * 0.00035)
     xs = rng.uniform(0, W, n)
     ys = rng.uniform(0, H, n)
     mag = rng.pareto(1.6, n) + 1.0
-    peak = np.minimum(0.045 * mag, 2.5)                       # Spitzenhelligkeit in der Druckfassung
+    peak = np.minimum(0.035 * mag, 1.8)                       # Spitzenhelligkeit in der Druckfassung
     temp = rng.uniform(0, 1, n)
     tint = np.stack([1.0 + 0.10 * (temp - 0.5) * -1, np.ones(n), 1.0 + 0.25 * (temp - 0.5)], -1)
     sig_full = 1.05 + 0.32 * np.sqrt(np.minimum(mag, 40))     # 0,1 ... 0,25 mm
@@ -430,23 +446,28 @@ def compose(R, W, H, scale):
     sh = CAM['shadow_r'] * R['trim_w']
     a = along / sh
     p = perp / sh
-    width = 0.32 + 0.11 * np.clip(a, 0, None)
-    ramp_in = np.clip((a - 0.9) / 1.6, 0, 1)
+    width = 0.28 + 0.12 * np.clip(a, 0, None)          # Kegel (in Schattenradien)
+    ramp_in = np.clip((a - 1.0) / 2.2, 0, 1)
     ramp_in = ramp_in * ramp_in * (3 - 2 * ramp_in)
-    jet = np.exp(-(p / width) ** 2) * ramp_in * np.exp(-a / 9.0)
-    jet *= (1 + 0.08 * smooth_noise(W, H, max(W // 30, 4), 13))
-    jet_col = np.array([0.95, 0.82, 0.66], np.float32)
-    # leichter Farbsaum am Rand des Strahls (wie Streulicht in der Vorlage)
-    fr = np.exp(-((np.abs(p) - width * 1.25) / (0.22 * width)) ** 2) * ramp_in * np.exp(-a / 7)
-    jet_rgb = (jet * 0.080)[..., None] * jet_col
-    jet_rgb += (fr * 0.007)[..., None] * np.array([0.55, 0.85, 1.0], np.float32) * (p > 0)[..., None]
-    jet_rgb += (fr * 0.007)[..., None] * np.array([1.0, 0.55, 0.30], np.float32) * (p < 0)[..., None]
+    q = np.abs(p) / width
+    jet = np.exp(-q ** 3) * ramp_in * np.exp(-a / 16.0)
+    jet *= (1 + 0.06 * smooth_noise(W, H, max(W // 30, 4), 13))
+    jet_col = np.array([0.93, 0.82, 0.70], np.float32)
+    jet_rgb = (jet * 0.060)[..., None] * jet_col
+    # Regenbogensaum an der linken Kante: innen blaugruen -> gelb -> rot aussen
+    e = np.clip((q - 0.95) / 0.45, 0, 1)
+    band = np.exp(-((q - 1.15) / 0.22) ** 2) * ramp_in * np.exp(-a / 12.0) * (p < 0)
+    hue = np.stack([np.interp(e, [0, 0.35, 0.65, 1], [0.25, 0.55, 1.0, 1.0]),
+                    np.interp(e, [0, 0.35, 0.65, 1], [0.75, 0.95, 0.80, 0.30]),
+                    np.interp(e, [0, 0.35, 0.65, 1], [0.95, 0.45, 0.20, 0.12])], -1).astype(np.float32)
+    jet_rgb += (band * 0.016)[..., None] * hue
+    del q, e, band, hue
     a2 = -a
     r2 = np.clip((a2 - 0.9) / 1.6, 0, 1)
-    jet2 = np.exp(-(p / width) ** 2) * r2 * np.exp(-a2 / 6.0) * 0.015
+    jet2 = np.exp(-(np.abs(p) / width) ** 3) * r2 * np.exp(-a2 / 8.0) * 0.013
     jet_rgb += jet2[..., None] * jet_col
     a = None
-    del xx, yy, n1, n2, along, perp, p, a2, jet, jet2, fr
+    del xx, yy, n1, n2, along, perp, p, a2, jet, jet2
     # --- Photonenring: duenne Ueberhoehung knapp ausserhalb b_c (Bilder hoeherer Ordnung)
     ring = np.exp(-((R['b'] - (B_C + 0.012)) / 0.010) ** 2)
     ring_rgb = (ring * 0.6)[..., None] * np.array([1.0, 0.86, 0.70], np.float32)
