@@ -236,7 +236,7 @@ def trace_rows(job):
     col = 0.0
     tbg = 0.0
     for i, (ox, oy) in enumerate(offs):
-        c, t, bb = trace_points(px + ox, py + oy)
+        c, t, bb = trace_points(px + ox, py + oy, (y1 - y0, W))
         col = col + c
         tbg = tbg + t
         if i == 0:
@@ -248,7 +248,7 @@ def trace_rows(job):
         b0.astype(np.float32).reshape(shape)
 
 
-def trace_points(px, py):
+def trace_points(px, py, shape):
     cam = G['cam']
     X = px - cam['cx']
     Y = cam['cy'] - py
@@ -296,8 +296,21 @@ def trace_points(px, py):
             # Keplersche Scherung -> nachlaufende Spiralstreifen
             psi = spin * phid + 1.9 * s + li * 1.37
             st, ev, cl, sm = sample_tex(tex, s + li * 0.031, psi)
-            if kk >= 1:   # gelinste Ringe: weichere, rauchige Struktur statt feiner Kreislinien
-                st = 0.3 * st + 0.85 * sm
+            # Texturfilterung (wie Mipmapping): wie viele Texturpunkte fallen auf einen Pixel?
+            # Wo die feinen Faeden dichter liegen als die Pixel -> weiche Textur, sonst Moire.
+            fs = np.full(n, np.nan, np.float32)
+            fs[idx] = s
+            fs = fs.reshape(shape)
+            gy, gx = np.gradient(fs) if min(shape) > 1 else (np.zeros_like(fs), np.zeros_like(fs))
+            ks = (tex.shape[1] - 1) / (S_MAX - S_MIN)
+            foot = (np.maximum(np.abs(gx), np.abs(gy)) * ks).ravel()[idx]
+            foot = np.nan_to_num(foot, nan=0.0)
+            wmip = np.clip((foot - 1.2) / 4.0, 0, 1)
+            st = (1 - wmip) * st + wmip * sm * 1.4
+            if kk >= 1:   # gelinste Ringe: nur weiche, rauchige Struktur (feine Faeden kreuzen sich sonst mit dem Band)
+                st = 1.2 * sm
+            elif li > 0:  # gekippte Zusatzlagen: nur weiche Textur, sonst kreuzen sich Faeden (Karomuster)
+                st = sm
             near = np.clip(-P[:, 1] / rr, 0, 1)        # 1 = Vorderseite (zur Kamera)
             x6 = 6.0 / rr
             # Neigung des Strahls gegen die Scheibe beim Durchstoss (geschlossen aus der Bahngleichung):
