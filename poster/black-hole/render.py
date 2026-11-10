@@ -255,6 +255,8 @@ def trace_rows(job):
     spin = dk['spin']
     for kk in range(3):
         for li, nrm in enumerate(G['normals']):
+            if kk >= 1 and li > 0:
+                continue   # gelinste Ringe nur aus der Mittellage: sonst kreuzen sich Streifen (Karomuster)
             a = float(e1 @ nrm)
             c = e2 @ nrm
             phi = np.mod(np.arctan2(a, -c), np.pi) + kk * np.pi
