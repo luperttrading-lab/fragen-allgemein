@@ -24,18 +24,18 @@ DATUM = "10.11.2026"
 # Raum – ANNAHMEN, bitte messen
 A_WAND = 2500          # Vorderkante Bank (Wandseite) bis gegenueberliegende Wand
 RAUM_H = 2500          # Raumhoehe
-# Bett – ANNAHMEN (Produktbilder sind KI-generiert), am gelieferten Bett messen
-BETT_L = 2060          # Rahmen aussen, Laenge
-BETT_B = 2060          # Rahmen aussen, Breite
-BETT_H = 250           # Rahmenhoehe
-ROST_Z = 230           # Oberkante Lattenrost
-MATR_H = 220           # Matratzenhoehe  -> Matratzenoberkante 450
+# Bett – Hoehe gemessen (Foto 10.11.), Laenge/Breite/Matratze noch ANNAHMEN
+BETT_L = 2060          # Rahmen aussen, Laenge (A)
+BETT_B = 2060          # Rahmen aussen, Breite (A)
+BETT_H = 220           # Rahmenhoehe, gemessen
+ROST_Z = 220           # Matratze liegt auf Rahmenoberkante (Foto)
+MATR_H = 200           # Matratzenhoehe (A)  -> Matratzenoberkante 420
 VK = 19                # Verkleidung Plattenstaerke
 VK_BODEN = 10          # Luft Verkleidung - Fussboden
 # Bank
 FUGE = 10              # Trennfuge Bett | Bank (mechanische Entkopplung)
 BANK_T = 520           # Tiefe
-BANK_H = 550           # Hoehe
+BANK_H = 500           # Hoehe
 SOCKEL = 60            # Fusshoehe (verstellbare Moebelfuesse)
 PL = 19                # Plattenstaerke Korpus
 FRONTSPALT = 45        # Linsenfront bis Innenseite Frontplatte
@@ -48,6 +48,15 @@ TR_MIN, TR_MAX = 1.09, 1.77
 H_MIN, H_MAX = 0.056, 0.499        # Unterkante Bild ueber Linsenmitte / Bildhoehe
 P_NORMAL, P_ECO, P_QUIET = 255, 180, 175   # W bei 200-240 V
 LM_NORMAL, LM_ECO = 5200, 3640
+# Vorhandener Beamer Panasonic PT-VX500 (Haendlerdaten, 2012) – passt ebenfalls in die Bank
+VX_B, VX_T, VX_H = 379, 305, 107
+VX_TIEFE_KABEL = 420   # gemessen inkl. Stecker
+P_VX = 365             # W, Lampe 280 W
+VX_TR_MIN, VX_TR_MAX = 1.18, 1.90
+# Lueftung
+LUEFTER = 140          # 2 Luefter, Kantenlaenge mm
+VDOT_M3H = 150         # Volumenstrom (A)
+P_GERAETE = 40         # Apple TV, Mac mini, Switch-Dock, HDMI-/LAN-Switch (A)
 # Bildziel
 BILD_B = 2000          # Bildbreite 16:10
 BILD_UK = 800          # Unterkante Bild ueber Fussboden
@@ -66,7 +75,7 @@ Y_RI = Y_B0 + PL                        # Innenseite Rueckwand
 Z_K0 = SOCKEL                           # Unterkante Korpus
 Z_BO = SOCKEL + PL                      # Oberkante Boden
 Z_DE = BANK_H - PL                      # Unterkante Deckel
-Z_FB = 346                              # Oberkante Beamerboden (Fachboden)
+Z_FB = BANK_H - PL - 50 - PJ_H         # Oberkante Beamerboden (50 mm Luft unter dem Deckel)
 Z_L = Z_FB + PJ_H - PJ_LINSE_OBEN       # Linsenmitte
 X_PJ0 = PJ_LINSE_SEITE - PJ_B           # Beamer Abluftseite (-X)
 X_PJ1 = PJ_LINSE_SEITE                  # Beamer Linsenseite (+X)
@@ -83,11 +92,13 @@ F_X = 80                                # halbe Breite
 F_Z0, F_Z1 = Z_L - 35, Z_L + 85
 # Schieber
 S_X0, S_X1 = -100, 100
-S_Z0, S_Z1 = F_Z0 - 16, F_Z1 + 16
+S_Z0, S_Z1 = F_Z0 - 10, F_Z1 + 10
 HUB = 200
 
 assert TR_MIN <= TR <= TR_MAX, TR
 assert H_MIN <= H_SHIFT <= H_MAX, H_SHIFT
+assert S_Z1 + 4 < BANK_H - PL, "obere Schieberfuehrung stoesst an den Deckel"
+assert VX_TIEFE_KABEL + 20 <= (FUGE + BANK_T - PL) - (FUGE + PL), "VX500 passt nicht in die Tiefe"
 
 # ------------------------------------------------------------------ Grafik
 pdfmetrics.registerFont(TTFont("DV", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"))
@@ -143,7 +154,7 @@ class Blatt:
         c.setFillColor(C_ROT)
         c.drawString(x0 + 2, y0 + 3, "VORENTWURF – Bett- und Raummaße sind Annahmen (A): vor dem Zuschnitt messen!")
         c.setFillColor(black)
-        c.drawString(x0 + 112, y0 + 3, "Beamer: Panasonic PT-VMZ51S")
+        c.drawString(x0 + 112, y0 + 3, "Beamer: PT-VMZ51S / PT-VX500")
 
     def fertig(self):
         self.c.restoreState()
@@ -526,13 +537,14 @@ def blatt1(c):
     w.rechteck(Y_PR, Z_FB, PJ_T, PJ_H, fill=C_PJ, falpha=0.4, lw=LW_DUENN, dash=(1.2, 0.8))
     w.kreis(Y_LF, Z_L, 18, fill=C_PJ, lw=LW_FEIN)
     # Sichtlinien
-    augen = [((-BETT_AY + 360, 700), "Auge liegend ≈ 700"), ((-BETT_AY + 480, 950), "Auge halb sitzend ≈ 950")]
+    z_e1, z_e2 = MATR_OK + 250, MATR_OK + 500
+    augen = [((-BETT_AY + 360, z_e1), f"Auge liegend ≈ {z_e1}"), ((-BETT_AY + 480, z_e2), f"Auge halb sitzend ≈ {z_e2}")]
     for (ya, za), t in augen:
         for zz in (BILD_UK, BILD_OK):
             w.linie(ya, za, Y_WAND - 15, zz, lw=LW_FEIN, col=Color(0.1, 0.5, 0.2), dash=(2, 1))
         w.kreis(ya, za, 18, fill=Color(0.1, 0.5, 0.2), rand=False)
-    w.hinweis(augen[0][0][0], 700, 4, -13, augen[0][1], gr=2.0)
-    w.hinweis(augen[1][0][0], 950, -4, 13, augen[1][1], gr=2.0)
+    w.hinweis(augen[0][0][0], z_e1, 4, -13, augen[0][1], gr=2.0)
+    w.hinweis(augen[1][0][0], z_e2, -4, 13, augen[1][1], gr=2.0)
     # Koten Wand
     for zz, t in ((BILD_OK, f"+{fmt(BILD_OK)} OK"), (BILD_UK, f"+{fmt(BILD_UK)} UK"),
                   (0, "±0")):
@@ -542,8 +554,8 @@ def blatt1(c):
     w.hinweis(Y_LF, Z_L, 12, 18, f"Linsenmitte +{Z_L}", gr=2.0)
     w.hinweis(Y_B1, BANK_H, 22, 9, f"Bank +{BANK_H}", gr=2.0)
     w.hinweis(-600, MATR_OK, -4, 30, f"Matratze OK ≈ +{MATR_OK} (A)", gr=2.0)
-    w.text(-BETT_AY / 2, 95, f"Bettrahmen +{BETT_H} (A) mit Verkleidung 19 mm", gr=2.0, anker="c")
-    w.hinweis(-220, MATR_OK + 265, 6, 26, "Zehen unter Decke ≈ 720", gr=2.0)
+    w.text(-BETT_AY / 2, 80, f"Bettrahmen +{BETT_H} (gemessen) mit Verkleidung 19 mm", gr=2.0, anker="c")
+    w.hinweis(-220, MATR_OK + 265, 6, 26, f"Zehen unter Decke ≈ {MATR_OK + 270}", gr=2.0)
     # Bemassung unten
     w.mass(-BETT_AY, -100, 0, -100, -5, f"Bett {fmt(BETT_AY)} (A)")
     w.mass(Y_B0, -100, Y_B1, -100, -5, fmt(BANK_T))
@@ -574,7 +586,9 @@ def blatt1(c):
         f"² Unterkante {BILD_UK} braucht Lens-Shift h = ({BILD_UK} − {Z_L}) / Bildhöhe ≤ 0,50 → Bildhöhe ≥ "
         f"{fmt((BILD_UK - Z_L) / H_MAX)}. Kleinere Bilder: Fachboden höher setzen (Lochreihe) oder Beamer neigen.",
         "Werte aus Panasonic-Datenblatt PT-VMZ51S: Throw Ratio 1,09–1,77; H = 0,056–0,50 × Bildhöhe (Tabelle S. 7).",
-        "Grundlage Sichtlinie: Unterkante ≥ 800, damit Zehen/Decke (≈ 720) das Bild auch im Liegen nicht anschneiden.",
+        f"Grundlage Sichtlinie: Unterkante ≥ 800, damit Zehen/Decke (≈ {MATR_OK + 270}) das Bild auch im Liegen nicht anschneiden.",
+        f"Vorhandener PT-VX500 (4:3, TR 1,18–1,90): bei A = {fmt(A_WAND)} Bildbreite "
+        f"{fmt(L_PROJ / VX_TR_MAX)}–{fmt(L_PROJ / VX_TR_MIN)}, Lens-Shift vertikal laut Händler +40 % (nicht im Original geprüft).",
     ], gr=2.1, breite=226)
     b.fertig()
 
@@ -632,16 +646,16 @@ def blatt2(c):
     t.rechteck(-F_X, Y_FI, 2 * F_X, PL, fill=white, lw=LW_DUENN)
     t.rechteck(X_T1 + PL, Y_RI, X_T2 - X_T1 - PL, Y_LF - Y_RI, lw=LW_FEIN, dash=d)
     t.rechteck(150, 60, 450, 380, lw=LW_FEIN, dash=d)
-    t.rechteck(200, 200, 350, 150, lw=LW_FEIN, dash=(0.6, 0.6), col=C_KALT)
+    t.rechteck(180, 160, 400, 180, lw=LW_FEIN, dash=(0.6, 0.6), col=C_KALT)
     t.rechteck(X_PJ0, Y_PR, PJ_B, PJ_T, fill=C_PJ, falpha=0.45, lw=LW_MITTEL)
     t.rechteck(-LINSE_R - 8, Y_LF - 30, 2 * LINSE_R + 16, 30, fill=C_PJ, lw=LW_DUENN)
     t.text(X_PJ0 + PJ_B / 2, Y_PR + 175, "PT-VMZ51S", gr=2.2, anker="c", font="DVB")
     t.text(X_PJ0 + PJ_B / 2, Y_PR + 125, "399 × 348", gr=2.0, anker="c")
     t.schraffur(X_T1 + PL, Y_PR + 40, X_PJ0 - X_T1 - PL, PJ_T - 80, abstand=0.5, col=C_WARM)
-    for yy in (195, 345):
+    for yy in (180, 360):
         t.pfeil(X_PJ0 + 40, yy, -XB - 90, yy, col=C_WARM)
-    for yc in (195, 345):
-        t.rechteck(-XB + PL, yc - 60, 25, 120, fill=C_GRAU, lw=LW_DUENN)
+    for yc in (180, 360):
+        t.rechteck(-XB + PL, yc - LUEFTER / 2, 25, LUEFTER, fill=C_GRAU, lw=LW_DUENN)
     t.text(-690, 420, "Abluftkanal – frei halten", gr=2.2, anker="c", col=C_WARM)
     t.pfeil(380, 275, X_PJ1 + 10, 275, col=C_KALT)
     t.kreis(380, 275, 35, lw=0.3, col=C_KALT)
@@ -651,23 +665,29 @@ def blatt2(c):
     t.rechteck(S_X1, Y_FI - 22, 200, 8, fill=C_GRAU, lw=LW_DUENN)
     t.rechteck(S_X1 + 200, Y_FI - 36, 300, 36, fill=C_GRAU, lw=LW_DUENN)
     t.rechteck(S_X1 + 500, Y_FI - 44, 30, 44, fill=C_VK, lw=LW_DUENN)
-    for (x, y, w_, h_, txt) in ((680, 350, 300, 60, "Master-Slave-Leiste"), (680, 230, 120, 70, "NT 12 V A"),
-                                (840, 230, 120, 70, "NT 12 V B"), (700, 110, 120, 70, "Relais")):
+    for (x, y, w_, h_, txt) in ((665, 395, 173, 60, "Switch-Dock"), (665, 240, 127, 127, "Mac mini"),
+                                (860, 260, 95, 95, "Apple TV"), (860, 395, 150, 60, "HDMI 3→1"),
+                                (665, 95, 160, 110, "LAN-Switch")):
         t.rechteck(x, y, w_, h_, fill=white, lw=LW_DUENN)
         t.text(x + w_ / 2, y + h_ / 2 - 8, txt, gr=1.7, anker="c")
-    t.text(890, 60, "Technik / Stauraum", gr=1.8, anker="c")
-    t.kreis(920, Y_B0 + PL / 2, 30, fill=white, lw=LW_DUENN)
+    t.text(925, 150, "Ebene 1: Geräte", gr=1.7, anker="c")
+    t.text(925, 100, "darunter: Leisten,", gr=1.6, anker="c")
+    t.text(925, 60, "Netzteile, Relais", gr=1.6, anker="c")
+    # Kabelkanal unter dem Boden (Wanddose auf der Abluftseite)
+    t.rechteck(-XB - 60, 35, XB + 1050, 40, lw=LW_DUENN, dash=(2.5, 0.8), col=Color(0.45, 0.2, 0.6))
+    t.kreis(990, 55, 22, fill=white, lw=LW_DUENN, col=Color(0.45, 0.2, 0.6))
     t.kreis(0, Y_B0 + 4, 12, fill=C_ROT, rand=False)
     t.linie(0, Y_B0 - 60, 0, Y_B1 + 110, lw=LW_DUENN, dash=(4, 1, 0.6, 1))
     for yy in (Y_B0 - 60, Y_B1 + 110):
         t.pfeil(0, yy, -120, yy, lw=0.5, kopf=1.5)
         t.text(-150, yy - 25, "A", gr=2.6, font="DVB", anker="r")
-    t.hinweis_abs(-XB + 30, 150, 40, 108, "2 × Lüfter 120 mm,\nblasen nach außen", gr=1.9)
+    t.hinweis_abs(-XB + 30, 120, 40, 108, f"2 × Lüfter {LUEFTER} mm,\nblasen nach außen", gr=1.9)
     t.hinweis_abs(X_T1 + 10, Y_PR + 70, 100, 100, "Trennwand T1: Ausschnitt 280 × 100 vor\nAbluftgitter, Moosgummi-Dichtrahmen", gr=1.9)
     t.hinweis_abs(0, Y_B0 + 4, 141, 110, "IR-Empfänger (zum Bett)", gr=1.9)
-    t.hinweis_abs(380, 240, 176, 100, "Zuluftgitter im Boden 350 × 150 + Filtermatte,\nFachboden mit Ausschnitt 450 × 380", gr=1.9, col=C_KALT)
-    t.hinweis_abs(920, Y_B0, 231, 110, "Kabel Ø 60", gr=1.9)
-    t.hinweis_abs(S_X1 + 350, Y_FI - 18, 188, 186, "Linearantrieb 12 V, Hub 200 (Blatt 3)", gr=1.9)
+    t.hinweis_abs(380, 240, 176, 100, "Zuluftgitter im Boden 400 × 180 + Filtermatte,\nFachboden mit Ausschnitt 450 × 380", gr=1.9, col=C_KALT)
+    t.hinweis_abs(-XB - 40, 75, 140, 186, "Kabelkanal unter dem Boden: Strom + LAN von der Wanddose\n(Wandseite prüfen) bis ins Technikfach",
+                  gr=1.9, col=Color(0.45, 0.2, 0.6))
+    t.hinweis_abs(S_X1 + 350, Y_FI - 18, 214, 186, "Linearantrieb 12 V, Hub 200 (Blatt 3)", gr=1.9)
     t.mass(-XB, Y_B0, -XB, Y_B1, 8, fmt(BANK_T))
     t.mass(-XB, Y_B1, X_T1, Y_B1, 4, fmt(XB + X_T1))
     t.mass(X_T1 + PL, Y_B1, X_T2, Y_B1, 4, fmt(X_T2 - X_T1 - PL))
@@ -718,8 +738,8 @@ def blatt2(c):
     a.mass(Y_B0, -18, Y_B1, -18, -10, fmt(BANK_T))
     a.hinweis_abs(Y_B0 + 200, BANK_H, 318, 260, "Deckel abnehmbar (Dübel + Magnete):\n"
                                                 "Zugang Zoom, Fokus, Lens-Shift, Filter", gr=1.9)
-    a.hinweis_abs(Y_FI - 6, S_Z1 - 1, 342, 240, "Schieber (zu) in\nAlu-U-Führungen", gr=1.8)
-    a.hinweis_abs(Y_RI + 40, Z_FB + 60, 288, 200, "Kabelraum 89 mm: HDMI/Netz\nmit Winkelsteckern", gr=1.8)
+    a.hinweis_abs(Y_FI - 6, S_Z1 - 1, 340, 229, "Schieber (zu) in Alu-U-Führungen", gr=1.8)
+    a.hinweis_abs(Y_RI + 40, Z_FB + 60, 288, 192, "Kabelraum 89 mm: HDMI/Netz\nmit Winkelsteckern", gr=1.8)
     a.hinweis_abs(Y_RI + 150, Z_FB - PL / 2, 313, 186, "Fachboden auf Bodenträgern,\nLochreihe 32 mm in T1/T2\n(Linsenhöhe verstellbar)", gr=1.8)
     a.hinweis_abs(Y_FI - 25, 160, 330, 166, "Zuluft von unten\n(Gitter seitlich,\ns. Draufsicht)", gr=1.8, col=C_KALT)
 
@@ -731,14 +751,14 @@ def blatt2(c):
     e.rechteck(Y_B0, SOCKEL, BANK_T, BANK_H - SOCKEL, fill=C_HOLZ, lw=LW_DICK)
     e.linie(Y_B0, Z_DE, Y_B1, Z_DE, lw=LW_DUENN)
     e.linie(Y_B0, Z_BO, Y_B1, Z_BO, lw=LW_DUENN)
-    for yc in (195, 345):
-        e.rechteck(yc - 60, 380, 120, 120, fill=Color(0.25, 0.25, 0.25), lw=LW_DUENN)
-        e.kreis(yc, 440, 55, lw=LW_FEIN, col=white)
-        e.kreis(yc, 440, 20, lw=LW_FEIN, col=white)
+    for yc in (180, 360):
+        e.rechteck(yc - LUEFTER / 2, 300, LUEFTER, LUEFTER, fill=Color(0.25, 0.25, 0.25), lw=LW_DUENN)
+        e.kreis(yc, 300 + LUEFTER / 2, LUEFTER / 2 - 5, lw=LW_FEIN, col=white)
+        e.kreis(yc, 300 + LUEFTER / 2, 22, lw=LW_FEIN, col=white)
     e.mass(Y_B1, 0, Y_B0, 0, -5, fmt(BANK_T))
-    e.mass(Y_B0, 380, Y_B0, 500, -4, "120")
-    e.text(270, 300, "2 × 120 mm", gr=1.9, anker="c")
-    e.text(270, 230, "mit Schutzgitter", gr=1.9, anker="c")
+    e.mass(Y_B0, 300, Y_B0, 300 + LUEFTER, -4, fmt(LUEFTER))
+    e.text(270, 220, f"2 × {LUEFTER} mm", gr=1.9, anker="c")
+    e.text(270, 150, "mit Schutzgitter", gr=1.9, anker="c")
     e.text(Y_B1, 575, "Wand", gr=1.9, anker="c")
     e.text(Y_B0, 575, "Bett", gr=1.9, anker="c")
 
@@ -765,12 +785,16 @@ def blatt2(c):
         "durch den Ausschnitt im Fachboden an die Ansaugseiten des Beamers (Linsenseite + Front). Bei offenem Schieber auch durchs Fenster.",
         "2. Der Beamer bläst seitlich auf der Abluftseite aus. Moosgummi-Rahmen und Trennwand T1 führen die warme Luft in den "
         "Abluftkanal – kein Kurzschluss zurück zur Ansaugung.",
-        "3. Zwei 120-mm-Lüfter in der linken Stirnseite saugen den Kanal ab (Unterdruck in der Bank). Die warme Luft verlässt die "
+        "3. Zwei 140-mm-Lüfter in der linken Stirnseite saugen den Kanal ab (Unterdruck in der Bank). Die warme Luft verlässt die "
         "Bank seitlich, weit weg vom Strahl (Hitzeflimmern vor der Linse vermeiden, Anleitung S. 19).",
         "4. Lüfter laufen nur, wenn der Beamer läuft (Slave-Steckplatz, Blatt 3). Vor der Stirnseite ≥ 50 cm frei halten.",
         "**Entkopplung",
         "Die Bank berührt das Bett nicht (Fuge 10 mm, optisch eine Schattenfuge). Bewegung auf der Matratze würde sonst das Bild "
         "zittern lassen: schon 0,5 mm Kippen über 348 mm Gerätetiefe verschiebt das Bild um ≈ 3,7 mm ≈ 3,5 Pixel (Blatt 4).",
+        "**Passt für beide Beamer und alle Geräte",
+        "PT-VMZ51S 399 × 348 und vorhandener PT-VX500 379 × 305 (mit Steckern ≈ 420 tief, gemessen). Linsenhöhe über die Lochreihe "
+        "des Fachbodens anpassen. Technikfach: Apple TV, Mac mini, Switch-Dock (Zugang über Klappdeckel), HDMI- und LAN-Switch; "
+        "darunter Steckdosenleisten, Netzteile, Relais. Von der Wand kommen nur 1 Stromkabel + 1 LAN-Kabel, unsichtbar im Kanal unter der Bank.",
     ], gr=2.15, breite=222)
     b.fertig()
 
@@ -780,9 +804,9 @@ def blatt3(c):
     b = Blatt(c, 3, 4, "Details: Schieber, Fenster, Bettverkleidung, Steuerung",
               "Detail 1–3 und Blockschaltbild", "1:4 / 1:2,5")
     # ---------------- Detail 1 Schieber, Ansicht von innen  M 1:4
-    v = Ansicht(c, 77, 192, 1 / 4, ry=250)
+    v = Ansicht(c, 77, 192, 1 / 4, ry=200)
     titel(c, 22, 276, "Detail 1: Schieber mit Antrieb – Ansicht von innen (Blick zur Wand, Beamer weggelassen)", "M 1:4")
-    v.rechteck(-220, 250, 900, Z_DE - 250, fill=C_HOLZ, lw=LW_DUENN)
+    v.rechteck(-220, 200, 900, Z_DE - 200, fill=C_HOLZ, lw=LW_DUENN)
     v.schraffur(-220, Z_DE, 900, PL, abstand=0.8, fill=C_HOLZ)
     v.rechteck(-F_X, F_Z0, 2 * F_X, F_Z1 - F_Z0, fill=white, lw=LW_MITTEL)
     v.kreis(0, Z_L, LINSE_R, lw=LW_FEIN, dash=(1, 0.6), col=C_PJ)
@@ -811,9 +835,9 @@ def blatt3(c):
     v.text(0, F_Z0 + 25, "Fenster 160 × 120", gr=1.8, anker="c")
 
     # ---------------- Detail 2 Vertikalschnitt Fenster  M 1:2,5
-    w = Ansicht(c, 338, 168, 1 / 2.5, rx=400, ry=340)
+    w = Ansicht(c, 338, 168, 1 / 2.5, rx=400, ry=290)
     titel(c, 336, 276, "Detail 2: Schnitt Fenster", "M 1:2,5", gr=3.0)
-    w.schraffur(Y_FI, 340, PL, F_Z0 - 340, abstand=0.8, fill=C_HOLZ)
+    w.schraffur(Y_FI, 290, PL, F_Z0 - 290, abstand=0.8, fill=C_HOLZ)
     w.schraffur(Y_FI, F_Z1, PL, Z_DE - F_Z1, abstand=0.8, fill=C_HOLZ)
     w.schraffur(400, Z_DE, Y_B1 - 400, PL, abstand=0.8, fill=C_HOLZ)
     w.rechteck(400, Z_L - 45, Y_LF - 400, 90, fill=C_PJ, falpha=0.45, lw=LW_DUENN)
@@ -831,8 +855,8 @@ def blatt3(c):
     w.rechteck(Y_FI - 7, S_Z0, 3, S_Z1 - S_Z0, lw=LW_FEIN, dash=(1.2, 0.6), col=C_GRAU)
     for zz in (S_Z0 - 4, S_Z1 - 6):
         w.rechteck(Y_FI - 10, zz, 10, 10, fill=C_ALU, lw=LW_FEIN)
-    w.mass(Y_LF, 345, Y_FI, 345, -3, fmt(FRONTSPALT))
-    w.mass(Y_FI, 345, Y_B1, 345, -3, "19")
+    w.mass(Y_LF, 295, Y_FI, 295, -3, fmt(FRONTSPALT))
+    w.mass(Y_FI, 295, Y_B1, 295, -3, "19")
     w.mass(Y_B1, F_Z0, Y_B1, Z_L, -3, "35")
     w.mass(Y_B1, Z_L, Y_B1, F_Z1, -3, "85")
     absatz(c, 336, 158, [
@@ -903,14 +927,15 @@ def blatt3(c):
         c.setStrokeColor(black)
 
     box(152, 138, 34, 12, "Wandsteckdose\n230 V")
-    box(194, 112, 44, 40, "Master-Slave-\nSteckdosenleiste\nSchwelle einstellbar\n≈ 40–60 W\n\nM · S · D", fill=C_HELLGRAU, fett=True)
-    box(250, 140, 50, 14, "Beamer PT-VMZ51S\n175–255 W · Standby 15 W", fill=Color(0.85, 0.9, 1.0), fett=True)
+    box(194, 112, 44, 40, "Master-Slave-\nSteckdosenleiste\nSchwelle einstellbar\n≈ 25–30 W\n\nM · S · D", fill=C_HELLGRAU, fett=True)
+    box(250, 140, 50, 14, "Beamer VMZ51S / VX500\n175–365 W · Standby 12–15 W", fill=Color(0.85, 0.9, 1.0), fett=True)
     box(250, 112, 50, 16, "Netzteil B 12 V / 2 A\nnur an, wenn Beamer an")
     box(250, 84, 50, 16, "Netzteil A 12 V / 3 A\nimmer an")
-    box(314, 114, 38, 14, "2 × Lüfter 120 mm\n12 V, leise")
+    box(314, 114, 38, 14, "2 × Lüfter 140 mm\n12 V, leise")
+    box(314, 140, 38, 14, "Marshall (AUX)\nLautsprecher")
     box(314, 80, 38, 24, "Relais 12 V\n2 Wechsler\n= Polwender\nSpule an → AUF")
     box(362, 80, 42, 24, "Linearantrieb 12 V\nHub 200\nEndschalter intern\n→ Schieber")
-    box(152, 108, 34, 14, "Streaming-Gerät\n(HDMI-CEC)")
+    box(152, 108, 34, 14, "HDMI-Switch 3→1\nApple TV·Mac·Switch")
     box(152, 82, 34, 14, "IR-Verlängerung\nAuge zum Bett")
     ver([(186, 144), (194, 144)])
     ver([(238, 147), (250, 147)], txt="Master", tpos=(239, 148))
@@ -923,10 +948,11 @@ def blatt3(c):
     ver([(300, 90), (314, 90)], txt="12 V", tpos=(302, 91))
     ver([(352, 92), (362, 92)], txt="±12 V", tpos=(353, 93))
     ver([(152, 115), (147, 115), (147, 158), (275, 158), (275, 154)], col=C_KALT, dash=(1.5, 0.8),
-        txt="HDMI 1 (CEC: Gerät schaltet Beamer ein/aus)", tpos=(180, 159))
+        txt="HDMI → Beamer (Apple TV, Mac mini, Switch über einen Umschalter)", tpos=(165, 159))
+    ver([(300, 147), (314, 147)], txt="Audio-Out", tpos=(301, 148.5))
     absatz(c, 152, 74, [
         "**Ablauf",
-        "Ein: Fernbedienung des Streaming-Geräts → CEC schaltet den Beamer ein → Leistung > Schwelle → Slave an → "
+        "Ein: Beamer-Fernbedienung (über IR-Verlängerung) oder CEC vom Apple TV (nur VMZ51S sicher) → Leistung > Schwelle → Slave an → "
         "Relaisspule an → Antrieb fährt ein → Schieber AUF (≈ 5 s bei 40 mm/s) · Lüfter an.",
         "Aus: Beamer aus → Lüfternachlauf des Beamers → Leistung < Schwelle → Slave aus → Spule aus → Antrieb fährt aus → "
         "Schieber ZU · Lüfter aus.",
@@ -951,11 +977,11 @@ def blatt4(c):
     hoehe_innen = Z_DE - Z_BO
     tiefe_innen = Y_FI - Y_RI
     zeilen = [["Pos", "Teil", "Stk", "L", "B", "Bemerkung"],
-              ["1", "Boden Bank", "1", fmt(BETT_AX), fmt(BANK_T), "Ausschnitt 350 × 150 (Zuluft), Füße"],
-              ["2", "Stirnseite links (Abluft)", "1", fmt(hoehe_innen), fmt(BANK_T), "2 Lüfterausschnitte 120 × 120"],
+              ["1", "Boden Bank", "1", fmt(BETT_AX), fmt(BANK_T), "Ausschnitt 400 × 180 (Zuluft), Kabeldurchlass"],
+              ["2", "Stirnseite links (Abluft)", "1", fmt(hoehe_innen), fmt(BANK_T), f"2 Lüfterausschnitte {LUEFTER} × {LUEFTER}"],
               ["3", "Stirnseite rechts", "1", fmt(hoehe_innen), fmt(BANK_T), ""],
-              ["4", "Front (Wandseite)", "1", fmt(BETT_AX - 2 * PL), fmt(hoehe_innen), "Fenster 160 × 120, Linse +420"],
-              ["5", "Rückwand (Bettseite)", "1", fmt(BETT_AX - 2 * PL), fmt(hoehe_innen), "Kabeldurchlass Ø 60, IR-Auge"],
+              ["4", "Front (Wandseite)", "1", fmt(BETT_AX - 2 * PL), fmt(hoehe_innen), f"Fenster 160 × 120, Linse +{Z_L}"],
+              ["5", "Rückwand (Bettseite)", "1", fmt(BETT_AX - 2 * PL), fmt(hoehe_innen), "IR-Auge (Ø 10)"],
               ["6", "Trennwand T1 (Abluft)", "1", fmt(hoehe_innen), fmt(tiefe_innen), "Ausschnitt 280 × 100, Lochreihe"],
               ["7", "Trennwand T2 (Technik)", "1", fmt(hoehe_innen), fmt(tiefe_innen), "Lochreihe 32, Kabeldurchlass"],
               ["8", "Fachboden Beamer", "1", fmt(X_T2 - X_T1 - PL - 2), fmt(Y_LF - Y_RI), "Ausschnitt 450 × 380 (Luft)"],
@@ -964,6 +990,7 @@ def blatt4(c):
               ["11", "Deckel rechts", "1", "419", fmt(BANK_T), "Scharniere, Stauraum"],
               ["12", "Verkleidung Längsseiten", "2", fmt(BETT_AY), fmt(BETT_H - VK_BODEN), "Maß nach Bett (A)"],
               ["13", "Verkleidung Kopf/Fuß", "2", fmt(BETT_B), fmt(BETT_H - VK_BODEN), "Maß nach Bett (A)"],
+              ["14", "Zwischenboden Technik", "1", fmt(XB - PL - X_T2 - PL), fmt(tiefe_innen), "Bodenträger, Lochreihe"],
               ]
     flaeche = (BETT_AX * BANK_T + 2 * hoehe_innen * BANK_T + 2 * (BETT_AX - 2 * PL) * hoehe_innen
                + 2 * hoehe_innen * tiefe_innen + (X_T2 - X_T1 - PL) * (Y_LF - Y_RI) + BETT_AX * BANK_T
@@ -979,12 +1006,16 @@ def blatt4(c):
 
     titel(c, x0, y - 5, "Einkaufsliste Technik und Beschläge", gr=3.4)
     teile = [["Teil", "Anforderung"],
-             ["Master-Slave-Steckdosenleiste", "Schaltschwelle einstellbar (Standby 15 W < Schwelle)"],
+             ["Master-Slave-Steckdosenleiste", "Schwelle einstellbar, ≈ 25–30 W (über Standby 11,5–15 W)"],
+             ["Steckdosenleiste (Dauer)", "≥ 6 Plätze: Apple TV, Mac, Dock, Switches, NT A"],
+             ["HDMI-Switch 3 → 1", "4K, automatische Umschaltung, mit Fernbedienung"],
+             ["LAN-Switch 5 Port", "für Mac mini, Apple TV, Beamer (PJLink)"],
+             ["Kabelkanal", "unter der Bank + flach auf dem Boden bis zur Dose"],
              ["Netzteil A 12 V DC", "≥ 3 A (Antrieb), immer an"],
              ["Netzteil B 12 V DC", "≥ 2 A (Relaisspule + 2 Lüfter), Slave"],
              ["Relaismodul 12 V", "2 Wechsler (DPDT) ≥ 5 A als Polwender"],
              ["Linearantrieb 12 V", "Hub 200, ≥ 30 N, ≥ 40 mm/s, Endschalter intern"],
-             ["2 Lüfter 120 mm 12 V", "leise (≤ 20 dB(A)), + 2 Schutzgitter"],
+             ["2 Lüfter 140 mm 12 V", "je ≥ 75 m³/h, leise, + 2 Schutzgitter"],
              ["IR-Verlängerung", "Empfänger + Sender, USB 5 V"],
              ["Alu-Verbundplatte 3 mm", "≈ 200 × 152 (Schieber)"],
              ["Alu-U-Profil 10 × 10", "2 × 470, + PTFE-Gleitband"],
@@ -1000,9 +1031,9 @@ def blatt4(c):
     x1 = 196
     titel(c, x1, 274, "Berechnungen", gr=3.4)
     rho_cp = 1.2 * 1005
-    vdot = 90 / 3600
-    dt_n = P_NORMAL / (rho_cp * vdot)
-    dt_q = P_QUIET / (rho_cp * vdot)
+    vdot = VDOT_M3H / 3600
+    dt_n = (P_NORMAL + P_GERAETE) / (rho_cp * vdot)
+    dt_q = (P_VX + P_GERAETE) / (rho_cp * vdot)
     a_frei = vdot / 1.5 * 1e4
     flaeche_bild = SW / 1000 * SH / 1000
     e_lx = LM_ECO / flaeche_bild
@@ -1019,26 +1050,30 @@ def blatt4(c):
         f"{fmt(H_SHIFT, 3)} (zulässig 0,056–0,50) ✓",
         f"Oberkante = {BILD_UK} + {fmt(SH)} = {fmt(BILD_OK)} mm. Keine Trapezkorrektur → volle 1920 × 1200 Pixel.",
         "**2  Wärme und Lüftung",
-        f"Leistung bei 230 V (Datenblatt): Normal {P_NORMAL} W, Eco {P_ECO} W, Quiet {P_QUIET} W – praktisch alles wird Wärme.",
-        f"ΔT = P / (ρ · c_p · V̇), ρ·c_p = 1,2 · 1005 = {fmt(rho_cp)} J/(m³K), V̇ = 90 m³/h = {fmt(vdot, 3)} m³/s (A)",
-        f"→ Abluft wärmer als Raum: Normal {fmt(dt_n, 1)} K, Quiet {fmt(dt_q, 1)} K. Bei 24 °C Raum: Abluft ≈ "
-        f"{fmt(24 + dt_n, 0)} °C.",
-        "Die Ansaugung bekommt Raumluft (Unterdruck in der Bank). Panasonic drosselt erst ab 36 °C Umgebung (unter 700 m).",
-        f"Freier Querschnitt je Seite bei v ≤ 1,5 m/s: A ≥ V̇/v = {fmt(a_frei)} cm². Bodengitter 350 × 150 mit 50 % frei "
-        f"= 263 cm² ✓, 2 Lüfter Ø 115 = 208 cm² ✓",
-        "Kontrolle: Der Beamer zeigt Ansaug- und Ablufttemperatur im STATUS-Menü und im Web-Interface. Erster Test 2 h Normal.",
-        "**3  Helligkeit",
+        f"Leistung: VMZ51S Normal {P_NORMAL} W / Quiet {P_QUIET} W (Datenblatt); vorhandener VX500 {P_VX} W, Lampe 280 W "
+        f"(Händlerdaten); Geräte im Technikfach ≈ {P_GERAETE} W (A). Praktisch alles wird Wärme.",
+        f"ΔT = P / (ρ · c_p · V̇), ρ·c_p = 1,2 · 1005 = {fmt(rho_cp)} J/(m³K), V̇ = {VDOT_M3H} m³/h = {fmt(vdot, 3)} m³/s "
+        f"(A: 2 × {LUEFTER} mm)",
+        f"→ Abluft wärmer als Raum: VMZ51S + Geräte {fmt(dt_n, 1)} K, VX500 + Geräte {fmt(dt_q, 1)} K. Bei 24 °C Raum: "
+        f"Abluft ≈ {fmt(24 + dt_q, 0)} °C.",
+        "Die Ansaugung bekommt Raumluft (Unterdruck in der Bank). Grenzen: VMZ51S 45 °C (drosselt ab 36 °C), VX500 40 °C.",
+        f"Freier Querschnitt je Seite bei v ≤ 1,5 m/s: A ≥ V̇/v = {fmt(a_frei)} cm². Bodengitter 400 × 180 mit 50 % frei "
+        f"= 360 cm² ✓, 2 Lüfter Ø 135 = 286 cm² ✓",
+        "Kontrolle: VMZ51S zeigt Ansaug-/Ablufttemperatur im STATUS-Menü. VX500: Thermometer in den Abluftkanal, 2-h-Test.",
+        "**3  Helligkeit und Auflösung",
         f"Quiet/Eco {fmt(LM_ECO)} lm auf {fmt(flaeche_bild, 2)} m² → E = {fmt(e_lx)} lx; weiße Wand (ρ ≈ 0,8): "
         f"L = E·ρ/π ≈ {fmt(leucht)} cd/m².",
-        "Kino-Referenz 48 cd/m², Heimkino im Dunkeln ≈ 50–150 cd/m² → selbst Quiet ist 2,5- bis 7-mal zu hell:",
-        "Quiet-Modus (26 dB, 175 W), Bildmodus Kino, Helligkeit/Kontrast senken; ggf. hellgraue Projektionsfarbe.",
+        "Kino-Referenz 48 cd/m², Heimkino im Dunkeln ≈ 50–150 cd/m² → beide Beamer sind 2,5- bis 7-mal zu hell: Eco/Quiet, Bildmodus Kino.",
+        f"16:9-Film: VX500 (XGA 1024 × 768) nutzt 1024 × 576 = 0,59 MP, VMZ51S 1920 × 1080 = 2,07 MP (3,5-fach). Pixel bei "
+        f"{fmt(SW)} Breite: {fmt(SW / 1024, 2)} mm statt {fmt(SW / 1920, 2)} mm; aus 4,8 m Abstand "
+        f"{fmt(SW / 1024 / 4800 * 3437.7, 1)}′ statt {fmt(SW / 1920 / 4800 * 3437.7, 1)}′ (Sehschärfe ≈ 1′) → beim VX500 Pixel sichtbar.",
         "**4  Erschütterung (warum die Bank frei steht)",
         f"1 Pixel = {fmt(SW)}/1920 = {fmt(px, 2)} mm → 1 Pixel Versatz entspricht {fmt(px, 2)}/{fmt(L_PROJ)} = "
         f"{fmt(delta_px, 2)} mrad Kippung.",
         f"Beamer auf dem Bettrahmen: 0,5 mm Durchbiegung (A) über 348 mm = {fmt(kipp, 2)} mrad → Bildversatz "
         f"{fmt(versatz, 1)} mm ≈ {fmt(versatz / px, 1)} Pixel.",
         "**5  Standby",
-        f"Standby NORMAL (Netzwerk aktiv) 15 W → {fmt(jahr_kwh)} kWh/Jahr; ECO 0,5 W, dann Funktionen eingeschränkt (CEC prüfen).",
+        f"VMZ51S Standby NORMAL (Netzwerk) 15 W → {fmt(jahr_kwh)} kWh/Jahr, ECO 0,5 W. VX500: Netzwerk-Standby 11,5 W, Eco 0,3 W.",
     ], gr=2.3, breite=202, zab=1.38)
 
     titel(c, x1, yb - 4, "Inbetriebnahme – Reihenfolge", gr=3.4)
@@ -1048,7 +1083,7 @@ def blatt4(c):
         "3. Beamer VOR dem Bau frei auf einen Hocker an die Bankposition stellen: Bildlage, Zoom, Lens-Shift, Geräusch prüfen.",
         "4. Bank bauen, Beamer einsetzen, Linse exakt auf die Bettachse; Bild mit Lens-Shift (Drehregler oben) setzen.",
         "5. Schieber und Antrieb ohne Beamer testen: 20 × auf/zu, Endlagen, Geräusch.",
-        "6. Master-Slave-Schwelle einstellen: über Standby (15 W), unter Betrieb (175 W) → ≈ 40–60 W.",
+        "6. Master-Slave-Schwelle knapp über Standby (11,5–15 W) einstellen, ≈ 25–30 W: Lüfter laufen dann bis zum Ende des Nachlaufs.",
         "7. Messen: Zeit vom Einschalten bis zum ersten Licht – muss länger sein als die Öffnungszeit (≈ 5 s).",
         "8. 2-h-Test im Normal-Modus, Temperaturen im STATUS-Menü notieren; danach Quiet als Standard.",
         "9. Menü: HDMI CEC → GERÄT → PROJEKTOR: EIN/AUS; Bildmodus Kino; Lens-Shift statt Trapez.",
@@ -1059,16 +1094,16 @@ def blatt4(c):
     c.setFillColor(Color(1.0, 0.96, 0.85))
     c.setStrokeColor(C_ROT)
     c.setLineWidth(0.35)
-    c.rect(x0, 70, 167, 32, stroke=1, fill=1)
+    c.rect(x0, 50, 167, 32, stroke=1, fill=1)
     c.setFillColor(black)
     c.setStrokeColor(black)
-    absatz(c, x0 + 3, 97, [
+    absatz(c, x0 + 3, 77, [
         "**Die sechs Punkte, an denen das Projekt scheitern kann",
         "1. Beamer nie aufs Bett: Die Bank steht frei auf dem Boden, sonst zittert das Bild.",
         "2. Zwangslüftung ist Pflicht: Panasonic verlangt sie bei Einbau in engen Räumen und haftet nicht für Schäden.",
         "3. Nie mit geschlossenem Schieber projizieren (Brandgefahr): Der Schieber muss automatisch mit dem Beamer öffnen.",
         "4. Linse auf die Bettachse, Bildhöhe nur per Lens-Shift einstellen, kein Trapez (sonst Pixelverlust).",
-        "5. Der Beamer ist für ein dunkles Schlafzimmer viel zu hell: Quiet-Modus und Bildmodus Kino verwenden.",
+        "5. Beide Beamer sind fürs dunkle Schlafzimmer viel zu hell; der VX500 hat nur XGA (Pixel sichtbar) und braucht mehr Kühlung.",
         "6. Erst messen, dann sägen: Bettmaße und Wandabstand sind hier Annahmen.",
     ], gr=2.3, breite=160, zab=1.4)
     absatz(c, x0, 44, [
