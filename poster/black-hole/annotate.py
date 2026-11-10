@@ -131,8 +131,8 @@ def annotate(img8, meta, variant):
     draw_tracked(dt, (x0, y0), 'BLACK HOLE', f_tit, 0.62 * 318 * s, anchor_x='center')
 
     # ---- Etiketten
-    f_head = font(78 * s, 400, 125)
-    f_body = font(44 * s, 400, 110)
+    f_head = font(78 * s, 460, 125)
+    f_body = font(46 * s, 520, 110)
     lw = max(1, int(round(2.6 * s)))
     lab = layout(meta, bh)
     texts = TEXTS[variant]
@@ -149,7 +149,7 @@ def annotate(img8, meta, variant):
         dl.ellipse([px - rr, py - rr, px + rr, py + rr], fill=255)
 
     out = img8.astype(np.float32) / 255.0
-    for mask, colr, op in ((m_line, (1.0, 0.97, 0.93), 0.55), (m_body, (0.86, 0.83, 0.80), 0.92),
+    for mask, colr, op in ((m_line, (1.0, 0.97, 0.93), 0.55), (m_body, (0.93, 0.91, 0.89), 1.0),
                            (m_head, (0.97, 0.96, 0.95), 1.0), (m_title, (0.97, 0.96, 0.95), 1.0)):
         m = np.asarray(mask, np.float32)[..., None] / 255.0 * op
         out = out * (1 - m) + np.array(colr, np.float32) * m
