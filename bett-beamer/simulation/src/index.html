@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bett mit verdecktem Beamer – 3D-Simulation</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #111; color: #eee; font: 14px/1.35 system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden; }
+  #c { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  #kopf { position: fixed; top: 0; left: 0; right: 0; padding: 10px 14px 8px; background: linear-gradient(#000c, #0000); pointer-events: none; }
+  #kopf h1 { margin: 0; font-size: 15px; font-weight: 650; }
+  #info { margin-top: 3px; font-size: 13px; color: #f3d7a8; max-width: 900px; }
+  #leiste { position: fixed; left: 0; right: 0; bottom: 0; padding: 8px 10px 12px; background: linear-gradient(#0000, #000d 30%); display: flex; flex-direction: column; gap: 6px; }
+  #leiste div { display: flex; flex-wrap: wrap; gap: 6px; }
+  button { background: #2a2a2e; color: #eee; border: 1px solid #4a4a50; border-radius: 8px; padding: 7px 10px; font: inherit; font-size: 13px; cursor: pointer; }
+  button.an { background: #d9a35f; color: #1b1308; border-color: #f0c48a; font-weight: 600; }
+  #hinweis { position: fixed; top: 54px; right: 12px; font-size: 11.5px; color: #bbb; text-align: right; pointer-events: none; }
+  @media (max-width: 760px) { #hinweis { display: none; } #kopf h1 { font-size: 14px; } #info { font-size: 12px; } button { padding: 6px 8px; font-size: 12px; } }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="kopf"><h1>Bett mit verdecktem Beamer – Simulation (Vorentwurf)</h1><div id="info"></div></div>
+<div id="hinweis">Ziehen: drehen · Zwei Finger / Mausrad: zoomen<br>Maße wie Bauzeichnung, Bild 2,2 m breit, Wand 2,5 m (Annahme)</div>
+<div id="leiste"></div>
+<script src="./app.js"></script>
+</body>
+</html>

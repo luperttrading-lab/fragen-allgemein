@@ -50,3 +50,14 @@ Folgende Werte sind deshalb angenommen:
 
 Quellen: Panasonic Spec File PT-VMZ51S (Stand 04/2023) und Operating Instructions PT-VMZ71/61/51/51S/41. Die PDFs
 liegen nicht im Repo.
+
+## Varianten A und C, Simulation
+
+- **Variante A:** offenes Fenster ohne Klappe. Der Beamer wird mit seiner eigenen Fernbedienung bedient, die
+  Lüfter laufen über eine Master-Slave-Leiste.
+- **Variante C:** Motor-Schieber, bedient per WLAN-Relais (Siri, Home-App oder Taster), mit Endschalter-Verriegelung.
+- Blatt 5 stellt A und C gegenüber, Blatt 6 zeigt Renderbilder aus der Simulation.
+- `simulation/`: interaktive 3D-Simulation mit three.js (`npm install`, `npm run build`). Standbilder erzeugt
+  `node render.js ../renders name=variant=C,kino=1,view=bett` (Ansichten: raum, bett, sitzend, bank, detail, seite).
+- `renders/`: Renderbilder und Übersichten je Variante.
+- Online: [3D-Simulation](https://claude.ai/artifact/CV19tvoDtLsx4sz4gvDq9q)

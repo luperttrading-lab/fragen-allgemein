@@ -1,0 +1,16 @@
+{
+  "name": "bett-beamer-simulation",
+  "version": "1.0.0",
+  "description": "3D-Simulation Bett mit verdecktem Beamer (Variante A offen, Variante C Motor-Schieber)",
+  "scripts": {
+    "build": "esbuild src/main.js --bundle --minify --format=iife --target=es2020 --outfile=dist/app.js && cp src/index.html dist/index.html",
+    "render": "node render.js ../renders"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.24.0",
+    "three": "^0.170.0"
+  }
+}

@@ -108,6 +108,7 @@ assert VX_TIEFE_KABEL + 20 <= (FUGE + BANK_T - PL) - (FUGE + PL), "VX500 passt n
 pdfmetrics.registerFont(TTFont("DV", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"))
 pdfmetrics.registerFont(TTFont("DVB", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"))
 MM = 72 / 25.4
+GESAMT = 6
 SEITE_B, SEITE_H = 420, 297
 
 C_HOLZ = Color(0.93, 0.84, 0.66)
@@ -473,7 +474,7 @@ def bank_draufsicht_aussen(v, innen=True):
 
 # ------------------------------------------------------------------ Blatt 1
 def blatt1(c):
-    b = Blatt(c, 1, 4, "Bett 200×200 mit Verkleidung und verdecktem Beamer",
+    b = Blatt(c, 1, GESAMT, "Bett 200×200 mit Verkleidung und verdecktem Beamer",
               "Übersicht: Draufsicht Raum, Längsschnitt mit Strahlengang und Sichtlinien", "1:25")
     s = 1 / 25
 
@@ -602,7 +603,7 @@ def blatt1(c):
 
 # ------------------------------------------------------------------ Blatt 2
 def blatt2(c):
-    b = Blatt(c, 2, 4, "Beamer-Fußbank (frei stehend, vom Bett entkoppelt)",
+    b = Blatt(c, 2, GESAMT, "Beamer-Fußbank (frei stehend, vom Bett entkoppelt)",
               "Ansicht Wandseite, Draufsicht ohne Deckel, Schnitt A–A, Stirnseiten", "1:10 / 1:5")
     s = 1 / 10
     d = (1.2, 0.8)
@@ -807,7 +808,7 @@ def blatt2(c):
 
 # ------------------------------------------------------------------ Blatt 3
 def blatt3(c):
-    b = Blatt(c, 3, 4, "Details: Schieber, Fenster, Bettverkleidung, Steuerung",
+    b = Blatt(c, 3, GESAMT, "Details: Schieber, Fenster, Bettverkleidung, Steuerung",
               "Detail 1–3 und Blockschaltbild", "1:4 / 1:2,5")
     # ---------------- Detail 1 Schieber, Ansicht von innen  M 1:4
     v = Ansicht(c, 77, 215, 1 / 4, ry=20)
@@ -908,7 +909,7 @@ def blatt3(c):
     ], gr=1.9, zab=1.3)
 
     # ---------------- Detail 4 Blockschaltbild
-    titel(c, 152, 166, "Detail 4: Steuerung – Blockschaltbild (Grundvariante ohne Smart Home)", gr=3.0)
+    titel(c, 152, 166, "Detail 4: Steuerung Variante C – Blockschaltbild (Variante A: Blatt 5)", gr=3.0)
 
     def box(x, y, w_, h_, t, fill=white, gr=1.9, fett=False):
         c.setFillColor(fill)
@@ -944,7 +945,7 @@ def blatt3(c):
     box(366, 140, 38, 14, "Endschalter S2\nSchieber ganz AUF", fill=Color(1.0, 0.9, 0.9), fett=True)
     box(152, 114, 34, 14, "Steckdosenleiste\nDauer")
     box(254, 114, 48, 14, "Netzteil 12 V / 5 A\nimmer an")
-    box(314, 112, 42, 16, "Kino-Relais K1\nFunk/WLAN\noder Schalter", fett=True)
+    box(314, 112, 42, 16, "WLAN-Relais K1\nSiri / Home-App\n+ Taster", fett=True)
     box(366, 112, 38, 16, "Zeitrelais K4\n5 min Nachlauf\n→ 2 Lüfter 140")
     box(152, 88, 34, 14, "HDMI-Switch\n3 → 1")
     box(196, 88, 46, 14, "Apple TV · Mac mini\nSwitch-Dock · LAN")
@@ -974,7 +975,7 @@ def blatt3(c):
     ver([(302, 147), (314, 147)], txt="Audio", tpos=(303, 148.5))
     absatz(c, 152, 78, [
         "**Ablauf",
-        "Kino an: K1 ein → K2 zieht an → Antrieb fährt ein → Schieber AUF (≈ 5 s) → Endschalter S2 schließt → K3 gibt die "
+        "Kino an: „Hey Siri, Kino an“ → K1 ein → K2 zieht an → Antrieb fährt ein → Schieber AUF (≈ 5 s) → Endschalter S2 schließt → K3 gibt die "
         "Beamer-Steckdose frei → Beamer startet sofort ([INITIAL START UP] = ON, VMZ51S Anleitung S. 89). Lüfter an.",
         "Kino aus: K1 aus → Schieber fährt zu → S2 öffnet nach 1–2 mm → Beamer sofort stromlos; der Schieber erreicht das "
         "Fenster erst ≈ 0,5 s später. Direct Power Off ist laut Panasonic zulässig. Lüfter laufen 5 min nach (K4).",
@@ -992,7 +993,7 @@ def blatt3(c):
 
 # ------------------------------------------------------------------ Blatt 4
 def blatt4(c):
-    b = Blatt(c, 4, 4, "Listen, Berechnungen, Inbetriebnahme", "Zuschnitt, Einkauf, Rechenwerte, Checkliste", "–")
+    b = Blatt(c, 4, GESAMT, "Listen, Berechnungen, Inbetriebnahme", "Zuschnitt, Einkauf, Rechenwerte, Checkliste", "–")
     x0 = 18
     titel(c, x0, 274, "Zuschnittliste (Platte 19 mm; Maße L × B)", gr=3.4)
     hoehe_innen = Z_DE - Z_BO
@@ -1026,7 +1027,7 @@ def blatt4(c):
 
     titel(c, x0, y - 5, "Einkaufsliste Technik und Beschläge", gr=3.4)
     teile = [["Teil", "Anforderung"],
-             ["Kino-Relais K1 12 V", "Funk- oder WLAN-Relais (Handsender/App) oder Schalter"],
+             ["WLAN-Relais K1 12 V", "Matter/HomeKit (Siri), potentialfrei, + Taster (nur C)"],
              ["Netzrelais K3", "Spule 12 V, Kontakt 230 V ≥ 10 A, in Dose (Elektriker)"],
              ["Mikroschalter S2", "Rollenhebel, Schließer, Endlage Schieber AUF"],
              ["Zeitrelais K4 12 V", "Abfallverzögerung, einstellbar ≈ 5 min (Lüfter)"],
@@ -1134,11 +1135,154 @@ def blatt4(c):
     b.fertig()
 
 
+# ------------------------------------------------------------------ Blatt 5
+def fenster_ansicht(c, px, py, s, variante):
+    """Fenster von der Wand gesehen (gespiegelt), Massstab s."""
+    v = Ansicht(c, px, py, s, spiegel_x=True)
+    v.rechteck(-170, SOCKEL, 340, BANK_H - SOCKEL, fill=C_HOLZ, lw=LW_MITTEL)
+    v.linie(-170, Z_BO, 170, Z_BO, lw=LW_DUENN)
+    v.linie(-170, Z_DE, 170, Z_DE, lw=LW_DUENN)
+    v.rechteck(-F_X, F_Z0, 2 * F_X, F_Z1 - F_Z0, fill=Color(0.08, 0.08, 0.08), lw=LW_MITTEL)
+    if variante == "A":
+        v.rechteck(-F_X, Z_FB + 10, 2 * F_X, PJ_H - 10, fill=Color(0.93, 0.93, 0.92), lw=LW_FEIN)
+        v.kreis(0, Z_L, 36, fill=C_ALU, lw=LW_FEIN)
+        v.kreis(0, Z_L, LINSE_R, fill=Color(0.05, 0.07, 0.12), lw=LW_FEIN)
+        v.hinweis_abs(0, Z_L - LINSE_R, px - 20, py - 9, "Linse sichtbar (Beamer aus)", gr=1.9)
+    else:
+        v.rechteck(-F_X, F_Z0, 2 * F_X, F_Z1 - F_Z0, fill=Color(0.16, 0.16, 0.17), lw=LW_MITTEL)
+        v.kreis(0, Z_L, LINSE_R, lw=LW_FEIN, dash=(1, 0.6), col=C_PJ)
+        v.poly([(170, S_Z0), (S_X0 + HUB, S_Z0), (S_X0 + HUB, S_Z1), (170, S_Z1)], zu=False, lw=LW_DUENN, dash=(3, 0.8, 0.5, 0.8))
+        v.hinweis_abs(-40, (F_Z0 + F_Z1) / 2, px - 20, py - 9, "Schieber zu (Alu, mattschwarz, 26 mm hinter der Front)", gr=1.9)
+        v.text(140, S_Z0 + 12, "Schieber AUF →", gr=1.6, anker="c")
+    v.linie(0, -5, 0, BANK_H + 15, lw=LW_FEIN, dash=(4, 1, 0.6, 1))
+    v.mass(-F_X, F_Z1, F_X, F_Z1, 7, "160")
+    v.mass(-F_X, F_Z0, -F_X, F_Z1, -4, fmt(F_Z1 - F_Z0))
+    v.mass(170, 0, 170, F_Z0, 4, fmt(F_Z0))
+    v.mass(170, 0, 170, Z_L, 10, f"Linse {Z_L}")
+    v.mass(-170, 0, -170, BANK_H, -4, fmt(BANK_H))
+    v.linie(-190, 0, 190, 0, lw=LW_DICK)
+
+
+def fenster_schnitt(c, px, py, s, variante):
+    w = Ansicht(c, px, py, s, rx=400, ry=0)
+    w.linie(400, 0, 575, 0, lw=LW_DICK)
+    w.schraffur(400, Z_K0, Y_B1 - 400, PL, abstand=0.8, fill=C_HOLZ)
+    w.schraffur(400, Z_DE, Y_B1 - 400, PL, abstand=0.8, fill=C_HOLZ)
+    w.schraffur(Y_FI, Z_BO, PL, F_Z0 - Z_BO, abstand=0.8, fill=C_HOLZ)
+    w.rechteck(400, Z_FB + 10, Y_LF - 400, PJ_H - 10, fill=C_PJ, falpha=0.45, lw=LW_DUENN)
+    w.rechteck(Y_LF - 25, Z_L - LINSE_R, 25, 2 * LINSE_R, fill=Color(0.2, 0.3, 0.6), lw=LW_DUENN)
+    ende = Y_B1 + 40
+    st_u = H_SHIFT * SH / L_PROJ
+    st_o = (H_SHIFT + 1) * SH / L_PROJ
+    w.poly([(Y_LF, Z_L - LINSE_R), (ende, Z_L - LINSE_R + st_u * (ende - Y_LF)),
+            (ende, Z_L + LINSE_R + st_o * (ende - Y_LF)), (Y_LF, Z_L + LINSE_R)],
+           fill=C_STRAHL, falpha=0.45, lw=LW_FEIN, col=C_STRAHL)
+    w.linie(Y_LF - 30, Z_L, ende, Z_L, lw=LW_FEIN, dash=(4, 1, 0.6, 1))
+    if variante == "C":
+        w.rechteck(Y_FI - 7, S_Z0, 3, S_Z1 - S_Z0, lw=LW_FEIN, dash=(1.2, 0.6), col=C_GRAU)
+        for zz in (S_Z0 - 4, S_Z1 - 6):
+            w.rechteck(Y_FI - 10, zz, 10, 10, fill=C_ALU, lw=LW_FEIN)
+    w.mass(Y_LF, 0, Y_FI, 0, -3, fmt(FRONTSPALT))
+    w.mass(Y_FI, 0, Y_B1, 0, -3, "19")
+    w.text(430, Z_L + 10, "Beamer", gr=1.7, rot=90, anker="c")
+
+
+def blatt5(c):
+    b = Blatt(c, 5, GESAMT, "Varianten A und C im Vergleich",
+              "Fenster von der Wand, Schnitt Fenster, Bedienung, Unterschiede", "1:3")
+    s = 1 / 3
+    for i, (var, kopf, farbe) in enumerate((("A", "Variante A – offenes Fenster, ohne Klappe", C_KALT),
+                                           ("C", "Variante C – Motor-Schieber per WLAN / Siri", C_WARM))):
+        x0 = 20 + i * 192
+        c.setFont("DVB", 3.6)
+        c.setFillColor(farbe)
+        c.drawString(x0, 273, kopf)
+        c.setFillColor(black)
+        titel(c, x0, 262, "Ansicht von der Wand", "M 1:3", gr=2.6)
+        fenster_ansicht(c, x0 + 62, 180, s, var)
+        titel(c, x0 + 128, 262, "Schnitt Fenster", "M 1:3", gr=2.6)
+        fenster_schnitt(c, x0 + 128, 180, s, var)
+    absatz(c, 20, 160, [
+        "**Bedienung",
+        "Beamer-Fernbedienung über die IR-Verlängerung (Auge an der Bettseite) oder HDMI-CEC vom Apple TV (VMZ51S).",
+        "**Entfällt gegenüber C",
+        "Schieber, Führungen, Linearantrieb, Relais K1–K4, Endschalter S2, Elektriker. Brandgefahr durch geschlossenen "
+        "Schieber gibt es nicht.",
+        "**Lüfter",
+        "Master-Slave-Steckdosenleiste: Beamer = Master, 12-V-Netzteil der Lüfter = Slave, Schwelle ≈ 25–30 W. Die Lüfter "
+        "laufen, solange der Beamer Strom zieht, auch im Nachlauf.",
+        "**Nachteile",
+        "Staub auf der Linse (alle paar Monate mit dem Blasebalg reinigen), dunkles Fenster 16 × 12 cm auf der Wandseite, "
+        "Linse für Kinder und Haustiere erreichbar.",
+        "Optional: Magnetblende 200 × 140 von Hand – nie bei laufendem Beamer aufsetzen.",
+    ], gr=2.15, breite=180, zab=1.32)
+    absatz(c, 212, 160, [
+        "**Bedienung",
+        "„Hey Siri, Kino an“, Home-App oder Taster → WLAN-Relais K1 → Schieber AUF (≈ 5 s) → Endschalter S2 → Netzrelais K3 → "
+        "Beamer startet von selbst ([INITIAL START UP] = ON). Aus: K1 aus → Beamer sofort stromlos → Schieber zu → "
+        "Lüfter 5 min Nachlauf (K4).",
+        "**Sicherheit",
+        "Der Beamer hat nur Strom, wenn der Schieber ganz offen ist – fest verdrahtet, unabhängig vom WLAN.",
+        "**WLAN-Relais K1",
+        "12-V-Versorgung, potentialfreier Kontakt, Matter- oder HomeKit-fähig für Siri (Modell nach Verfügbarkeit prüfen). "
+        "Zusätzlich ein Taster parallel, falls das WLAN ausfällt.",
+        "**Nachteile",
+        "Mehr Teile, 230-V-Relais durch eine Elektrofachkraft, der Antrieb surrt ≈ 5 s.",
+    ], gr=2.15, breite=186, zab=1.32)
+    zeilen = [["Kriterium", "A: offenes Fenster", "C: Motor-Schieber"],
+              ["vom Bett aus sichtbar", "nichts", "nichts"],
+              ["von der Wandseite sichtbar", "dunkles Fenster mit Linse", "schwarze Fläche hinter dem Ausschnitt"],
+              ["Bedienung", "Beamer-Fernbedienung / CEC", "Siri, Home-App oder Taster – ein Befehl"],
+              ["Staub, Kinder, Haustiere", "Linse offen", "geschützt, solange zu"],
+              ["zusätzliche Teile", "Master-Slave-Leiste", "Schieber, Antrieb, K1–K4, S2, Netzteil 5 A"],
+              ["Elektriker", "nein", "ja (K3 schaltet 230 V)"],
+              ["Fehlerquellen", "praktisch keine", "Antrieb, Endschalter, WLAN"],
+              ["Zeit bis zum Bild", "Startzeit Beamer", "≈ 5 s Schieber + Startzeit Beamer"]]
+    tabelle(c, 20, 104, [52, 62, 82], zeilen, gr=2.2, zh=3.9)
+    absatz(c, 222, 104, [
+        "**Gemeinsam für A und C",
+        "Bank, Verkleidung, Lüftung (Schlitzfelder, Lüfter 140 mm),",
+        "Technikfach und Kabelkanal sind identisch (Blatt 1–4).",
+        "Der Fensterausschnitt ist in beiden Varianten gleich;",
+        "C lässt sich also später aus A nachrüsten.",
+    ], gr=2.1, zab=1.32)
+    b.fertig()
+
+
+# ------------------------------------------------------------------ Blatt 6
+def blatt6(c):
+    b = Blatt(c, 6, GESAMT, "Visualisierung (3D-Simulation)",
+              "Renderbilder Variante A und C, Blick vom Bett, Innenleben", "–")
+    ordner = os.path.join(HIER, "renders")
+    bilder = [("Uebersicht_Variante_A.jpg", 20, 140, 185), ("Uebersicht_Variante_C.jpg", 215, 140, 185),
+              ("Uebersicht_Gemeinsam.jpg", 20, 12, 175)]
+    for name, x, y, w_ in bilder:
+        pfad = os.path.join(ordner, name)
+        if os.path.exists(pfad):
+            from reportlab.lib.utils import ImageReader
+            ir = ImageReader(pfad)
+            iw, ih = ir.getSize()
+            h_ = w_ * ih / iw
+            c.drawImage(ir, x, y, w_, h_)
+    absatz(c, 205, 126, [
+        "**Zur Simulation",
+        "Gerendert aus der interaktiven 3D-Simulation (three.js) mit",
+        "denselben Maßen wie die Bauzeichnung: Bank 2098 × 520 × 210,",
+        "Bett 21 cm, Linse +103, Bild 2,2 m breit, Unterkante 750.",
+        "Annahmen: Wandabstand 2,5 m, Raum 4,2 m breit, Raumhöhe 2,5 m,",
+        "Holz Eiche-Leimholz (in der Simulation auf Kiefer umschaltbar).",
+        "Das Filmbild ist ein Platzhalter; Helligkeit und Licht im Raum",
+        "sind qualitativ, nicht fotometrisch gerechnet.",
+        "Simulation: bett-beamer/simulation (npm install, npm run build).",
+    ], gr=2.1, zab=1.32)
+    b.fertig()
+
+
 def main():
     c = canvas.Canvas(AUSGABE, pagesize=(SEITE_B * MM, SEITE_H * MM))
     c.setTitle("Bauzeichnungen Bett mit verdecktem Beamer")
     c.setAuthor("Vorentwurf")
-    for f in (blatt1, blatt2, blatt3, blatt4):
+    for f in (blatt1, blatt2, blatt3, blatt4, blatt5, blatt6):
         f(c)
     c.save()
     print(f"geschrieben: {AUSGABE}")
