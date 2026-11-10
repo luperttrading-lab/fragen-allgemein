@@ -272,9 +272,9 @@ def trace_rows(job):
             edge = edge * edge * (3 - 2 * edge)
             # Doppler + Gravitation
             Om = spin * rr ** -1.5
-            g = np.sqrt(np.clip(1 - 3 / rr, 1e-4, None)) / (1 - Om * lam[idx])
+            g = np.sqrt(np.clip(1 - 3 / rr, 1e-4, None)) / np.maximum(1 - Om * lam[idx], 0.05)
             # Dichte / Struktur
-            fade = np.exp(-(rr / (dk['r_out'] * (1 + 0.22 * cl))) ** 2.5)    # ausgefranster Rand
+            fade = np.exp(-(rr / (dk['r_out'] * np.clip(1 + 0.22 * cl, 0.4, None))) ** 2.5)    # ausgefranster Rand
             if li == 0:
                 dens = 1 / (1 + np.exp(-(2.7 * st * (0.65 + 0.35 * np.tanh(ev)) + 0.9 * cl + 0.15)))
             else:   # gekippte Lagen: nur Flocken -> Volumen an den Kanten
@@ -301,6 +301,7 @@ def trace_rows(job):
     kd = G['kind']
     esc = (kd[ib] == 2) & (kd[ib + 1] == 2)
     T_bg = np.where(esc, T, 0).astype(np.float32)
+    col = np.nan_to_num(col, nan=0.0, posinf=0.0, neginf=0.0)   # ein NaN wuerde der Bloom zum Quadrat verschmieren
     shape = (y1 - y0, W)
     return y0, col.reshape(shape + (3,)), T_bg.reshape(shape), b.astype(np.float32).reshape(shape)
 
@@ -314,11 +315,12 @@ def star_layer(W, H, scale, seed=3):
     xs = rng.uniform(0, W, n)
     ys = rng.uniform(0, H, n)
     mag = rng.pareto(1.6, n) + 1.0
-    flux = 0.016 * mag
-    flux = np.minimum(flux, 4.0)
+    peak = np.minimum(0.045 * mag, 2.5)                       # Spitzenhelligkeit in der Druckfassung
     temp = rng.uniform(0, 1, n)
     tint = np.stack([1.0 + 0.10 * (temp - 0.5) * -1, np.ones(n), 1.0 + 0.25 * (temp - 0.5)], -1)
-    sig = (0.55 + 0.35 * np.sqrt(np.minimum(mag, 30))) * scale
+    sig_full = 1.05 + 0.32 * np.sqrt(np.minimum(mag, 40))     # 0,1 ... 0,25 mm
+    flux = peak * 2 * math.pi * sig_full ** 2 * scale ** 2    # Lichtmenge flaechentreu
+    sig = np.maximum(sig_full * scale, 0.45)
     for x, y, fl, s, t in zip(xs, ys, flux, sig, tint):
         R = int(math.ceil(3 * s)) + 1
         x0, x1 = max(int(x) - R, 0), min(int(x) + R + 1, W)
