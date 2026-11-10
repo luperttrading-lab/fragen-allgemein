@@ -596,7 +596,7 @@ def blatt1(c):
 # ------------------------------------------------------------------ Blatt 2
 def blatt2(c):
     b = Blatt(c, 2, 4, "Beamer-Fußbank (frei stehend, vom Bett entkoppelt)",
-              "Ansicht Wandseite, Draufsicht ohne Deckel, Schnitt A–A, Stirnseite Abluft", "1:10 / 1:5")
+              "Ansicht Wandseite, Draufsicht ohne Deckel, Schnitt A–A, Stirnseiten", "1:10 / 1:5")
     s = 1 / 10
     d = (1.2, 0.8)
 
@@ -654,8 +654,11 @@ def blatt2(c):
     t.schraffur(X_T1 + PL, Y_PR + 40, X_PJ0 - X_T1 - PL, PJ_T - 80, abstand=0.5, col=C_WARM)
     for yy in (180, 360):
         t.pfeil(X_PJ0 + 40, yy, -XB - 90, yy, col=C_WARM)
+    t.rechteck(-XB + PL + 80, Y_RI, PL, Y_FI - Y_RI, fill=C_VK, lw=LW_DUENN)
     for yc in (180, 360):
-        t.rechteck(-XB + PL, yc - LUEFTER / 2, 25, LUEFTER, fill=C_GRAU, lw=LW_DUENN)
+        t.rechteck(-XB + PL + 80 - 25, yc - LUEFTER / 2, 25, LUEFTER, fill=C_GRAU, lw=LW_DUENN)
+    for yy in (180, 360):
+        t.pfeil(XB + 110, yy, X_T2 + 60, yy, col=C_KALT)
     t.text(-690, 420, "Abluftkanal – frei halten", gr=2.2, anker="c", col=C_WARM)
     t.pfeil(380, 275, X_PJ1 + 10, 275, col=C_KALT)
     t.kreis(380, 275, 35, lw=0.3, col=C_KALT)
@@ -670,9 +673,9 @@ def blatt2(c):
                                 (665, 95, 160, 110, "LAN-Switch")):
         t.rechteck(x, y, w_, h_, fill=white, lw=LW_DUENN)
         t.text(x + w_ / 2, y + h_ / 2 - 8, txt, gr=1.7, anker="c")
-    t.text(925, 150, "Ebene 1: Geräte", gr=1.7, anker="c")
-    t.text(925, 100, "darunter: Leisten,", gr=1.6, anker="c")
-    t.text(925, 60, "Netzteile, Relais", gr=1.6, anker="c")
+    t.text(925, 175, "Ebene 1: Geräte", gr=1.7, anker="c")
+    t.text(925, 135, "darunter: Leisten,", gr=1.6, anker="c")
+    t.text(925, 100, "Netzteil, Relais", gr=1.6, anker="c")
     # Kabelkanal unter dem Boden (Wanddose auf der Abluftseite)
     t.rechteck(-XB - 60, 35, XB + 1050, 40, lw=LW_DUENN, dash=(2.5, 0.8), col=Color(0.45, 0.2, 0.6))
     t.kreis(990, 55, 22, fill=white, lw=LW_DUENN, col=Color(0.45, 0.2, 0.6))
@@ -681,7 +684,7 @@ def blatt2(c):
     for yy in (Y_B0 - 60, Y_B1 + 110):
         t.pfeil(0, yy, -120, yy, lw=0.5, kopf=1.5)
         t.text(-150, yy - 25, "A", gr=2.6, font="DVB", anker="r")
-    t.hinweis_abs(-XB + 30, 120, 40, 108, f"2 × Lüfter {LUEFTER} mm,\nblasen nach außen", gr=1.9)
+    t.hinweis_abs(-XB + 75, 110, 40, 108, f"2 × Lüfter {LUEFTER} mm auf Träger,\n80 mm hinter dem Schlitzfeld", gr=1.9)
     t.hinweis_abs(X_T1 + 10, Y_PR + 70, 100, 100, "Trennwand T1: Ausschnitt 280 × 100 vor\nAbluftgitter, Moosgummi-Dichtrahmen", gr=1.9)
     t.hinweis_abs(0, Y_B0 + 4, 141, 110, "IR-Empfänger (zum Bett)", gr=1.9)
     t.hinweis_abs(380, 240, 176, 100, "Zuluftgitter im Boden 400 × 180 + Filtermatte,\nFachboden mit Ausschnitt 450 × 380", gr=1.9, col=C_KALT)
@@ -745,20 +748,18 @@ def blatt2(c):
 
     # ---------------- Stirnseite Abluft M 1:10 (Blick von -X, Bettseite rechts)
     e = Ansicht(c, 278, 56, s, spiegel_x=True, rx=Y_B1)
-    titel(c, 262, 121, "Stirnseite Abluft (von links)", "M 1:10")
+    titel(c, 262, 121, "Stirnseiten (links = rechts)", "M 1:10")
     for yf in (Y_B0 + 50, Y_B1 - 100):
         e.rechteck(yf, 0, 50, SOCKEL, fill=C_GRAU, lw=LW_DUENN)
     e.rechteck(Y_B0, SOCKEL, BANK_T, BANK_H - SOCKEL, fill=C_HOLZ, lw=LW_DICK)
     e.linie(Y_B0, Z_DE, Y_B1, Z_DE, lw=LW_DUENN)
     e.linie(Y_B0, Z_BO, Y_B1, Z_BO, lw=LW_DUENN)
-    for yc in (180, 360):
-        e.rechteck(yc - LUEFTER / 2, 300, LUEFTER, LUEFTER, fill=Color(0.25, 0.25, 0.25), lw=LW_DUENN)
-        e.kreis(yc, 300 + LUEFTER / 2, LUEFTER / 2 - 5, lw=LW_FEIN, col=white)
-        e.kreis(yc, 300 + LUEFTER / 2, 22, lw=LW_FEIN, col=white)
+    for k in range(9):
+        e.rechteck(100, 140 + 30 * k, 340, 12, fill=Color(0.2, 0.2, 0.2), lw=LW_FEIN)
     e.mass(Y_B1, 0, Y_B0, 0, -5, fmt(BANK_T))
-    e.mass(Y_B0, 300, Y_B0, 300 + LUEFTER, -4, fmt(LUEFTER))
-    e.text(270, 220, f"2 × {LUEFTER} mm", gr=1.9, anker="c")
-    e.text(270, 150, "mit Schutzgitter", gr=1.9, anker="c")
+    e.mass(100, 140, 440, 140, -3, "340")
+    e.mass(Y_B0, 140, Y_B0, 392, -4, "9 × 12, Teilung 30")
+    e.text(270, 95, "Schlitzfeld 367 cm² frei", gr=1.8, anker="c")
     e.text(Y_B1, 575, "Wand", gr=1.9, anker="c")
     e.text(Y_B0, 575, "Bett", gr=1.9, anker="c")
 
@@ -781,13 +782,17 @@ def blatt2(c):
 
     absatz(c, 25, 90, [
         "**Luftführung (Panasonic verlangt im engen Raum Zwangslüftung, Anleitung S. 21)",
-        "1. Zuluft: Raumluft strömt unter der Bank (Sockelfuge 60 mm, offen) durch das Bodengitter mit Filtermatte nach oben, "
+        "1. Zuluft (zusätzlich zur rechten Stirnseite, Punkt 5): Raumluft strömt unter der Bank (Sockelfuge 60 mm, offen) durch das Bodengitter mit Filtermatte nach oben, "
         "durch den Ausschnitt im Fachboden an die Ansaugseiten des Beamers (Linsenseite + Front). Bei offenem Schieber auch durchs Fenster.",
         "2. Der Beamer bläst seitlich auf der Abluftseite aus. Moosgummi-Rahmen und Trennwand T1 führen die warme Luft in den "
         "Abluftkanal – kein Kurzschluss zurück zur Ansaugung.",
         "3. Zwei 140-mm-Lüfter in der linken Stirnseite saugen den Kanal ab (Unterdruck in der Bank). Die warme Luft verlässt die "
         "Bank seitlich, weit weg vom Strahl (Hitzeflimmern vor der Linse vermeiden, Anleitung S. 19).",
-        "4. Lüfter laufen nur, wenn der Beamer läuft (Slave-Steckplatz, Blatt 3). Vor der Stirnseite ≥ 50 cm frei halten.",
+        "4. Lüfter laufen mit „Kino an“ und 5 min nach (Zeitrelais, Blatt 3). Vor beiden Stirnseiten ≥ 50 cm frei halten.",
+        "5. Beide Stirnseiten bekommen das gleiche Schlitzfeld (9 × 340 × 12). Links Abluft: Lüfter sitzen unsichtbar 80 mm dahinter. "
+        "Rechts Zuluft: Filtermatte dahinter, die Luft kühlt Mac mini und Switch und strömt durch 2 Öffnungen 300 × 80 unten in "
+        "T2 zum Beamer. Vorne (Wandseite) keine Abluft (Hitzeflimmern) und keine Schlitze in den Abluftkanal (Lüfter saugen sonst "
+        "Raumluft statt Beamer-Abluft).",
         "**Entkopplung",
         "Die Bank berührt das Bett nicht (Fuge 10 mm, optisch eine Schattenfuge). Bewegung auf der Matratze würde sonst das Bild "
         "zittern lassen: schon 0,5 mm Kippen über 348 mm Gerätetiefe verschiebt das Bild um ≈ 3,7 mm ≈ 3,5 Pixel (Blatt 4).",
@@ -828,6 +833,10 @@ def blatt3(c):
     v.hinweis_abs(330, S_Z1 + 3, 252, 262, "Alu-U-Profil 10 × 10 oben + unten,\nPTFE-Gleitband, auf Front geschraubt", gr=1.9)
     v.hinweis_abs(S_X1 + 350, Z_L + 18, 252, 249, "Linearantrieb 12 V DC, Hub 200, ≥ 30 N,\n≥ 40 mm/s, Endschalter intern", gr=1.9)
     v.hinweis_abs(S_X1 + 540, Z_L - 30, 252, 236, "Hartholzklotz, Gabelkopf verschraubt", gr=1.9)
+    v.rechteck(S_X1 + HUB + 4, S_Z0 + 8, 22, 12, fill=Color(1.0, 0.85, 0.85), lw=LW_DUENN)
+    v.linie(S_X1 + HUB + 6, S_Z0 + 20, S_X1 + HUB + 1, S_Z0 + 30, lw=0.4, col=C_ROT)
+    v.hinweis_abs(S_X1 + HUB + 26, S_Z0 + 14, 252, 222, "Endschalter S2: schließt nur, wenn der Schieber\n"
+                  "ganz AUF ist → erst dann Strom für den Beamer", gr=1.9, col=C_ROT)
     v.hinweis_abs(S_X0 + 30, S_Z0 + 20, 120, 205, "Schieber: Alu-Verbundplatte 3 mm, Wandseite mattschwarz,\n"
                                                   "Linsenseite blank (Hitzeschild)", gr=1.9)
     v.hinweis_abs(S_X1, Z_L - 15, 120, 197, "Winkel + Gabelkopf am Schieberrand", gr=1.9)
@@ -859,7 +868,7 @@ def blatt3(c):
     w.mass(Y_FI, 295, Y_B1, 295, -3, "19")
     w.mass(Y_B1, F_Z0, Y_B1, Z_L, -3, "35")
     w.mass(Y_B1, Z_L, Y_B1, F_Z1, -3, "85")
-    absatz(c, 336, 158, [
+    absatz(c, 288, 214, [
         "gelb: Strahl bei gewähltem Bild",
         "rot: Extremfall Weitwinkel +",
         "voller Lens-Shift – bleibt im Fenster",
@@ -926,45 +935,56 @@ def blatt3(c):
             c.setFillColor(black)
         c.setStrokeColor(black)
 
-    box(152, 138, 34, 12, "Wandsteckdose\n230 V")
-    box(194, 112, 44, 40, "Master-Slave-\nSteckdosenleiste\nSchwelle einstellbar\n≈ 25–30 W\n\nM · S · D", fill=C_HELLGRAU, fett=True)
-    box(250, 140, 50, 14, "Beamer VMZ51S / VX500\n175–365 W · Standby 12–15 W", fill=Color(0.85, 0.9, 1.0), fett=True)
-    box(250, 112, 50, 16, "Netzteil B 12 V / 2 A\nnur an, wenn Beamer an")
-    box(250, 84, 50, 16, "Netzteil A 12 V / 3 A\nimmer an")
-    box(314, 114, 38, 14, "2 × Lüfter 140 mm\n12 V, leise")
-    box(314, 140, 38, 14, "Marshall (AUX)\nLautsprecher")
-    box(314, 80, 38, 24, "Relais 12 V\n2 Wechsler\n= Polwender\nSpule an → AUF")
-    box(362, 80, 42, 24, "Linearantrieb 12 V\nHub 200\nEndschalter intern\n→ Schieber")
-    box(152, 108, 34, 14, "HDMI-Switch 3→1\nApple TV·Mac·Switch")
-    box(152, 82, 34, 14, "IR-Verlängerung\nAuge zum Bett")
-    ver([(186, 144), (194, 144)])
-    ver([(238, 147), (250, 147)], txt="Master", tpos=(239, 148))
-    ver([(238, 120), (250, 120)], txt="Slave", tpos=(239, 121))
-    ver([(230, 112), (230, 92), (250, 92)], txt="Dauer", tpos=(236, 93))
-    ver([(194, 115), (186, 115)], txt="Dauer", tpos=(187, 116))
-    ver([(206, 112), (206, 89), (186, 89)], txt="Dauer 5 V", tpos=(188, 90))
-    ver([(300, 121), (314, 121)])
-    ver([(300, 116), (307, 116), (307, 98), (314, 98)], txt="Spule", tpos=(302, 106))
-    ver([(300, 90), (314, 90)], txt="12 V", tpos=(302, 91))
-    ver([(352, 92), (362, 92)], txt="±12 V", tpos=(353, 93))
-    ver([(152, 115), (147, 115), (147, 158), (275, 158), (275, 154)], col=C_KALT, dash=(1.5, 0.8),
-        txt="HDMI → Beamer (Apple TV, Mac mini, Switch über einen Umschalter)", tpos=(165, 159))
-    ver([(300, 147), (314, 147)], txt="Audio-Out", tpos=(301, 148.5))
-    absatz(c, 152, 74, [
+    C_230 = Color(0.65, 0.1, 0.1)
+    box(152, 141, 34, 12, "Wandsteckdose\n230 V")
+    box(196, 136, 46, 20, "Netzrelais K3\nSpule 12 V · 230 V ≥ 10 A\nin Dose (Elektriker)", fill=Color(1.0, 0.9, 0.9), fett=True)
+    box(254, 140, 48, 14, "Beamer\nINITIAL START UP: ON", fill=Color(0.85, 0.9, 1.0), fett=True)
+    box(314, 140, 42, 14, "Marshall (AUX)\nLautsprecher")
+    box(366, 140, 38, 14, "Endschalter S2\nSchieber ganz AUF", fill=Color(1.0, 0.9, 0.9), fett=True)
+    box(152, 114, 34, 14, "Steckdosenleiste\nDauer")
+    box(254, 114, 48, 14, "Netzteil 12 V / 5 A\nimmer an")
+    box(314, 112, 42, 16, "Kino-Relais K1\nFunk/WLAN\noder Schalter", fett=True)
+    box(366, 112, 38, 16, "Zeitrelais K4\n5 min Nachlauf\n→ 2 Lüfter 140")
+    box(152, 88, 34, 14, "HDMI-Switch\n3 → 1")
+    box(196, 88, 46, 14, "Apple TV · Mac mini\nSwitch-Dock · LAN")
+    box(254, 88, 48, 14, "IR-Verlängerung\nAuge zum Bett")
+    box(314, 84, 42, 20, "Polwender K2\n2 Wechsler\nSpule an → AUF")
+    box(366, 84, 38, 20, "Linearantrieb\n12 V, Hub 200\n→ Schieber")
+    # 230 V
+    ver([(186, 147), (196, 147)], col=C_230)
+    ver([(242, 147), (254, 147)], col=C_230)
+    ver([(169, 141), (169, 128)], col=C_230)
+    ver([(186, 121), (254, 121)], col=C_230, txt="Dauer", tpos=(220, 122))
+    ver([(178, 114), (178, 108), (219, 108), (219, 102)], col=C_230)
+    ver([(186, 117), (248, 117), (248, 95), (254, 95)], col=C_230)
+    # 12 V
+    ver([(302, 121), (314, 121)])
+    ver([(302, 117), (309, 117), (309, 94), (314, 94)])
+    ver([(335, 112), (335, 104)], txt="Spule", tpos=(336, 106.5))
+    ver([(356, 121), (366, 121)])
+    ver([(356, 94), (366, 94)], txt="±12 V", tpos=(357, 95.5))
+    ver([(302, 125), (308, 125), (308, 135), (385, 135), (385, 140)], txt="12 V", tpos=(372, 136))
+    ver([(385, 154), (385, 158), (219, 158), (219, 156)], col=C_ROT, dash=(1.2, 0.6),
+        txt="Verriegelung: K3 nur an, wenn S2 geschlossen", tpos=(290, 159.2))
+    # Signale
+    ver([(196, 95), (186, 95)], col=C_KALT)
+    ver([(152, 95), (147, 95), (147, 161), (272, 161), (272, 154)], col=C_KALT, dash=(1.5, 0.8),
+        txt="HDMI → Beamer", tpos=(150, 156))
+    ver([(302, 147), (314, 147)], txt="Audio", tpos=(303, 148.5))
+    absatz(c, 152, 78, [
         "**Ablauf",
-        "Ein: Beamer-Fernbedienung (über IR-Verlängerung) oder CEC vom Apple TV (nur VMZ51S sicher) → Leistung > Schwelle → Slave an → "
-        "Relaisspule an → Antrieb fährt ein → Schieber AUF (≈ 5 s bei 40 mm/s) · Lüfter an.",
-        "Aus: Beamer aus → Lüfternachlauf des Beamers → Leistung < Schwelle → Slave aus → Spule aus → Antrieb fährt aus → "
-        "Schieber ZU · Lüfter aus.",
-        "Ohne Strom auf Netzteil B steht der Schieber immer auf ZU (sicherer Grundzustand).",
+        "Kino an: K1 ein → K2 zieht an → Antrieb fährt ein → Schieber AUF (≈ 5 s) → Endschalter S2 schließt → K3 gibt die "
+        "Beamer-Steckdose frei → Beamer startet sofort ([INITIAL START UP] = ON, VMZ51S Anleitung S. 89). Lüfter an.",
+        "Kino aus: K1 aus → Schieber fährt zu → S2 öffnet nach 1–2 mm → Beamer sofort stromlos; der Schieber erreicht das "
+        "Fenster erst ≈ 0,5 s später. Direct Power Off ist laut Panasonic zulässig. Lüfter laufen 5 min nach (K4).",
     ], gr=1.95, breite=94, zab=1.28)
-    absatz(c, 254, 74, [
-        "**Pflicht: nie mit geschlossenem Schieber projizieren",
-        "Panasonic warnt (Anleitung S. 13): nicht mit aufgesetztem Objektivdeckel projizieren – Brandgefahr. Einmal messen: Ist die Zeit vom "
-        "Einschalten bis zum ersten Licht länger als die Öffnungszeit des Schiebers (≈ 5 s)?",
-        "Wenn nicht: Profi-Variante mit Smart-Home-Relais + PJLink über LAN: Beamer startet mit [SHUTTER SETTING → "
-        "STARTUP: ON] (Bild dunkel), der Shutter öffnet erst, wenn ein Reedkontakt „Schieber offen“ meldet.",
-        "Alle 230-V-Teile nur steckbar, keine Netzverdrahtung im Holz; im Korpus nur 12 V.",
+    absatz(c, 254, 78, [
+        "**Harte Verriegelung: Beamer hat nur Strom, wenn der Schieber ganz offen ist",
+        "Endschalter S2 (Mikroschalter mit Rollenhebel) sitzt an der Endlage AUF und schaltet die 12-V-Spule von K3. Ohne "
+        "Software und ohne WLAN: Fällt Antrieb, Netzteil oder Relais aus, bleibt der Beamer aus. Projizieren auf den "
+        "geschlossenen Schieber (Brandgefahr, Anleitung S. 13) ist damit ausgeschlossen.",
+        "K3 schaltet 230 V: nur als geschlossenes Modul in einer Dose, Anschluss durch eine Elektrofachkraft. Alles andere ist 12 V.",
+        "Beamer-Fernbedienung (IR-Verlängerung) bleibt für Eingang, Lautstärke und Bildmodus.",
     ], gr=1.95, breite=150, zab=1.28)
     b.fertig()
 
@@ -978,12 +998,12 @@ def blatt4(c):
     tiefe_innen = Y_FI - Y_RI
     zeilen = [["Pos", "Teil", "Stk", "L", "B", "Bemerkung"],
               ["1", "Boden Bank", "1", fmt(BETT_AX), fmt(BANK_T), "Ausschnitt 400 × 180 (Zuluft), Kabeldurchlass"],
-              ["2", "Stirnseite links (Abluft)", "1", fmt(hoehe_innen), fmt(BANK_T), f"2 Lüfterausschnitte {LUEFTER} × {LUEFTER}"],
-              ["3", "Stirnseite rechts", "1", fmt(hoehe_innen), fmt(BANK_T), ""],
+              ["2", "Stirnseite links (Abluft)", "1", fmt(hoehe_innen), fmt(BANK_T), "Schlitzfeld 9 × 340 × 12"],
+              ["3", "Stirnseite rechts (Zuluft)", "1", fmt(hoehe_innen), fmt(BANK_T), "Schlitzfeld 9 × 340 × 12"],
               ["4", "Front (Wandseite)", "1", fmt(BETT_AX - 2 * PL), fmt(hoehe_innen), f"Fenster 160 × 120, Linse +{Z_L}"],
               ["5", "Rückwand (Bettseite)", "1", fmt(BETT_AX - 2 * PL), fmt(hoehe_innen), "IR-Auge (Ø 10)"],
               ["6", "Trennwand T1 (Abluft)", "1", fmt(hoehe_innen), fmt(tiefe_innen), "Ausschnitt 280 × 100, Lochreihe"],
-              ["7", "Trennwand T2 (Technik)", "1", fmt(hoehe_innen), fmt(tiefe_innen), "Lochreihe 32, Kabeldurchlass"],
+              ["7", "Trennwand T2 (Technik)", "1", fmt(hoehe_innen), fmt(tiefe_innen), "2 Öffnungen 300 × 80 unten, Lochreihe"],
               ["8", "Fachboden Beamer", "1", fmt(X_T2 - X_T1 - PL - 2), fmt(Y_LF - Y_RI), "Ausschnitt 450 × 380 (Luft)"],
               ["9", "Deckel links (Kanal)", "1", "709", fmt(BANK_T), "verschraubt"],
               ["10", "Deckel Mitte (Beamer)", "1", "968", fmt(BANK_T), "abnehmbar: Dübel + Magnete"],
@@ -991,6 +1011,7 @@ def blatt4(c):
               ["12", "Verkleidung Längsseiten", "2", fmt(BETT_AY), fmt(BETT_H - VK_BODEN), "Maß nach Bett (A)"],
               ["13", "Verkleidung Kopf/Fuß", "2", fmt(BETT_B), fmt(BETT_H - VK_BODEN), "Maß nach Bett (A)"],
               ["14", "Zwischenboden Technik", "1", fmt(XB - PL - X_T2 - PL), fmt(tiefe_innen), "Bodenträger, Lochreihe"],
+              ["15", "Lüfterträger", "1", fmt(hoehe_innen), fmt(tiefe_innen), f"2 Ausschnitte Ø {LUEFTER - 5}"],
               ]
     flaeche = (BETT_AX * BANK_T + 2 * hoehe_innen * BANK_T + 2 * (BETT_AX - 2 * PL) * hoehe_innen
                + 2 * hoehe_innen * tiefe_innen + (X_T2 - X_T1 - PL) * (Y_LF - Y_RI) + BETT_AX * BANK_T
@@ -1006,23 +1027,23 @@ def blatt4(c):
 
     titel(c, x0, y - 5, "Einkaufsliste Technik und Beschläge", gr=3.4)
     teile = [["Teil", "Anforderung"],
-             ["Master-Slave-Steckdosenleiste", "Schwelle einstellbar, ≈ 25–30 W (über Standby 11,5–15 W)"],
-             ["Steckdosenleiste (Dauer)", "≥ 6 Plätze: Apple TV, Mac, Dock, Switches, NT A"],
+             ["Kino-Relais K1 12 V", "Funk- oder WLAN-Relais (Handsender/App) oder Schalter"],
+             ["Netzrelais K3", "Spule 12 V, Kontakt 230 V ≥ 10 A, in Dose (Elektriker)"],
+             ["Mikroschalter S2", "Rollenhebel, Schließer, Endlage Schieber AUF"],
+             ["Zeitrelais K4 12 V", "Abfallverzögerung, einstellbar ≈ 5 min (Lüfter)"],
+             ["Steckdosenleiste (Dauer)", "≥ 6 Plätze: Apple TV, Mac, Dock, Switches, Netzteil"],
              ["HDMI-Switch 3 → 1", "4K, automatische Umschaltung, mit Fernbedienung"],
              ["LAN-Switch 5 Port", "für Mac mini, Apple TV, Beamer (PJLink)"],
              ["Kabelkanal", "unter der Bank + flach auf dem Boden bis zur Dose"],
-             ["Netzteil A 12 V DC", "≥ 3 A (Antrieb), immer an"],
-             ["Netzteil B 12 V DC", "≥ 2 A (Relaisspule + 2 Lüfter), Slave"],
-             ["Relaismodul 12 V", "2 Wechsler (DPDT) ≥ 5 A als Polwender"],
+             ["Netzteil 12 V DC", "≥ 5 A (Antrieb, Lüfter, Relais), immer an"],
+             ["Relaismodul K2 12 V", "2 Wechsler (DPDT) ≥ 5 A als Polwender"],
              ["Linearantrieb 12 V", "Hub 200, ≥ 30 N, ≥ 40 mm/s, Endschalter intern"],
              ["2 Lüfter 140 mm 12 V", "je ≥ 75 m³/h, leise, + 2 Schutzgitter"],
              ["IR-Verlängerung", "Empfänger + Sender, USB 5 V"],
              ["Alu-Verbundplatte 3 mm", "≈ 200 × 152 (Schieber)"],
              ["Alu-U-Profil 10 × 10", "2 × 470, + PTFE-Gleitband"],
-             ["Filtermatte G3", "≈ 400 × 200 (Bodengitter)"],
-             ["Moosgummi-Dichtband", "10 × 30, ≈ 1,2 m (Abluftrahmen)"],
-             ["HDMI-Winkeladapter 90°", "2 Stück (Kabelraum 89 mm)"],
-             ["Bodenträger, Möbelfüße", "4 × Ø 5 mm; 6 Füße 60 mm"],
+             ["Filtermatte G3", "Stirnseite rechts + Bodengitter"],
+                                       ["Bodenträger, Möbelfüße", "4 × Ø 5 mm; 6 Füße 60 mm"],
              ["Schrauben", "Spax 4×35 (Verkleidung), 4×50 (Korpus), Dübel 8×40"],
              ]
     tabelle(c, x0, y - 9, [60, 107], teile, gr=2.4)
@@ -1058,7 +1079,7 @@ def blatt4(c):
         f"Abluft ≈ {fmt(24 + dt_q, 0)} °C.",
         "Die Ansaugung bekommt Raumluft (Unterdruck in der Bank). Grenzen: VMZ51S 45 °C (drosselt ab 36 °C), VX500 40 °C.",
         f"Freier Querschnitt je Seite bei v ≤ 1,5 m/s: A ≥ V̇/v = {fmt(a_frei)} cm². Bodengitter 400 × 180 mit 50 % frei "
-        f"= 360 cm² ✓, 2 Lüfter Ø 135 = 286 cm² ✓",
+        f"= 360 cm² ✓, Schlitzfeld je Stirnseite 9 × 340 × 12 = 367 cm² ✓, 2 Lüfter Ø 135 = 286 cm² ✓",
         "Kontrolle: VMZ51S zeigt Ansaug-/Ablufttemperatur im STATUS-Menü. VX500: Thermometer in den Abluftkanal, 2-h-Test.",
         "**3  Helligkeit und Auflösung",
         f"Quiet/Eco {fmt(LM_ECO)} lm auf {fmt(flaeche_bild, 2)} m² → E = {fmt(e_lx)} lx; weiße Wand (ρ ≈ 0,8): "
@@ -1082,9 +1103,9 @@ def blatt4(c):
         "2. Wandabstand A und Raumhöhe messen; Bildgröße aus der Tabelle auf Blatt 1 wählen.",
         "3. Beamer VOR dem Bau frei auf einen Hocker an die Bankposition stellen: Bildlage, Zoom, Lens-Shift, Geräusch prüfen.",
         "4. Bank bauen, Beamer einsetzen, Linse exakt auf die Bettachse; Bild mit Lens-Shift (Drehregler oben) setzen.",
-        "5. Schieber und Antrieb ohne Beamer testen: 20 × auf/zu, Endlagen, Geräusch.",
-        "6. Master-Slave-Schwelle knapp über Standby (11,5–15 W) einstellen, ≈ 25–30 W: Lüfter laufen dann bis zum Ende des Nachlaufs.",
-        "7. Messen: Zeit vom Einschalten bis zum ersten Licht – muss länger sein als die Öffnungszeit (≈ 5 s).",
+        "5. Schieber ohne Beamer testen (20 × auf/zu), Prüflampe an der Beamer-Steckdose: nur bei ganz offenem Schieber an.",
+        "6. Beamer-Menü [INITIAL START UP] = ON (VMZ51S, S. 89); beim VX500 prüfen, sonst nach dem Öffnen per Fernbedienung.",
+        "7. Zeitrelais K4 auf ≈ 5 min Lüfternachlauf stellen.",
         "8. 2-h-Test im Normal-Modus, Temperaturen im STATUS-Menü notieren; danach Quiet als Standard.",
         "9. Menü: HDMI CEC → GERÄT → PROJEKTOR: EIN/AUS; Bildmodus Kino; Lens-Shift statt Trapez.",
         "10. Laufweg zwischen Bank und Wand: nicht in den Strahl schauen (Risikogruppe 2), Kinder!",
@@ -1101,7 +1122,7 @@ def blatt4(c):
         "**Die sechs Punkte, an denen das Projekt scheitern kann",
         "1. Beamer nie aufs Bett: Die Bank steht frei auf dem Boden, sonst zittert das Bild.",
         "2. Zwangslüftung ist Pflicht: Panasonic verlangt sie bei Einbau in engen Räumen und haftet nicht für Schäden.",
-        "3. Nie mit geschlossenem Schieber projizieren (Brandgefahr): Der Schieber muss automatisch mit dem Beamer öffnen.",
+        "3. Nie auf den geschlossenen Schieber projizieren (Brandgefahr): Endschalter S2 + Netzrelais K3 sperren den Strom.",
         "4. Linse auf die Bettachse, Bildhöhe nur per Lens-Shift einstellen, kein Trapez (sonst Pixelverlust).",
         "5. Beide Beamer sind fürs dunkle Schlafzimmer viel zu hell; der VX500 hat nur XGA (Pixel sichtbar) und braucht mehr Kühlung.",
         "6. Erst messen, dann sägen: Bettmaße und Wandabstand sind hier Annahmen.",

@@ -25,10 +25,14 @@ mechanisch ist sie durch eine 10-mm-Fuge vom Bett getrennt.
   ist nicht nötig.
 - **Zwangslüftung:** Zuluft von unten durch ein Bodengitter (400 × 180). Abluft durch einen eigenen Kanal mit zwei
   140-mm-Lüftern (≈ 150 m³/h), seitlich hinaus und weg vom Strahl. Ausgelegt ist sie für den heißeren VX500
-  (365 W) plus etwa 40 W Geräte. Panasonic verlangt beim Einbau in engen Räumen eine Lüftung (Anleitung S. 21).
-- **Schieber:** Alu-Verbundplatte in U-Führungen, bewegt von einem 12-V-Linearantrieb mit 200 mm Hub. Eine
-  Master-Slave-Steckdosenleiste öffnet den Schieber automatisch, sobald der Beamer Strom zieht. Mit geschlossenem
-  Schieber zu projizieren wäre eine Brandgefahr (Anleitung S. 13).
+  (365 W) plus etwa 40 W Geräte. Beide Stirnseiten bekommen das gleiche Schlitzfeld (9 × 340 × 12 mm, 367 cm² frei):
+  links Abluft, die Lüfter sitzen 80 mm dahinter; rechts Zuluft mit Filtermatte. Vorne kommt keine Abluft raus. Panasonic verlangt beim Einbau in engen Räumen eine Lüftung (Anleitung S. 21).
+- **Schieber:** Alu-Verbundplatte in U-Führungen, nur so groß wie das Linsenfenster (160 × 120). Sie fährt innen
+  seitlich auf und steht nirgends vor. Angetrieben wird sie von einem 12-V-Linearantrieb mit 200 mm Hub.
+- **Harte Verriegelung:** Der Endschalter S2 (Schieber ganz AUF) schaltet das Netzrelais K3. Der Beamer hat also nur
+  Strom, wenn der Schieber offen ist. Der VMZ51S startet dann sofort ([INITIAL START UP] = ON). Beim Schließen ist der
+  Beamer schon stromlos, bevor der Schieber das Fenster erreicht. Mit geschlossenem Schieber zu projizieren wäre eine
+  Brandgefahr (Anleitung S. 13). K3 schaltet 230 V und gehört deshalb in die Hand einer Elektrofachkraft.
 
 - **Technikfach und Kabel:** Apple TV, Mac mini, Switch-Dock (Zugang über Klappdeckel), HDMI-Umschalter 3→1 und
   LAN-Switch sitzen in der Bank. Von der Wanddose kommen nur ein Strom- und ein LAN-Kabel, in einem Kanal unter der
