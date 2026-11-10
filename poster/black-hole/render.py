@@ -222,12 +222,34 @@ def lookup_u(ib, tb, phi):
     return u
 
 
+# Vierfach-Abtastung je Pixel (gedrehtes Gitter): glaettet Treppenstufen an feinen Linien
+SS_OFFSETS = [(-0.375, -0.125), (0.125, -0.375), (0.375, 0.125), (-0.125, 0.375)]
+
+
 def trace_rows(job):
     y0, y1 = job
-    cam, W = G['cam'], G['W']
+    W = G['W']
     py, px = np.mgrid[y0:y1, 0:W].astype(np.float64)
     px = px.ravel() + 0.5
     py = py.ravel() + 0.5
+    offs = G.get('ss', SS_OFFSETS)
+    col = 0.0
+    tbg = 0.0
+    for i, (ox, oy) in enumerate(offs):
+        c, t, bb = trace_points(px + ox, py + oy)
+        col = col + c
+        tbg = tbg + t
+        if i == 0:
+            b0 = bb
+    col /= len(offs)
+    tbg /= len(offs)
+    shape = (y1 - y0, W)
+    return y0, col.reshape(shape + (3,)).astype(np.float32), tbg.reshape(shape).astype(np.float32), \
+        b0.astype(np.float32).reshape(shape)
+
+
+def trace_points(px, py):
+    cam = G['cam']
     X = px - cam['cx']
     Y = cam['cy'] - py
     cr, sr = math.cos(cam['roll']), math.sin(cam['roll'])
@@ -333,8 +355,7 @@ def trace_rows(job):
     esc = (kd[ib] == 2) & (kd[ib + 1] == 2)
     T_bg = np.where(esc, T, 0).astype(np.float32)
     col = np.nan_to_num(col, nan=0.0, posinf=0.0, neginf=0.0)   # ein NaN wuerde der Bloom zum Quadrat verschmieren
-    shape = (y1 - y0, W)
-    return y0, col.reshape(shape + (3,)), T_bg.reshape(shape), b.astype(np.float32).reshape(shape)
+    return col, T_bg, b
 
 
 # ================================================================== Hintergrund
@@ -396,7 +417,7 @@ def aces(x):
 
 
 # ================================================================== Hauptlauf
-def render(W, H, off_x, off_y, trim_w, trim_h, procs=4, rows=None):
+def render(W, H, off_x, off_y, trim_w, trim_h, procs=4, rows=None, ss=None):
     t0 = time.time()
     cam = camera(W, H, off_x, off_y, trim_w, trim_h)
     # groesstes noetiges b (Ecken)
@@ -416,9 +437,9 @@ def render(W, H, off_x, off_y, trim_w, trim_h, procs=4, rows=None):
         a = math.radians(ax)
         R = rot([math.cos(a), math.sin(a), 0.0], tilt)
         normals.append(R @ np.array([0.0, 0.0, 1.0]))
-    state = dict(U=U, bs=bs, phi_end=phi_end, kind=kind, dphi=0.002, cam=cam, W=W,
+    state = dict(U=U, bs=bs, phi_end=phi_end, kind=kind, dphi=0.002, cam=cam, W=W, ss=ss,
                  tex=tex, disk=DISK, normals=normals)
-    step = rows or max(8, int(2_000_000 / W))
+    step = rows or max(8, int(1_000_000 / W))
     jobs = [(y, min(y + step, H)) for y in range(0, H, step)]
     col = np.zeros((H, W, 3), np.float32)
     Tb = np.zeros((H, W), np.float32)
@@ -530,7 +551,8 @@ def main():
     bleed = int(round(BLEED * scale))
     W, H = trim_w + 2 * bleed, trim_h + 2 * bleed
     print(f'Format {W}x{H} (beschnitten {trim_w}x{trim_h}), Massstab {scale:.3f}', flush=True)
-    R = render(W, H, bleed, bleed, trim_w, trim_h, procs=args.procs)
+    R = render(W, H, bleed, bleed, trim_w, trim_h, procs=args.procs,
+               ss=[(0.0, 0.0)] if args.preview else SS_OFFSETS)
     R['trim_w'] = trim_w
     img = compose(R, W, H, scale)
     t = (np.clip(img, 0, 1) * 65535 + 0.5).astype(np.uint16)
