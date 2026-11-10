@@ -1,6 +1,7 @@
 # Bett 200 × 200 mit Verkleidung und verdecktem Beamer
 
-Vorentwurf vom 10.11.2026 für das Massivholzbett (200 × 200 cm, Rahmenhöhe 22 cm gemessen). Gezeichnet ist der
+Vorentwurf vom 10.11.2026 für das Massivholzbett (200 × 200 cm, Rahmenhöhe 21 cm). Die Beamer-Bank ist genauso hoch
+wie das Bett (210 mm), ihre Oberkante fluchtet mit dem Rahmen. Gezeichnet ist der
 Panasonic PT-VMZ51S (5.200 lm, WUXGA, Laser). Die Bank passt auch für den vorhandenen PT-VX500 (379 × 305 mm,
 mit Steckern etwa 420 mm tief, gemessen).
 
@@ -20,14 +21,15 @@ mechanisch ist sie durch eine 10-mm-Fuge vom Bett getrennt.
 
 - **Entkopplung:** 1 Pixel entspricht bei 2 m Bildbreite 0,41 mrad Kippung. Schon 0,5 mm Durchbiegung im Bettrahmen
   verschiebt das Bild um etwa 3,5 Pixel.
-- **Bildlage per Lens-Shift:** Linse auf +380 mm (Bank 500 hoch). Mit Lens-Shift h = 0,34 (zulässig 0,056–0,50 laut Datenblatt)
-  liegt die Bildunterkante auf 800 mm, damit Füße und Decke auch im Liegen nichts verdecken. Eine Trapezkorrektur
-  ist nicht nötig.
-- **Zwangslüftung:** Zuluft von unten durch ein Bodengitter (400 × 180). Abluft durch einen eigenen Kanal mit zwei
+- **Bildlage per Lens-Shift:** Der Beamer steht direkt auf dem Boden der Bank, die Linse liegt auf +103 mm. Mit fast
+  vollem Lens-Shift (h = 0,47, zulässig 0,056–0,50) und einem 2,2 m breiten Bild kommt die Unterkante auf 750 mm,
+  ohne Trapezkorrektur. Im Liegen läuft die Sichtlinie damit nur etwa 1 cm über die Zehen. Kleinere Bilder liegen
+  tiefer oder brauchen Neigung plus Trapez.
+- **Zwangslüftung:** Zuluft durch die rechte Stirnseite (kein Bodengitter, unter der Bank sind nur 10 mm). Abluft durch einen eigenen Kanal mit zwei
   140-mm-Lüftern (≈ 150 m³/h), seitlich hinaus und weg vom Strahl. Ausgelegt ist sie für den heißeren VX500
-  (365 W) plus etwa 40 W Geräte. Beide Stirnseiten bekommen das gleiche Schlitzfeld (9 × 340 × 12 mm, 367 cm² frei):
+  (365 W) plus etwa 40 W Geräte. Beide Stirnseiten bekommen das gleiche Schlitzfeld (5 × 440 × 13 mm, 286 cm² frei):
   links Abluft, die Lüfter sitzen 80 mm dahinter; rechts Zuluft mit Filtermatte. Vorne kommt keine Abluft raus. Panasonic verlangt beim Einbau in engen Räumen eine Lüftung (Anleitung S. 21).
-- **Schieber:** Alu-Verbundplatte in U-Führungen, nur so groß wie das Linsenfenster (160 × 120). Sie fährt innen
+- **Schieber:** Alu-Verbundplatte in U-Führungen, nur so groß wie das Linsenfenster (160 × 123, Ausschnitt reicht bis unter den Deckel). Sie fährt innen
   seitlich auf und steht nirgends vor. Angetrieben wird sie von einem 12-V-Linearantrieb mit 200 mm Hub.
 - **Harte Verriegelung:** Der Endschalter S2 (Schieber ganz AUF) schaltet das Netzrelais K3. Der Beamer hat also nur
   Strom, wenn der Schieber offen ist. Der VMZ51S startet dann sofort ([INITIAL START UP] = ON). Beim Schließen ist der
@@ -43,7 +45,7 @@ mechanisch ist sie durch eine 10-mm-Fuge vom Bett getrennt.
 Die Produktbilder bei XXXLutz sind als KI-generiert gekennzeichnet, die Maße des Betts waren nicht abrufbar.
 Folgende Werte sind deshalb angenommen:
 
-- Rahmen außen 2060 × 2060 (die Höhe von 220 ist gemessen), Matratze 200
+- Rahmen außen 2060 × 2060 (Höhe 210 laut Nutzer), Matratze 200
 - Wandabstand Bank–Wand 2500, Raumhöhe 2500
 
 Quellen: Panasonic Spec File PT-VMZ51S (Stand 04/2023) und Operating Instructions PT-VMZ71/61/51/51S/41. Die PDFs
