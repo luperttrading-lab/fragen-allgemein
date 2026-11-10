@@ -259,13 +259,13 @@ function box(w, h, d, mat, x, y, z, rund = 0) {
   return m;
 }
 
-function platteMitLoechern(umriss, loecher, dicke, mat) {
+function platteMitLoechern(umriss, loecher, dicke, mat, kante = matSchwarz) {
   const s = new THREE.Shape(umriss.map(p => new THREE.Vector2(p[0], p[1])));
   for (const l of loecher) s.holes.push(new THREE.Path(l.map(p => new THREE.Vector2(p[0], p[1]))));
   const geo = new THREE.ExtrudeGeometry(s, { depth: dicke, bevelEnabled: false });
   const uv = geo.attributes.uv;
   for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * SU + 0.37, uv.getY(i) * SV + 0.11);
-  const m = new THREE.Mesh(geo, [mat, matSchwarz]);
+  const m = new THREE.Mesh(geo, [mat, kante]);
   m.castShadow = m.receiveShadow = true;
   return m;
 }
@@ -343,7 +343,7 @@ hb(holzBox(M.bettB - 2 * M.pl, yDe - yBo, M.pl, matHolzBank[1], 0, (yBo + yDe) /
 // Front mit Fensterausschnitt (bis unter den Deckel)
 const xi = XB - M.pl;
 const front = platteMitLoechern([[-xi, yBo], [xi, yBo], [xi, yDe], [M.fx, yDe], [M.fx, M.fz0], [-M.fx, M.fz0], [-M.fx, yDe], [-xi, yDe]],
-  [], M.pl, matHolzBank[2]);
+  [], M.pl, matHolzBank[2], matHolzBank[2]);
 front.position.z = zB1;
 hb(front);
 // Stirnseiten mit Schlitzfeld 5 x 440 x 13
@@ -410,9 +410,9 @@ for (const [w, h, d, col, x, z, r, rough] of geraete) {
 const mech = new THREE.Group();
 bank.add(mech);
 const zFi = zB1 + M.pl;                 // Innenseite Front
-const schieber = box(0.2, 0.127, 0.003, matAluSchwarz, 0, 0.1215, zFi + 0.0055);
+const schieber = holzBox(0.2, 0.127, 0.004, matHolzBank[1], 0, 0.1215, zFi + 0.006, 31);   // Eiche-Sperrholz 4 mm, wie die Bank
 mech.add(schieber);
-for (const yy of [0.059, 0.184]) mech.add(box(0.47, 0.01, 0.01, matAlu, 0.105, yy, zFi + 0.005));
+for (const yy of [0.058, 0.185]) mech.add(holzBox(0.47, 0.012, 0.012, matHolzBank[0], 0.105, yy, zFi + 0.006, 40 + yy * 100));  // Eiche-Nutleisten
 const antrieb = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.3, 24), new THREE.MeshStandardMaterial({ color: 0x5a5d63, roughness: 0.5, metalness: 0.5 }));
 antrieb.rotation.z = Math.PI / 2;
 antrieb.position.set(0.45, M.linseY, zFi + 0.025);
@@ -550,10 +550,10 @@ function setKino(on, sofort) {
 function status() {
   if (state.variant === 'A') return state.kino ? 'Variante A: offenes Fenster, Beamer läuft (Ein/Aus mit seiner Fernbedienung).'
     : 'Variante A: offenes Fenster, Beamer aus. Linse sichtbar – nur von der Wandseite.';
-  if (state.kino && schieberT < 0.999) return 'Variante C: „Hey Siri, Kino an“ → Schieber fährt auf (hier beschleunigt, in echt ≈ 5 s) …';
-  if (state.kino) return 'Variante C: Endschalter S2 geschlossen → Beamer hat Strom und startet. Kino läuft.';
-  if (schieberT > 0.001) return 'Variante C: Kino aus → Beamer sofort stromlos, Schieber fährt zu, Lüfter laufen 5 min nach.';
-  return 'Variante C: Schieber zu, Beamer stromlos. Von außen nur eine schwarze Fläche.';
+  if (state.kino && schieberT < 0.999) return 'Variante C: einmal gedrückt (Taster oder „Hey Siri“) → Motorschieber fährt auf (hier beschleunigt, in echt ≈ 5 s) …';
+  if (state.kino) return 'Variante C: Schieber ganz offen → Endschalter S2 → Beamer hat Strom und startet. Nochmal drücken = zu.';
+  if (schieberT > 0.001) return 'Variante C: nochmal gedrückt → Beamer sofort stromlos, Holzschieber fährt zu, Lüfter laufen 5 min nach.';
+  return 'Variante C: Holzschieber zu (Eiche wie die Bank, 2 cm zurückgesetzt), Beamer stromlos.';
 }
 
 let uiFn = () => {};
@@ -607,13 +607,13 @@ const FILM_KAMERA = [            // [Zeit s, Ansicht]
 ];
 const FILM_TEXT = [
   [0, 3, 'Variante C: Beamer unsichtbar in der Fußbank'],
-  [3, 5.5, 'Von der Wandseite: Schieber zu, Beamer stromlos'],
-  [5.5, 7, '„Hey Siri, Kino an“'],
+  [3, 5.5, 'Von der Wandseite: Holzschieber zu, Beamer stromlos'],
+  [5.5, 7, 'Einmal drücken (Taster oder „Hey Siri“): Motorschieber auf'],
   [7, 11.5, 'Schieber fährt auf – echte Geschwindigkeit (≈ 5 s)'],
   [11.5, 14.5, 'Endschalter: Beamer bekommt Strom und startet'],
   [14.5, 18.5, 'Blick vom Bett (halb sitzend)'],
-  [18.5, 20, '„Hey Siri, Kino aus“'],
-  [20, 27, 'Beamer sofort stromlos – Schieber fährt zu, Lüfter laufen nach'],
+  [18.5, 20, 'Nochmal drücken: Motorschieber zu'],
+  [20, 27, 'Beamer sofort stromlos – Holzschieber fährt zu, Lüfter laufen nach'],
 ];
 function filmZeit(t) {
   state.variant = 'C'; mech.visible = true;
@@ -677,7 +677,8 @@ uiFn = () => {
   g1.append(knopf('A: offenes Fenster', state.variant === 'A', () => setVariant('A')),
     knopf('C: Motor-Schieber', state.variant === 'C', () => setVariant('C')));
   const g2 = document.createElement('div');
-  g2.append(knopf(state.kino ? '■ Kino aus' : '▶ Kino an', state.kino, () => setKino(!state.kino)),
+  const kText = state.variant === 'C' ? (state.kino ? '■ Motorschieber zu' : '▶ Motorschieber auf') : (state.kino ? '■ Beamer aus' : '▶ Beamer an');
+  g2.append(knopf(kText, state.kino, () => setKino(!state.kino)),
     knopf('Innenleben', state.xray, () => setXray(!state.xray)),
     knopf(state.holz === 'eiche' ? 'Holz: Eiche' : 'Holz: Kiefer', false, () => setHolz(state.holz === 'eiche' ? 'kiefer' : 'eiche')));
   const g3 = document.createElement('div');
