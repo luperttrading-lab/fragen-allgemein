@@ -1275,7 +1275,7 @@ def blatt6(c):
         "Bett 21 cm, Linse +103, Bild 2,2 m breit, Unterkante 750.",
         "Annahmen: Wandabstand 2,5 m, Raum 4,2 m breit, Raumhöhe 2,5 m,",
         "Holz Eiche-Leimholz (in der Simulation auf Kiefer umschaltbar),",
-        "Boden Kirschparkett. Mini-Film: renders/Film_Variante_C.mp4.",
+        "Boden Kirschparkett. Mini-Film: renders/Film_Motorschieber.mp4.",
         "Das Filmbild ist ein Platzhalter; Helligkeit und Licht im Raum",
         "sind qualitativ, nicht fotometrisch gerechnet.",
         "Simulation: bett-beamer/simulation (npm install, npm run build).",

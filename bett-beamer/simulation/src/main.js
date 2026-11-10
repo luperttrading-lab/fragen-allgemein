@@ -550,10 +550,10 @@ function setKino(on, sofort) {
 function status() {
   if (state.variant === 'A') return state.kino ? 'Variante A: offenes Fenster, Beamer läuft (Ein/Aus mit seiner Fernbedienung).'
     : 'Variante A: offenes Fenster, Beamer aus. Linse sichtbar – nur von der Wandseite.';
-  if (state.kino && schieberT < 0.999) return 'Variante C: einmal gedrückt (Taster oder „Hey Siri“) → Motorschieber fährt auf (hier beschleunigt, in echt ≈ 5 s) …';
-  if (state.kino) return 'Variante C: Schieber ganz offen → Endschalter S2 → Beamer hat Strom und startet. Nochmal drücken = zu.';
-  if (schieberT > 0.001) return 'Variante C: nochmal gedrückt → Beamer sofort stromlos, Holzschieber fährt zu, Lüfter laufen 5 min nach.';
-  return 'Variante C: Holzschieber zu (Eiche wie die Bank, 2 cm zurückgesetzt), Beamer stromlos.';
+  if (state.kino && schieberT < 0.999) return 'Einmal gedrückt → Motorschieber fährt auf (hier beschleunigt, in echt ≈ 5 s) …';
+  if (state.kino) return 'Schieber ganz offen → Beamer bekommt Strom und startet von selbst. Nochmal drücken = zu und Beamer aus.';
+  if (schieberT > 0.001) return 'Nochmal gedrückt → Beamer sofort stromlos, Holzschieber fährt zu, Lüfter laufen 5 min nach.';
+  return 'Holzschieber zu (gleiches Holz wie die Bank, 2,5 cm zurückgesetzt), Beamer stromlos.';
 }
 
 let uiFn = () => {};
@@ -601,26 +601,28 @@ function anwenden() {
 // ------------------------------------------------------------------ Film (deterministisch, Variante C)
 const glatt = x => x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x);
 function rampe(t, a, b) { return glatt((t - a) / (b - a)); }
+const linear = (t, a, b) => Math.max(0, Math.min(1, (t - a) / (b - a)));
+const FILM_DAUER = 29;
 const FILM_KAMERA = [            // [Zeit s, Ansicht]
-  [0, { p: [2.6, 1.95, 2.0], t: [-0.2, 0.5, -1.5], fov: 62 }], [3, 'raum'], [5, 'detail'], [11.5, 'detail'],
-  [14.5, 'sitzend'], [18.5, 'sitzend'], [21, 'detail'], [27, 'detail'],
+  [0, { p: [2.3, 1.95, 1.95], t: [-0.2, 0.5, -1.5], fov: 62 }], [3, 'raum'], [5.2, 'detail'], [13.6, 'detail'],
+  [16.6, 'sitzend'], [20, 'sitzend'], [22.2, 'detail'], [FILM_DAUER, 'detail'],
 ];
 const FILM_TEXT = [
-  [0, 3, 'Variante C: Beamer unsichtbar in der Fußbank'],
+  [0, 3, 'Beamer unsichtbar in der Fußbank am Bettende'],
   [3, 5.5, 'Von der Wandseite: Holzschieber zu, Beamer stromlos'],
-  [5.5, 7, 'Einmal drücken (Taster oder „Hey Siri“): Motorschieber auf'],
+  [5.5, 7, 'Einmal drücken: Motorschieber auf'],
   [7, 11.5, 'Schieber fährt auf – echte Geschwindigkeit (≈ 5 s)'],
-  [11.5, 14.5, 'Endschalter: Beamer bekommt Strom und startet'],
-  [14.5, 18.5, 'Blick vom Bett (halb sitzend)'],
-  [18.5, 20, 'Nochmal drücken: Motorschieber zu'],
-  [20, 27, 'Beamer sofort stromlos – Holzschieber fährt zu, Lüfter laufen nach'],
+  [11.5, 14, 'Schieber ganz offen: Beamer bekommt Strom und startet'],
+  [16.6, 20, 'Blick vom Bett (halb sitzend), Bild 2,2 m breit'],
+  [22.2, 23.7, 'Nochmal drücken: Motorschieber zu'],
+  [23.7, FILM_DAUER, 'Beamer sofort stromlos – Holzschieber fährt zu, Lüfter laufen nach'],
 ];
 function filmZeit(t) {
   state.variant = 'C'; mech.visible = true;
-  schieberT = rampe(t, 6.5, 11.5) * (1 - rampe(t, 20.5, 25.5));
-  const an = t >= 11.5 && t < 19;
+  schieberT = linear(t, 6.5, 11.5) * (1 - linear(t, 22.8, 27.8));     // Linearantrieb: konstante Geschwindigkeit
+  const an = t >= 11.5 && t < 22.9;                                    // Endschalter oeffnet nach 1-2 mm Weg
   bildT = an ? rampe(t, 11.7, 13.2) : 0;
-  raumT = 1 - 0.95 * rampe(t, 11.5, 14) * (1 - rampe(t, 19, 21));
+  raumT = 1 - 0.95 * rampe(t, 14, 16.3) * (1 - rampe(t, 20, 21.8));    // Raumlicht aus / wieder an
   anwenden();
   let i = 0;
   while (i < FILM_KAMERA.length - 2 && t > FILM_KAMERA[i + 1][0]) i++;
@@ -638,6 +640,7 @@ function filmZeit(t) {
 }
 window.__filmZeit = filmZeit;
 window.__filmText = FILM_TEXT;
+window.__filmDauer = FILM_DAUER;
 
 function resize() {
   const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -673,17 +676,16 @@ const leiste = document.getElementById('leiste');
 const info = document.getElementById('info');
 uiFn = () => {
   leiste.innerHTML = '';
-  const g1 = document.createElement('div');
-  g1.append(knopf('A: offenes Fenster', state.variant === 'A', () => setVariant('A')),
-    knopf('C: Motor-Schieber', state.variant === 'C', () => setVariant('C')));
+  // Bedienung nur noch ueber den Motorschieber (Variante A bleibt per ?variant=A fuer Standbilder erreichbar)
   const g2 = document.createElement('div');
   const kText = state.variant === 'C' ? (state.kino ? '■ Motorschieber zu' : '▶ Motorschieber auf') : (state.kino ? '■ Beamer aus' : '▶ Beamer an');
   g2.append(knopf(kText, state.kino, () => setKino(!state.kino)),
     knopf('Innenleben', state.xray, () => setXray(!state.xray)),
-    knopf(state.holz === 'eiche' ? 'Holz: Eiche' : 'Holz: Kiefer', false, () => setHolz(state.holz === 'eiche' ? 'kiefer' : 'eiche')));
+    knopf('Eiche', state.holz === 'eiche', () => setHolz('eiche')),
+    knopf('Kiefer', state.holz === 'kiefer', () => setHolz('kiefer')));
   const g3 = document.createElement('div');
   for (const [k, v] of Object.entries(VIEWS)) g3.append(knopf(v.name, state.view === k, () => setView(k)));
-  leiste.append(g1, g2, g3);
+  leiste.append(g2, g3);
   info.textContent = status();
 };
 

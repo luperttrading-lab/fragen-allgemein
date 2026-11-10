@@ -60,4 +60,8 @@ liegen nicht im Repo.
 - `simulation/`: interaktive 3D-Simulation mit three.js (`npm install`, `npm run build`). Standbilder erzeugt
   `node render.js ../renders name=variant=C,kino=1,view=bett` (Ansichten: raum, bett, sitzend, bank, detail, seite).
 - `renders/`: Renderbilder und Übersichten je Variante.
+- `renders/Film_Motorschieber.mp4`: Mini-Film (29 s): Schieber auf, Beamer startet, Blick vom Bett, Schieber zu.
+  Neu erzeugen: `node film.js <bildordner> 25 1280 720`, dann `python3 film_schnitt.py <bildordner> ../renders/Film_Motorschieber.mp4`.
+- Die Simulation zeigt nur noch den Motorschieber (ein Knopf für auf/zu). Variante A ist für Standbilder weiter über
+  `?variant=A` erreichbar. Schieber und Nutleisten sind aus Eiche wie die Bank, der Boden ist Kirschparkett.
 - Online: [3D-Simulation](https://claude.ai/artifact/CV19tvoDtLsx4sz4gvDq9q)

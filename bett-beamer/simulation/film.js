@@ -10,7 +10,7 @@ const path = require('path');
   page.on('pageerror', e => console.log('FEHLER', e.message));
   await page.goto('file://' + path.resolve(__dirname, 'dist/index.html') + '?ui=0&shot=1&variant=C&view=detail', { timeout: 280000 });
   await page.waitForFunction(() => window.__ready === true, null, { timeout: 280000, polling: 500 });
-  const dauer = 27, n = Math.round(dauer * fps);
+  const dauer = await page.evaluate(() => window.__filmDauer), n = Math.round(dauer * fps);
   const i0 = Number(von || 0), i1 = Math.min(n, Number(bis || n));
   const t0 = Date.now();
   for (let i = i0; i < i1; i++) {
@@ -18,6 +18,7 @@ const path = require('path');
     fs.writeFileSync(path.join(out, `f${String(i).padStart(4, '0')}.jpg`), Buffer.from(data.split(',')[1], 'base64'));
     if (i % 25 === 0) console.log('Bild', i, '/', n, ((Date.now() - t0) / 1000 / (i - i0 + 1)).toFixed(2), 's/Bild');
   }
-  fs.writeFileSync(path.join(out, 'texte.json'), JSON.stringify(await page.evaluate(() => window.__filmText)));
+  fs.writeFileSync(path.join(out, `texte_${i0}.json`), JSON.stringify(await page.evaluate(() => window.__filmText)));
+  console.log('FERTIG', i0, i1);
   await b.close();
 })().catch(e => { console.log('ABBRUCH', e.message.split('\n')[0]); process.exit(1); });
