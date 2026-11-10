@@ -125,13 +125,13 @@ function parkettCanvas() {
   c.width = W; c.height = H;
   const g = c.getContext('2d');
   const R = rng(7);
-  const bw = 0.14 / 2.4 * W;
+  const bw = 0.09 / 2.4 * W;
   for (let x = 0; x < W; x += bw) {
     let y = -R() * 400;
     while (y < H) {
-      const len = (0.45 + R() * 0.8) / 2.4 * H;
-      const t = (R() - 0.5) * 0.16;
-      const col = [168, 100, 52].map(v => Math.max(0, Math.min(255, v * (1 + t * 0.7))));
+      const len = (0.4 + R() * 0.35) / 2.4 * H;
+      const t = (R() - 0.5) * 0.14;
+      const col = [136, 72, 46].map(v => Math.max(0, Math.min(255, v * (1 + t))));
       g.fillStyle = `rgb(${col})`;
       g.fillRect(x, y, bw, len);
       for (let i = 0; i < 26; i++) {
@@ -568,6 +568,20 @@ function update(dt) {
   if (!state.kino) bildZiel = 0;
   bildT += Math.sign(bildZiel - bildT) * Math.min(Math.abs(bildZiel - bildT), dt * (bildZiel > bildT ? 1.6 : 6));
   raumT += Math.sign(raumZiel - raumT) * Math.min(Math.abs(raumZiel - raumT), dt * 1.2);
+  anwenden();
+  if (camAnim) {
+    camAnim.t = Math.min(1, camAnim.t + dt / 0.9);
+    const k = camAnim.t < 0.5 ? 2 * camAnim.t * camAnim.t : 1 - Math.pow(-2 * camAnim.t + 2, 2) / 2;
+    camera.position.lerpVectors(camAnim.p0, camAnim.ziel.p, k);
+    controls.target.lerpVectors(camAnim.t0, camAnim.ziel.t, k);
+    basisFov = camAnim.f0 + (camAnim.ziel.fov - camAnim.f0) * k;
+    camera.fov = fovFuer(basisFov);
+    camera.updateProjectionMatrix();
+    if (camAnim.t >= 1) camAnim = null;
+  }
+}
+
+function anwenden() {
   const sx = 0.2 * schieberT;
   schieber.position.x = sx;
   const stEnd = 0.1 + sx;
@@ -582,17 +596,48 @@ function update(dt) {
   fenster.intensity = 0.55 * raumT;
   fuell.intensity = 0.55 * raumT;
   scene.environmentIntensity = 0.35 * raumT + 0.02;
-  if (camAnim) {
-    camAnim.t = Math.min(1, camAnim.t + dt / 0.9);
-    const k = camAnim.t < 0.5 ? 2 * camAnim.t * camAnim.t : 1 - Math.pow(-2 * camAnim.t + 2, 2) / 2;
-    camera.position.lerpVectors(camAnim.p0, camAnim.ziel.p, k);
-    controls.target.lerpVectors(camAnim.t0, camAnim.ziel.t, k);
-    basisFov = camAnim.f0 + (camAnim.ziel.fov - camAnim.f0) * k;
-    camera.fov = fovFuer(basisFov);
-    camera.updateProjectionMatrix();
-    if (camAnim.t >= 1) camAnim = null;
-  }
 }
+
+// ------------------------------------------------------------------ Film (deterministisch, Variante C)
+const glatt = x => x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x);
+function rampe(t, a, b) { return glatt((t - a) / (b - a)); }
+const FILM_KAMERA = [            // [Zeit s, Ansicht]
+  [0, { p: [2.6, 1.95, 2.0], t: [-0.2, 0.5, -1.5], fov: 62 }], [3, 'raum'], [5, 'detail'], [11.5, 'detail'],
+  [14.5, 'sitzend'], [18.5, 'sitzend'], [21, 'detail'], [27, 'detail'],
+];
+const FILM_TEXT = [
+  [0, 3, 'Variante C: Beamer unsichtbar in der Fußbank'],
+  [3, 5.5, 'Von der Wandseite: Schieber zu, Beamer stromlos'],
+  [5.5, 7, '„Hey Siri, Kino an“'],
+  [7, 11.5, 'Schieber fährt auf – echte Geschwindigkeit (≈ 5 s)'],
+  [11.5, 14.5, 'Endschalter: Beamer bekommt Strom und startet'],
+  [14.5, 18.5, 'Blick vom Bett (halb sitzend)'],
+  [18.5, 20, '„Hey Siri, Kino aus“'],
+  [20, 27, 'Beamer sofort stromlos – Schieber fährt zu, Lüfter laufen nach'],
+];
+function filmZeit(t) {
+  state.variant = 'C'; mech.visible = true;
+  schieberT = rampe(t, 6.5, 11.5) * (1 - rampe(t, 20.5, 25.5));
+  const an = t >= 11.5 && t < 19;
+  bildT = an ? rampe(t, 11.7, 13.2) : 0;
+  raumT = 1 - 0.95 * rampe(t, 11.5, 14) * (1 - rampe(t, 19, 21));
+  anwenden();
+  let i = 0;
+  while (i < FILM_KAMERA.length - 2 && t > FILM_KAMERA[i + 1][0]) i++;
+  const [t0, v0] = FILM_KAMERA[i], [t1, v1] = FILM_KAMERA[i + 1];
+  const k = glatt((t - t0) / (t1 - t0));
+  const a = typeof v0 === 'string' ? VIEWS[v0] : v0, b = typeof v1 === 'string' ? VIEWS[v1] : v1;
+  camera.position.lerpVectors(new THREE.Vector3(...a.p), new THREE.Vector3(...b.p), k);
+  controls.target.lerpVectors(new THREE.Vector3(...a.t), new THREE.Vector3(...b.t), k);
+  basisFov = a.fov + (b.fov - a.fov) * k;
+  resize();
+  camera.fov = fovFuer(basisFov);
+  camera.updateProjectionMatrix();
+  camera.lookAt(controls.target);
+  renderer.render(scene, camera);
+}
+window.__filmZeit = filmZeit;
+window.__filmText = FILM_TEXT;
 
 function resize() {
   const w = canvas.clientWidth, h = canvas.clientHeight;
