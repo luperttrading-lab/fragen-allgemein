@@ -1,13 +1,13 @@
 {
   "stand": "08.11.2026",
-  "fassung": "v6 freigegeben 12.11.2026 (gesprochene Titelkarte)",
+  "fassung": "v7 freigegeben 12.11.2026 (Was wirklich neu ist)",
   "stimme_entwurf": "de-DE-FlorianMultilingualNeural",
   "szenen": [
     {
       "id": "s00_titel",
-      "text": "OpenCode Browse: wie es funktioniert, was es kostet und wo das Risiko liegt.",
+      "text": "OpenCode Browse: was wirklich neu ist, was es kostet und wo das Risiko liegt.",
       "cues": {
-        "funktioniert": "wie es funktioniert",
+        "neu": "was wirklich neu",
         "kostet": "was es kostet",
         "risiko": "wo das Risiko"
       }
@@ -262,11 +262,14 @@
     },
     {
       "id": "s13_regel",
-      "text": "Deshalb die Faustregel. Erstens: Gib dem Agenten ein eigenes Browserprofil, nicht deinen Hauptbrowser mit Bank und E-Mail. Zweitens: Schalte die Liste erlaubter Seiten ein. Drittens: Alles, was Geld oder Passwörter betrifft, machst du selbst. Kurz gesagt: Nutzt du Claude mit Abo und reicht dir Chrome, ist Claude in Chrome schon dabei. Willst du ein anderes oder ein lokales Modell oder arbeitest du mit API-Schlüssel, ist OpenCode Browse der kostenlose Weg. Mit Vorsicht.",
+      "text": "Deshalb die Faustregel. Erstens: Gib dem Agenten ein eigenes Browserprofil, nicht deinen Hauptbrowser mit Bank und E-Mail. Zweitens: Schalte die Liste erlaubter Seiten ein. Drittens: Alles, was Geld oder Passwörter betrifft, machst du selbst. Was ist also wirklich neu? Die Idee nicht, die gibt es bei Anthropic, Microsoft und Google schon. Neu ist das kostenlose Komplettpaket, das mit jedem Modell und jedem Agenten läuft. Kurz gesagt: Nutzt du Claude mit Abo und reicht dir Chrome, ist Claude in Chrome schon dabei. Willst du ein anderes oder ein lokales Modell oder arbeitest du mit API-Schlüssel, ist OpenCode Browse der kostenlose Weg. Mit Vorsicht.",
       "cues": {
         "r1": "Erstens",
         "r2": "Zweitens",
         "r3": "Drittens",
+        "neu": "Was ist also",
+        "nichtneu": "Die Idee nicht",
+        "neuja": "Neu ist das",
         "fazit": "Kurz gesagt",
         "f1": "Nutzt du",
         "f2": "Willst du",

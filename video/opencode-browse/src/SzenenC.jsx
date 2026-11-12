@@ -213,7 +213,8 @@ export const S12 = ({c}) => {
 // 13 · Faustregel und Fazit
 export const S13 = ({c}) => {
   const t = useT();
-  const teilA = aus(t, c.fazit - 0.2, 0.5);
+  const teilA = aus(t, c.neu - 0.2, 0.5);
+  const teilN = ein(t, c.neu - 0.1, 0.5) * aus(t, c.fazit - 0.2, 0.5);
   const regeln = [
     [c.r1, 'Eigenes Browserprofil', 'nicht dein Hauptbrowser mit Bank und E-Mail'],
     [c.r2, 'Liste erlaubter Seiten an', 'ab Werk ist sie aus'],
@@ -222,7 +223,7 @@ export const S13 = ({c}) => {
   const stempel = feder((t - c.vorsicht) / 0.6);
   return (
     <>
-      <Kopf t={t} nr="13" titel={t < c.fazit ? 'Die Faustregel' : 'Kurz gesagt'} />
+      <Kopf t={t} nr="13" titel={t < c.neu - 0.2 ? 'Die Faustregel' : t < c.fazit - 0.2 ? 'Was ist wirklich neu?' : 'Kurz gesagt'} />
       {teilA > 0.01 && (
         <div style={{position: 'absolute', inset: 0, opacity: teilA}}>
           {regeln.map(([at, a, b], i) => (
@@ -235,6 +236,34 @@ export const S13 = ({c}) => {
               </Karte>
             </Ein>
           ))}
+        </div>
+      )}
+      {teilN > 0.01 && (
+        <div style={{position: 'absolute', inset: 0, opacity: teilN}}>
+          <Ein t={t} at={c.nichtneu} style={{left: 140, top: 200, width: 1640}}>
+            <Karte farbe={F.ROT} style={{padding: '28px 36px'}}>
+              <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
+                <Kreuz g={48} /><div style={{fontSize: 44, fontWeight: 800, color: F.TEXT}}>Nicht neu: die Idee</div>
+              </div>
+              <div style={{display: 'flex', gap: 16, marginTop: 20, flexWrap: 'wrap'}}>
+                {['Claude in Chrome (Anthropic)', 'Playwright MCP (Microsoft)', 'Chrome DevTools MCP (Google)'].map((x, i) => (
+                  <div key={x} style={{opacity: ein(t, c.nichtneu + 1.2 + i * 0.6, 0.35)}}><Chip farbe={F.GRAU} gross={32}>{x}</Chip></div>
+                ))}
+              </div>
+            </Karte>
+          </Ein>
+          <Ein t={t} at={c.neuja} style={{left: 140, top: 540, width: 1640}}>
+            <Karte farbe={F.GRUEN} style={{padding: '28px 36px'}}>
+              <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
+                <Haken g={48} /><div style={{fontSize: 44, fontWeight: 800, color: F.TEXT}}>Neu: das Komplettpaket</div>
+              </div>
+              <div style={{display: 'flex', gap: 16, marginTop: 20, flexWrap: 'wrap'}}>
+                {['kostenlos und Open Source', 'jedes Modell', 'jeder Agent', 'Übergabe, Passwörter, Aufzeichnung'].map((x, i) => (
+                  <div key={x} style={{opacity: ein(t, c.neuja + 1.0 + i * 0.5, 0.35)}}><Chip farbe={F.GRUEN} gross={32}>{x}</Chip></div>
+                ))}
+              </div>
+            </Karte>
+          </Ein>
         </div>
       )}
       {[[c.f1, 'Du nutzt Claude mit Abo, und Chrome reicht dir', 'Claude in Chrome', 'im Abo enthalten, auch in Claude Code', F.GELB],

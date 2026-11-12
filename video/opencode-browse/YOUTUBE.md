@@ -20,22 +20,22 @@ Datei `untertitel/opencode-browse.de.srt` in YouTube Studio hochladen: Untertite
 ## Beschreibung
 
 ```
-Mit OpenCode Browse benutzen KI-Agenten wie Claude Code, Codex oder Cursor deinen echten, eingeloggten Browser. Kostenlos und Open Source. Was das Werkzeug kann, wie es funktioniert, was es wirklich kostet und warum Prompt Injection das größte Risiko ist. Stand: November 2026.
+Mit OpenCode Browse benutzen KI-Agenten wie Claude Code, Codex oder Cursor deinen echten, eingeloggten Browser. Kostenlos und Open Source. Was daran wirklich neu ist, was es kostet und warum Prompt Injection das größte Risiko ist. Stand: November 2026.
 
 Kapitel:
 0:00 Das Problem: die Login-Wand
-0:28 Die Lösung: OpenCode Browse
-1:04 So kommt der Agent in deinen Browser
+0:29 Die Lösung: OpenCode Browse
+1:05 So kommt der Agent in deinen Browser
 1:46 Im Hintergrund, mit Übergabe an dich
 2:20 Passwörter, ohne dass der Agent sie sieht
-2:41 Jedes Modell, auch lokal: zwei Haken
+2:42 Jedes Modell, auch lokal: zwei Haken
 3:35 Agent oder Werkzeug? Claude in Chrome im Vergleich
 4:38 Datenschutz und Regeln
 5:11 Das Risiko: Prompt Injection
 5:53 Wie oft gelingt so ein Angriff?
 6:23 Was OpenCode Browse selbst absichert
 6:52 Zwei praktische Haken
-7:13 Faustregel und Fazit
+7:14 Faustregel, was wirklich neu ist, Fazit
 
 Begriffe aus dem Video:
 Cookies: Mini-Dateien, mit denen Webseiten dich wiedererkennen und eingeloggt halten

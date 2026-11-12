@@ -265,35 +265,38 @@
    "begriffe": []
   },
   "s13_regel": {
-   "audio": 33.149388,
-   "dauer": 34.099,
+   "audio": 45.479184,
+   "dauer": 46.429,
    "vorlauf": 0.25,
    "cues": {
     "r1": 2.17,
-    "r2": 9.21,
-    "r3": 12.97,
-    "fazit": 17.85,
-    "f1": 18.97,
-    "f2": 24.09,
-    "vorsicht": 32.41
+    "r2": 9.13,
+    "r3": 13.05,
+    "neu": 18.17,
+    "nichtneu": 20.17,
+    "neuja": 24.97,
+    "fazit": 30.49,
+    "f1": 31.77,
+    "f2": 36.65,
+    "vorsicht": 44.73
    },
    "begriffe": [
     {
      "begriff": "Browserprofil",
      "erklaerung": "getrennter Bereich im Browser mit eigenen Logins, Cookies und Lesezeichen",
      "pos": "r",
-     "t": 4.89
+     "t": 4.97
     }
    ]
   },
   "s00_titel": {
-   "audio": 6.112653,
-   "dauer": 7.063,
+   "audio": 6.347755,
+   "dauer": 7.298,
    "vorlauf": 0.25,
    "cues": {
-    "funktioniert": 2.01,
-    "kostet": 3.37,
-    "risiko": 4.81
+    "neu": 1.93,
+    "kostet": 3.69,
+    "risiko": 5.13
    },
    "begriffe": []
   }
@@ -314,6 +317,6 @@
   "s12_haken",
   "s13_regel"
  ],
- "laenge": 467.988,
+ "laenge": 480.553,
  "stimme": "ElevenLabs Christian (eleven_v4), Tempo 1.0"
 }

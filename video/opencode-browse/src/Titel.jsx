@@ -27,7 +27,7 @@ const Motiv = ({x, y, g = 1}) => (
 );
 
 // Großes Layout: Thema riesig, darunter drei farbige Punkte untereinander (Wunsch des Nutzers, 09.11.)
-const PUNKTE = [['Wie es funktioniert', F.GRUEN], ['Was es kostet', F.GELB], ['Wo das Risiko liegt', F.ROT]];
+const PUNKTE = [['Was wirklich neu ist', F.GRUEN], ['Was es kostet', F.GELB], ['Wo das Risiko liegt', F.ROT]];
 const GrossLayout = ({a = () => 1, kopf = false, punkt}) => (
   <>
     <div style={{position: 'absolute', left: 90, top: kopf ? 70 : 80, width: 1150}}>
@@ -56,7 +56,7 @@ export const Titelkarte = ({animiert = true}) => {
 // Gesprochene Titelkarte (erste Szene): Titel steht ab dem ersten Bild, die drei Punkte kommen mit dem Wort
 export const TitelSzene = ({c}) => {
   const t = useT();
-  const ab = [c.funktioniert, c.kostet, c.risiko];
+  const ab = [c.neu, c.kostet, c.risiko];
   return <AbsoluteFill><GrossLayout kopf punkt={(i) => ein(t, ab[i] - 0.1, 0.4)} /></AbsoluteFill>;
 };
 
