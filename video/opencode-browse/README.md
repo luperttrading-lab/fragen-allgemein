@@ -6,6 +6,9 @@ Grafik sind neu, die Fakten sind an den Primärquellen geprüft (Tabelle unten).
 
 - **Veröffentlicht:** [luperttrading-lab.github.io/ki-videos/opencode-browse](https://luperttrading-lab.github.io/ki-videos/opencode-browse/)
   (Repo `luperttrading-lab/ki-videos`, Web-Fassung 9,5 MB: CRF 32, Ton mono 64 kbit/s).
+- **Endfassung v6** (12.11.2026): gesprochene Titelkarte (Szene `s00_titel`, 76 Zeichen, 33 Credits), 7:56 min.
+  Untertitel `untertitel/opencode-browse.de.srt` und `.vtt` aus den ElevenLabs-Zeitmarken (`tts/untertitel.py`),
+  auch im Player der Webseite. ElevenLabs gesamt für das Video: **3.785 Credits**.
 - **Endfassung v5** (09.11.2026 abends): Szene 9 neu gesprochen (Betonung auf „alles“: „liest auf einer Seite alles“),
   Schrift in Szene 10/11 größer (Szene 3/4 bewusst nicht, Abstände wurden schlechter). ElevenLabs gesamt für das
   Video: 3.430 + 62 (Hörproben) + 260 (Szene 9) = **3.752 Credits**.
