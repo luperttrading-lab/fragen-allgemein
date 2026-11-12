@@ -1,8 +1,17 @@
 {
   "stand": "08.11.2026",
-  "fassung": "v3 freigegeben 09.11.2026 (Begriffe, Einordnung Claude Code, Web-App-Test, nur Computer)",
+  "fassung": "v6 freigegeben 12.11.2026 (gesprochene Titelkarte)",
   "stimme_entwurf": "de-DE-FlorianMultilingualNeural",
   "szenen": [
+    {
+      "id": "s00_titel",
+      "text": "OpenCode Browse: wie es funktioniert, was es kostet und wo das Risiko liegt.",
+      "cues": {
+        "funktioniert": "wie es funktioniert",
+        "kostet": "was es kostet",
+        "risiko": "wo das Risiko"
+      }
+    },
     {
       "id": "s01_wand",
       "text": "Dein KI-Agent baut dir in einer Stunde eine ganze App. Aber bitte ihn, kurz dein Dashboard zu prüfen oder eine E-Mail zu beantworten, und er steht vor einem Login. Denn die meisten Browser-Agenten, also KI-Programme, die für dich im Browser klicken, starten einen frischen, leeren Browser. Keine Cookies, keine Anmeldung.",

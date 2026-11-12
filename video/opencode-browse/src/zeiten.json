@@ -285,9 +285,21 @@
      "t": 4.89
     }
    ]
+  },
+  "s00_titel": {
+   "audio": 6.112653,
+   "dauer": 7.063,
+   "vorlauf": 0.25,
+   "cues": {
+    "funktioniert": 2.01,
+    "kostet": 3.37,
+    "risiko": 4.81
+   },
+   "begriffe": []
   }
  },
  "reihenfolge": [
+  "s00_titel",
   "s01_wand",
   "s02_browse",
   "s03_kette",
@@ -302,6 +314,6 @@
   "s12_haken",
   "s13_regel"
  ],
- "laenge": 460.925,
+ "laenge": 467.988,
  "stimme": "ElevenLabs Christian (eleven_v4), Tempo 1.0"
 }

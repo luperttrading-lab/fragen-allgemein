@@ -7,6 +7,16 @@
 
 Thumbnail A passt zum ersten Titel, Thumbnail B zum zweiten. YouTube kann beide gegeneinander testen („Testen und vergleichen“).
 
+## Schlagwörter (Tags, Feld „Tags“ unter „Mehr anzeigen“, zusammen höchstens 500 Zeichen)
+
+```
+OpenCode Browse, OpenCode, KI-Agent, Browser-Agent, Claude in Chrome, Claude Code, MCP, Model Context Protocol, Prompt Injection, Ollama, lokale KI, Coding-Agent, Playwright MCP, KI Browser, KI Sicherheit
+```
+
+## Untertitel
+
+Datei `untertitel/opencode-browse.de.srt` in YouTube Studio hochladen: Untertitel → Sprache Deutsch → „Datei hochladen“ → „Mit Zeitangaben“. Wortgenau aus dem Sprechtext, Zahlen als Ziffern.
+
 ## Beschreibung
 
 ```
@@ -14,18 +24,18 @@ Mit OpenCode Browse benutzen KI-Agenten wie Claude Code, Codex oder Cursor deine
 
 Kapitel:
 0:00 Das Problem: die Login-Wand
-0:25 Die Lösung: OpenCode Browse
-1:01 So kommt der Agent in deinen Browser
-1:42 Im Hintergrund, mit Übergabe an dich
-2:16 Passwörter, ohne dass der Agent sie sieht
-2:38 Jedes Modell, auch lokal: zwei Haken
-3:31 Agent oder Werkzeug? Claude in Chrome im Vergleich
-4:34 Datenschutz und Regeln
-5:07 Das Risiko: Prompt Injection
-5:50 Wie oft gelingt so ein Angriff?
-6:19 Was OpenCode Browse selbst absichert
-6:48 Zwei praktische Haken
-7:10 Faustregel und Fazit
+0:28 Die Lösung: OpenCode Browse
+1:04 So kommt der Agent in deinen Browser
+1:46 Im Hintergrund, mit Übergabe an dich
+2:20 Passwörter, ohne dass der Agent sie sieht
+2:41 Jedes Modell, auch lokal: zwei Haken
+3:35 Agent oder Werkzeug? Claude in Chrome im Vergleich
+4:38 Datenschutz und Regeln
+5:11 Das Risiko: Prompt Injection
+5:53 Wie oft gelingt so ein Angriff?
+6:23 Was OpenCode Browse selbst absichert
+6:52 Zwei praktische Haken
+7:13 Faustregel und Fazit
 
 Begriffe aus dem Video:
 Cookies: Mini-Dateien, mit denen Webseiten dich wiedererkennen und eingeloggt halten

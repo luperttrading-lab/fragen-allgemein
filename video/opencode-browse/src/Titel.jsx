@@ -28,7 +28,7 @@ const Motiv = ({x, y, g = 1}) => (
 
 // Großes Layout: Thema riesig, darunter drei farbige Punkte untereinander (Wunsch des Nutzers, 09.11.)
 const PUNKTE = [['Wie es funktioniert', F.GRUEN], ['Was es kostet', F.GELB], ['Wo das Risiko liegt', F.ROT]];
-const GrossLayout = ({a = () => 1, kopf = false}) => (
+const GrossLayout = ({a = () => 1, kopf = false, punkt}) => (
   <>
     <div style={{position: 'absolute', left: 90, top: kopf ? 70 : 80, width: 1150}}>
       {kopf && <div style={{fontSize: 34, fontWeight: 700, color: F.GRAU, letterSpacing: 2, opacity: a(0.1)}}>ERKLÄRVIDEO</div>}
@@ -37,7 +37,7 @@ const GrossLayout = ({a = () => 1, kopf = false}) => (
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16, marginTop: 34}}>
         {PUNKTE.map(([txt, farbe], i) => (
           <div key={txt} style={{background: farbe, color: F.BG1, fontSize: 70, fontWeight: 800, padding: '6px 36px', borderRadius: 20,
-            opacity: a(0.9 + i * 0.35), transform: `translateX(${(1 - a(0.9 + i * 0.35)) * -40}px)`}}>{txt}</div>
+            opacity: punkt ? punkt(i) : a(0.9 + i * 0.35), transform: `translateX(${(1 - (punkt ? punkt(i) : a(0.9 + i * 0.35))) * -40}px)`}}>{txt}</div>
         ))}
       </div>
     </div>
@@ -51,6 +51,13 @@ export const Titelkarte = ({animiert = true}) => {
   useSchriften();
   const t = useT();
   return <Hintergrund><GrossLayout kopf a={(at) => (animiert ? ein(t, at, 0.5) : 1)} /></Hintergrund>;
+};
+
+// Gesprochene Titelkarte (erste Szene): Titel steht ab dem ersten Bild, die drei Punkte kommen mit dem Wort
+export const TitelSzene = ({c}) => {
+  const t = useT();
+  const ab = [c.funktioniert, c.kostet, c.risiko];
+  return <AbsoluteFill><GrossLayout kopf punkt={(i) => ein(t, ab[i] - 0.1, 0.4)} /></AbsoluteFill>;
 };
 
 // Thumbnail C: wie Titelkarte, ohne Kopf- und Fußzeile
