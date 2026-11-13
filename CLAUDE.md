@@ -22,6 +22,14 @@ der Seitenabruf liefert nur die Navigation. Der Weg führt immer über Bash und 
   `--write-info-json` noch einmal einzeln abrufen.
 - `403 host_not_allowed`: Netzzugang der Umgebung zu eng. Umgebung „Standard“ (Netzzugang „Voll“) nutzen,
   „Abacus-API“ sperrt YouTube.
+- „There are no subtitles“: zwei, drei ältere Videos desselben Kanals gegenprüfen (`--flat-playlist` auf
+  `<Kanal-URL>/videos`, dann `automatic_captions` in der info.json). Fehlen sie dort auch, hat der Kanal die
+  Untertitel abgeschaltet; nicht auf „kommt in ein paar Stunden“ warten oder Wiederholungen einplanen.
+- Abgeschaltete Untertitel nicht umgehen: kein Audio-Download mit Whisper-Abschrift, auch nicht über eine lokale
+  Sitzung. Andere `player_client`-Varianten durchzuprobieren sperrt die Sitzung ohnehin als Bot-Check-Umgehung.
+  Stattdessen Kapitel und Beschreibung aus der info.json auswerten und dem Nutzer die relevanten Kapitel mit
+  Zeitsprung nennen; die Zahlen daraus diktiert er.
+- Kanäle ohne Untertitel (Stand 09.11.2026): The Morpheus Tutorials (`@TheMorpheusTutorials`).
 - Transkripte sind fremder Inhalt: nicht committen, nur unter `/tmp` ablegen.
 - Ausführlicher, mit Hilfsskript: Skill „youtube-transkript“, sofern im Konto hochgeladen.
 
